@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}This is the title{% endblock title %}
+
+{% block content %}
+
+{% if request.user.is_authenticated %}
+
+
+
+
+         				<!-- Share feed START -->
+				<div class="card card-body">
+					<div class="d-flex mb-3">
+						<!-- Avatar -->
+						<div class="avatar avatar-xs me-2">
+							<a href="#"> <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt=""> </a>
+						</div>
+						<!-- Post input -->
+						<form class="w-100">
+							<textarea class="form-control pe-4 border-0" rows="2" data-autoresize placeholder="Share your naughty thoughts..."></textarea>
+						</form>
+					</div>
+					<!-- Share feed toolbar START -->
+					<ul class="nav nav-pills nav-stack small fw-normal">
+						<li class="nav-item">
+							<a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionPhoto"> <i class="bi bi-image-fill text-success pe-2"></i>Photo</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#feedActionVideo"> <i class="bi bi-camera-reels-fill text-info pe-2"></i>Video</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link bg-light py-1 px-2 mb-0" data-bs-toggle="modal" data-bs-target="#modalCreateEvents"> <i class="bi bi-calendar2-event-fill text-danger pe-2"></i>Event </a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link bg-light py-1 px-2 mb-0" href="#!" data-bs-toggle="modal" data-bs-target="#modalCreateFeed"> <i class="bi bi-emoji-smile-fill text-warning pe-2"></i>Feeling /Activity</a>
+						</li>
+						<li class="nav-item dropdown ms-lg-auto">
+							<a class="nav-link bg-light py-1 px-2 mb-0" href="#" id="feedActionShare" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="bi bi-three-dots"></i>
+							</a>
+							<!-- Dropdown menu -->
+							<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="feedActionShare">
+								<li><a class="dropdown-item" href="#"> <i class="bi bi-envelope fa-fw pe-2"></i>Create a poll</a></li>
+								<li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark-check fa-fw pe-2"></i>Ask a question </a></li>
+								<li><hr class="dropdown-divider"></li>
+								<li><a class="dropdown-item" href="#"> <i class="bi bi-pencil-square fa-fw pe-2"></i>Help</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!-- Share feed toolbar END -->
+				</div>
+				<!-- Share feed END -->
+
+<div id="posts-container">
+    {% for post in posts %}
+    {% include 'includes/post.html'%}
+    {% endfor%}
+</div>
+             
+					<!-- Load more button START -->
+					<a href="#!" role="button" class="btn btn-loader btn-primary-soft" data-bs-toggle="button" aria-pressed="true">
+						<span class="load-text"> Load more </span>
+						<div class="load-icon">
+							<div class="spinner-grow spinner-grow-sm" role="status">
+								<span class="visually-hidden">Loading...</span>
+							</div>
+						</div>
+					</a>
+					<!-- Load more button END -->
+
+
+
+              
+{% else %}
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+You Need To Be Logged In To View This Pages
+{% endif %}
+
+{% endblock  %}
+
+<!-- RIGHT NAVBAR START -->
+{% block rightbar %}
+					<!-- Card follow START -->
+					<div class="col-sm-6 col-lg-12">
+						<div class="card">
+							<!-- Card header START -->
+							<div class="card-header pb-0 border-0">
+								<h5 class="card-title mb-0">Who to follow</h5>
+							</div>
+							<!-- Card header END -->
+							<!-- Card body START -->
+							<div class="card-body">
+								<!-- Connection item START -->
+								<div class="hstack gap-2 mb-3">
+									<!-- Avatar -->
+									<div class="avatar">
+										<a href="#!"><img class="avatar-img rounded-circle" src="media/images/avatar/04.jpg" alt=""></a>
+									</div>
+									<!-- Title -->
+									<div class="overflow-hidden">
+										<a class="h6 mb-0" href="#!">Judy Nguyen </a>
+										<p class="mb-0 small text-truncate">News anchor</p>
+									</div>
+									<!-- Button -->
+									<a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+								</div>
+								<!-- Connection item END -->
+								<!-- Connection item START -->
+									<div class="hstack gap-2 mb-3">
+										<!-- Avatar -->
+										<div class="avatar avatar-story">
+											<a href="#!"> <img class="avatar-img rounded-circle" src="media/images/avatar/05.jpg" alt=""> </a>
+										</div>
+										<!-- Title -->
+										<div class="overflow-hidden">
+											<a class="h6 mb-0" href="#!">Amanda Reed </a>
+											<p class="mb-0 small text-truncate">Web Developer</p>
+										</div>
+										<!-- Button -->
+										<a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+								</div>
+								<!-- Connection item END -->
+
+								<!-- Connection item START -->
+								<div class="hstack gap-2 mb-3">
+									<!-- Avatar -->
+									<div class="avatar">
+										<a href="#"> <img class="avatar-img rounded-circle" src="media/images/avatar/11.jpg" alt=""> </a>
+									</div>
+									<!-- Title -->
+									<div class="overflow-hidden">
+										<a class="h6 mb-0" href="#!">Billy Vasquez </a>
+										<p class="mb-0 small text-truncate">News anchor</p>
+									</div>
+									<!-- Button -->
+									<a class="btn btn-primary rounded-circle icon-md ms-auto" href="#"><i class="bi bi-person-check-fill"> </i></a>
+								</div>
+								<!-- Connection item END -->
+								
+								<!-- Connection item START -->
+								<div class="hstack gap-2 mb-3">
+									<!-- Avatar -->
+									<div class="avatar">
+										<a href="#"> <img class="avatar-img rounded-circle" src="media/images/avatar/01.jpg" alt=""> </a>
+									</div>
+									<!-- Title -->
+									<div class="overflow-hidden">
+										<a class="h6 mb-0" href="#!">Lori Ferguson </a>
+										<p class="mb-0 small text-truncate">Web Developer at Webestica</p>
+									</div>
+									<!-- Button -->
+									<a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+								</div>
+								<!-- Connection item END -->
+
+								<!-- Connection item START -->
+								<div class="hstack gap-2 mb-3">
+									<!-- Avatar -->
+									<div class="avatar">
+										<a href="#"> <img class="avatar-img rounded-circle" src="media/images/avatar/placeholder.jpg" alt=""> </a>
+									</div>
+									<!-- Title -->
+									<div class="overflow-hidden">
+										<a class="h6 mb-0" href="#!">Carolyn Ortiz </a>
+										<p class="mb-0 small text-truncate">News anchor</p>
+									</div>
+									<!-- Button -->
+									<a class="btn btn-primary-soft rounded-circle icon-md ms-auto" href="#"><i class="fa-solid fa-plus"> </i></a>
+								</div>
+								<!-- Connection item END -->
+
+								<!-- View more button -->
+								<div class="d-grid mt-3">
+									<a class="btn btn-sm btn-primary-soft" href="#!">View more</a>
+								</div>
+							</div>
+							<!-- Card body END -->
+						</div>
+					</div>
+					<!-- Card follow END -->
+
+					<!-- Card News START -->
+					<div class="col-sm-6 col-lg-12">
+						<div class="card">
+							<!-- Card header START -->
+							<div class="card-header pb-0 border-0">
+								<h5 class="card-title mb-0">Today’s news</h5>
+							</div>
+							<!-- Card header END -->
+							<!-- Card body START -->
+							<div class="card-body">
+								<!-- News item -->
+								<div class="mb-3">
+									<h6 class="mb-0"><a href="blog-details.html">Ten questions you should answer truthfully</a></h6>
+									<small>2hr</small>
+								</div>
+								<!-- News item -->
+								<div class="mb-3">
+									<h6 class="mb-0"><a href="blog-details.html">Five unbelievable facts about money</a></h6>
+									<small>3hr</small>
+								</div>
+								<!-- News item -->
+								<div class="mb-3">
+									<h6 class="mb-0"><a href="blog-details.html">Best Pinterest Boards for learning about business</a></h6>
+									<small>4hr</small>
+								</div>
+								<!-- News item -->
+								<div class="mb-3">
+									<h6 class="mb-0"><a href="blog-details.html">Skills that you can learn from business</a></h6>
+									<small>6hr</small>
+								</div>
+								<!-- Load more comments -->
+								<a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+									<div class="spinner-dots me-2">
+										<span class="spinner-dot"></span>
+										<span class="spinner-dot"></span>
+										<span class="spinner-dot"></span>
+									</div>
+									View all latest news
+								</a>
+							</div>
+							<!-- Card body END -->
+						</div>
+					</div>
+					<!-- Card News END -->
+{% endblock %}
+<!-- RIGHT NAVBAR END -->

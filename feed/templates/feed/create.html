@@ -1,0 +1,11 @@
+{% extends "feed/homepage.html" %}
+
+{% block title %}Create a new post{% endblock title %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+
+{% endblock content %}

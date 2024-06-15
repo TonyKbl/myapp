@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}This is the title{% endblock title %}
+
+{% block content %}
+<div id="detail-container">
+    {% include 'includes/post.html' with post=post %}
+</div>
+
+{% endblock %}
