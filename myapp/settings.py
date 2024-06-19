@@ -12,13 +12,12 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+# from .aws.conf import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-MEDIA_URL = "/media/"
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,7 +29,7 @@ SECRET_KEY = 'django-insecure-@%yl(=sf+$(-b#_0xgh+f2a-kn)0^w%&&u%_hc%wy0s)pp8^lm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+
 
 
 # Application definition
@@ -48,6 +47,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    
+    'storages',
+
     'feed',
     'profiles',
 ]
@@ -67,24 +69,12 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'myapp.urls'
 ROOT_PATH = os.path.dirname(__file__)
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(PROJECT_DIR, "myapp/templates")
-            ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = "/media/"
 
 WSGI_APPLICATION = 'myapp.wsgi.application'
 
@@ -94,12 +84,6 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
@@ -136,15 +120,90 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "frontend/")
-    ]
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-#     "/Users/tonyk/dev/myapp/myapp/static",
-# ]
+
+if DEBUG:
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+    MEDIA_URL = "/media/"
+
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(PROJECT_DIR, "frontend/")
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ] 
+
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+    
+    ALLOWED_HOSTS = ['*']
+
+else:
+
+
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = 'static/'
+    STATICFILES_DIRS = (
+        (os.path.join(BASE_DIR, 'static')),
+    )
+
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+    AWS_DEFAULT_ACl = "public-read"
+
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+    # AWS_LOCATION = 'assets'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+
+    
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'clubs4fu_myapp',
+        'USER': 'clubs4fu_clubs4funco',
+        'PASSWORD': 'TK8bw@5418',
+        'HOST':'127.0.0.1',
+        'PORT':'5432',
+        }
+
+    }
+    ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk']
+
+
+
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(PROJECT_DIR, "myapp/templates")
+            ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 
 SITE_ID = 1
 
