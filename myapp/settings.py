@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+# Initialise environment variables
+env = environ.Env()
+environ.Env.read_env()
+
 # from .aws.conf import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,10 +29,11 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@%yl(=sf+$(-b#_0xgh+f2a-kn)0^w%&&u%_hc%wy0s)pp8^lm'
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+USE_AWS = True
 
 
 
@@ -73,8 +79,8 @@ ROOT_PATH = os.path.dirname(__file__)
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+#MEDIA_URL = "/media/"
 
 WSGI_APPLICATION = 'myapp.wsgi.application'
 
@@ -123,15 +129,6 @@ USE_TZ = True
 
 if DEBUG:
 
-    MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-    MEDIA_URL = "/media/"
-
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(PROJECT_DIR, "frontend/")
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ] 
-
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -144,6 +141,24 @@ if DEBUG:
 
 else:
 
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
+        'HOST':'127.0.0.1',
+        'PORT':'5432',
+        }
+    }
+    ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk']
+
+
+if USE_AWS:
+
+    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_KEY = env('AWS_SECRET_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 
 
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -152,14 +167,14 @@ else:
         (os.path.join(BASE_DIR, 'static')),
     )
 
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+    MEDIA_URL = "/media/"
+
     AWS_S3_FILE_OVERWRITE = False
     AWS_DEFAULT_ACL = None
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-
-    AWS_DEFAULT_ACl = "public-read"
 
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 
@@ -167,21 +182,18 @@ else:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
     
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+    # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    # MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'clubs4fu_myapp',
-        'USER': 'clubs4fu_clubs4funco',
-        'PASSWORD': 'TK8bw@5418',
-        'HOST':'127.0.0.1',
-        'PORT':'5432',
-        }
+else:
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+    MEDIA_URL = "/media/"
 
-    }
-    ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk']
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(PROJECT_DIR, "frontend/")
+    STATICFILES_DIRS = [
+        BASE_DIR / "static",
+    ]     
 
 
 
