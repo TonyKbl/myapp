@@ -164,3 +164,4 @@ cython_debug/
 Downloads/
 media/
 static/
+env.py
