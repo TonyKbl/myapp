@@ -3,7 +3,6 @@
 {% block title %}Create a new post{% endblock title %}
 
 {% block content %}
-key id - 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
