@@ -31,8 +31,9 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-USE_AWS = True
+DEBUG = env.DEBUG
+USE_AWS = env.USE_AWS
+
 
 
 
