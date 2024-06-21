@@ -13,9 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import environ
-# Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
+
 
 # from .aws.conf import *
 
@@ -23,7 +21,9 @@ environ.Env.read_env()
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+# Initialise environment variables
+env = environ.Env()
+env.read_env(BASE_DIR('.env'), overwrite=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
