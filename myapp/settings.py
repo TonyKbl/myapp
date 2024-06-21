@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'feed',
     'friends',
     'groups',
+    'messaging',
     'notifications',
     'pages',
     'parties',
