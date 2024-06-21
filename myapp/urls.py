@@ -18,11 +18,13 @@ from django.urls import path, re_path
 from django.conf.urls import include
 from django.conf.urls.static import static
 from feed import urls as feed_urls
+from parties import urls as parties_urls
 from django.conf import settings
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(feed_urls, namespace="feed/")),
+    path("", include(parties_urls, namespace="parties/")),
     re_path("", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
