@@ -13,7 +13,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 # Create your models here.
 class Profile(models.Model):
-    username = models.OneToOneField(
+    user = models.OneToOneField(
       User,
       on_delete=models.CASCADE,
       related_name = "profile"
@@ -31,8 +31,8 @@ class Profile(models.Model):
     COUPLE_FF = "SR"
     PROFILE_TYPE_CHOICES = [
         (SELECT, "Select Profile Type"),
-        (MALE, "Male"),
-        (FEMALE, "Female"),
+        (MALE, "Single Male"),
+        (FEMALE, "Single Female"),
         (CD_TV, "CD_TV"),
         (TV_TS, "TV_TS"),
         (COUPLE_MF, "Couple MF"),
