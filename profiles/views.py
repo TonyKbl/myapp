@@ -10,6 +10,6 @@ class ProfileDetailView(DetailView):
     template = "profiles/detail.html"
     model = Profile
     context_object_name = "user"
-    slug_field = "username"
+    slug_field = "profile.username"
     slug_url_kwarg = "username"
     
