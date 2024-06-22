@@ -19,6 +19,7 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from feed import urls as feed_urls
 from parties import urls as parties_urls
+from profiles import urls as profiles_urls
 from messaging import urls as messaging_urls
 from django.conf import settings
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(feed_urls, namespace="feed/")),
     path("", include(parties_urls, namespace="parties/")),
+    path("profile/", include(profiles_urls, namespace="profiles/")),
     path("", include(messaging_urls, namespace="messages/")),
     re_path("", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,15 +11,19 @@
                           <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar avatar-story me-2">
-                            {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
-                              <a href="#!"> <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""> </a>
-                            {% endthumbnail %}
+                                {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
+                                   <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">
+                                    <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                                  </a>
+                                {% endthumbnail %}
                             </div>
         
                             <!-- Info -->
                             <div>
                               <div class="nav nav-divider">
-                                <h6 class="nav-item card-title mb-0"> <a href="#!">{{ post.author.username}}</a></h6>
+                                
+                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">{{ post.author.username}}</a></h6>
+                                
                                 <span class="nav-item small"> {{post.date}} </span>
                               </div>
                               <p class="mb-0 small">{{ post.author.profile.profile_type}}</p>
@@ -48,10 +52,11 @@
                       <div class="card-body">
                         <p>{{post.text}}</p>
                         <!-- Card img -->
-        
+                          <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">
                             {% thumbnail post.image "100x100" crop="center" as im %}
-                              <img class="card-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }} alt="Post">
+                              <img class="card-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Post">
                             {% endthumbnail %}
+                          </a>
                             
                         <!-- Feed react START -->
                         <ul class="nav nav-stack py-3 small">
