@@ -13,7 +13,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(
+    username = models.OneToOneField(
       User,
       on_delete=models.CASCADE,
       related_name = "profile"
