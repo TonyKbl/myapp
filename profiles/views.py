@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 from .models import Profile
 
-class ProfilesDetailView(DetailView):
+class ProfileDetailView(DetailView):
     http_method_names = ["get"]
-    template = "profiles/detail.html"
+    template_name = "profiles/detail.html"
     model = User
     context_object_name = "user"
     slug_field = "username"

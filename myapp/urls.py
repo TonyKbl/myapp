@@ -22,6 +22,7 @@ from parties import urls as parties_urls
 from profiles import urls as profiles_urls
 from messaging import urls as messaging_urls
 from django.conf import settings
+from django.urls import re_path as url
 
 
 urlpatterns = [
@@ -30,5 +31,5 @@ urlpatterns = [
     path("", include(parties_urls, namespace="parties/")),
     path("profiles/", include(profiles_urls, namespace="profiles")),
     path("", include(messaging_urls, namespace="messages/")),
-    path("", include("allauth.urls")),
+    url("", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
