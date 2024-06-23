@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 from django.conf import settings
+from django_resized import ResizedImageField
 
 # Create your models here.
 class Post(models.Model):
@@ -13,7 +14,7 @@ class Post(models.Model):
     
     text = models.CharField(max_length=240)
     date = models.DateTimeField(auto_now=True)
-    image = ImageField(upload_to='feed_images', null=True, blank=True)
+    image = ResizedImageField(upload_to='feed_images', null=True, blank=True)
     
 
     def __str__(self):

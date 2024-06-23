@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from sorl.thumbnail import ImageField
-
+from django_resized import ResizedImageField
 
 @receiver(post_save, sender=User)   
 def create_user_profile(sender, instance, created, **kwargs):
@@ -19,7 +19,7 @@ class Profile(models.Model):
       related_name = "profile"
     )
     
-    image = ImageField(upload_to='profiles')
+    image = ResizedImageField(size=[500, 500], upload_to='profiles')
     
     # profile type option
     SELECT = ""
