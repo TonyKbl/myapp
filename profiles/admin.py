@@ -7,4 +7,5 @@ class ProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(Profile, ProfileAdmin)
 
-# Register your models here.
+
+
