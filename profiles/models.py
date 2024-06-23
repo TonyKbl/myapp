@@ -23,12 +23,12 @@ class Profile(models.Model):
     
     # profile type option
     SELECT = ""
-    MALE = "M"
-    FEMALE = "F"
-    CD_TV = "F"
-    TV_TS = "F"
-    COUPLE_MF = "MF"
-    COUPLE_FF = "SR"
+    MALE = "SM"
+    FEMALE = "SF"
+    CD_TV = "CD/TV"
+    TV_TS = "TV/TS"
+    COUPLE_MF = "MF Couple"
+    COUPLE_FF = "Couple FF"
     PROFILE_TYPE_CHOICES = [
         (SELECT, "Select Profile Type"),
         (MALE, "Single Male"),
@@ -39,11 +39,12 @@ class Profile(models.Model):
         (COUPLE_FF, "Couple FF"),
     ]
     profile_type = models.CharField(
-        max_length=2,
+        max_length=10,
         choices=PROFILE_TYPE_CHOICES,
         default=SELECT,
     )
 
+    location = models.CharField(max_length=25)
     
     name = models.CharField(max_length=20)
     # DOB = models.DateField(null = False, blank = False)

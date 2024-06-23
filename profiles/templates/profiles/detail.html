@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load thumbnail %}
+
 {% block title %}{{username}} - Profile{% endblock title %}
 
 {% block content %}
@@ -13,12 +15,14 @@
             <div>
               <!-- Avatar -->
               <div class="avatar avatar-xxl mt-n5 mb-3">
-                <img class="avatar-img rounded-circle border border-white border-3" src="assets/images/avatar/07.jpg" alt="">
-              </div>
+                {% thumbnail user.profile.image "100x100" crop="center" as im %}
+                    <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="">
+                {% endthumbnail %}
+                </div>
             </div>
             <div class="ms-sm-4 mt-sm-3">
               <!-- Info -->
-              <h1 class="mb-0 h5">Sam Lanson <i class="bi bi-patch-check-fill text-success small"></i></h1>
+              <h1 class="mb-0 h5">{{ user.username }} <i class="bi bi-patch-check-fill text-success small"></i></h1>
               <p>250 connections</p>
             </div>
             <!-- Button -->
@@ -42,9 +46,9 @@
           </div>
           <!-- List profile -->
           <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
-            <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> Lead Developer</li>
-            <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> New Hampshire</li>
-            <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on Nov 26, 2019</li>
+            <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> {{ user.profile.profile_type }}</li>
+            <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> {{ user.profile.location }}</li>
+            <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{ user.date_joined }}</li>
           </ul>
         </div>
         <!-- Card body END -->
