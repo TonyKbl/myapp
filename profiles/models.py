@@ -19,7 +19,7 @@ class Profile(models.Model):
       related_name = "profile"
     )
     
-    cover_image = ResizedImageField(size=[500, 500], upload_to='profiles')
+    image = ResizedImageField(size=[500, 500], upload_to='profiles')
     image = ResizedImageField(size=[200, 500], upload_to='profiles')
     
     headline = models.CharField( max_length=200, null=True, blank=True)
