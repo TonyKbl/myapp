@@ -8,8 +8,7 @@
 
     <!-- Card START -->
     <div class="card">
-        {% thumbnail user.profile.cover "500x200" crop="center" as cvim %}
-      <div class="h-200px rounded-top" style="background-image:url({{ cvim.url }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+      <div class="h-200px rounded-top" style="background-image:url(assets/images/bg/05.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
         <!-- Card body START -->
         <div class="card-body py-0">
           <div class="d-sm-flex align-items-start text-center text-sm-start">
@@ -66,7 +65,6 @@
           </ul>
         </div>
       </div>
-        {% endthumbnail %}
       <!-- Card END -->
       <!-- Card headline item START -->
       <div class="card">
@@ -83,6 +81,8 @@
         <div class="card-header border-0 pb-0">
           <h5 class="card-title"> Profile Info</h5> 
         </div>
+        <!-- Card header END -->
+        <!-- Card body START -->
         <div class="card-body">
           <div class="rounded border px-3 py-2 mb-3"> 
             <p><strong>{{ user.profile.intro}}</strong></p>
