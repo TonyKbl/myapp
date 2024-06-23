@@ -21,6 +21,12 @@ class Profile(models.Model):
     
     image = ResizedImageField(size=[500, 500], upload_to='profiles')
     
+    headline = models.CharField( max_length=200, null=True, blank=True)
+
+    intro = models.CharField( max_length=200, null=True, blank=True)
+
+    description = models.TextField()
+
     # profile type option
     SELECT = ""
     MALE = "SM"
