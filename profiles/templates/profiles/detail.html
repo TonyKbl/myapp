@@ -86,7 +86,7 @@
         <div class="card-body">
           <div class="rounded border px-3 py-2 mb-3"> 
             <p><strong>{{ user.profile.intro}}</strong></p>
-            <p>{{ user.profile.description}}</p>
+            <p>{{ user.profile.description|linebreaks}}</p>
           </div>
           <div class="row g-4">
             <div class="col-sm-6">
