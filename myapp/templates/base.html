@@ -346,7 +346,7 @@ Header START -->
 
 					<li class="nav-item ms-2 dropdown">
 						<a class="nav-link btn icon-md p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
-						{% thumbnail user.profile.image "100x100" crop="center" as im %}
+						{% thumbnail request.user.profile.image "100x100" crop="center" as im %}
 							<img class="avatar-img rounded-2" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
 						{% endthumbnail %}
 						</a>
