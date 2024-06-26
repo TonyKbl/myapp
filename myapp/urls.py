@@ -29,7 +29,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include(feed_urls, namespace="feed/")),
     path("", include(parties_urls, namespace="parties/")),
-    path("profiles/", include(profiles_urls, namespace="profiles")),
+    path("", include(profiles_urls, namespace="profiles/")),
+    path("", include(profiles_urls, namespace="edit_profile/")),
     path("", include(messaging_urls, namespace="messages/")),
+
     url("", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
