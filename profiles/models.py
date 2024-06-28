@@ -22,22 +22,26 @@ class Profile(models.Model):
     )
 
         # Height Option
+    ft = [4, 5, 6,]
+    inch = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+
     SELECT = ""
-    ME = "meN"
-    BISEXUAL = "Bisexual"
-    BI_CURIOUS = "Bicurious"
-    BI_ORALLY = "Orally Bi"
-    BI_PLAYFUL = "Bi Playful"
-    GAY = "Gay"
+    f4 = "meN"
+    f41 = "Bisexual"
+    f42 = "Bicurious"
+    f43 = "Orally Bi"
+    f45 = "Bi Playful"
+    f46 = "Gay"
     LESBIAN = "Lesbian"
     HEIGHT_CHOICES = [
         (SELECT, "Select Sexuality"),
-        (ME, "ME CHOICES"),
-        (BISEXUAL, "Bisexual"),
-        (BI_CURIOUS, "Bicuriuos"),
-        (BI_ORALLY, "Orally Bi"),
-        (BI_PLAYFUL, "Bi Playful"),
-        (GAY, "Gay"),
+        (f4, "ME CHOICES"),
+        (f41, "Bisexual"),
+        (f42, "Bicuriuos"),
+        (f43, "Orally Bi"),
+        (f45, "Bi Playful"),
+        (f46, "Gay"),
         (LESBIAN, "Lesbian"),
     ]
     
