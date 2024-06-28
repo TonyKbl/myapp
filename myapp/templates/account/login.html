@@ -19,6 +19,7 @@
 <!-- Start card body -->
 
     <div class="card-body">
+         <div class="form_group">
     {% if not SOCIALACCOUNT_ONLY %}
         {% setvar link %}
             <a href="{{ signup_url }}">
@@ -56,6 +57,7 @@
     {% if SOCIALACCOUNT_ENABLED %}
         {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
     {% endif %}
+   </div>
         </div> <!-- end card body -->
 </div> <!-- end card    -->
 {% endblock content %}
