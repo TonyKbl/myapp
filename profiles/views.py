@@ -23,7 +23,14 @@ class ProfileUpdateView(UpdateView):
     template_name = "profiles/profile_update_form.html"
     success_url = "/"
 
-    def get_object(self):
-        return self.request.user
+   # def get_object(self):
+    #    return self.request.user
+    
+    
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
+    
     
     

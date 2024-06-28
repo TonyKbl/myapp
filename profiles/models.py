@@ -4,6 +4,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from sorl.thumbnail import ImageField
 from django_resized import ResizedImageField
+from datetime import date
+from django.utils import timezone
 
 @receiver(post_save, sender=User)   
 def create_user_profile(sender, instance, created, **kwargs):
@@ -18,6 +20,26 @@ class Profile(models.Model):
       on_delete=models.CASCADE,
       related_name = "profile"
     )
+
+        # Height Option
+    SELECT = ""
+    ME = "meN"
+    BISEXUAL = "Bisexual"
+    BI_CURIOUS = "Bicurious"
+    BI_ORALLY = "Orally Bi"
+    BI_PLAYFUL = "Bi Playful"
+    GAY = "Gay"
+    LESBIAN = "Lesbian"
+    HEIGHT_CHOICES = [
+        (SELECT, "Select Sexuality"),
+        (ME, "ME CHOICES"),
+        (BISEXUAL, "Bisexual"),
+        (BI_CURIOUS, "Bicuriuos"),
+        (BI_ORALLY, "Orally Bi"),
+        (BI_PLAYFUL, "Bi Playful"),
+        (GAY, "Gay"),
+        (LESBIAN, "Lesbian"),
+    ]
     
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles')
 
@@ -55,38 +77,44 @@ class Profile(models.Model):
     location = models.CharField(max_length=25)
     
     name = models.CharField(max_length=20)
-    # DOB = models.DateField(null = False, blank = False)
+    
+    DOB = models.DateTimeField(null = False, blank = False)
     
     # Sexuality Option
     SELECT = ""
-    STRAIGHT = "ST"
-    BISEXUAL = "BI"
-    BI_CURIOUS = "BC"
-    BI_ORALLY = "BO"
-    BI_PLAYFUL = "BP"
-    GAY = "G"
-    LESBIAN = "L"
+    STRAIGHT = "Straight"
+    BISEXUAL = "Bisexual"
+    BI_CURIOUS = "Bicurious"
+    BI_ORALLY = "Orally Bi"
+    BI_PLAYFUL = "Bi Playful"
+    GAY = "Gay"
+    LESBIAN = "Lesbian"
     SEXUALITY_CHOICES = [
         (SELECT, "Select Sexuality"),
         (STRAIGHT, "Straight"),
-        (BISEXUAL, "Bisexial"),
-        (BI_CURIOUS, "Bi Curious"),
+        (BISEXUAL, "Bisexual"),
+        (BI_CURIOUS, "Bicuriuos"),
         (BI_ORALLY, "Orally Bi"),
-        (BI_PLAYFUL, "Playfully Bi"),
+        (BI_PLAYFUL, "Bi Playful"),
         (GAY, "Gay"),
         (LESBIAN, "Lesbian"),
     ]
     sexuality = models.CharField(
-        max_length=2,
+        max_length=10,
         choices=SEXUALITY_CHOICES,
         default=SELECT,
     )
 
+    height = models.CharField(
+        max_length=16,
+        choices=HEIGHT_CHOICES,
+        default=SELECT,
+    )
     name2 = models.CharField(max_length=20, null=True, blank=True)
-    # DOB2 = models.DateField(null=True, blank=False)
+    DOB2 = models.DateTimeField(null=True, blank=False)
 
     sexuality2 = models.CharField(
-        max_length=2,
+        max_length=10,
         null = True,
         blank = True,
         choices=SEXUALITY_CHOICES,
@@ -96,8 +124,29 @@ class Profile(models.Model):
     date_joined = models.DateTimeField(auto_now=True)
     last_activity = models.DateTimeField(null=True, blank=True)
 
-    
+    # Python3 code to calculate age in years
 
+
+    @property
+    def age(self):
+        today = timezone.now().date()
+        age = int(
+            today.year
+            - (self.DOB.year)
+            - ((today.month, today.day) < (self.DOB.month, self.DOB.day))
+        )
+        return age 
+
+    @property
+    def age2(self):
+        today = timezone.now().date()
+        age2 = int(
+            today.year
+            - (self.DOB2.year)
+            - ((today.month, today.day) < (self.DOB2.month, self.DOB2.day))
+        )
+        return age2
+    
     def __str__(self):
         return self.user.username
 
