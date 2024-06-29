@@ -3,9 +3,23 @@
 {% block title %}Create a new post{% endblock title %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
+<div class="card">
+    <div class="card-header border-0 pb-0">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                New Feed Post
+            </div>
+        </div>
+    </div>
+    <!-- Start card body -->
+    <div class="card-body">
+        <div class="form_group">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Save">
+        </div>
+    </div> <!-- end card body -->
+</div> <!-- end card    -->
 
 {% endblock content %}
