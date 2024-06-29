@@ -108,6 +108,7 @@ class Profile(models.Model):
         (f70, "7ft 0in"),
     ]
     
+    
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles')
 
     image = ResizedImageField(size=[600, 600], upload_to='profiles')
