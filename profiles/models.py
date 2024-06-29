@@ -25,24 +25,87 @@ class Profile(models.Model):
     ft = [4, 5, 6,]
     inch = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-
+    # class Genre(models.TextChoices): 
+    #     FEMININ = 'Féminin', _('Féminin')
+    #     MASCULIN = 'Masculin', _('Masculin')
+    #     AUTRE = 'Autre', _('Autre (préciser)')
     SELECT = ""
-    f4 = "meN"
-    f41 = "Bisexual"
-    f42 = "Bicurious"
-    f43 = "Orally Bi"
-    f45 = "Bi Playful"
-    f46 = "Gay"
-    LESBIAN = "Lesbian"
+    f4 = "4ft 0in"
+    f41 = "4ft 1in"
+    f42 = "4ft 2in"
+    f43 = "4ft 3in"
+    f44 = "4ft 4in"
+    f45 = "4ft 5in"
+    f46 = "4ft 6in"
+    f47 = "4ft 7in"
+    f48 = "4ft 8in"
+    f49 = "4ft 9in"
+    f410 = "4ft 10in"
+    f411 = "4ft 11in"
+    f50 = "5ft 0in"
+    f51 = "5ft 1in"
+    f52 = "5ft 2in"
+    f53 = "5ft 3in"
+    f54 = "5ft 4in"
+    f55 = "5ft 5in"
+    f56 = "5ft 6in"
+    f57 = "5ft 7in"
+    f58 = "5ft 8in"
+    f59 = "5ft 9in"
+    f510 = "5ft 10in"
+    f511 = "5ft 11in"
+    f60 = "6ft 0in"
+    f61 = "6ft 1in"
+    f62 = "6ft 2in"
+    f63 = "6ft 3in"
+    f64 = "6ft 4in"
+    f65 = "6ft 5in"
+    f66 = "6ft 6in"
+    f67 = "6ft 7in"
+    f68 = "6ft 8in"
+    f69 = "6ft 9in"
+    f610 = "6ft 10in"
+    f611 = "6ft 11in"
+    f70 = "7ft 0in"
     HEIGHT_CHOICES = [
-        (SELECT, "Select Sexuality"),
-        (f4, "ME CHOICES"),
-        (f41, "Bisexual"),
-        (f42, "Bicuriuos"),
-        (f43, "Orally Bi"),
-        (f45, "Bi Playful"),
-        (f46, "Gay"),
-        (LESBIAN, "Lesbian"),
+        (SELECT, "Select Height"),
+        (f4, "4ft 0in"),
+        (f41, "4ft 1in"),
+        (f42, "4ft 2in"),
+        (f43, "4ft 3in"),
+        (f44, "4ft 4in"),
+        (f45, "4ft 5in"),
+        (f46, "4ft 6in"),
+        (f47, "4ft 7in"),
+        (f48, "4ft 8in"),
+        (f49, "4ft 9in"),
+        (f410, "4ft 10in"),
+        (f411, "4ft 11in"),
+        (f50, "5ft 0in"),
+        (f51, "5ft 1in"),
+        (f52, "5ft 2in"),
+        (f53, "5ft 3in"),
+        (f54, "5ft 4in"),
+        (f55, "5ft 5in"),
+        (f56, "5ft 6in"),
+        (f57, "5ft 7in"),
+        (f58, "5ft 8in"),
+        (f59, "5ft 9in"),
+        (f510, "5ft 10in"),
+        (f511, "5ft 11in"),
+        (f60, "6ft 0in"),
+        (f61, "6ft 1in"),
+        (f62, "6ft 2in"),
+        (f63, "6ft 3in"),
+        (f64, "6ft 4in"),
+        (f65, "6ft 5in"),
+        (f66, "6ft 6in"),
+        (f67, "6ft 7in"),
+        (f68, "6ft 8in"),
+        (f69, "6ft 9in"),
+        (f610, "6ft 10in"),
+        (f611, "6ft 11in"),
+        (f70, "7ft 0in"),
     ]
     
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles')
@@ -115,7 +178,7 @@ class Profile(models.Model):
         default=SELECT,
     )
     name2 = models.CharField(max_length=20, null=True, blank=True)
-    DOB2 = models.DateTimeField(null=True, blank=False)
+    DOB2 = models.DateTimeField(null=True, blank=True)
 
     sexuality2 = models.CharField(
         max_length=10,
@@ -125,7 +188,16 @@ class Profile(models.Model):
         default=SELECT,
     )
 
+    height2 = models.CharField(
+        max_length=16,
+        choices=HEIGHT_CHOICES,
+        default=SELECT,
+        null = True,
+        blank = True,
+    )
+
     date_joined = models.DateTimeField(auto_now=True)
+
     last_activity = models.DateTimeField(null=True, blank=True)
 
     # Python3 code to calculate age in years

@@ -15,7 +15,7 @@
                     <!-- Card body START -->
                     <div class="card-body">
                         <div class="form_group">
-                            <form method="post">
+                            <form class="form-with-validation" method="post" >
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <input type="submit" value="Update">
