@@ -7,7 +7,7 @@ from sorl.thumbnail import ImageField
 
 # Create your models here.
 class Parties(models.Model):
-    user = models.OneToOneField(
+    page = models.OneToOneField(
       User,
       on_delete=models.CASCADE,
       related_name = "parties"
