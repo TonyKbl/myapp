@@ -461,7 +461,9 @@ Header END -->
 										<div class="text-center">
 										<!-- Avatar -->
 										<div class="avatar avatar-lg mt-n5 mb-3">
-											<a href="#!"><img class="avatar-img rounded border border-white border-3" src="media/images/avatar/07.jpg" alt=""></a>
+											{% thumbnail request.user.profile.image "100x100" crop="center" as im %}
+											<a href="{% url 'profiles:detail' request.user.username %}"><img class="avatar-img rounded border border-white border-3" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt=""></a>
+											{% endthumbnail %}
 										</div>
 										<!-- Info -->
 										<h5 class="mb-0"> <a href="#!">Sam Lanson </a> </h5>

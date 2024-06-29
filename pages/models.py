@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_resized import ResizedImageField
+from profiles.models import Profile
 
 # Create your models here.
-class Profile(models.Model):
+class Page(models.Model):
     user = models.OneToOneField(
-      User,
+      Profile,
       on_delete=models.CASCADE,
       related_name = "page"
     )

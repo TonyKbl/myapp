@@ -15,9 +15,16 @@
     <div class="card-body">
         <div class="form_group">
             <form method="post" enctype="multipart/form-data">
+                <table style="border: 15px">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Save">
+                {{ form.as_table }}
+                <tr>
+                    <td>
+                        <input type="submit" value="Save">
+                    </td>
+                </tr>
+
+                </table>
         </div>
     </div> <!-- end card body -->
 </div> <!-- end card    -->
