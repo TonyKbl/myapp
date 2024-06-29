@@ -108,7 +108,55 @@ class Profile(models.Model):
         (f70, "7ft 0in"),
     ]
     
-    
+    # body_type options
+
+    SELECT = ""
+    SLIM = "Slim"
+    ATHLETIC = "Athletic"
+    CURVY = "Curvy"
+    DADBOD = "Dad Bod"
+    LARGE = "Large"
+    BODY_TYPE_CHOICES = [
+        (SELECT, "Select Profile Type"),
+        (SLIM, "Slim"),
+        (ATHLETIC, "Athletic"),
+        (CURVY, "Curvy"),
+        (DADBOD, "Dad Bod"),
+        (LARGE, "Large"),
+    ]
+
+    # Smoke Options
+    SELECT = ""
+    NEVER = "Never"
+    OCCASIONALLY = "Occasionally"
+    SOCIALLY = "Socially"
+    OFTEN = "Often"
+    VAPER = "Vape"
+    SMOKER_TYPE_CHOICES = [
+        (SELECT, "Select Smoker Type"),
+        (NEVER, "Never"),
+        (OCCASIONALLY, "Occasionally"),
+        (SOCIALLY, "Socially"),
+        (OFTEN, "Often"),
+        (VAPER, "Vape"),
+    ]
+
+        # Drink Options
+    SELECT = ""
+    NEVER = "Never"
+    OCCASIONALLY = "Occasionally"
+    SOCIALLY = "Socially"
+    OFTEN = "Often"
+    DRINK_TYPE_CHOICES = [
+        (SELECT, "Select Option"),
+        (NEVER, "Never"),
+        (OCCASIONALLY, "Occasionally"),
+        (SOCIALLY, "Socially"),
+        (OFTEN, "Often"),
+        (VAPER, "Vape"),
+    ]
+
+
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles')
 
     image = ResizedImageField(size=[600, 600], upload_to='profiles')
@@ -178,6 +226,26 @@ class Profile(models.Model):
         choices=HEIGHT_CHOICES,
         default=SELECT,
     )
+
+    body_type = models.CharField(
+        max_length=16,
+        choices=BODY_TYPE_CHOICES,
+        default=SELECT,
+    )
+
+    smoke = models.CharField(
+        max_length=16,
+        choices=SMOKER_TYPE_CHOICES,
+        default=SELECT,
+    )
+
+    drink = models.CharField(
+        max_length=16,
+        choices=DRINK_TYPE_CHOICES,
+        default=SELECT,
+    )
+
+
     name2 = models.CharField(max_length=20, null=True, blank=True)
     DOB2 = models.DateTimeField(null=True, blank=True)
 
@@ -196,6 +264,25 @@ class Profile(models.Model):
         null = True,
         blank = True,
     )
+
+    body_type2 = models.CharField(
+        max_length=16,
+        choices=BODY_TYPE_CHOICES,
+        default=SELECT,
+    )
+
+    smoke2 = models.CharField(
+        max_length=16,
+        choices=SMOKER_TYPE_CHOICES,
+        default=SELECT,
+    )
+
+    drink2 = models.CharField(
+        max_length=16,
+        choices=DRINK_TYPE_CHOICES,
+        default=SELECT,
+    )
+
 
     date_joined = models.DateTimeField(auto_now=True)
 

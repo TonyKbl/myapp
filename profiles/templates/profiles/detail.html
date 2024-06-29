@@ -109,7 +109,7 @@
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Height: <strong> {{user.profile.height}} </strong>
                 </p>
                 <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.bodytype}} </strong>
+                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.body_type}} </strong>
                 </p>
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Smoke/Vape: <strong> {{user.profile.smoke}} </strong>
@@ -122,8 +122,8 @@
             </div>
             <div class="col-sm-6">
               <!-- Person 2 START -->  
-               {% if user.profile.name2%}               
-              <h6>{{user.profile.name2}}</h6>             
+               {% if user.profile.profile_type == "MF Couple" or user.profile.profile_type == "FF Couple" %}               
+               <h6>{{user.profile.name2}}</h6>               
               <div class="rounded border px-3 py-2"> 
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age2 }}</strong>
@@ -135,7 +135,7 @@
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Height: <strong> {{user.profile.height2}} </strong>
                 </p>
                 <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.bodytype2}} </strong>
+                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.body_type2}} </strong>
                 </p>
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Smoke/Vape: <strong> {{user.profile.smoke2}} </strong>
