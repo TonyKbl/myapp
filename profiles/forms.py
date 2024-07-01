@@ -2,6 +2,9 @@ from django import forms
 from .models import Profile
 from django.contrib.auth.models import User
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class ProfileUpdateForm(forms.ModelForm):
     
     class Meta:        

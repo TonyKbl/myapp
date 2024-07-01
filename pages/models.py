@@ -1,12 +1,22 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django_resized import ResizedImageField
+from django.conf import settings
 from profiles.models import Profile
 
+
+
 # Create your models here.
+
 class Page(models.Model):
+    owner = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="page"
+        )
+    
     class PageTypes(models.TextChoices):
-        CLUB = "Swingers Club",
+        SWINGERS_CLUB = "Swingers Club",
         GAY_SAUNA = "Gay Sauna",
         CINEMA = "Adult Cinema",
         ONLINE_SHOP = "Online Shop",
@@ -14,7 +24,7 @@ class Page(models.Model):
     
     page_type = models.CharField(max_length = 15, choices = PageTypes.choices)
 
-    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name = "page")
+    # owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name = "owner")
 
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles', null=True, blank=True)
 
@@ -29,3 +39,6 @@ class Page(models.Model):
     post_code = models.CharField( max_length=10, null=False, blank=False)
 
     description = models.TextField( null=False, blank=False)
+
+    def __str__(self):
+        return self.owner.username
