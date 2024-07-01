@@ -97,6 +97,7 @@
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+		{% block head %}{% endblock %}
 	</head>
 <body>
 
@@ -367,7 +368,9 @@ Header START -->
 								<a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" href="{% url 'profiles:detail' request.user.username %}">View profile</a>
 							</li>
 							<!-- Links -->
-							<li><a class="dropdown-item" href="{% url "feed:new_post" %}"><i class="bi bi-gear fa-fw me-2"></i>Add New post</a></li>
+							<li><a class="dropdown-item" href="{% url "feed:new_post" %}"><i class="bi bi-gear fa-fw me-2"></i>Add New Post</a></li>
+							
+							<li><a class="dropdown-item" href="{% url "pages:add_page" %}"><i class="bi bi-flag fa-fw me-2"></i>Add New Page</a></li>
 							
 							<li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings & Privacy</a></li>
 							<li> 
@@ -502,27 +505,25 @@ Header END -->
 									<!-- Side Nav START -->
 									<ul class="nav nav-link-secondary flex-column fw-bold gap-2">
 										<li class="nav-item">
-											<a class="nav-link" href="/"> <img class="me-2 h-20px fa-fw" src="media/images/icon/home-outline-filled.svg" alt=""><span>Feed </span></a>
+											<a class="nav-link" href="/"> <i class="fa-solid fa-house me-2 h-20ps"></i><span>Feed </span></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="my-profile-connections.html"> <img class="me-2 h-20px fa-fw" src="media/images/icon/person-outline-filled.svg" alt=""><span>My Friends </span></a>
-										</li>										<li class="nav-item">
-											<a class="nav-link" href="Pagess.html"> <img class="me-2 h-20px fa-fw" src="media/images/icon/notification-outlined-filled.svg" alt=""><span>Pages </span></a>
+											<a class="nav-link" href="my-profile-connections.html"> <i class="fa-solid fa-people-group me-2 h-20px"></i><span>My Friends </span></a>
+										</li>										
+										<li class="nav-item">
+											<a class="nav-link" href="Pagess.html"><i class="fa fa-flag me-2 h-20px"></i><span>Pages </span></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="/events/"> <img class="me-2 h-20px fa-fw" src="media/images/icon/calendar-outline-filled.svg" alt=""><span>Events </span></a>
+											<a class="nav-link" href="/events/"><i class="fa fa-calendar-day me-2 h-20px"></i><span>Events </span></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="groups.html"> <img class="me-2 h-20px fa-fw" src="media/images/icon/chat-outline-filled.svg" alt=""><span>Groups </span></a>
+											<a class="nav-link" href="groups.html"> <i class="fa-solid fa-user-group me-2 h-20px"></i><span>Groups </span></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="blog.html"> <img class="me-2 h-20px fa-fw" src="media/images/icon/earth-outline-filled.svg" alt=""><span>Latest News </span></a>
+											<a class="nav-link" href="notifications.html"> <i class="fa-solid fa-bell me-2 h-20px"></i><span>Notifications </span></a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="notifications.html"> <img class="me-2 h-20px fa-fw" src="media/images/icon/notification-outlined-filled.svg" alt=""><span>Notifications </span></a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="settings.html"> <img class="me-2 h-20px fa-fw" src="media/images/icon/cog-outline-filled.svg" alt=""><span>Settings </span></a>
+											<a class="nav-link" href="settings.html"> <i class="fa-solid fa-gear me-2 h-20px"></i><span>Settings </span></a>
 										</li>
 									</ul>
 									<!-- Side Nav END -->
@@ -679,38 +680,39 @@ Header END -->
 <div class="modal fade" id="feedActionPhoto" tabindex="-1" aria-labelledby="feedActionPhotoLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<!-- Modal feed header START -->
-			<div class="modal-header">
-				<h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<!-- Modal feed header END -->
+			<form class="w-100" method="post" enctype="multipart/form-data">						
+				{% csrf_token %}
+				<!-- Modal feed header START -->
+				<div class="modal-header">
+					<h5 class="modal-title" id="feedActionPhotoLabel">Add post photo</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<!-- Modal feed header END -->
 
 				<!-- Modal feed body START -->
 				<div class="modal-body">
-				<!-- Add Feed -->
-				<div class="d-flex mb-3">
-					<!-- Avatar -->
-					<div class="avatar avatar-xs me-2">
-						<img class="avatar-img rounded-circle" src="media/images/avatar/03.jpg" alt="">
+					<!-- Add Feed -->
+					<div class="d-flex mb-3">
+						<!-- Avatar -->
+						<div class="avatar avatar-xs me-2">
+							<img class="avatar-img rounded-circle" src="media/images/avatar/03.jpg" alt="">
+						</div>
+						<!-- Feed box  -->
+						<textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" maxlength="240" required="" id="id_text" placeholder="Share your naughty thoughts..."></textarea>
+					
 					</div>
-					<!-- Feed box  -->
-					<form class="w-100">
-						<textarea class="form-control pe-4 fs-3 lh-1 border-0" rows="2" placeholder="Share your thoughts..."></textarea>
-					</form>
-				</div>
 
-				<!-- Dropzone photo START -->
-				<div>
-					<label class="form-label">Upload attachment</label>
-					<div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
-						<div class="dz-message">
-							<i class="bi bi-images display-3"></i>
-							<p>Drag here or click to upload photo.</p>
+					<!-- Dropzone photo START -->
+					<div>
+						<label class="form-label">Upload attachment</label>
+						<div class="dropzone dropzone-default card shadow-none" data-dropzone='{"maxFiles":2}'>
+							<div class="dz-message">
+								<i class="bi bi-images display-3" name="image" id="id_image"></i>
+								<p>Drag here or click to upload photo.</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- Dropzone photo END -->
+					<!-- Dropzone photo END -->
 
 				</div>
 				<!-- Modal feed body END -->
@@ -718,10 +720,11 @@ Header END -->
 				<!-- Modal feed footer -->
 				<div class="modal-footer ">
 					<!-- Button -->
-						<button type="button" class="btn btn-danger-soft me-2" data-bs-dismiss="modal">Cancel</button>
-						<button type="button" class="btn btn-success-soft">Post</button>
+						<button class="btn btn-danger-soft me-2" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" value="save" type="button" class="btn btn-success-soft">Post</button>
 				</div>
-				<!-- Modal feed footer -->
+			</form>
+			<!-- Modal feed footer -->
 		</div>
 	</div>
 </div>
@@ -900,7 +903,7 @@ JS libraries, plugins and custom scripts -->
 <script src="{% static 'vendor/plyr/plyr.js' %}"></script>
 <script src="{% static 'vendor/dropzone/dist/min/dropzone.min.js' %}"></script>
 <script src="{% static 'vendor/zuck.js/dist/zuck.min.js' %}"></script>
-<script src="{% static 'js/zuck-stories.js' %}"></script>
+{% comment %} <script src="{% static 'js/zuck-stories.js' %}"></script> {% endcomment %}
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

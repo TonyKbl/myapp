@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     
     'storages',
+    'crispy_forms',
+    'formtools',
 
     'feed',
     'friends',
@@ -65,6 +67,8 @@ INSTALLED_APPS = [
     'parties',
     'profiles',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

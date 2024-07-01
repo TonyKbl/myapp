@@ -5,18 +5,27 @@ from profiles.models import Profile
 
 # Create your models here.
 class Page(models.Model):
-    user = models.OneToOneField(
-      Profile,
-      on_delete=models.CASCADE,
-      related_name = "page"
-    )
+    class PageTypes(models.TextChoices):
+        CLUB = "Swingers Club",
+        GAY_SAUNA = "Gay Sauna",
+        CINEMA = "Adult Cinema",
+        ONLINE_SHOP = "Online Shop",
+    
+    
+    page_type = models.CharField(max_length = 15, choices = PageTypes.choices)
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to='profiles')
+    user = models.OneToOneField(Profile, on_delete=models.CASCADE, related_name = "page")
 
-    image = ResizedImageField(size=[600, 600], upload_to='profiles')
+    cover_image = ResizedImageField(size=[600, 200], upload_to='profiles', null=True, blank=True)
+
+    image = ResizedImageField(size=[600, 600], upload_to='profiles', null=True, blank=True)
 
     page_name = models.CharField( max_length=50, null=False, blank=False)
 
-    intro = models.CharField( max_length=200, null=False, blank=False)
+    address1 = models.CharField( max_length=50, null=False, blank=False)
+    address2 = models.CharField( max_length=50, null=True, blank=True)
+    town_city = models.CharField( max_length=50, null=False, blank=False)
+    county = models.CharField( max_length=50, null=False, blank=False)
+    post_code = models.CharField( max_length=10, null=False, blank=False)
 
     description = models.TextField( null=False, blank=False)

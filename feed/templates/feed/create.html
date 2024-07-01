@@ -1,6 +1,11 @@
 {% extends "feed/homepage.html" %}
+{% load crispy_froms_tags %}
 
-{% block title %}Create a new post{% endblock title %}
+{% block title %}Create a new post{% endblock %}
+
+{% block head %}
+{{ wizard.form.media }}
+{% endblock head %}
 
 {% block content %}
 <div class="card">
@@ -12,12 +17,12 @@
         </div>
     </div>
     <!-- Start card body -->
-    <div class="card-body">
+    <div>
         <div class="form_group">
             <form method="post" enctype="multipart/form-data">
                 <table style="border: 15px">
                 {% csrf_token %}
-                {{ form.as_table }}
+                {{ form as_p }}
                 <tr>
                     <td>
                         <input type="submit" value="Save">
