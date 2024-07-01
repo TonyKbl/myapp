@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load crispy_forms_tags %}
+
 {% load thumbnail %}
 
 {% block title %}{{username}} - Update Profile{% endblock title %}
@@ -17,7 +19,7 @@
                         <div class="form_group">
                             <form class="form-with-validation" method="post" >
                                 {% csrf_token %}
-                                {{ form.as_p }}
+                                {{ form|crispy }}
                                 <input type="submit" value="Update">
                             </form>
                         </div>
