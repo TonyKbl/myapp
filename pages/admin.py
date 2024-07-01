@@ -3,6 +3,6 @@ from .models import Page
 
 # Register your models here.
 class PageAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("page",)}
 
 admin.site.register(Page, PageAdmin)

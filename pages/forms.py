@@ -9,7 +9,7 @@ class PageCreateForm(forms.ModelForm):
         model = Page
         fields = (
             "page_type",
-            "page_name",
+            "page",
             "address1",
             "address2",
             "town_city",
@@ -19,7 +19,7 @@ class PageCreateForm(forms.ModelForm):
         )
 
         def __str__(self):
-            return self.user
+            return self.model.page
 
 class PageUpdateForm(forms.ModelForm):
         
@@ -27,4 +27,11 @@ class PageUpdateForm(forms.ModelForm):
         model = Page
         fields = (
             "page_type",
+            "page",
+            "address1",
+            "address2",
+            "town_city",
+            "county",
+            "post_code",
+            "description",
         )
