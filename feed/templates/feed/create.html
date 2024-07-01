@@ -1,5 +1,5 @@
 {% extends "feed/homepage.html" %}
-{% load crispy_froms_tags %}
+{% load crispy_forms_tags %}
 
 {% block title %}Create a new post{% endblock %}
 
@@ -12,17 +12,17 @@
     <div class="card-header border-0 pb-0">
         <div class="d-flex align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                New Feed Post
+                <h6>New Feed Post</h6>
             </div>
         </div>
     </div>
     <!-- Start card body -->
     <div>
-        <div class="form_group">
+        <div class="form_group px-4 pb-5">
             <form method="post" enctype="multipart/form-data">
                 <table style="border: 15px">
                 {% csrf_token %}
-                {{ form as_p }}
+                {{ form|crispy }}
                 <tr>
                     <td>
                         <input type="submit" value="Save">
