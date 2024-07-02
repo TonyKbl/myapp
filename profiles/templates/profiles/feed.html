@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}Feed{% endblock title %}
+
+{% block content %}
+
+    <!-- Card START -->
+     
+{% include "includes/profile_header.html" %}
+
+  User is {{ username }}
+    <!-- Card Headline item END -->
+      <!-- Card feed item START -->
+      <div id="posts-container">
+        {% for post in posts %}
+        {% include 'includes/post.html'%}
+        <hr>
+        {% endfor%}
+    </div>
+      <!-- Card feed item END -->
+
+      <!-- Card feed item START -->
+
+      <!-- Card feed item END -->
+
+
+
+{% endblock %}

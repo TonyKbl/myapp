@@ -22,13 +22,7 @@ class Profile(models.Model):
     )
 
         # Height Option
-    ft = [4, 5, 6,]
-    inch = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-    # class Genre(models.TextChoices): 
-    #     FEMININ = 'Féminin', _('Féminin')
-    #     MASCULIN = 'Masculin', _('Masculin')
-    #     AUTRE = 'Autre', _('Autre (préciser)')
     SELECT = ""
     f4 = "4ft 0in"
     f41 = "4ft 1in"
@@ -289,7 +283,6 @@ class Profile(models.Model):
     last_activity = models.DateTimeField(null=True, blank=True)
 
     # Python3 code to calculate age in years
-
 
     @property
     def age(self):

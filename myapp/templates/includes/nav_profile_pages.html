@@ -1,0 +1,9 @@
+<ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
+    <li class="nav-item"> <a class="nav-link" href="{% url 'profiles:feed'  user.profile.user %}"> Posts </a> </li>
+    <li class="nav-item"> <a class="nav-link" href="{% url 'profiles:detail' user.profile.user %}"> About </a> </li>
+    <li class="nav-item"> <a class="nav-link" href="{% url 'profiles:detail' user.profile.user %}"> Photos</a> </li>
+    {% comment %} <li class="nav-item"> <a class="nav-link" href="my-profile-videos.html"> Videos</a> </li> {% endcomment %}
+    <li class="nav-item"> <a class="nav-link" href="{% url 'profiles:detail' user.profile.user %}"> Events</a> </li>
+    {% comment %} <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li> {% endcomment %}
+  </ul>
+</div>
