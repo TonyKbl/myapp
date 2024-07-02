@@ -27,6 +27,7 @@ class PostDetailView(DetailView):
     context_object_name = "post"
     queryset = Post.objects.all()
 
+
 class CreateNewPost(CreateView):
     models = Post
     template_name = "feed/create.html"

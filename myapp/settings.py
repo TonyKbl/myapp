@@ -89,9 +89,6 @@ ROOT_PATH = os.path.dirname(__file__)
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-#MEDIA_URL = "/media/"
-
 WSGI_APPLICATION = 'myapp.wsgi.application'
 
 
@@ -126,11 +123,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/London'
 
-USE_I18N = True
+USE_I18N = False
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

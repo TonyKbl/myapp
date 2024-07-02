@@ -100,7 +100,12 @@
 		{% block head %}{% endblock %}
 	</head>
 <body>
-
+<!-- Pre loader -->
+<div class="preloader">
+	<div class="preloader-item">
+		<div class="spinner-grow text-primary"></div>
+	</div>
+</div>
 <!-- =======================
 Header START -->
 <header class="navbar-light fixed-top header-static bg-mode">
@@ -260,14 +265,14 @@ Header START -->
 				<!-- Nav right START -->
 				<ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
 					<li class="nav-item ms-2">
-						<a class="nav-link bg-light icon-md btn btn-light p-0" href="messaging.html">
-							<i class="bi bi-chat-left-text-fill fs-6"> </i>
+						<a class="nav-link icon-md btn btn-light p-0" href="messaging.html">
+							<i class="bi bi-chat-left-text-fill fs-1"> </i>
 						</a>
 					</li>
 					<li class="nav-item dropdown ms-2">
-						<a class="nav-link bg-light icon-md btn btn-light p-0" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+						<a class="nav-link icon-md btn btn-light p-0" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
 							<span class="badge-notif animation-blink"></span>
-							<i class="bi bi-bell-fill fs-6"> </i>
+							<i class="bi bi-bell-fill fs-1"> </i>
 						</a>
 						<div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0" aria-labelledby="notifDropdown">
 							<div class="card">
