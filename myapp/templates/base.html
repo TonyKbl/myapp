@@ -584,6 +584,7 @@ Header END -->
 						</div>
 						{% endif %}
 						{% if request.user.is_authenticated %}
+							{% block profile_head %}{% endblock %}
 							{% block content %}{% endblock content %}
 						{% endif %}
 					</div>

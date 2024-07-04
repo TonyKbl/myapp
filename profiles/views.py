@@ -16,6 +16,9 @@ class ProfileDetailView(DetailView):
     context_object_name = "user"
     slug_field = "username"
     slug_url_kwarg = "username"
+
+    # if(profile_page):
+    #     pass
     
 
 class ProfileUpdateView(UpdateView):
@@ -42,15 +45,34 @@ class ProfileUpdateView(UpdateView):
     # context_object_name = "posts"
     # queryset = Post.objects.all().order_by('-id')[0:30]
 
-class ProfileFeedView(ListView): 
-    def get_queryset(self):
-        return Post.objects.filter(author__username=self.kwargs['username'])
-    html_method_names = ["get"]  
+class ProfileFeedView(DetailView): 
+    http_method_names = ["get"]
     template_name = "profiles/feed.html"
-    # model = Post   
-    context_object_name = "posts"
-    # queryset=Post.objects.filter(author__username = User.username )
-    # # queryset = Post.objects.all().order_by('-id')[0:30]
+    model = User
+    context_object_name = "user"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfileFeedView, self).get_context_data(*args, **kwargs)
+        context['posts'] = Post.objects.filter(author__username=self.kwargs['username'])
+        return context
+    # def get_queryset(self):
+    #     # return Post.objects.filter(author__username=self.kwargs['username'])
+    #     queryset = Post.objects.filter(author__username = User.username )
+        
+    # html_method_names = ["get"]  
+    # template_name = "profiles/feed.html"
+    # model = User   
+    # context_object_name = "posts"
+    # # queryset=Post.objects.filter(author__username = User.username )
+    # # # queryset = Post.objects.all().order_by('-id')[0:30]
+    
+    # slug_field = "username"
+    # slug_url_kwarg = "username"
+
+    # def get_object(self):
+    #    return self.request.username
 
 
     

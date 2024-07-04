@@ -1,6 +1,7 @@
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 
 from .models import Post
 

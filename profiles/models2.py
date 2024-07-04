@@ -188,7 +188,7 @@ class Profile(models.Model):
     
     name = models.CharField(max_length=20)
     
-    DOB = models.DateTimeField(null = True, blank = False)
+    DOB = models.DateTimeField(null = False, blank = False)
     
     # Sexuality Option
     SELECT = ""
@@ -263,24 +263,18 @@ class Profile(models.Model):
         max_length=16,
         choices=BODY_TYPE_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
     )
 
     smoke2 = models.CharField(
         max_length=16,
         choices=SMOKER_TYPE_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
     )
 
     drink2 = models.CharField(
         max_length=16,
         choices=DRINK_TYPE_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
     )
 
 
@@ -312,7 +306,5 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user
-    
-    
 
 
