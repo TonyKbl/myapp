@@ -9,7 +9,7 @@ class PageCreateForm(forms.ModelForm):
         model = Page
         fields = (
             "page_type",
-            "page",
+            "page_name",
             "address1",
             "address2",
             "town_city",
@@ -27,7 +27,7 @@ class PageUpdateForm(forms.ModelForm):
         model = Page
         fields = (
             "page_type",
-            "page",
+            "page_name",
             "address1",
             "address2",
             "town_city",

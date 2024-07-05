@@ -5,11 +5,12 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from feed.models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Profile
 from .forms import ProfileUpdateForm
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     http_method_names = ["get"]
     template_name = "profiles/detail.html"
     model = User
@@ -21,7 +22,7 @@ class ProfileDetailView(DetailView):
     #     pass
     
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileUpdateForm
     template_name = "profiles/profile_update_form.html"
@@ -45,7 +46,7 @@ class ProfileUpdateView(UpdateView):
     # context_object_name = "posts"
     # queryset = Post.objects.all().order_by('-id')[0:30]
 
-class ProfileFeedView(DetailView): 
+class ProfileFeedView(LoginRequiredMixin, DetailView): 
     http_method_names = ["get"]
     template_name = "profiles/feed.html"
     model = User
@@ -57,23 +58,16 @@ class ProfileFeedView(DetailView):
         context = super(ProfileFeedView, self).get_context_data(*args, **kwargs)
         context['posts'] = Post.objects.filter(author__username=self.kwargs['username'])
         return context
-    # def get_queryset(self):
-    #     # return Post.objects.filter(author__username=self.kwargs['username'])
-    #     queryset = Post.objects.filter(author__username = User.username )
-        
-    # html_method_names = ["get"]  
-    # template_name = "profiles/feed.html"
-    # model = User   
-    # context_object_name = "posts"
-    # # queryset=Post.objects.filter(author__username = User.username )
-    # # # queryset = Post.objects.all().order_by('-id')[0:30]
-    
-    # slug_field = "username"
-    # slug_url_kwarg = "username"
 
-    # def get_object(self):
-    #    return self.request.username
+class ProfileGalleryView(LoginRequiredMixin, DetailView): 
+    http_method_names = ["get"]
+    template_name = "profiles/gallery.html"
+    model = User
+    context_object_name = "user"
+    slug_field = "username"
+    slug_url_kwarg = "username"
 
-
-    
-    
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfileGalleryView, self).get_context_data(*args, **kwargs)
+        context['posts'] = Post.objects.filter(author__username=self.kwargs['username'])
+        return context

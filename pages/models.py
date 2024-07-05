@@ -24,7 +24,7 @@ class Page(models.Model):
 
     image = ResizedImageField(size=[600, 600], upload_to='profiles', null=True, blank=True)
 
-    page = models.CharField( max_length=50, null=False, blank=False)
+    page_name = models.CharField( max_length=50, null=False, blank=False)
 
     address1 = models.CharField( max_length=50, null=False, blank=False)
     address2 = models.CharField( max_length=50, null=True, blank=True)
@@ -38,11 +38,11 @@ class Page(models.Model):
     slug = models.SlugField(default="", null=False, unique=True)
 
     def get_absolute_url(self):
-        return reverse("page_detail", kwargs={"slug": self.slug})
+        return reverse("page", kwargs={"slug": self.slug})
     
     def save(self, *args, **kwargs):  # new
         if not self.slug:
-            self.slug = slugify(self.page)
+            self.slug = slugify(self.page_name)
         return super().save(*args, **kwargs)
 
     def __str__(self):

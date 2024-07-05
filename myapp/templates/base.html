@@ -583,10 +583,8 @@ Header END -->
 							</ul>
 						</div>
 						{% endif %}
-						{% if request.user.is_authenticated %}
 							{% block profile_head %}{% endblock %}
 							{% block content %}{% endblock content %}
-						{% endif %}
 					</div>
 			<!-- Main content END -->
 
@@ -605,7 +603,7 @@ Header END -->
 	<!-- Container END -->
 
 	{% comment %} {% else %} {% endcomment %}
-	<div class="container g-0 g-md-1">
+	{% comment %} <div class="container g-0 g-md-1">
 		<div class="row g-4">
 			<div class="col-lg-3">
 			</div>
@@ -615,7 +613,7 @@ Header END -->
 			<div class="col-lg-3">
 			</div>
 		</div>
-	</div>
+	</div> {% endcomment %}
 	{% comment %} {% endif %} {% endcomment %}
 
 </main>

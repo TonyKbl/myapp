@@ -9,8 +9,15 @@ from .models import Page
 from profiles.models import Profile
 from .forms import PageUpdateForm, PageCreateForm
 
-class PageListView(ListView):
-    pass
+class PageListView(ListView):    
+    http_method_names = ["get"]
+    template_name = "pages/list.html"
+    model = Page
+    context_object_name = "pages"
+    queryset = Page.objects.all().order_by('-id')[0:30]
+
+    
+
 
 class PageDetailView(DetailView):
     http_method_names = ["get"]

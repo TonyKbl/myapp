@@ -6,17 +6,9 @@
 {% block title %}{{username}} - Profile{% endblock title %}
 
 {% block content %}
-<!-- Card START -->
-{% include 'includes/profile_head.html' %}
- <!-- Card END -->
 
-<!-- Card feed item START -->
-<div id="posts-container">
-    {% for post in posts %}
-    {% include 'includes/post.html'%}
-    <hr>
-    {% endfor%}
-</div>
-<!-- Card feed item END -->
+{% include 'includes/profile_head.html' %}
+
+Photos of {{user.profile.user}}
 
 {% endblock %}

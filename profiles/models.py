@@ -311,7 +311,7 @@ class Profile(models.Model):
         return age2
     
     def __str__(self):
-        return self.user
+        return self.user.username
     
     
 
