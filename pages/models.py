@@ -18,13 +18,13 @@ class Page(models.Model):
         
     page_type = models.CharField(max_length = 15, choices = PageTypes.choices)
 
+    page_name = models.CharField( max_length=50, null=False, blank=False)
+
     # owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name = "owner")
 
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles', null=True, blank=True)
 
     image = ResizedImageField(size=[600, 600], upload_to='profiles', null=True, blank=True)
-
-    page_name = models.CharField( max_length=50, null=False, blank=False)
 
     address1 = models.CharField( max_length=50, null=False, blank=False)
     address2 = models.CharField( max_length=50, null=True, blank=True)
@@ -46,4 +46,4 @@ class Page(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.page
+        return self.page_name
