@@ -22,9 +22,9 @@ class Page(models.Model):
 
     # owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name = "owner")
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to='profiles', null=True, blank=True)
+    cover_image = ResizedImageField(size=[600, 200], upload_to='page_covers', null=True, blank=True)
 
-    image = ResizedImageField(size=[600, 600], upload_to='profiles', null=True, blank=True)
+    image = ResizedImageField(size=[600, 600], upload_to='page_avatars', null=True, blank=True)
 
     address1 = models.CharField( max_length=50, null=False, blank=False)
     address2 = models.CharField( max_length=50, null=True, blank=True)
