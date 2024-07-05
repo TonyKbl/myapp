@@ -31,7 +31,7 @@ class PageDetailView(DetailView):
 class PageCreateView(CreateView):
     model = Page
     form_class = PageCreateForm
-    template_name = "pages/page_create_form.html"
+    template_name = "pages/page_add_edit_form.html"
     # fields = ["page_type", "cover_image", "image"]
     success_url = "/"
 
@@ -45,18 +45,26 @@ class PageCreateView(CreateView):
 
 
 class PageUpdateView(UpdateView):
-    pass
-#     model = Page
-#     form_class = PageUpdateForm
-#     template_name = "pages/page_update_form.html"
-#     success_url = "/"
+    model = Page
+    form_class = PageUpdateForm
+    template_name = "pages/page_add_edit_form.html"
+    success_url = "/"
 
-#    # def get_object(self):
-#     #    return self.request.user
+    def get_object(self):
+       return self.request.user
     
     
     
-#     def get_object(self, queryset=None):
-#         obj = Page.objects.get(user=self.request.user)
-#         return obj
+    def get_object(self, queryset=None):
+        obj = Page.objects.get(user=self.request.user)
+        return obj
+    
+    # def get_object(self):
+    #    return self.request.
+    
+    
+    
+    # def get_object(self, *args, **kwargs):
+    #     obj = Page.objects.get(id)
+    #     return obj
     

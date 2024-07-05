@@ -154,6 +154,8 @@ class Profile(models.Model):
     cover_image = ResizedImageField(size=[600, 200], upload_to='profiles')
 
     image = ResizedImageField(size=[600, 600], upload_to='profiles')
+
+    display_name = models.CharField( max_length=50, null = True, blank = False )
     
     headline = models.CharField( max_length=200, null=True, blank=True)
 

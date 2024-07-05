@@ -28,7 +28,7 @@
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
                 {% if page.user.username == request.user.username %}
-                <a href="/edit_profile/{{id}}" >
+                <a href="/edit_page/{{page.id}}/{{page.slug}}" >
                   <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit </button>
                 </a>
               {% else %}

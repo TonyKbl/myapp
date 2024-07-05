@@ -11,7 +11,11 @@
                 <div class="card">
                     <!-- Card header START -->
                     <div class="card-header border-0 pb-0">
-                        <h2>Add Page</h2>
+                        {% if page.page_name == Null %}
+                            <h2>Add New Page</h2>
+                        {% else %}
+                            <h2>Edit Page</h2>
+                        {% endif %}
                     </div>                     
                     <!-- Card header END -->
                     <!-- Card body START -->

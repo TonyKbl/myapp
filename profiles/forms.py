@@ -10,7 +10,8 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:        
         model = Profile
         fields = (
-            "profile_type", 
+            "profile_type",
+            "display_name",
             "headline", 
             "intro", 
             "description", 
@@ -32,6 +33,7 @@ class ProfileUpdateForm(forms.ModelForm):
             )
         widgets = {
             'profile_type': forms.Select(attrs={'class': 'form-control'}),
+            'display_name': forms.TextInput(attrs={'class': 'form-control'}),
             'headline': forms.TextInput(attrs={'class': 'form-control'}),
             'intro': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),

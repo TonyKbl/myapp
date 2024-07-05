@@ -18,7 +18,7 @@
                             <div>
                               <div class="nav nav-divider">
                                 
-                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">{{ post.author.username}}</a></h6>
+                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">{{ post.author.profile.display_name}}</a></h6>
                                 
                                 <span class="nav-item small"> {{post.date}} </span>
                               </div>

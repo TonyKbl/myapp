@@ -9,5 +9,5 @@ urlpatterns = [
     path("pages/", views.PageListView.as_view(), name="list"),  
     path("page/<slug:slug>/", views.PageDetailView.as_view(), name="detail"),    
     path("add_page/", views.PageCreateView.as_view(), name="add_page"),
-    path("edit_page/", views.PageUpdateView.as_view(), name="edit_page"),
+    path("edit_page/<int:pk>/<slug:slug>", views.PageUpdateView.as_view(), name="edit_page"),
 ]
