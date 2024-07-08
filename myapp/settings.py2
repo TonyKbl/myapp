@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 # import environ
 # Initialise environment variables
+from . import env
 
 # from .aws.conf import *
 
@@ -30,7 +31,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env.DEBUG
 USE_AWS = True
 
 
@@ -150,9 +151,9 @@ else:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DATABASE_NAME,
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASS,
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASS'),
         'HOST':'127.0.0.1',
         'PORT':'5432',
         }
@@ -165,9 +166,9 @@ if USE_AWS:
     STATICFILES_LOCATION = 'static'
     MEDIAFILES_LOCATION = 'media'
 
-    AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
-    AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME
+    AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
+    AWS_STORAGE_BUCKET_NAME = env.AWS_STORAGE_BUCKET_NAME
     AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
@@ -182,7 +183,7 @@ if USE_AWS:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_STORAGE)
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
 else:
