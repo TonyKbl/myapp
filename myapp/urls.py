@@ -24,7 +24,10 @@ from profiles import urls as profiles_urls
 from messaging import urls as messaging_urls
 from django.conf import settings
 from django.urls import re_path as url
+from django.shortcuts import render
 
+def custom_page_not_found_view(request, exception):
+   return render(request, "404.html", {})
 
 urlpatterns = [
     path('admin/', admin.site.urls),
