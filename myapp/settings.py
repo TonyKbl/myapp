@@ -253,7 +253,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
     
 )
-CSRF_TRUSTED_ORIGINS=['https://clubs4fun.co.uk','https://clubsforfun.co.uk','https://18.134.250.132', 'https://clubswing.com',]
+CSRF_TRUSTED_ORIGINS=['https://clubs4fun.co.uk','https://clubsforfun.co.uk','http://18.134.250.132', 'https://clubswing.com',]
 
 
 # Default primary key field type
