@@ -15,18 +15,17 @@
         <div class="card-header border-0 pb-0">
           <h5 class="card-title"> Profile Info</h5> 
         </div>
+        <hr>
         <!-- Card header END -->
         <!-- Card body START -->
-        <div class="card-body">
-          <div class="rounded border px-3 py-2 mb-3"> 
+        <div class="card-body mt-0 pt-0">
             <p><strong>{{ user.profile.intro|linebreaks}}</strong></p>
             <p>{{ user.profile.description|linebreaks}}</p>
-          </div>
+            <hr>
           <div class="row g-4">
             <div class="col-sm-6">
               <!-- Person 1 START -->
               <h6>{{user.profile.name}}</h6>
-              <div class="rounded border px-3 py-2"> 
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age }}</strong>
                 </p>
@@ -45,14 +44,12 @@
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Drink: <strong> {{user.profile.drink}} </strong>
                 </p>
-              </div>
               <!-- Person 1 END -->
             </div>
             <div class="col-sm-6">
               <!-- Person 2 START -->  
                {% if user.profile.profile_type == "MF Couple" or user.profile.profile_type == "FF Couple" %}               
-               <h6>{{user.profile.name2}}</h6>               
-              <div class="rounded border px-3 py-2"> 
+               <h6>{{user.profile.name2}}</h6>
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age2 }}</strong>
                 </p>
@@ -71,7 +68,6 @@
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Drink: <strong> {{user.profile.drink}} </strong>
                 </p>
-              </div>
               {% endif %}
               <!-- Person 2 END -->
             </div>

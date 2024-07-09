@@ -151,11 +151,11 @@ else:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.DATABASE_NAME,
-        'USER': env.DATABASE_USER,
-        'PASSWORD': env.DATABASE_PASS,
-        'HOST':'127.0.0.1',
-        'PORT':'5432',
+        'NAME': 'clubswing',
+        'USER': 'clubswing_admin',
+        'PASSWORD': 'TK8bw@5418',
+        'HOST':'127.0.0.1, localhost',
+        'PORT':'',
         }
     }
     ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk', '206.189.31.203']
@@ -184,7 +184,7 @@ if env.USE_AWS:
 
 
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_STORAGE)
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_LOCATION)
 
 else:
     STATIC_URL = '/static/'
@@ -192,7 +192,7 @@ else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
 # else:
