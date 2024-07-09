@@ -158,7 +158,7 @@ else:
         'PORT':'5432',
         }
     }
-    ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk']
+    ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk', '206.189.31.203']
 
 
 if env.USE_AWS:
