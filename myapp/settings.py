@@ -10,9 +10,17 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+# from pathlib import Path
+# import os
+# import env
+
+from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 import os
-import env
+import sys
+import dj_database_url
+
+
 # Initialise environment variables
 
 # from .aws.conf import *
@@ -27,12 +35,15 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.SECRET_KEY
+# SECRET_KEY = env.SECRET_KEY
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.DEBUG
-USE_AWS = env.USE_AWS
+# DEBUG = env.DEBUG
+# USE_AWS = env.USE_AWS
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 
@@ -47,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    'gunicorn'
 
     'allauth',
     'allauth.account',
@@ -132,44 +144,58 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-
-if env.USE_SQLITE:
-
+if DEVELOPMENT_MODE is True:
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
         }
     }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
+
+
+# if env.USE_SQLITE:
+
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+#     }
 
     
-    ALLOWED_HOSTS = ['*']
+#     ALLOWED_HOSTS = ['*']
 
-else:
+# else:
 
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'clubswing',
-        'USER': 'clubswing_admin',
-        'PASSWORD': 'TK8bw@5418',
-        'HOST':'127.0.0.1, localhost',
-        'PORT':'',
-        }
-    }
-    ALLOWED_HOSTS = ['clubs4fun.co.uk', 'clubsforfun.co.uk', 'clubswing.com', 'clubswing.co.uk', 'localhost', '18.134.250.132']
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'clubswing',
+#         'USER': 'clubswing_admin',
+#         'PASSWORD': 'TK8bw@5418',
+#         'HOST':'127.0.0.1, localhost',
+#         'PORT':'',
+#         }
+#     }
+#     ALLOWED_HOSTS = ['*']
 
 
-if env.USE_AWS:
+if USE_AWS is True:
     # aws settings
     STATICFILES_LOCATION = 'static'
     MEDIAFILES_LOCATION = 'media'
 
-    AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
-    AWS_STORAGE_BUCKET_NAME = env.AWS_STORAGE_BUCKET_NAME
+    AWS_ACCESS_KEY_ID = AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY = AWS_SECRET_ACCESS_KEY
+    AWS_STORAGE_BUCKET_NAME = AWS_STORAGE_BUCKET_NAME
     AWS_DEFAULT_ACL = None
-    AWS_S3_CUSTOM_DOMAIN = f'{env.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     # s3 static settings
     AWS_LOCATION = 'static'
