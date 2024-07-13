@@ -23,6 +23,7 @@ import dj_database_url
 
 # Initialise environment variables
 
+DEVELOPMENT_MODE = "True"
 # from .aws.conf import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
