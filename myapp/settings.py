@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 # from pathlib import Path
 # import os
-# import env
+# import .env
 
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
@@ -144,7 +144,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-if DEVELOPMENT_MODE is True:
+if os.getenv('DEVELOPMENT_MODE') is True:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
