@@ -22,7 +22,10 @@ USE_AWS = "True"
 
 USE_AWS = os.getenv("USE_AWS", "True")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
+DATABASE_URL = env.DATABASE_URL
+DATABASE_DB = env.DATABASE_DB
 
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", env.DEVELOPMENT_MODE)
 
 ALLOWED_HOSTS = ("127.0.0.1", "localhost", "134.209.191.224")
 
@@ -97,21 +100,29 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
-# if DEVELOPMENT_MODE is True:
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+if DEVELOPMENT_MODE is True:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
-# elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-#     if os.getenv("DATABASE_URL", None) is None:
-#         raise Exception("DATABASE_URL environment variable not defined")
-#     DATABASES = {
-#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-#     }
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if DATABASE_URL == None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    # DATABASES = {
+    #     "default": dj_database_url.parse(DATABASE_URL),
+    # }
+
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_DB,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+
 
 
 # Password validation
