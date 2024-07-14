@@ -20,6 +20,7 @@ import os
 import sys
 import dj_database_url
 
+from urllib.parse import urlparse
 
 # Initialise environment variables
 
@@ -59,7 +60,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
-    'gunicorn'
+    'gunicorn',
+    'whitenoise',
 
     'allauth',
     'allauth.account',
@@ -213,13 +215,15 @@ if USE_AWS is True:
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_LOCATION)
 
 else:
-    STATIC_URL = '/static/'
-    # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-    STATICFILES_DIRS = [
-        BASE_DIR / "static",
-    ]     
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    # STATIC_URL = '/static/'
+    # # STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    # STATICFILES_DIRS = [BASE_DIR / "static",]     
+    # MEDIA_URL = '/media/'
+    # MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+    STATIC_URL = "/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
