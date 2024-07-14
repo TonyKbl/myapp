@@ -24,7 +24,7 @@ USE_AWS = os.getenv("USE_AWS", "True")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
 
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = ("127.0.0.1", "localhost", "134.209.191.224")
 
 
 # Application definition
