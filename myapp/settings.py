@@ -20,6 +20,10 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 DEBUG = "True"
 USE_AWS = "True"
 
+USE_AWS = os.getenv("USE_AWS", "True")
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
+
+
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
@@ -86,7 +90,7 @@ TEMPLATES = [
         },
     },
 ]
-
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 WSGI_APPLICATION = 'myapp.wsgi.application'
 
@@ -150,9 +154,14 @@ if USE_AWS == 'True':
     STATICFILES_LOCATION = 'static'
     MEDIAFILES_LOCATION = 'media'
 
-    AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
-    AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
-    AWS_STORAGE_BUCKET_NAME = env.AWS_STORAGE_BUCKET_NAME
+    
+    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
+    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME", env.AWS_STORAGE_BUCKET_NAME)
+    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", env.AWS_SECRET_ACCESS_KEY)
+
+    # AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
+    # AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
+    # AWS_STORAGE_BUCKET_NAME = env.AWS_STORAGE_BUCKET_NAME
     AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
