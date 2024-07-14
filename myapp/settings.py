@@ -24,8 +24,7 @@ from urllib.parse import urlparse
 
 # Initialise environment variables
 
-DEVELOPMENT_MODE = "True"
-USE_AWS = "True"
+
 # from .aws.conf import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,9 +42,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = env.DEBUG
-# USE_AWS = env.USE_AWS
+USE_AWS = os.getenv("USE_AWS", "False") == "True"
 DEBUG = os.getenv("DEBUG", "False") == "True"
-
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
@@ -148,7 +147,7 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-if os.getenv('DEVELOPMENT_MODE') is True:
+if DEVELOPMENT_MODE is True:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
