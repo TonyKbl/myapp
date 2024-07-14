@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'gunicorn',
     'whitenoise',
+    'dj_database_url',
 
     'allauth',
     'allauth.account',
