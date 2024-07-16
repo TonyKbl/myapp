@@ -101,6 +101,8 @@ WSGI_APPLICATION = 'myapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 if DEVELOPMENT_MODE == 'True':
     print("DEVELOPMENT_MODE = True")
     DATABASES = {
