@@ -27,7 +27,7 @@ DATABASE_DB = env.DATABASE_DB
 
 DEVELOPMENT_MODE = env.DEVELOPMENT_MODE
 
-ALLOWED_HOSTS = ("127.0.0.1", "localhost", "134.209.191.224")
+ALLOWED_HOSTS = ("127.0.0.1", "localhost", "134.209.191.224", "clubsforfun.com")
 
 
 # Application definition
