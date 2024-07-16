@@ -17,10 +17,9 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "True"
-USE_AWS = "True"
+DEBUG = env.DEBUG
+USE_AWS = env.USE_AWS
 
-USE_AWS = os.getenv("USE_AWS", "True")
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
 DATABASE_URL = env.DATABASE_URL
 DATABASE_DB = env.DATABASE_DB
