@@ -155,7 +155,7 @@ Header START -->
 					<ul class="navbar-nav navbar-nav-scroll ms-auto">
 						<!-- Nav item 1 Demos -->
 						<li class="nav-item dropdown">
-							<a class="nav-link active dropdown-toggle" href="#" id="homeMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demo</a>
+							<a class="nav-link active dropdown-toggle" href="#" id="homeMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Events</a>
 							<ul class="dropdown-menu" aria-labelledby="homeMenu">
 								<li> <a class="dropdown-item active" href="index.html">Home default</a></li>
 								<li> <a class="dropdown-item" href="index-classic.html">Home classic</a></li>
@@ -187,7 +187,7 @@ Header START -->
 
 						<!-- Nav item 3 Post -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account </a>
+							<a class="nav-link dropdown-toggle" href="#" id="postMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Groups </a>
 							<ul class="dropdown-menu" aria-labelledby="postMenu">
 								<li> <a class="dropdown-item" href="create-page.html">Create a page</a></li>
 								<li> <a class="dropdown-item" href="settings.html">Settings</a> </li>
@@ -215,7 +215,7 @@ Header START -->
 
 						<!-- Nav item 4 Mega menu -->
 						<li class="nav-item">
-							<a class="nav-link" href="my-profile-connections.html">My network</a>
+							<a class="nav-link" href="my-profile-connections.html">Blog</a>
 						</li>
 					</ul>
 				</div>
@@ -225,13 +225,17 @@ Header START -->
 				<ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
 					<li class="nav-item ms-2">
 						<a class="nav-link icon-md btn btn-light p-0" href="messaging.html">
-							<i class="bi bi-chat-left-text-fill fs-1"> </i>
+							<i class="bi bi-chat-left-text fs-2"> </i>
 						</a>
 					</li>
 					<li class="nav-item dropdown ms-2">
 						<a class="nav-link icon-md btn btn-light p-0" href="#" id="notifDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-							<span class="badge-notif animation-blink"></span>
-							<i class="bi bi-bell-fill fs-1"> </i>
+							<span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
+								99+
+								<span class="visually-hidden">unread messages</span>
+							  </span>
+							{% comment %} <span class="badge-notif animation-blink">52</span> {% endcomment %}
+							<i class="bi bi-bell fs-2">  </i>
 						</a>
 						<div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0" aria-labelledby="notifDropdown">
 							<div class="card">

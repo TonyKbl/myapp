@@ -2,7 +2,9 @@
 <!-- Card START -->
 {% comment %} {% include "includes/profile_header.html" with user=user.profile.user %} {% endcomment %}
 <div class="card"> 
-    <div class="h-200px rounded-top" style="background-image:url(https://clubs4fun.s3.amazonaws.com/static/{{ user.profile.cover_image }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+    <div class="h-200px rounded-top" style="background-image:url(https://clubs4fun.s3.amazonaws.com/static/{{ user.profile.cover_image }}); background-position: center; background-size: cover; background-repeat: no-repeat;">
+        <a href="#">Edit</a>
+    </div>
         <!-- Card body START -->
         <div class="card-body py-0">
             <div class="d-sm-flex align-items-start text-center text-sm-start">
@@ -34,12 +36,18 @@
                         <i class="bi bi-three-dots"></i>
                     </button>
                     <!-- Card share action dropdown menu -->
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">                        
+                    {% if user.username == request.user.username %}
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a></li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
+                    {% else %}
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-ban fa-fw pe-2"></i>Block profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#"> <i class="bi bi-exclamation-triangle-fill fa-fw pe-2"></i>Report User</a></li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>
