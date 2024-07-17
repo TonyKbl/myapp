@@ -6,6 +6,7 @@ from sorl.thumbnail import ImageField
 from django_resized import ResizedImageField
 from datetime import date
 from django.utils import timezone
+from profanity.validators import validate_is_profane
 
 @receiver(post_save, sender=User)   
 def create_user_profile(sender, instance, created, **kwargs):
@@ -63,18 +64,7 @@ class Profile(models.Model):
     f70 = "7ft 0in"
     HEIGHT_CHOICES = [
         (SELECT, "Select Height"),
-        (f4, "4ft 0in"),
-        (f41, "4ft 1in"),
-        (f42, "4ft 2in"),
-        (f43, "4ft 3in"),
-        (f44, "4ft 4in"),
-        (f45, "4ft 5in"),
-        (f46, "4ft 6in"),
-        (f47, "4ft 7in"),
-        (f48, "4ft 8in"),
-        (f49, "4ft 9in"),
-        (f410, "4ft 10in"),
-        (f411, "4ft 11in"),
+        (f411, "<5ft"),
         (f50, "5ft 0in"),
         (f51, "5ft 1in"),
         (f52, "5ft 2in"),
@@ -94,12 +84,7 @@ class Profile(models.Model):
         (f64, "6ft 4in"),
         (f65, "6ft 5in"),
         (f66, "6ft 6in"),
-        (f67, "6ft 7in"),
-        (f68, "6ft 8in"),
-        (f69, "6ft 9in"),
-        (f610, "6ft 10in"),
-        (f611, "6ft 11in"),
-        (f70, "7ft 0in"),
+        (f67, ">6ft 6in"),
     ]
     
     # body_type options
@@ -111,7 +96,7 @@ class Profile(models.Model):
     DADBOD = "Dad Bod"
     LARGE = "Large"
     BODY_TYPE_CHOICES = [
-        (SELECT, "Select Profile Type"),
+        (SELECT, "Select Body Type"),
         (SLIM, "Slim"),
         (ATHLETIC, "Athletic"),
         (CURVY, "Curvy"),
@@ -147,7 +132,6 @@ class Profile(models.Model):
         (OCCASIONALLY, "Occasionally"),
         (SOCIALLY, "Socially"),
         (OFTEN, "Often"),
-        (VAPER, "Vape"),
     ]
 
 
@@ -157,11 +141,11 @@ class Profile(models.Model):
 
     display_name = models.CharField( max_length=50, null = True, blank = False )
     
-    headline = models.CharField( max_length=200, null=True, blank=True)
+    headline = models.CharField( max_length=200, null=True, blank=True, validators=[validate_is_profane])
 
-    intro = models.CharField( max_length=200, null=True, blank=True)
+    intro = models.CharField( max_length=200, null=True, blank=True, validators=[validate_is_profane])
 
-    description = models.TextField()
+    description = models.TextField(null=True, validators=[validate_is_profane])
 
     # profile type option
     SELECT = ""

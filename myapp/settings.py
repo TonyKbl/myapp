@@ -26,7 +26,7 @@ DATABASE_DB = env.DATABASE_DB
 
 DEVELOPMENT_MODE = env.DEVELOPMENT_MODE
 
-ALLOWED_HOSTS = ("127.0.0.1", "localhost", "134.209.191.224", "clubsforfun.com")
+ALLOWED_HOSTS = ("127.0.0.1", "localhost", "www.clubsforfun.com", "clubsforfun.com")
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'formtools',
+    'profanity',
 
     'feed',
     'friends',
@@ -227,5 +228,5 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
     
 )
-CSRF_TRUSTED_ORIGINS=['https://clubs4fun.co.uk','https://clubsforfun.co.uk','http://18.134.250.132', 'https://clubswing.com',]
+CSRF_TRUSTED_ORIGINS=['https://clubsforfun.com','https://www.clubsforfun.com','https://clubsforfun.co.uk','http://18.134.250.132', 'https://clubswing.com',]
 
