@@ -8,8 +8,8 @@
                           <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar avatar-story me-2">
-                                {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
-                                  <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">
+                                {% thumbnail post.name.image "100x100" crop="center" as im %}
+                                  <a class="fles items_center" href="{% url 'pages:detail' post.name.slug %}">
                                     <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
                                   </a>
                                 {% endthumbnail %}

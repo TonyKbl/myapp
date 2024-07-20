@@ -87,16 +87,12 @@
             <div class="col-lg-6">
               <!-- Person 1 START -->
               <h6>Address</h6>
-              <dl class="row">
-                <dt class="col-sm-3">Address</dt>
-                <dd class="col-sm-9">{{ page.address1 }}<br>
-                {% if page.address2 != None %}{{ page.address2 }}{%endif%}</dd>
-                <dt class="col-sm-3">County</dt>
-                <dd class="col-sm-9">{{page.county}}</dd>
-                <dt class="col-sm-3 text-truncate">Postcode</dt>
-                <dd class="col-sm-9">{{page.post_code}}</dd>
+                {{ page.address1 }}<br>
+                {% if page.address2 != None %}{{ page.address2 }}<br>{%endif%}
+                {{page.county}}<br>
+                <br>
+                {{page.post_code}}
               
-              </dl>
               <!-- Person 1 END -->
             </div>
             <div class="col-lg-6">
