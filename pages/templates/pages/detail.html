@@ -41,7 +41,8 @@
                 </button>
                 <!-- Card share action dropdown menu -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-                  <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share profile in a message</a></li>
+                  <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Page Post</a></li>
+                  <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
                   <li><hr class="dropdown-divider"></li>
@@ -83,52 +84,25 @@
             <p>{{ page.description|linebreaks}}</p>
                <hr>
           <div class="row g-4">
-            <div class="col-sm-6">
+            <div class="col-lg-6">
               <!-- Person 1 START -->
-              <h6>{{user.profile.name}}</h6>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age }}</strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Sexuality: <strong> {{user.profile.sexuality }} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Height: <strong> {{user.profile.height}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.body_type}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Smoke/Vape: <strong> {{user.profile.smoke}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Drink: <strong> {{user.profile.drink}} </strong>
-                </p>
+              <h6>Address</h6>
+              <dl class="row">
+                <dt class="col-sm-3">Address</dt>
+                <dd class="col-sm-9">{{ page.address1 }}<br>
+                {% if page.address2 != None %}{{ page.address2 }}{%endif%}</dd>
+                <dt class="col-sm-3">County</dt>
+                <dd class="col-sm-9">{{page.county}}</dd>
+                <dt class="col-sm-3 text-truncate">Postcode</dt>
+                <dd class="col-sm-9">{{page.post_code}}</dd>
+              
+              </dl>
               <!-- Person 1 END -->
             </div>
-            <div class="col-sm-6">
+            <div class="col-lg-6">
               <!-- Person 2 START -->  
-               {% if user.profile.profile_type == "MF Couple" or user.profile.profile_type == "FF Couple" %}               
-               <h6>{{user.profile.name2}}</h6>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age2 }}</strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Sexuality: <strong> {{user.profile.sexuality2 }} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Height: <strong> {{user.profile.height2}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.body_type2}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Smoke/Vape: <strong> {{user.profile.smoke2}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Drink: <strong> {{user.profile.drink}} </strong>
-                </p>
-              {% endif %}
+   
+              
               <!-- Person 2 END -->
             </div>
           </div>

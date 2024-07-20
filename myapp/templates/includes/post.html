@@ -2,13 +2,14 @@
                 <!-- Card feed item START -->
                     <div class="card">
                       <!-- Card header START -->
+                      {% if post.post_type == 'page' %}
                       <div class="card-header border-0 pb-0">
                         <div class="d-flex align-items-center justify-content-between">
                           <div class="d-flex align-items-center">
                             <!-- Avatar -->
                             <div class="avatar avatar-story me-2">
                                 {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
-                                   <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">
+                                  <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">
                                     <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
                                   </a>
                                 {% endthumbnail %}
@@ -17,7 +18,47 @@
                             <!-- Info -->
                             <div>
                               <div class="nav nav-divider">
+                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'pages:detail' post.name.slug %}">{{ post.name }}</a></h6>
                                 
+                                <span class="nav-item small"> {{post.date}} </span>
+                              </div>
+                              <p class="mb-0 small">{{ post.author.profile.display_name }} - @{{ post.author.username}}</p>
+                            </div>
+                          </div>
+                          <!-- Card feed action dropdown START -->
+                          <div class="dropdown">
+                            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-three-dots"></i>
+                            </a>
+                            <!-- Card feed action dropdown menu -->
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                            </ul>
+                          </div>
+                          <!-- Card feed action dropdown END -->
+                        </div>
+                      </div>
+                      {% else %}
+                      <div class="card-header border-0 pb-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-story me-2">
+                                {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
+                                  <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">
+                                    <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
+                                  </a>
+                                {% endthumbnail %}
+                            </div>
+        
+                            <!-- Info -->
+                            <div>
+                              <div class="nav nav-divider">
                                   <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'profiles:detail' post.author.username %}">{{ post.author.profile.display_name}}</a></h6>
                                 
                                 <span class="nav-item small"> {{post.date}} </span>
@@ -43,6 +84,7 @@
                           <!-- Card feed action dropdown END -->
                         </div>
                       </div>
+                      {% endif %}
                       <!-- Card header END -->
                       <!-- Card body START -->
                       <div class="card-body">
