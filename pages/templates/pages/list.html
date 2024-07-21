@@ -17,7 +17,7 @@
 							</div>
 						{% for page in pages %}
 							<div class="card-body bg-transparent border-0">
-								<div class="row g-3">
+								<div class="row g-3 position-relative">
 								  <div class="col-4">
 									<!-- Blog image -->
 									 
@@ -28,18 +28,17 @@
 									</div>
 								  </div>
 								  <div class="col-8">
-									<!-- Blog caption -->
 									<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{page.page_type}}</a>
 									<h5><a href="{% url 'pages:detail' page.slug %}" class="btn-link stretched-link text-reset fw-bold">{{page.page_name}}</a></h5>
 									<div class="d-none d-sm-inline-block">
 									  <p class="mb-2">{{page.address1}}{% if page.address2 != None %}, {{addresss2}}{% endif %}, {{page.town_city}}, {{page.county}}, {{page.post_code}}</p>
-									  <!-- BLog date -->
+									 
 									  <a class="small text-secondary" href="#!"> <i class="bi bi-calendar-date pe-1"></i> Jan 22, 2022</a>
 									</div>
 								  </div>
 								</div>
 							  </div>
-							  <hr class="my-4">
+							  <hr>
 							{% comment %} {% include 'includes/post.html'%} {% endcomment %}
 						{% endfor%}
 						</div>
