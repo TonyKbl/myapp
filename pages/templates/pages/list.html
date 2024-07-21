@@ -18,7 +18,7 @@
 						{% for page in pages %}
 							<div class="card-body bg-transparent border-0">
 								<div class="row g-3">
-								  <div class="col-3">
+								  <div class="col-4">
 									<!-- Blog image -->
 									 
 									<div class="avatar avatar-xl">
@@ -27,7 +27,7 @@
 										{% endthumbnail %}
 									</div>
 								  </div>
-								  <div class="col-9">
+								  <div class="col-8">
 									<!-- Blog caption -->
 									<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{page.page_type}}</a>
 									<h5><a href="{% url 'pages:detail' page.slug %}" class="btn-link stretched-link text-reset fw-bold">{{page.page_name}}</a></h5>
