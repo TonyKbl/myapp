@@ -32,8 +32,8 @@
         {% endelement %}
         {% url 'account_login' as login_url %}
         {% element form form=form method="post" action=login_url tags="entrance,login" %}
-            {% slot body %}
                 {% csrf_token %}
+            {% slot body %}
                 {% element fields form=form unlabeled=True %}
                 {% endelement %}
                 {{ redirect_field }}
