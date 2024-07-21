@@ -10,18 +10,24 @@
 
 
 
-					<!-- Share feed END -->
-
-					<div id="pages-container">
-						<h1> Pages</h1>
+						<div class="card">
+							<!-- Card header START -->
+							<div class="card-header border-0 pb-0">
+								<h5 class="card-title"> Pages</h5> 
+							</div>
 						{% for page in pages %}
-							<div class="card bg-transparent border-0">
+							<div class="card-body bg-transparent border-0">
 								<div class="row g-3">
-								  <div class="col-4">
+								  <div class="col-3">
 									<!-- Blog image -->
-									<img class="rounded" src="assets/images/post/4by3/03.jpg" alt="">
+									 
+									<div class="avatar avatar-xl">
+										{% thumbnail page.image "100x100" crop="center" as im %}
+											<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+										{% endthumbnail %}
+									</div>
 								  </div>
-								  <div class="col-8">
+								  <div class="col-9">
 									<!-- Blog caption -->
 									<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{page.page_type}}</a>
 									<h5><a href="{% url 'pages:detail' page.slug %}" class="btn-link stretched-link text-reset fw-bold">{{page.page_name}}</a></h5>
@@ -36,5 +42,5 @@
 							  <hr class="my-4">
 							{% comment %} {% include 'includes/post.html'%} {% endcomment %}
 						{% endfor%}
-					</div>
+						</div>
 {% endblock %}
