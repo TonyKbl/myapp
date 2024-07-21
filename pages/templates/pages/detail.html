@@ -83,7 +83,7 @@
             {% comment %} <p><strong>{{ user.profile.intro|linebreaks}}</strong></p> {% endcomment %}
             <p>{{ page.description|linebreaks}}</p>
                <hr>
-          <div class="row g-4">
+          <div class="row g-4 align-items-center">
             <div class="col-lg-6">
               <!-- Person 1 START -->
               <h6>Address</h6>
@@ -98,7 +98,7 @@
             <div class="col-lg-6">
               <!-- Person 2 START -->  
    
-              
+              <a href="https://www.google.com/maps/dir/?api=1&destination={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="btn btn-primary btn-small">Get Directions</a>
               <!-- Person 2 END -->
             </div>
           </div>
