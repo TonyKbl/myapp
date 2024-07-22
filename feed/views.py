@@ -6,6 +6,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from queryset_sequence import QuerySetSequence
 from itertools import chain
 from operator import attrgetter
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 from .models import Post, PagePost
 
@@ -23,7 +25,7 @@ class HomePage(LoginRequiredMixin, ListView):
         qs1 = Post.objects.all() #your first qs
         qs2 = PagePost.objects.all()  #your second qs
         #you can add as many qs as you want
-        queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),)
+        queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)
         return queryset
 
 # Import QuerySetSequence
@@ -34,12 +36,29 @@ class HomePage(LoginRequiredMixin, ListView):
 
 # Chain them together.
 
-class PostDetailView(LoginRequiredMixin, DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):    
     html_method_names = ["get"]
     template_name = "feed/detail.html"
-    models = Post
+    models = Post, PagePost,
     context_object_name = "post"
-    queryset = Post.objects.all()
+    # qs1 = Post.objects.all()
+    # qs2 = PagePost.objects.all()
+    # queryset = chain(qs1, qs2)
+
+    def get_queryset(self, **kwargs):
+        if self.kwargs['page_type'] == 'profile':
+            return Post.objects.filter(author=self.request.user)
+        elif self.kwargs['page_type'] == 'page':
+            # print("kwargs: ", kwargs)
+            return PagePost.objects.filter(id=self.kwargs['pk'])
+                # if not objects:
+                #     return HttpResponseRedirect("/empty-queryset-url/")
+                # return super().get_queryset().objects
+            
+            # example 
+                # def get_queryset(self):
+                #     author_id = self.kwargs['author_id']
+                #     return Post.objects.filter(author=int(author_id)).order_by("-published_date")
 
 
 class CreateNewPost(LoginRequiredMixin, CreateView):
@@ -50,7 +69,8 @@ class CreateNewPost(LoginRequiredMixin, CreateView):
     success_url = "/"
     
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.author = self.request.user        
+        form.instance.post_type = "profile"
         return super().form_valid(form)
 
 class CreateNewPagePost(LoginRequiredMixin, CreateView):
@@ -66,15 +86,4 @@ class CreateNewPagePost(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         form.instance.post_type = "page"
         return super(CreateNewPagePost, self).form_valid(form)
-
-    # def form_valid(self, form):        
-    #     self.object = self.get_object()
-    #     page = self.object[0]
-    #     # new_page_post = kwargs.pop('page', None)
-    #     print("page = " + page)
-    #     # super(CreateNewPagePost, self).form_valid(*args, **kwargs)
-    #     if page:
-    #         self.fields['feed_pagepost.author'].initial = page
-    #     # form.instance.page = 
-    #     return super().form_valid(form)
 

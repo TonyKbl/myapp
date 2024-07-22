@@ -387,8 +387,10 @@ Header START -->
 				</ul>
 				<!-- Nav right END -->
 			{% else %}
-				<a href ="{% url 'account_signup'%}">Register</a>
-				<a href ="{% url 'account_login'%}">Login</a>
+			<div class="d-flex align-items-end">
+				<a class = "btn btn-danger-soft me-2" href="{% url 'account_signup'%}">Sign Up</a>
+				<a class = "btn btn-primary-soft me-2" href="{% url 'account_login'%}">Login</a>
+			</div>
 			{% endif %}
 		</div>
 	</nav>
