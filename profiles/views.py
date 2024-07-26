@@ -74,7 +74,6 @@ def follow(request, username):
     if request.method == 'POST':
         if request.user != target_user:
             follow_relationship,  created = Follow.objects.get_or_create(follower = request.user, following = target_user)
-
             if not created:
                 follow_relationship.delete()
 
