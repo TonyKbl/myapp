@@ -4,8 +4,9 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404, redirect
 
-from .models import Page
+from .models import Page, PageFollow
 from profiles.models import Profile
 from .forms import PageUpdateForm, PageCreateForm
 
@@ -26,6 +27,10 @@ class PageDetailView(DetailView):
     context_object_name = "page"
     slug_field = "slug"
     slug_url_kwarg = "slug"
+
+    target_page = id
+
+    context = {'target_page':target_page}
     
 
 class PageCreateView(CreateView):
@@ -68,3 +73,12 @@ class PageUpdateView(UpdateView):
     #     obj = Page.objects.get(id)
     #     return obj
     
+def page_follow(request, slug):
+    target_page = get_object_or_404(Page, slug=slug)
+    if request.method == 'POST':
+        follow_relationship,  created = PageFollow.objects.get_or_create(follower = request.user, following = target_page)
+
+        if not created:
+            follow_relationship.delete()
+
+    return redirect('/', page=Page.slug)

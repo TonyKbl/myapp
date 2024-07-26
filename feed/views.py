@@ -8,21 +8,26 @@ from itertools import chain
 from operator import attrgetter
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.db.models import Q
 
 from .models import Post, PagePost
+from profiles.models import Follow
 
 # Create your views here.
 
 class HomePage(LoginRequiredMixin, ListView):
     html_method_names = ["get"]
     template_name = "feed/homepage.html"
-    models = Post, PagePost
+    models = User, Post, PagePost
     context_object_name = "posts"
     # queryset = Post.objects.all().order_by('-id')[0:30]
     # queryset = QuerySetSequence(Post.objects.all(), PagePost.objects.all())
 
     def get_queryset(self):
-        qs1 = Post.objects.all() #your first qs
+        print(self.request.user.id)
+        followed_users = self.request.user.following.all()
+        qs1 = Post.objects.filter(Q(author__in=followed_users.values('following'))) #your first qs
+        # qs1 = Post.objects.all()
         qs2 = PagePost.objects.all()  #your second qs
         #you can add as many qs as you want
         queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)

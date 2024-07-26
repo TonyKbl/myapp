@@ -47,3 +47,11 @@ class Page(models.Model):
 
     def __str__(self):
         return self.page_name
+    
+class PageFollow(models.Model):
+    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='page_following')
+    following = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='page_followers')
+    date = models.DateTimeField(auto_now_add='True')
+
+    class Meta:
+        unique_together = ('follower', 'following')
