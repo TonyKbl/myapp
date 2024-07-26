@@ -58,25 +58,15 @@ class PageUpdateView(UpdateView):
     def get_object(self):
        return self.request.user
     
-    
-    
     def get_object(self, queryset=None):
         obj = Page.objects.get(user=self.request.user)
         return obj
     
-    # def get_object(self):
-    #    return self.request.
-    
-    
-    
-    # def get_object(self, *args, **kwargs):
-    #     obj = Page.objects.get(id)
-    #     return obj
     
 def page_follow(request, slug):
-    target_page = get_object_or_404(Page, slug=slug)
+    tp = get_object_or_404(Page, slug=slug)
     if request.method == 'POST':
-        follow_relationship,  created = PageFollow.objects.get_or_create(follower = request.user, following = target_page)
+        follow_relationship,  created = PageFollow.objects.get_or_create(follower = request.user, following = tp)
 
         if not created:
             follow_relationship.delete()
