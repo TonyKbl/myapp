@@ -18,12 +18,12 @@ class Post(models.Model):
   date = models.DateTimeField(auto_now=True)
   image = ResizedImageField(upload_to='feed_images', null=True, blank=True)
   slug = models.SlugField("username")
-  likes = models.ManyToManyField(User, related_name='liked_posts', through='Like')
+  likes = models.ManyToManyField(User, related_name='liked_posts', through='PostLike')
 
   def __str__(self):
     return self.text[0:100]
     
-class Like(models.Model):
+class PostLike(models.Model):
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   post=models.ForeignKey(Post, on_delete=models.CASCADE)    
   date = models.DateTimeField(auto_now=True)
@@ -46,12 +46,12 @@ class PagePost(models.Model):
   date = models.DateTimeField(auto_now=True)
   image = ResizedImageField(upload_to='page_feed_images', null=True, blank=True)    
   slug = models.SlugField("name")
-  likes = models.ManyToManyField(User, related_name='liked_page_posts', through='PageLike')
+  likes = models.ManyToManyField(User, related_name='liked_page_posts', through='PagePostLike')
 
   def __str__(self):
     return self.text[0:100]
     
-class PageLike(models.Model):
+class PagePostLike(models.Model):
   user=models.ForeignKey(User, on_delete=models.CASCADE)
   page_post=models.ForeignKey(PagePost, on_delete=models.CASCADE)    
   date = models.DateTimeField(auto_now=True)

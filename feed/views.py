@@ -10,7 +10,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import Q
 
-from .models import Post, PagePost
+from .models import Post, PagePost, Page, Profile
 from profiles.models import Follow
 
 # Create your views here.
@@ -18,17 +18,23 @@ from profiles.models import Follow
 class HomePage(LoginRequiredMixin, ListView):
     html_method_names = ["get"]
     template_name = "feed/homepage.html"
-    models = User, Post, PagePost
+    models = User, Post, PagePost, Page, Profile
     context_object_name = "posts"
     # queryset = Post.objects.all().order_by('-id')[0:30]
     # queryset = QuerySetSequence(Post.objects.all(), PagePost.objects.all())
 
     def get_queryset(self):
+        # print(self.request.page_id)
+        followed_users = self.request.user.following.all()      
         print(self.request.user.id)
-        followed_users = self.request.user.following.all()
+        print(followed_users.values())
         qs1 = Post.objects.filter(Q(author__in=followed_users.values('following'))) #your first qs
         # qs1 = Post.objects.all()
-        qs2 = PagePost.objects.all()  #your second qs
+        followed_pages = self.request.user.page_following.all()        
+        print(self.request.user.id)
+        print(followed_pages.values())
+        qs2 = PagePost.objects.filter(Q(name__in=followed_pages.values('following')))  #your second qs
+        # qs2 = PagePost.objects.all()  #your second qs
         #you can add as many qs as you want
         queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)
         return queryset
