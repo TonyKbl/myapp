@@ -5,7 +5,7 @@
 {% block title %}{{page.page_name}} - Feed{% endblock title %}
 
 {% block content %}
-{% include 'includes/page_head.html' %}
+{% include 'includes/page_head.html' with feed_active="active" %}
 
 							<!-- Share feed START -->
 					<div class="card card-body">

@@ -6,7 +6,7 @@
 
 {% block content %}
 
-{% include 'includes/page_head.html' %}
+{% include 'includes/page_head.html' with about_active="active" %}
     <!-- Card about item START -->
     <div class="card">
       <!-- Card header START -->
@@ -43,4 +43,13 @@
     </div>
     <!-- Card feed item END -->
 
+{% endblock %}
+{% block rightbar %}
+<!-- Card about item START -->
+<div class="card">
+  <!-- Card header START -->
+  <div class="card-header border-0 pb-0">
+    <h6>right block</h6>
+  </div>
+</div>
 {% endblock %}

@@ -403,18 +403,8 @@ Header END -->
 	<div class="container g-0 g-md-1 scrollbar-gutter">
 		<div class="row g-4">
 			<!-- Sidenav START -->
-			<div class="col-lg-3">
+			<div class="col-lg-3 mt-0">
             {% if request.user.is_authenticated %}
-				<!-- Advanced filter responsive toggler START -->
-				{% comment %} <div class="d-flex align-items-center d-lg-none">
-					<button class="border-0 bg-transparent" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSideNavbar" aria-controls="offcanvasSideNavbar">
-						<span class="btn btn-primary"><i class="fa-solid fa-sliders-h"></i></span>
-						<span class="h6 mb-0 fw-bold d-lg-none ms-2">My profile</span>
-					</button>
-				</div> {% endcomment %}
-				<!-- Advanced filter responsive toggler END -->
-				
-				<!-- Navbar START-->
 				<nav class="navbar navbar-expand-lg mx-0"> 
 					<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
 						<!-- Offcanvas header -->
@@ -538,27 +528,28 @@ Header END -->
 
                 
 			<!-- Main content START -->
-					<div class="col-md-8 col-lg-6 vstack gap-4 pe-0">
-						{% if messages %}
-						<div>
-							<ul>
-								{% for message in messages %}<li>{{ message }}</li>{% endfor %}
-							</ul>
-						</div>
-						{% endif %}
-							{% block profile_head %}{% endblock %}
-							{% block content %}{% endblock content %}
+			<div class="col-md-8 col-lg-6 vstack gap-4 pe-0 mt-0">
+				{% if messages %}
+					<div>
+						<ul>
+							{% for message in messages %}<li>{{ message }}</li>{% endfor %}
+						</ul>
 					</div>
+				{% endif %}
+
+				{% block profile_head %}{% endblock %}
+				{% block content %}{% endblock content %}
+			</div>
 			<!-- Main content END -->
 
-					<!-- Right sidebar START -->
-					<div class="col-lg-3">
-						<div class="row g-4">
-							{% if request.user.is_authenticated %}
-								{% block rightbar %}{% endblock %}
-							{% endif %}
-						</div>
-					</div>
+			<!-- Right sidebar START -->
+			<div class="col-lg-3 pe-0 mt-0">
+				{% comment %} <div class="row g-4"> {% endcomment %}
+					{% if request.user.is_authenticated %}
+						{% block rightbar %}{% endblock %}
+					{% endif %}
+				{% comment %} </div> {% endcomment %}
+			</div>
 			<!-- Right sidebar END -->
 
 		</div> <!-- Row END -->
