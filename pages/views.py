@@ -4,9 +4,11 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 
 from .models import Page, PageFollow
+from feed.models import PagePost
 from profiles.models import Profile
 from .forms import PageUpdateForm, PageCreateForm
 
@@ -45,9 +47,6 @@ class PageCreateView(CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-    
-
-
 
 class PageUpdateView(UpdateView):
     model = Page
@@ -61,6 +60,21 @@ class PageUpdateView(UpdateView):
     def get_object(self, queryset=None):
         obj = Page.objects.get(user=self.request.user)
         return obj
+    
+
+class PageFeedView(LoginRequiredMixin, DetailView): 
+    http_method_names = ["get"]
+    template_name = "pages/feed.html"
+    model = Page
+    context_object_name = "page"
+    # slug_field = "name"
+    # slug_url_kwarg = "name"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageFeedView, self).get_context_data(*args, **kwargs)
+        # context['page_posts'] = PagePost.objects.filter(name__page_name=self.kwargs['slug'])
+        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug'])
+        return context
     
     
 def page_follow(request, slug):

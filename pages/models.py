@@ -18,9 +18,7 @@ class Page(models.Model):
         
     page_type = models.CharField(max_length = 15, choices = PageTypes.choices)
 
-    page_name = models.CharField( max_length=50, null=False, blank=False)
-
-    # owner = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name = "owner")
+    page_name = models.CharField( max_length=50, null=False, blank=False, unique=True)
 
     cover_image = ResizedImageField(size=[600, 200], upload_to='page_covers', null=True, blank=True)
 
@@ -34,7 +32,14 @@ class Page(models.Model):
 
     description = models.TextField( null=False, blank=False)
 
-    
+    phone_number = models.CharField( max_length=10, null=True, blank=True)
+
+    website = models.CharField( max_length=255, null=True, blank=True)
+    facebook = models.CharField( max_length=255, null=True, blank=True)
+    x_twitter = models.CharField( max_length=255, null=True, blank=True)
+    insta = models.CharField( max_length=255, null=True, blank=True)
+    tiktok = models.CharField( max_length=255, null=True, blank=True)
+        
     slug = models.SlugField(default="", null=False, unique=True)
 
     def get_absolute_url(self):

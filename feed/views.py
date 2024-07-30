@@ -24,18 +24,13 @@ class HomePage(LoginRequiredMixin, ListView):
     # queryset = QuerySetSequence(Post.objects.all(), PagePost.objects.all())
 
     def get_queryset(self):
-        # print(self.request.page_id)
+        
         followed_users = self.request.user.following.all()      
-        print(self.request.user.id)
-        print(followed_users.values())
         qs1 = Post.objects.filter(Q(author__in=followed_users.values('following'))) #your first qs
-        # qs1 = Post.objects.all()
-        followed_pages = self.request.user.page_following.all()        
-        print(self.request.user.id)
-        print(followed_pages.values())
+
+        followed_pages = self.request.user.page_following.all()
         qs2 = PagePost.objects.filter(Q(name__in=followed_pages.values('following')))  #your second qs
-        # qs2 = PagePost.objects.all()  #your second qs
-        #you can add as many qs as you want
+        
         queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)
         return queryset
     
