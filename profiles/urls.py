@@ -1,5 +1,6 @@
 from django.urls import path
 
+
 from . import views
 
 app_name = "profiles"
@@ -10,4 +11,5 @@ urlpatterns = [
     path("profile/<str:username>/", views.ProfileDetailView.as_view(), name="detail"),
     path("gallery/<str:username>/", views.ProfileGalleryView.as_view(), name="photos"),
     path("follow/<str:username>/", views.follow, name="follow"),
+    path("gallery/upload/<str:username>/", views.follow, name="gallery_upload"),
 ]
