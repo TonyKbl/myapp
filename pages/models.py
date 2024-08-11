@@ -60,3 +60,23 @@ class PageFollow(models.Model):
 
     class Meta:
         unique_together = ('follower', 'following')
+
+class PageReviews(models.Model):
+    class PageRatings(models.IntegerChoices):
+        ONE = 1,
+        TWO = 2,
+        THREE = 3,
+        FOUR = 4,
+        FIVE = 5,
+    
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviewer')
+    page_name = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='reviewed_page')
+    rating = models.IntegerField(choices=PageRatings.choices)
+    text = models.CharField(max_length=2048)
+    date = models.DateField(auto_now_add='True')
+
+    def __int__(self):
+        return self.Avg('rating')
+
+ 

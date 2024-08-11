@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load thumbnail %}
+
+{% block title %}{{username}} - Update Cover Image{% endblock title %}
+
+{% block content %}
+                <!-- Card feed item START -->
+                <div class="card">
+                    <!-- Card header START -->
+                    <div class="card-header border-0 pb-0">
+                        <h2>Update avatar</h2>
+                    </div>                     
+                    <!-- Card header END -->
+                    <!-- Card body START -->
+                    <div class="card-body">
+                        <div class="form_group">
+                            <form class="form" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <input type="submit" value="Update">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}

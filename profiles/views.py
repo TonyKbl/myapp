@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 
 from .models import Profile, Follow
-from .forms import ProfileUpdateForm
+from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm
 from feed.models import Post
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
@@ -35,6 +35,37 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
        return self.request.user
     
+    
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
+    
+class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileCoverUpdateForm
+    template_name = "profiles/cover_update_form.html"
+    success_url = "/pages/"
+   
+
+    def get_object(self):
+        return self.request.user    
+    
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj  
+
+
+class AvatarImageUpdateView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileAvatarUpdateForm
+    template_name = "profiles/avatar_update_form.html"
+    success_url = "/pages/"
+   
+
+    def get_object(self):
+        return self.request.user    
     
     
     def get_object(self, queryset=None):

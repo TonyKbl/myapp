@@ -74,7 +74,7 @@
             <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.slug %}"> About </a> </li>
             <li class="nav-item"> <a class="nav-link" href="my-profile-media.html"> Gallery</a> </li>
             <li class="nav-item"> <a class="nav-link" href="my-profile-events.html"> Events</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Reviews</a> </li>
+            <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.slug %}"> Reviews</a> </li>
           </ul>
         </div>
       </div>

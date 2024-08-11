@@ -12,7 +12,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = (
             "profile_type",
             "display_name",
-            "headline", 
+            "status", 
             "intro", 
             "description", 
             "location", 
@@ -34,7 +34,7 @@ class ProfileUpdateForm(forms.ModelForm):
         widgets = {
             'profile_type': forms.Select(attrs={'class': 'form-control'}),
             'display_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'headline': forms.TextInput(attrs={'class': 'form-control'}),
+            'status': forms.TextInput(attrs={'class': 'form-control'}),
             'intro': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'location': forms.TextInput(attrs={'class': 'form-control'}),
@@ -53,6 +53,28 @@ class ProfileUpdateForm(forms.ModelForm):
             'smoke2': forms.Select(attrs={'class': 'form-control'}),
             'drink2': forms.Select(attrs={'class': 'form-control'}),
         }
+
+        def __str__(self):
+            return self.user
+        
+class ProfileCoverUpdateForm(forms.ModelForm):
+    
+    class Meta:        
+        model = Profile
+        fields = (
+            "cover_image",
+        )
+
+        def __str__(self):
+            return self.user
+        
+class ProfileAvatarUpdateForm(forms.ModelForm):
+    
+    class Meta:        
+        model = Profile
+        fields = (
+            "image",
+        )
 
         def __str__(self):
             return self.user

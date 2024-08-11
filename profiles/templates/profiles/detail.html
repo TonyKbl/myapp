@@ -6,7 +6,7 @@
 {% block title %}{{username}} - Profile{% endblock title %}
 
 {% block content %}
-
+{% if user.is_active == True %}
 {% include 'includes/profile_head.html' with about_active="active" target_user=user.id %}
 
       <!-- Card feed item START -->
@@ -101,7 +101,10 @@
         <!-- Card body END -->
       </div>
       <!-- Card feed item END -->
+{% else %}
 
+ <h6> User is inactive </h6>
 
+{% endif %}
 
 {% endblock %}

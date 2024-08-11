@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load thumbnail %}
+
+{% block title %}Add Review{% endblock title %}
+
+{% block content %}
+                <!-- Card feed item START -->
+                <div class="card">
+                    <!-- Card header START -->
+                    <div class="card-header border-0 pb-0">
+                        <h2>Add Review</h2>
+                    </div>                     
+                    <!-- Card header END -->
+                    <!-- Card body START -->
+                    <div class="card-body">
+                        <div class="form_group">
+                            <form class="form-with-validation" method="post" >
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <input type="submit" value="Add Review">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}

@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'profanity',
 
     'feed',
-    'friends',
+    'friend',
     'groups',
     'messaging',
     'notifications',
@@ -230,3 +230,6 @@ AUTHENTICATION_BACKENDS = (
 )
 CSRF_TRUSTED_ORIGINS=['https://clubsforfun.com','https://www.clubsforfun.com','https://clubsforfun.co.uk','http://18.134.250.132', 'https://clubswing.com',]
 
+SESSION_COOKIE_AGE = 60 * 60 # 60 minutes. "1209600(2 weeks)" by default
+
+SESSION_SAVE_EVERY_REQUEST = True # "False" by default

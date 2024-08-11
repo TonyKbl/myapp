@@ -1,5 +1,5 @@
 from django import forms
-from .models import Page
+from .models import Page, PageReviews
 from django.contrib.auth.models import User
 
 
@@ -35,3 +35,12 @@ class PageUpdateForm(forms.ModelForm):
             "post_code",
             "description",
         )
+
+class PageReviewForm(forms.ModelForm):
+    
+    class Meta:
+        model = PageReviews
+        fields = (
+            "rating",
+            "text",
+            )
