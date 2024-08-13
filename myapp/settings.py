@@ -17,7 +17,6 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.DEBUG
 USE_AWS = env.USE_AWS
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
@@ -105,6 +104,7 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 if DEVELOPMENT_MODE == 'True':
     print("DEVELOPMENT_MODE = True")
+    DEBUG = True
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -114,6 +114,7 @@ if DEVELOPMENT_MODE == 'True':
     print(os.path.join(BASE_DIR, "db.sqlite3"))
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     print("DEVELOPMENT_MODE = False")
+    DEBUG = False
     if DATABASE_URL == None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
@@ -174,20 +175,15 @@ if USE_AWS == 'True':
     AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME", env.AWS_STORAGE_BUCKET_NAME)
     AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", env.AWS_SECRET_ACCESS_KEY)
 
-    # AWS_ACCESS_KEY_ID = env.AWS_ACCESS_KEY_ID
-    # AWS_SECRET_ACCESS_KEY = env.AWS_SECRET_ACCESS_KEY
-    # AWS_STORAGE_BUCKET_NAME = env.AWS_STORAGE_BUCKET_NAME
     AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     # s3 static settings
     AWS_LOCATION = 'static'
-    #STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     
     # s3 public media settings
     PUBLIC_MEDIA_LOCATION = 'media'
-    #MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 
