@@ -17,6 +17,7 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = env.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env.DEBUG
 USE_AWS = env.USE_AWS
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
@@ -104,7 +105,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 if DEVELOPMENT_MODE == 'True':
     print("DEVELOPMENT_MODE = True")
-    DEBUG = True
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
@@ -114,7 +114,6 @@ if DEVELOPMENT_MODE == 'True':
     print(os.path.join(BASE_DIR, "db.sqlite3"))
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     print("DEVELOPMENT_MODE = False")
-    DEBUG = False
     if DATABASE_URL == None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
