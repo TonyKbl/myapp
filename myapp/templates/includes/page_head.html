@@ -63,7 +63,7 @@
           <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
             <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> {{ page.page_type }}</li>
             <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> {{ page.town_city }}, {{page.county}}</li>
-            <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{ user.date_joined|date:"d M Y" }}</li>
+            <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{ page.page_created|date:"d M Y" }}</li>
           </ul>
         </div>
         <!-- Card body END -->

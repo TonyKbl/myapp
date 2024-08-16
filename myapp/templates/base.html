@@ -532,9 +532,11 @@ Header END -->
 			<div class="col-md-8 col-lg-6 vstack gap-4 pe-0 mt-0">
 				{% if messages %}
 					<div>
-						<ul>
-							{% for message in messages %}<li>{{ message }}</li>{% endfor %}
-						</ul>
+						{% for message in messages %}
+							<div class="text-center alert alert-{{ message.tags }} mb-0">
+								{{ message }}
+							</div>
+						{% endfor %}
 					</div>
 				{% endif %}
 

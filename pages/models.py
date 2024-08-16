@@ -41,6 +41,8 @@ class Page(models.Model):
     tiktok = models.CharField( max_length=255, null=True, blank=True)
         
     slug = models.SlugField(default="", null=False, unique=True)
+    page_created = models.DateField(auto_now_add=True)
+    page_updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
         return reverse("page", kwargs={"slug": self.slug})

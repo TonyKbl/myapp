@@ -114,6 +114,11 @@ if DEVELOPMENT_MODE == 'True':
     print(os.path.join(BASE_DIR, "db.sqlite3"))
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     print("DEVELOPMENT_MODE = False")
+    
+    # SESSION_COOKIE_SECURE = True
+    # CSRF_COOKIE_SECURE = True
+    # SECURE_SSL_REDIRECT = True
+
     if DATABASE_URL == None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
@@ -122,9 +127,6 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
             conn_max_age=600,
             conn_health_checks=True,
         )
-    # DATABASES = {
-    #     "default": dj_database_url.parse(DATABASE_URL),
-    # }
     }
 
 
@@ -151,9 +153,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/London'
 
 USE_I18N = True
 
@@ -225,6 +227,6 @@ AUTHENTICATION_BACKENDS = (
 )
 CSRF_TRUSTED_ORIGINS=['https://clubsforfun.com','https://www.clubsforfun.com','https://clubsforfun.co.uk','http://18.134.250.132', 'https://clubswing.com',]
 
-SESSION_COOKIE_AGE = 60 * 60 # 60 minutes. "1209600(2 weeks)" by default
+SESSION_COOKIE_AGE = 30 * 60 # 60 minutes. "1209600(2 weeks)" by default
 
 SESSION_SAVE_EVERY_REQUEST = True # "False" by default

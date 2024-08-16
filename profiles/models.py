@@ -271,7 +271,9 @@ class Profile(models.Model):
     )
 
 
-    date_joined = models.DateTimeField(auto_now=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    last_updated = models.DateTimeField(auto_now=True)
 
     last_activity = models.DateTimeField(null=True, blank=True)
 
