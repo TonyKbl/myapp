@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from datetime import datetime
+from django_resized import ResizedImageField
+
 
 today = datetime.now()
 today_path = today.strftime("%Y/%m/%d") ## this will create something like "2011/08/30"
@@ -16,10 +18,10 @@ class UserGallery(models.Model):
     settings.AUTH_USER_MODEL, 
     on_delete=models.CASCADE, related_name="owner",
     )
-    image = models.ImageField(upload_to="profiles")
+    image = ResizedImageField(size=[900, 900], quality=70, upload_to=upload_dir)
     private = models.BooleanField(default=0)
 
-
+ 
 # class PageGallery(models.Model):
 #     today = datetime.now()
 #     today_path = today.strftime("%Y/%m/%d") ## this will create something like "2011/08/30"
