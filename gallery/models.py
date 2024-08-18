@@ -18,7 +18,7 @@ class UserGallery(models.Model):
     settings.AUTH_USER_MODEL, 
     on_delete=models.CASCADE, related_name="owner",
     )
-    image = ResizedImageField(size=[900, 900], quality=70, upload_to=upload_dir)
+    image = ResizedImageField(size=[900, 900], quality=70, upload_to=upload_dir, max_length=200)
     private = models.BooleanField(default=0)
 
  
