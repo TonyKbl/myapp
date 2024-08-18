@@ -1,5 +1,6 @@
 from django import forms
 from .models import Profile
+from gallery.models import UserGallery
 from django.contrib.auth.models import User
 
 class DateInput(forms.DateInput):
@@ -74,6 +75,19 @@ class ProfileAvatarUpdateForm(forms.ModelForm):
         model = Profile
         fields = (
             "image",
+        )
+
+        def __str__(self):
+            return self.user
+        
+
+class ProfileGalleryCreateForm(forms.ModelForm):
+    
+    class Meta:        
+        model = UserGallery
+        fields = (
+            "image",
+            "private",
         )
 
         def __str__(self):

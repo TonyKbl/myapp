@@ -10,8 +10,8 @@ urlpatterns = [
     path("feed/<str:username>/", views.ProfileFeedView.as_view(), name="feed"),
     path("profile/<str:username>/", views.ProfileDetailView.as_view(), name="detail"),
     path("follow/<str:username>/", views.follow, name="follow"),
-    path("gallery/<str:username>/", views.ProfileGalleryView.as_view(), name="photos"),
-    path("gallery/upload/<str:username>/", views.follow, name="gallery_upload"),
+    path("gallery/<str:username>/", views.ProfileGalleryView.as_view(), name="gallery"),
+    path("gallery_upload/<str:username>/", views.ProfileAddGalleryView.as_view(), name="gallery_upload"),
     path("update_cover/", views.CoverImageUpdateView.as_view(), name="update_cover"),
     path("update_avatar/", views.AvatarImageUpdateView.as_view(), name="update_avatar"),
 ]

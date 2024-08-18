@@ -21,7 +21,12 @@
             <div class="ms-sm-4 mt-sm-3">
               <!-- Info -->
               <h1 class="mb-0 h5">{{ page.page_name }} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-              <p>250 connections</p>
+              <p>
+                {% avg_rating page.id %}
+                {% comment %} {% avg_ratings page.id %} {% endcomment %}
+                {% for rating in avg_ratings %} 
+                    {{rating.rating}}
+                  {% endfor %} out of 250 reviews</p>
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
@@ -72,7 +77,7 @@
           <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
             <li class="nav-item"> <a class="nav-link {{ feed_active }}" href="{% url 'pages:page_feed' page.slug %}">&nbsp Feed </a> </li>
             <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.slug %}"> About </a> </li>
-            <li class="nav-item"> <a class="nav-link" href="my-profile-media.html"> Gallery</a> </li>
+            <li class="nav-item"> <a class="nav-link {{ gallery_active }}" href="#"> Gallery</a> </li>
             <li class="nav-item"> <a class="nav-link" href="my-profile-events.html"> Events</a> </li>
             <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.slug %}"> Reviews</a> </li>
           </ul>

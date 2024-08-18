@@ -53,12 +53,16 @@ INSTALLED_APPS = [
 
     'feed',
     'friend',
+    'gallery',
     'groups',
     'messaging',
     'notifications',
     'pages',
     'parties',
     'profiles',
+
+    # This app must be the last app
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

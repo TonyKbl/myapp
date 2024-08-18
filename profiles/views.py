@@ -8,8 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 
 from .models import Profile, Follow
-from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm
+from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm
 from feed.models import Post
+from gallery.models import UserGallery
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     http_method_names = ["get"]
@@ -96,8 +97,26 @@ class ProfileGalleryView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileGalleryView, self).get_context_data(*args, **kwargs)
-        context['posts'] = Post.objects.filter(author__username=self.kwargs['username'])
+        context['images'] = UserGallery.objects.filter(owner__username=self.kwargs['username'])
         return context
+
+
+class ProfileAddGalleryView(LoginRequiredMixin, CreateView):
+    model = UserGallery
+    form_class = ProfileGalleryCreateForm
+    template_name = "profiles/gallery_create_form.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+    
+    def get_object(self):
+       return self.request.user
+
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
     
 
 def follow(request, username):

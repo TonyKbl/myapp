@@ -2,11 +2,11 @@
 {% load thumbnail %}
 
 
-{% block title %}{{page.page_name}} - Feed{% endblock title %}
+{% block title %}{{page.page_name}} - Reviews{% endblock title %}
 
 {% block content %}
 {% include 'includes/page_head.html' with reviews_active="active" %}
-{{rating}}
+{{avg_rating}}
 							<!-- Share feed START -->
 					<div class="card card-body">
 						<div class="d-flex mb-0">
