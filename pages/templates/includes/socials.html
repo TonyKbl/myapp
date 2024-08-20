@@ -1,0 +1,25 @@
+<div class="card">
+    <!-- Card header START -->
+    <div class="card-header border-0 pb-0">
+      <h6>{{page.page_name}} Socials</h6>
+    </div>
+    <div class="card-body text-center">
+        <h2>
+        {% if page.website != None %}
+            <a href="{{ page.website }} target="_blank"> <i class="bi bi-globe2"></i> </a>
+        {%endif%}
+        {% if page.x_twitter != None %}
+            <a href="{{ page.x_twitter }}" target="_blank"> <i class="bi bi-twitter-x"></i> </a>
+        {%endif%}
+        {% if page.facebook != None %}
+            <a href="{{ page.facebook }}" target="_blank"> <i class="bi bi-facebook"></i> </a>
+        {%endif%}
+        {% if page.insta != None %}
+            <a href="{{ page.insta }}" target="_blank"> <i class="bi bi-instagram"></i> </a>
+        {%endif%}
+        {% if page.tiktok != None %}
+            <a href="{{ page.tiktok }}" target="_blank"> <i class="bi bi-tiktok"> </i></a>
+        {%endif%}
+        </h2>
+    </div>
+  </div>
