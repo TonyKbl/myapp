@@ -21,28 +21,7 @@
             <div class="ms-sm-4 mt-sm-3">
               <!-- Info -->
               <h1 class="mb-0 h5">{{ page.page_name }} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-              <p>{% if avg_rating == 5 %}
-                <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  {% elif avg_rating == 4 %}
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  {% elif 'avg_rating' == 3 %}
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  {% elif avg_rating == 2 %}
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                  {% elif avg_rating == 1 %}
-                  <i style = "color:yellow;" class="bi bi-star-fill"></i>
-                {% endif %}
-                {% avg_rating page.id %} from {% review_count page.id %} reviews</p>
+              <p>{% avg_rating page.id %} from {% review_count page.id %} reviews</p>
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
