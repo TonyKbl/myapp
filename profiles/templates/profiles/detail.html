@@ -3,7 +3,7 @@
 
 {% load thumbnail %}
 
-{% block title %}{{username}} - Profile{% endblock title %}
+{% block title %}{{user.username}} - Profile{% endblock title %}
 
 {% block content %}
 {% if user.is_active == True %}

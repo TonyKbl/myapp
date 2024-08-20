@@ -6,7 +6,6 @@
 
 {% block content %}
 {% include 'includes/page_head.html' with reviews_active="active" %}
-{{avg_rating}}
 							<!-- Share feed START -->
 					<div class="card card-body">
 						<div class="d-flex mb-0">
@@ -21,6 +20,8 @@
 						{% for review in page_reviews %}
 						{% include 'includes/page_review.html' %}
 						<hr>
+						{% empty %}
+						<p>There are currently no reviews for {{page.page_name}}
 						{% endfor%}
 					</div>
              
