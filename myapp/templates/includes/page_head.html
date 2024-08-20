@@ -21,7 +21,7 @@
             <div class="ms-sm-4 mt-sm-3">
               <!-- Info -->
               <h1 class="mb-0 h5">{{ page.page_name }} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-              <p>{% avg_rating page.id %} from {% review_count page.id %} reviews</p>
+              <p>{% autoescape off %}{% avg_rating page.id %}{% endautoescape %} from {% review_count page.id %} reviews</p>
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">

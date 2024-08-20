@@ -1,6 +1,7 @@
 from django import template
 from django.db.models import Avg, Count
 from ..models import PageFollow, PageReviews
+from django.http import HttpResponse
 
 register = template.Library()
 
@@ -13,9 +14,19 @@ def avg_rating(target_page):
     # return PageReviews.objects.filter(page_name=target_page).values()[0]
     average = PageReviews.objects.filter(page_name=target_page).aggregate(Avg('rating'))
     if average['rating__avg'] == None:
-        return 0
-    else:
-        print(average)
+        return '<i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+    elif average['rating__avg'] <= 1.5:
+        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+    elif 1.5 <= average['rating__avg'] <= 2.5:
+        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+    elif 2.5 <= average['rating__avg'] <= 3.5:
+        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+    elif 3.5 <= average['rating__avg'] <= 4.5:
+        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i>'
+    elif 4.5 <= average['rating__avg'] <= 5:
+        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i>'
+        
+    else:        
         return round(average['rating__avg'], 2)
     # return PageReviews.objects.aggregate(Avg('rating'))
 
