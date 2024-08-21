@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
-
-{% block title %}{{page.page_name}} - Feed{% endblock title %}
+{% block title %}Clubs4Fun - Homepage{% endblock title %}
 
 {% block content %}
-{% include 'includes/page_head.html' with feed_active="active" %}
-{% comment %} 
-					<!-- Share feed START -->
-					<div class="card card-body">
+
+
+
+
+							<!-- Share feed START -->
+					{% comment %} <div class="card card-body">
 						<div class="d-flex mb-3">
 							<!-- Avatar -->
 							<div class="avatar avatar-xs me-2">
@@ -47,12 +48,12 @@
 							</li>
 						</ul>
 						<!-- Share feed toolbar END -->
-					</div>
-					<!-- Share feed END --> {% endcomment %}
+					</div> {% endcomment %}
+					<!-- Share feed END -->
 
 					<div id="posts-container">
-						{% for post in page_posts %}
-						{% include 'includes/page_post.html' %}
+						{% for post in posts %}
+						{% include 'includes/post.html' %}
 						<hr>
 						{% endfor%}
 					</div>

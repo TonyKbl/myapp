@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+<!-- **************** MAIN CONTENT START **************** -->
+{% block content %}
+<main class="py-5">
+
+  <!-- Container START -->
+  <div class="container">
+    <!-- Extra space -->
+    <div class="h-100px d-none d-lg-block"></div>
+    <div class="row align-items-center text-center py-sm-5">
+      <!-- Error 404 START -->
+      <div class="col-lg-8 mx-auto">
+        <!-- SVG START -->
+{% comment %} Figure {% endcomment %}
+        <!-- SVG END -->
+        <!-- 404 info -->
+        <h1 class="display-1 mt-4">403 CSRF</h1>
+        <h2 class="mb-2 h1">NO means NO!!!</h2>
+        <p>Sorry but you're not allowed to do that.</p>
+        <p>Click the button below to got to the home page or hit the 'Back' button to continue</p>
+        <!-- Button -->
+        <a class="btn btn-primary-soft btn-sm" href="/">Got to home page</a>
+      </div>
+      <!-- Error 404 START -->
+    </div> 
+    <!-- Extra space -->
+    <div class="h-100px d-none d-lg-block"></div>
+    <!-- Row END -->
+  </div>
+  <!-- Container END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- footer START -->
+<footer class="bg-mode py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Footer nav START -->
+        <ul class="nav justify-content-center justify-content-md-start lh-1">
+          <li class="nav-item">
+            <a class="nav-link" href="my-profile-about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="https://support.webestica.com/login">Support </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" target="_blank" href="docs/index.html">Docs </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="privacy-and-terms.html">Privacy & terms</a>
+          </li>
+        </ul>
+        <!-- Footer nav START -->
+      </div>
+      <div class="col-md-6">
+        <!-- Copyright START -->
+        <p class="text-center text-md-end mb-0">©2024 <a class="text-body" target="_blank" href="https://www.webestica.com"> Webestica </a>All rights reserved.</p>
+        <!-- Copyright END -->
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- footer END -->
+ 
+<!-- =======================
+JS libraries, plugins and custom scripts -->
+
+{% endblock %}

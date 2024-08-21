@@ -25,10 +25,11 @@
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
+              {% if request.user.is_authenticated %}
                 {% if page.user.username == request.user.username %}
-                <a href="/edit_page/{{page.id}}/{{page.slug}}" >
-                  <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit </button>
-                </a>
+                  <a href="/edit_page/{{page.id}}/{{page.slug}}" >
+                    <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit </button>
+                  </a>
                 {% else %}
                 {% if request.user.id|is_following_page:page.id %}
                     <form action="{% url 'pages:page_follow' page.slug %}" method="post">
@@ -41,7 +42,7 @@
                     <button class="btn btn-primary me-2" type="submit"> <i class="bi bi-person-plus pe-1"></i> Follow </button>
                     </form>
                 {% endif %}
-            {% endif %}
+                {% endif %}
               <div class="dropdown">
                 <!-- Card share action menu -->
                 <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -50,13 +51,14 @@
                 <!-- Card share action dropdown menu -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
                   <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Page Post</a></li>
-                  <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
+                  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li>
+                  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
                 </ul>
               </div>
+                {% endif %}
             </div>
           </div>
           <!-- List profile -->
