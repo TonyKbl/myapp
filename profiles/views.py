@@ -84,7 +84,7 @@ class ProfileFeedView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileFeedView, self).get_context_data(*args, **kwargs)
-        context['posts'] = Post.objects.filter(author__username=self.kwargs['username'])
+        context['posts'] = Post.objects.filter(author__username=self.kwargs['username']).order_by('-date')
         return context
 
 class ProfileGalleryView(LoginRequiredMixin, DetailView): 

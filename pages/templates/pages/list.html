@@ -10,9 +10,37 @@
 								<h5 class="card-title"> Pages</h5> 
 							</div>
 							<hr>
-							<div class="card-body">
-						{% for page in pages %}
-								<div class="row position-relative">
+						{% comment %} {% for page in pages %} {% endcomment %}
+
+
+						{% regroup pages by county as newlist %}
+
+						{% for x in newlist %}
+						<div class="card-body">
+						  <h5>{{ x.grouper }}</h5>
+						  {% for y in x.list %}
+						  <div class="row position-relative">
+							<div class="col-3">
+							  <!-- Blog image -->
+							  <div class="avatar avatar-xl">
+								  {% thumbnail y.image "100x100" crop="center" as im %}
+									  <img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+								  {% endthumbnail %}
+							  </div>
+							</div>
+							<div class="col">
+							  <h5><a href="{% url 'pages:detail' y.slug %}" class="btn-link stretched-link text-reset fw-bold">{{y.page_name}}</a></h5>
+							  <a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.page_type}}</a>
+									<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.town_city}}, {{y.county}}, {{y.post_code}}</p>
+							</div>
+									<hr>
+						  </div>
+						  {% endfor %}
+							  </div>
+						{% endfor %}
+
+
+								{% comment %} <div class="row position-relative">
 								  <div class="col-3">
 									<!-- Blog image -->
 									<div class="avatar avatar-xl">
@@ -27,9 +55,9 @@
 									  	<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{page.town_city}}, {{page.county}}, {{page.post_code}}</p>
 								  </div>
 							  			<hr>
-								</div>
+								</div> {% endcomment %}
+
 							{% comment %} {% include 'includes/post.html'%} {% endcomment %}
-						{% endfor%}
-							  </div>
+						{% comment %} {% endfor%} {% endcomment %}
 						</div>
 {% endblock %}

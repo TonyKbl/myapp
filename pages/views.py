@@ -23,7 +23,7 @@ class PageListView(ListView):
     template_name = "pages/list.html"
     model = Page
     context_object_name = "pages"
-    queryset = Page.objects.all().order_by('-page_updated')[0:30]
+    queryset = Page.objects.all().order_by('county')
 
 
 class PageDetailView(DetailView):
@@ -73,7 +73,7 @@ class PageFeedView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
-        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug'])
+        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')
         return context
 
 
