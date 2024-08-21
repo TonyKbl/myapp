@@ -550,9 +550,7 @@ Header END -->
 			<!-- Right sidebar START -->
 			<div class="col-lg-3 pe-0 mt-0">
 				{% comment %} <div class="row g-4"> {% endcomment %}
-					{% if request.user.is_authenticated %}
 						{% block rightbar %}{% endblock %}
-					{% endif %}
 				{% comment %} </div> {% endcomment %}
 			</div>
 			<!-- Right sidebar END -->
