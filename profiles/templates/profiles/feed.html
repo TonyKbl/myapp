@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load request_tag %}
 
 {% load thumbnail %}
 
@@ -21,4 +22,11 @@
 {%else%}
     <h6> Profile is inactive</h6>
 {%endif%}
+{% endblock %}
+{% block rightbar %}
+<h6>Active Users</h6>
+    {% active_users in 10 minutes as user_list %}
+    {% for user in user_list %}
+        {{ user.username }}
+    {% endfor %}
 {% endblock %}

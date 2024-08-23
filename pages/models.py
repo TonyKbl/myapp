@@ -5,6 +5,7 @@ from django.conf import settings
 from profiles.models import Profile
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+from profanity.validators import validate_is_profane
 
 class Page(models.Model):
     
@@ -24,21 +25,21 @@ class Page(models.Model):
 
     image = ResizedImageField(size=[600, 600], upload_to='page_avatars', max_length=200, null=True, blank=True)
 
-    address1 = models.CharField( max_length=50, null=False, blank=False)
-    address2 = models.CharField( max_length=50, null=True, blank=True)
-    town_city = models.CharField( max_length=50, null=False, blank=False)
-    county = models.CharField( max_length=50, null=False, blank=False)
-    post_code = models.CharField( max_length=10, null=False, blank=False)
+    address1 = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
+    address2 = models.CharField( max_length=50, null=True, blank=True, validators=[validate_is_profane])
+    town_city = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
+    county = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
+    post_code = models.CharField( max_length=10, null=False, blank=False, validators=[validate_is_profane])
 
-    description = models.TextField( null=False, blank=False)
+    description = models.TextField( null=False, blank=False, validators=[validate_is_profane])
 
     phone_number = models.CharField( max_length=10, null=True, blank=True)
 
-    website = models.CharField( max_length=255, null=True, blank=True)
-    facebook = models.CharField( max_length=255, null=True, blank=True)
-    x_twitter = models.CharField( max_length=255, null=True, blank=True)
-    insta = models.CharField( max_length=255, null=True, blank=True)
-    tiktok = models.CharField( max_length=255, null=True, blank=True)
+    website = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    facebook = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    x_twitter = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    insta = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    tiktok = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
         
     slug = models.SlugField(default="", null=False, unique=True)
     page_created = models.DateField(auto_now_add=True)

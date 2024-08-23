@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.conf.urls.static import static
+from events import urls as events_urls
 from feed import urls as feed_urls
 from gallery import urls as gallery_urls
 from pages import urls as pages_urls
@@ -32,6 +33,7 @@ def custom_page_not_found_view(request, exception):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", include(events_urls, namespace="events/")),
     path("", include(feed_urls, namespace="feed/")),
     path("", include(gallery_urls, namespace="gallery/")),
     path("", include(pages_urls, namespace="pages/")),

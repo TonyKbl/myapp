@@ -80,9 +80,9 @@
 
         {% comment %} {% include 'includes/nav_profile_pages.html'%} {% endcomment %}
         <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
-        <li class="nav-item"> <a class="nav-link {{ feed_active  }}" href="{% url 'profiles:feed' user.username %}">&nbsp Posts </a> </li>
+        <li class="nav-item"> <a class="nav-link {{ feed_active  }}" href="{% url 'profiles:feed' user.username %}">&nbsp Feed </a> </li>
         <li class="nav-item"> <a class="nav-link {{ about_active  }}" href="{% url 'profiles:detail' user.username %}"> About </a> </li>
-        <li class="nav-item"> <a class="nav-link" href="{% url 'profiles:gallery' user.username %}"> Photos</a> </li>
+        <li class="nav-item"> <a class="nav-link {{ photos_active  }}" href="{% url 'profiles:gallery' user.username %}"> Photos</a> </li>
         {% comment %} <li class="nav-item"> <a class="nav-link" href="my-profile-videos.html"> Videos</a> </li> {% endcomment %}
         <li class="nav-item"> <a class="nav-link" href="{% url 'profiles:detail' user.username %}"> Events</a> </li>
         {% comment %} <li class="nav-item"> <a class="nav-link" href="my-profile-activity.html"> Activity</a> </li> {% endcomment %}

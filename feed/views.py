@@ -15,6 +15,13 @@ from profiles.models import Follow
 
 # Create your views here.
 
+class Home(ListView):
+    html_method_names = ["get"]
+    template_name = "feed/landing.html"
+    models = Page
+    queryset = Page.objects.all()
+
+
 class HomePage(LoginRequiredMixin, ListView):
     html_method_names = ["get"]
     template_name = "feed/homepage.html"

@@ -50,7 +50,9 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'formtools',
     'profanity',
+    'request',
 
+    'events',
     'feed',
     'friend',
     'gallery',
@@ -65,6 +67,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,6 +78,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "request.middleware.RequestMiddleware",
 ]
 
 
@@ -157,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-gb'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/London'
 
@@ -234,3 +238,16 @@ CSRF_TRUSTED_ORIGINS=['https://clubsforfun.com','https://www.clubsforfun.com','h
 SESSION_COOKIE_AGE = 30 * 60 # 60 minutes. "1209600(2 weeks)" by default
 
 SESSION_SAVE_EVERY_REQUEST = True # "False" by default
+
+
+REQUEST_TRAFFIC_MODULES = {
+    'request.traffic.UniqueVisitor',
+    'request.traffic.UniqueVisit',
+    'request.traffic.Hit',
+    }
+
+REQUEST_IGNORE_PATHS = (
+    r'^admin/',
+)
+
+# REQUEST_BASE_URL = {'http://%s' % Site.objects.get_current().domain}

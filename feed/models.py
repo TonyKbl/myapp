@@ -5,6 +5,7 @@ from django.conf import settings
 from django_resized import ResizedImageField
 from profiles.models import Profile
 from pages.models import Page
+from profanity.validators import validate_is_profane
 
 # Create your models here.
 class Post(models.Model):
@@ -14,7 +15,7 @@ class Post(models.Model):
     )
   post_type = models.CharField(max_length=10)
   feature_name = models.CharField(max_length=100)    
-  text = models.CharField(max_length=300)
+  text = models.CharField(max_length=500, validators=[validate_is_profane])
   date = models.DateTimeField(auto_now=True)
   image = ResizedImageField(upload_to='feed_images', null=True, blank=True)
   slug = models.SlugField("username")
@@ -42,7 +43,7 @@ class PagePost(models.Model):
   )
 
   post_type = models.CharField(max_length = 10, null = True, blank = True)
-  text = models.CharField(max_length=300)
+  text = models.CharField(max_length=500, validators=[validate_is_profane])
   date = models.DateTimeField(auto_now=True)
   image = ResizedImageField(upload_to='page_feed_images', null=True, blank=True)    
   slug = models.SlugField("name")
