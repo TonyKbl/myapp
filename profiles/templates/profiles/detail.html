@@ -26,23 +26,13 @@
             <div class="col-sm-6">
               <!-- Person 1 START -->
               <h6>{{user.profile.name}}</h6>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age }}</strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Sexuality: <strong> {{user.profile.sexuality }} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Height: <strong> {{user.profile.height}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.body_type}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Smoke/Vape: <strong> {{user.profile.smoke}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Drink: <strong> {{user.profile.drink}} </strong>
+                <p>
+                  Age: <strong> {{ user.profile.age }}</strong><br>
+                  Sexuality: <strong> {{user.profile.sexuality }} </strong><br>
+                  Height: <strong> {{user.profile.height}} </strong><br>
+                  Body Type: <strong> {{user.profile.body_type}} </strong><br>
+                  Smoke/Vape: <strong> {{user.profile.smoke}} </strong><br>
+                  Drink: <strong> {{user.profile.drink}} </strong><br>
                 </p>
               <!-- Person 1 END -->
             </div>
@@ -50,23 +40,13 @@
               <!-- Person 2 START -->  
                {% if user.profile.profile_type == "MF Couple" or user.profile.profile_type == "FF Couple" or user.profile.profile_type == "MM Couple" %}               
                <h6>{{user.profile.name2}}</h6>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age2 }}</strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Sexuality: <strong> {{user.profile.sexuality2 }} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Height: <strong> {{user.profile.height2}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Body Type: <strong> {{user.profile.body_type2}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Smoke/Vape: <strong> {{user.profile.smoke2}} </strong>
-                </p>
-                <p class="mb-0">
-                  <i class="bi bi-calendar-date fa-fw me-2"></i> Drink: <strong> {{user.profile.drink}} </strong>
+                <p>
+                  Age: <strong> {{ user.profile.age2 }}</strong><br>
+                  Sexuality: <strong> {{user.profile.sexuality2 }} </strong><br>
+                  Height: <strong> {{user.profile.height2}} </strong><br>
+                  Body Type: <strong> {{user.profile.body_type2}} </strong><br>
+                  Smoke/Vape: <strong> {{user.profile.smoke2}} </strong><br>
+                  Drink: <strong> {{user.profile.drink}} </strong><br>
                 </p>
               {% endif %}
               <!-- Person 2 END -->
