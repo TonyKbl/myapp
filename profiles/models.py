@@ -312,11 +312,8 @@ class Follow(models.Model):
 
     
 class MyImage(models.Model):
-     photo = models.ImageField(
-         upload_to="profile_gallery", verbose_name=("Image"))
-     creator = models.ForeignKey(
-             settings.AUTH_USER_MODEL, null=False, blank=False,
-                     verbose_name=('Creator'), on_delete=models.CASCADE)
+     photo = models.ImageField(upload_to="profile_gallery", verbose_name=("Image"))
+     creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False, verbose_name=('Creator'), on_delete=models.CASCADE)
      creation_time = models.DateTimeField(auto_now_add=True, blank=False)
 
      @classmethod

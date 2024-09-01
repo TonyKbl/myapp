@@ -125,7 +125,6 @@ def page_follow(request, slug):
         follow_relationship,  created = PageFollow.objects.get_or_create(follower = request.user, following = tp)
         if created: 
             messages.success(request, "You are now following a new page")
-
         if not created:
             follow_relationship.delete()
             messages.warning(request, "You just unfollowed a page")

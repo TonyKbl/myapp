@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib import messages
 
 from .models import Profile, Follow
 from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm
@@ -82,6 +83,9 @@ class ProfileFeedView(LoginRequiredMixin, DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
 
+    target_user = id
+    context = {'target_user':target_user}
+
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileFeedView, self).get_context_data(*args, **kwargs)
         context['posts'] = Post.objects.filter(author__username=self.kwargs['username']).order_by('-date')
@@ -94,6 +98,9 @@ class ProfileGalleryView(LoginRequiredMixin, DetailView):
     context_object_name = "user"
     slug_field = "username"
     slug_url_kwarg = "username"
+
+    target_user = id
+    context = {'target_user':target_user}
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileGalleryView, self).get_context_data(*args, **kwargs)
@@ -124,8 +131,11 @@ def follow(request, username):
     if request.method == 'POST':
         if request.user != target_user:
             follow_relationship,  created = Follow.objects.get_or_create(follower = request.user, following = target_user)
+            if created: 
+                messages.success(request, "You are now following a new user")
             if not created:
                 follow_relationship.delete()
+                messages.warning(request, "You have stopped following a user")
 
     return redirect('/', username=username)
 

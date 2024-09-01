@@ -237,7 +237,7 @@ CSRF_TRUSTED_ORIGINS=['https://clubsforfun.com','https://www.clubsforfun.com','h
 
 SESSION_COOKIE_AGE = 30 * 60 # 60 minutes. "1209600(2 weeks)" by default
 
-SESSION_SAVE_EVERY_REQUEST = True # "False" by default
+SESSION_SAVE_EVERY_REQUEST = False # "False" by default
 
 
 REQUEST_TRAFFIC_MODULES = {

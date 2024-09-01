@@ -48,7 +48,7 @@
             </div>
             <div class="col-sm-6">
               <!-- Person 2 START -->  
-               {% if user.profile.profile_type == "MF Couple" or user.profile.profile_type == "FF Couple" %}               
+               {% if user.profile.profile_type == "MF Couple" or user.profile.profile_type == "FF Couple" or user.profile.profile_type == "MM Couple" %}               
                <h6>{{user.profile.name2}}</h6>
                 <p class="mb-0">
                   <i class="bi bi-calendar-date fa-fw me-2"></i> Age: <strong> {{ user.profile.age2 }}</strong>
