@@ -21,7 +21,7 @@
               <hr>
         <div class="row g-4 align-items-center">
           <div class="col-lg-6">
-            <!-- Person 1 START -->
+            <!-- Address START -->
             <h6>Address</h6>
             <p>
               {{ page.address1 }}<br>
@@ -30,12 +30,12 @@
               {{page.town_city}}<br>
               {{page.post_code}}
             </p>
-            <!-- Person 1 END -->
+            <!-- Address END -->
           </div>
           <div class="col-lg-6">
-            <!-- Person 2 START -->     
+            <!-- Map START -->     
             <a href="https://www.google.com/maps/dir/?api=1&destination={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="btn btn-primary btn-small">Get Directions</a>
-            <!-- Person 2 END -->
+            <!-- Map END -->
           </div>
         </div>
       </div>

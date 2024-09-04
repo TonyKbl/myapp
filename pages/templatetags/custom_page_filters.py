@@ -16,15 +16,15 @@ def avg_rating(target_page):
     if average['rating__avg'] == None:
         return '<i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
     elif average['rating__avg'] <= 1.5:
-        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+        return '<i class="bi bi-star-fill text-warning"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
     elif 1.5 <= average['rating__avg'] <= 2.5:
-        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+        return '<i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
     elif 2.5 <= average['rating__avg'] <= 3.5:
-        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
+        return '<i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i style = "color:gray;" class="bi bi-star"></i><i style = "color:gray;" class="bi bi-star"></i>'
     elif 3.5 <= average['rating__avg'] <= 4.5:
-        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:gray;" class="bi bi-star"></i>'
+        return '<i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i style = "color:gray;" class="bi bi-star"></i>'
     elif 4.5 <= average['rating__avg'] <= 5:
-        return '<i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i><i style = "color:yellow;" class="bi bi-star-fill"></i>'
+        return '<i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>'
         
     else:        
         return round(average['rating__avg'], 2)

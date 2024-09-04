@@ -14,7 +14,7 @@
               <!-- Avatar -->
               <div class="avatar avatar-xxl mt-n5 mb-3">
                 {% thumbnail page.image "100x100" crop="center" as im %}
-                    <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="">
+                    <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="{{ page.page_name }} | {{ page.page_type }} | Club Swing">
                 {% endthumbnail %}
               </div>
             </div>
@@ -51,6 +51,7 @@
                 <!-- Card share action dropdown menu -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
                   <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Page Post</a></li>
+                  <li><a class="dropdown-item" href="/add_event/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>Add Event</a></li>
                   {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
