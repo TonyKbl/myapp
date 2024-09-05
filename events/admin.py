@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Events
+from .models import Event
 
 # Register your models here.
 class EventsAdmin(admin.ModelAdmin):
     pass
 
-admin.site.register(Events, EventsAdmin)
+admin.site.register(Event, EventsAdmin)
