@@ -1,3 +1,4 @@
+from django.db.models.base import Model as Model
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
@@ -39,6 +40,9 @@ class EventDetailView(DetailView):
     template_name = "events/detail.html"
     models = Event,
     context_object_name = "event"
+
+    def get_queryset(self, **kwargs):
+        return Event.objects.filter(id=self.kwargs['pk'])
 
 
 class PageAddEventView(LoginRequiredMixin, CreateView):

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}{{ event.name }} - Profile{% endblock title %}
+
+{% block content %}
+{% comment %} 
+{% include 'includes/page_head.html' with about_active="active" %} {% endcomment %}
+    <!-- Card about item START -->
+    <div class="card">
+      <!-- Card header START -->
+      <div class="card-header border-0 pb-0">
+        <h4 class="card-title">{{ event.title}}</h4> 
+      </div>
+      <!-- Card header END -->
+      <!-- Card body START -->
+      <div class="card-body">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-6">
+            <!-- Address START -->
+            <h5>Event Location</h5>
+            <p>
+                <h6>{{ event.location.page_name }}</h6>
+                {{ event.location.address1 }}<br>
+                {% if event.location.address2 != None %}{{ event.location.address2 }}<br>{%endif%}
+                {{event.location.county}}<br>
+                {{event.location.town_city}}<br>
+                {{event.location.post_code}}
+            </p>
+            <!-- Address END -->
+          </div>
+          <div class="col-lg-6">
+            <!-- Map START -->     
+            <a href="https://www.google.com/maps/dir/?api=1&destination={{event.location.page_name|urlencode}}+{{event.location.address1|urlencode}}+{{event.location.county|urlencode}}+{{event.location.post_code|urlencode}}" class="btn btn-primary btn-small">Get Directions</a>
+            <!-- Map END -->
+          </div>
+        </div>
+          {% comment %} <p><strong>{{ user.profile.intro|linebreaks}}</strong></p> {% endcomment %}
+          <h5>Description</h5>
+          <p>{{ event.description|linebreaks}}</p>
+              <hr>
+            <h5>Admission Fees</h5>
+            <p>{{ event.admission_fees|linebreaks}}</p>
+                <hr>
+      </div>
+      <!-- Card body END -->
+    </div>
+    <!-- Card feed item END -->
+
+{% endblock %}

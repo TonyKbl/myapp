@@ -15,6 +15,8 @@ class EventCreateForm(forms.ModelForm):
             "date",
             "start_time",
             "end_time",
+            "admission_fees",
+            "additional_info",
         )
 
         widgets={
