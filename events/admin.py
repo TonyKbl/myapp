@@ -1,8 +1,14 @@
 from django.contrib import admin
-from .models import Event
+from .models import Event, EventDate, EventReview
 
 # Register your models here.
-class EventsAdmin(admin.ModelAdmin):
-    pass
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('title', 'location')
 
-admin.site.register(Event, EventsAdmin)
+class EventDateAdmin(admin.ModelAdmin):
+    list_display = ('event', 'date')
+    
+
+admin.site.register(Event, EventAdmin)
+admin.site.register(EventDate, EventDateAdmin)
+admin.site.register(EventReview)
