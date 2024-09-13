@@ -30,7 +30,7 @@ class MessageListView(ListView):
     # meassage =Message.objects.raw("SELECT * FROM myapp_message WHERE msg_from = %s", ['admin'])
  
     def get_queryset(self):
-        return Message.objects.filter(msg_to=self.request.user).order_by('date_sent').distinct('msg_from')
+        return Message.objects.filter(msg_to=self.request.user).distinct('msg_from').order_by('date_sent')
         # message = Message.objects.raw('''SELECT * FROM messaging_message WHERE msg_to_id = '4' ORDER_BY date_sent''')
         # print(message)
         # return message
