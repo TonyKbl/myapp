@@ -2,12 +2,13 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Message
 
 # Create your views here.
 
-class MessageInboxView(ListView):
+class MessageInboxView(LoginRequiredMixin, ListView):
     # html_method_names = ["get"]
     # template_name = "messaging/messages.html"
     # models = Message
@@ -23,7 +24,7 @@ class MessageInboxView(ListView):
 
  
     def get_queryset(self):
-        return Message.objects.filter(msg_to=self.request.user).distinct('msg_from').order_by('date_sent')
+        return Message.objects.filter(msg_to=self.request.user).distinct('msg_from')
         # message = Message.objects.raw('''SELECT * FROM messaging_message WHERE msg_to_id = '4' ORDER_BY date_sent''')
         # print(message)
         # return message
