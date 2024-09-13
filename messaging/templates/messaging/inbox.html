@@ -21,7 +21,7 @@
 												<div class="col-3">
 												<!-- Blog image -->
 												<div class="avatar avatar-xl">
-													{% thumbnail message.msg_from.profile.profile_type "100x100" crop="center" as im %}
+													{% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
 														<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
 													{% endthumbnail %}
 												</div>
