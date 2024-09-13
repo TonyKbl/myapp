@@ -8,7 +8,7 @@
                                                         <h1>Messages</h1>
                                                 </div>
         {% for message in message %}
-                                                <div class="card-body {% if not message.read %}border-start border-3 border-success {% endif %}">                
+                                                <div class="card-body {% if not message.read %}border-start border-3 border-success {% endif %} stretched-link">                
                                                         <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
                                                         <!-- Avatar -->
@@ -28,7 +28,7 @@
                                                                 <span class="nav-item small"> {{message.date_sent|timesince}} </span>
                                                         </div>
                                                         <div>
-                                                        <a class="flex items_center stretched-link" href="{% url 'messaging:message' message.msg_from_id %}"> 
+                                                        <a class="flex items_center" href="{% url 'messaging:message' message.msg_from_id %}"> 
                                                         <p class="mb-0 small">{{ message.msg_from.profile.profile_type}} - {{ message.msg_from.profile.age}} - {{ message.msg_from.location}}</p>
                                                         <p class="mb-0 small">{{ message.message}}</p>
                                                         </div>
