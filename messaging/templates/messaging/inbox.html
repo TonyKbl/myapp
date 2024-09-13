@@ -1,57 +1,43 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 
-{% block content %}
+{% block title %}Club Swing | Pages | Swinger Venues{% endblock title %}
+{% block description %}Swinger club list of swingers clubs in the United Kingdom, France and Spain {% endblock %}
 
-                                        <div class="card mb-3">
-                                                <div class="card-header border-0 pb-0">
-                                                        <h1>Inbox</h1>
-                                                </div>
-        {% for message in message %}
-                                                <div class="card-body {% if not message.read %}border-start border-3 border-success {% endif %}">                
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                        <div class="d-flex align-items-center">
-                                                        <!-- Avatar -->
-                                                        <div class="avatar avatar-story me-2">
-                                                                {% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
-                                                                <a class="fles items_center stretched-link" href="{% url 'profiles:detail' message.msg_to.username %}">
-                                                                <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
-                                                                </a>
-                                                                {% endthumbnail %}
-                                                        </div>
-                                        
-                                                        <!-- Info -->
-                                                        <div>
-                                                        <div class="nav nav-divider">
-                                                                <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'profiles:detail' message.msg_from.username %}">{{ message.msg_from.profile.display_name}}</a></h6>
-                                                                
-                                                                <span class="nav-item small"> {{message.date_sent|timesince}} </span>
-                                                        </div>
-                                                        <div>
-                                                        <a class="flex items_center" href="{% url 'messaging:message' message.msg_from_id %}"> 
-                                                        <p class="mb-0 small">{{ message.msg_from.profile.profile_type}} - {{ message.msg_from.profile.age}} - {{ message.msg_from.location}}</p>
-                                                        <p class="mb-0 small">{{ message.message}}</p>
-                                                        </div>
-                                                        </a>
-                                                        </div>
-                                                        </div>
-                                                        <!-- Card feed action dropdown START -->
-                                                        <div class="dropdown">
-                                                        <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="bi bi-three-dots"></i>
-                                                        </a>
-                                                        <!-- Card feed action dropdown menu -->
-                                                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
-                                                                <li><a class="dropdown-item" href="#"> <i class="bi bi-check fa-fw pe-2"></i>Mark as read</a></li>
-                                                                <li><a class="dropdown-item" href="#"> <i class="bi bi-x fa-fw pe-2"></i>Mark Unread</a></li>
-                                                        <li><hr class="dropdown-divider"></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
-                                                        <li><a class="dropdown-item" href="#"> <i class="bi bi-triangle fa-fw pe-2"></i>Report</a></li>
-                                                        </ul>
-                                                        </div>
-                                                        <!-- Card feed action dropdown END -->
-                                                        </div>
-                                                </div>
-        {% endfor %}
-                                        </div>
-{% endblock content %}
+{% block content %}
+						<div class="card">
+							<!-- Card header START -->
+							<div class="card-body border-0">
+								<h5 class="card-title"> Pages</h5> 
+							</div>
+						</div>
+						{% comment %} {% for page in pages %} {% endcomment %}
+
+
+						{% for message in message %}
+							<div class="card mb-0">
+										<div class="card-body">
+											<div class="row position-relative">
+												<div class="col-3">
+												<!-- Blog image -->
+												<div class="avatar avatar-xl">
+													{% thumbnail y.image "100x100" crop="center" as im %}
+														<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+													{% endthumbnail %}
+												</div>
+												</div>
+												<div class="col">
+													<h6><a href="{% url 'messaging:message' message.msg_from_id %}" class="btn-link stretched-link text-reset fw-bold">{{message.msg_from.profile.display_name}}</a></h6>
+													
+													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{ message.msg_from.profile.profile_type}} - {{ message.msg_from.profile.age}} - {{ message.msg_from.location}}</p>
+													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{ message.message}}</p>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+							</div>
+						{% endfor %}
+
+
+
+{% endblock %}
