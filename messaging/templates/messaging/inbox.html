@@ -8,13 +8,13 @@
                                                         <h1>Messages</h1>
                                                 </div>
         {% for message in message %}
-                                                <div class="card-body {% if not message.read %}border-start border-3 border-success {% endif %} stretched-link">                
+                                                <div class="card-body  position-relative {% if not message.read %}border-start border-3 border-success {% endif %} stretched-link">                
                                                         <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
                                                         <!-- Avatar -->
                                                         <div class="avatar avatar-story me-2">
                                                                 {% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
-                                                                <a class="fles items_center" href="{% url 'profiles:detail' message.msg_to.username %}">
+                                                                <a class="fles items_center stretched-link" href="{% url 'profiles:detail' message.msg_to.username %}">
                                                                 <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
                                                                 </a>
                                                                 {% endthumbnail %}
