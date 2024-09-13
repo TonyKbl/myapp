@@ -225,9 +225,10 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 3
 ACCOUNT_AUTHENTICATION_METHOD='username_email'
 ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "/edit_profile/"
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = "/edit_profile/"
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend'
@@ -242,7 +243,9 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", env.EMAIL_HOST_PASSWORD)
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", env.DEFAULT_FROM_EMAIL)
 
 CSRF_TRUSTED_ORIGINS=['https://clubsforfun.com','https://www.clubsforfun.com','https://clubsforfun.co.uk','http://18.134.250.132', 'https://clubswing.com',]
+CSRF_COOKIE_SECURE = True
 
+SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_AGE = 30 * 60 # 60 minutes. "1209600(2 weeks)" by default
 
 SESSION_SAVE_EVERY_REQUEST = False # "False" by default

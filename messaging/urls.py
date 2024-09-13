@@ -4,5 +4,5 @@ from . import views
 app_name = "messaging"
 
 urlpatterns = [
-    path("messaging/", views.Messages.as_view(), name="messages"),
+    path("messages/", views.MessageListView.as_view(), name="messages"),
     ]

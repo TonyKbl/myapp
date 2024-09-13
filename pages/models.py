@@ -81,5 +81,16 @@ class PageReviews(models.Model):
 
     def __int__(self):
         return self.Avg('rating')
+    
 
+class ClaimPage(models.Model):
+    claimant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='claimant')
+    page_claimed = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='claimed_page')
+    name = models.CharField(max_length=255, blank=False)
+    email = models.EmailField(blank=False)
+    phone = models.CharField(max_length=255, blank=True)
+    reason = models.TextField(blank=False, verbose_name='Reason for your claim')
+
+    def __str__(self):
+        return self.page_claimed.page_name
  

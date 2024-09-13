@@ -13,7 +13,7 @@ from .forms import EventCreateForm, EventAddDatesForm
 class EventsList(ListView):
     html_method_names = ["get"]
     template_name = "events/date_list.html"
-    models = Event
+    models = EventDate
     context_object_name = "events"
     queryset = EventDate.objects.all().order_by('date')[0:30]
 

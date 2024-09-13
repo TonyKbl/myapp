@@ -8,13 +8,13 @@ from django_resized import ResizedImageField
 
 # Create your models here.
 class Message(models.Model):
-    msg_from = models.OneToOneField(
+    msg_from = models.ForeignKey(
       User,
       on_delete=models.CASCADE,
       related_name = "msg_from"
     )
 
-    msg_to = models.OneToOneField(
+    msg_to = models.ForeignKey(
       User,
       on_delete=models.CASCADE,
       related_name = "msg_to"

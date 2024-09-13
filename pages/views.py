@@ -11,11 +11,11 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-from .models import Page, PageFollow, PageReviews
+from .models import Page, PageFollow, PageReviews, ClaimPage
 from feed.models import PagePost
 from profiles.models import Profile
 # from gallery.models import PageGallery
-from .forms import PageUpdateForm, PageCreateForm, PageReviewForm
+from .forms import PageUpdateForm, PageCreateForm, PageReviewForm, PageClaimForm
 
 
 class PageListView(ListView):    
@@ -101,6 +101,22 @@ class PageAddReviewView(LoginRequiredMixin, CreateView):
         form.instance.page_name_id = self.kwargs.get('pk')        
         form.instance.author = self.request.user
         return super(PageAddReviewView, self).form_valid(form)
+
+    def get_object(self):
+       return self.request.user
+
+class PageAddClaimView(LoginRequiredMixin, CreateView):
+    models = ClaimPage
+    form_class = PageClaimForm
+    template_name = "pages/add_claim.html"
+    # queryset = PageReviews.objects.all()    
+    success_message = "Your claim was sent successfully"
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.page_claimed_id = self.kwargs.get('pk')        
+        form.instance.claimant = self.request.user
+        return super(PageAddClaimView, self).form_valid(form)
 
     def get_object(self):
        return self.request.user

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}Clubs4Fun - Gallery{% endblock title %}
+
+{% block content %}
+
+{% include 'includes/profile_head.html' with photos_active="active" target_user=user.id %}
+<div class="card">
+    <!-- Card header START -->
+    <div class="card-header d-sm-flex align-items-center justify-content-between border-0 pb-0">
+      <h5 class="card-title">Photos</h5>
+      <!-- Button modal -->
+      {% comment %} <a class="btn btn-sm btn-primary-soft" href="#" data-bs-toggle="modal" data-bs-target="#modalCreateAlbum"> <i class="fa-solid fa-plus pe-1"></i> Create album</a> {% endcomment %}
+    </div>
+    <!-- Card header END -->
+    <!-- Card body START -->
+    <div class="card-body">
+      <!-- Photos of you tab START -->
+      <div class="row g-3">
+
+        <!-- Add photo START -->
+        {% if user.username == request.user.username %}
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <div class="border border-2 py-5 border-dashed h-100 rounded text-center d-flex align-items-center justify-content-center position-relative">
+            <a class="stretched-link" href="{% url 'profiles:gallery_upload'  user.username %}">
+              <i class="fa-solid fa-camera-retro fs-1"></i>
+              <h6 class="mt-2">Add photo</h6>
+            </a>
+          </div>
+        </div>
+        {% endif %}
+        <!-- Add photo END -->
+
+        {% for image in images %}
+        <!-- Photo item START -->
+        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+          <!-- Photo -->
+            {% thumbnail image.image "600x600" crop="center"  as im %}
+                <a href="https://clubs4fun.s3.amazonaws.com/static/{{ image.image }}" data-gallery="image-popup">
+                    <img class="rounded img-fluid" src="{{ im.url }}" alt="">
+                </a>
+            {% endthumbnail %}
+          {% comment %} <a href="assets/images/albums/06.jpg" data-gallery="image-popup" data-glightbox="description: .custom-desc2; descPosition: left;">
+            <img class="rounded img-fluid" src="assets/images/albums/06.jpg" alt="">
+          </a> {% endcomment %}
+          <!-- likes -->
+          <ul class="nav nav-stack py-2 small">
+            <li class="nav-item">
+              <a class="nav-link" href="#!"> <i class="bi bi-heart-fill text-danger pe-1"></i>56k </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#!"> <i class="bi bi-chat-left-text-fill pe-1"></i>12k </a>
+            </li>
+          </ul>
+          <!-- glightbox Albums left bar START -->
+          <div class="glightbox-desc">
+            
+          </div>
+          <!-- glightbox Albums left bar END  -->
+        </div>
+        <!-- Photo item END -->
+        {% endfor %}
+      </div>
+      <!-- Photos of you tab END -->
+    </div>
+    <!-- Card body END -->
+  </div>
+
+{% endblock %}

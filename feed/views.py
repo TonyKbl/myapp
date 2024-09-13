@@ -38,7 +38,7 @@ class HomePage(LoginRequiredMixin, ListView):
         followed_pages = self.request.user.page_following.all()
         qs2 = PagePost.objects.filter(Q(name__in=followed_pages.values('following')))  #your second qs
         
-        queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)
+        queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)[:25]
         return queryset
     
 
