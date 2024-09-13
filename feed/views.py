@@ -50,7 +50,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self, **kwargs):
         if self.kwargs['page_type'] == 'profile':
-            return Post.objects.filter(author=self.request.user)
+            return Post.objects.filter(id=self.kwargs['pk'])
         elif self.kwargs['page_type'] == 'page':
             # print("kwargs: ", kwargs)
             return PagePost.objects.filter(id=self.kwargs['pk'])

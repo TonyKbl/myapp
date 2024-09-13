@@ -3,20 +3,15 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
+from itertools import chain
 
 from .models import Message
 
 # Create your views here.
 
 class MessageInboxView(LoginRequiredMixin, ListView):
-    # html_method_names = ["get"]
-    # template_name = "messaging/messages.html"
-    # models = Message
-    # context_object_name = "message"
-    # queryset = Message.objects.all().order_by('-id')
-
-
-
+    
     http_method_names = ["get"]
     template_name = "messaging/inbox.html"
     model = Message
@@ -25,20 +20,39 @@ class MessageInboxView(LoginRequiredMixin, ListView):
  
     def get_queryset(self):
         return Message.objects.filter(msg_to=self.request.user).distinct('msg_from')
-        # message = Message.objects.raw('''SELECT * FROM messaging_message WHERE msg_to_id = '4' ORDER_BY date_sent''')
-        # print(message)
-        # return message
 
     
     def get_object(self):
        return self.request.user
 
-    # target_user = id
-    # context = {'target_user':target_user}
 
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(MessageListView, self).get_context_data(*args, **kwargs)
-    #     print(context)
-    #     # context['message'] = Message.objects.filter(msg_from__username=self.kwargs['slug']).order_by('-date_sent')
-    #     context['message'] = Message.objects.filter(msg_from__username=context.user.username).order_by('-date_sent')
-    #     return context
+class MessageView(LoginRequiredMixin, ListView):
+    
+    http_method_names = ["get"]
+    template_name = "messaging/message.html"
+    model = Message
+    context_object_name = "message_list"
+
+ 
+    def get_queryset(self):
+        qs1 = Message.objects.filter(Q(msg_to=self.request.user) & Q(msg_from=self.kwargs['pk']))
+        qs2 = Message.objects.filter(Q(msg_from=self.request.user) & Q(msg_to=self.kwargs['pk']))
+        queryset = chain(qs1,qs2)
+        return queryset
+        # return Message.objects.filter(Q(msg_to=self.request.user) | Q(msg_from=self.request.user))
+
+            # return PagePost.objects.filter(id=self.kwargs['pk'])
+    #  def get_queryset(self):
+        
+    #     followed_users = self.request.user.following.all()      
+    #     qs1 = Post.objects.filter(Q(author__in=followed_users.values('following'))) #your first qs
+
+    #     followed_pages = self.request.user.page_following.all()
+    #     qs2 = PagePost.objects.filter(Q(name__in=followed_pages.values('following')))  #your second qs
+        
+    #     queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)[:25]
+    #     return queryset
+    
+
+    def get_object(self):
+       return self.request.user

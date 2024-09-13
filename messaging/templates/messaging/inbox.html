@@ -27,8 +27,10 @@
                                                                 
                                                                 <span class="nav-item small"> {{message.date_sent|timesince}} </span>
                                                         </div>
+                                                        <a class="fles items_center stretched-link" href="{% url 'message:message' message.msg_from %}">
                                                         <p class="mb-0 small">{{ message.msg_from.profile.profile_type}} - {{ message.msg_from.profile.age}} - {{ message.msg_from.location}}</p>
                                                         <p class="mb-0 small">{{ message.message}}</p>
+                                                        </a>
                                                         </div>
                                                         </div>
                                                         <!-- Card feed action dropdown START -->

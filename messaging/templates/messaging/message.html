@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+
+<main>
+  
+
+    <!-- Container START -->
+    <div class="container">
+          <div class="row gx-0">
+ 
+        <!-- Chat conversation START -->
+        <div class="col-lg-8 col-xxl-9">
+          <div class="card card-chat rounded-start-lg-0 border-start-lg-0">
+            <div class="card-body h-100">
+              <div class="tab-content py-0 mb-0 h-100" id="chatTabsContent">
+  
+  
+  
+                <!-- Conversation item START -->
+                <div class="fade tab-pane show active h-100" id="chat-1" role="tabpanel" aria-labelledby="chat-1-tab">
+                  <!-- Top avatar and status START -->
+                  <div class="d-sm-flex justify-content-between align-items-center">
+                    <div class="d-flex mb-2 mb-sm-0">
+                      <div class="flex-shrink-0 avatar me-2">
+                        <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      </div>
+                      <div class="d-block flex-grow-1">
+                        <h6 class="mb-0 mt-1">{{user.username}}</h6>
+                        <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <!-- Call button -->
+                      {% comment %} <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Audio call" data-bs-original-title="Audio call"><i class="bi bi-telephone-fill"></i></a>
+                      <a href="#!" class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Video call" data-bs-original-title="Video call"><i class="bi bi-camera-video-fill"></i></a> {% endcomment %}
+                      <!-- Card action START -->
+                      <div class="dropdown">
+                        <a class="icon-md rounded-circle btn btn-primary-soft me-2 px-2" href="#" id="chatcoversationDropdown" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <i class="bi bi-three-dots"></i></a>               
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatcoversationDropdown">
+                          <li><a class="dropdown-item" href="#"><i class="bi bi-person-check me-2 fw-icon"></i>View profile</a></li>
+                          <li><a class="dropdown-item" href="#"><i class="bi bi-trash me-2 fw-icon"></i>Delete chat</a></li>
+                          <li class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#"><i class="bi bi-archive me-2 fw-icon"></i>Report</a></li>
+                        </ul>
+                      </div>
+                      <!-- Card action END -->
+                    </div>
+                  </div>
+                  <!-- Top avatar and status END -->
+                  <hr>
+                  <!-- Chat conversation START -->
+                  <div class="chat-conversation-content custom-scrollbar os-host os-theme-dark os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition os-host-scrollbar-vertical-hidden">
+                    <div class="os-resize-observer-host observed">
+                        <div class="os-resize-observer" style="left: 0px; right: auto;">
+
+                        </div>
+                    </div>
+                    <div class="os-size-auto-observer observed" style="height: calc(100% + 1px); float: left;">
+                        <div class="os-resize-observer">
+
+                        </div>
+                    </div>
+                    <div class="os-content-glue" style="margin: 0px; height: 1025px; width: 884px;">
+
+                    </div>
+                    <div class="os-padding">
+                        <div class="os-viewport os-viewport-native-scrollbars-invisible" style="overflow: visible;">
+                            <div class="os-content" style="padding: 0px; height: auto; width: 100%;">
+                    <!-- Chat time -->
+                    <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
+                    {% for message in message_list %}
+                    {% if message.msg_from.username != user.username %}
+                    {% comment %} {{message.msg_from.username}}
+                    {{user.username}} {% endcomment %}
+                    <!-- Chat message left -->
+                    <div class="d-flex mb-1">
+                      <div class="flex-shrink-0 avatar avatar-xs me-2">
+                        <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                      </div>
+                      <div class="flex-grow-1">
+                        <div class="w-100">
+                          <div class="d-flex flex-column align-items-start">
+                            <div class="bg-light text-secondary p-2 px-3 rounded-2">{{message.message}}</div>
+                            <div class="small my-2">{{message.date_sent}}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Chat message right -->
+                    {% comment %} <div class="d-flex justify-content-end text-end mb-1">
+                      <div class="w-100">
+                        <div class="d-flex flex-column align-items-end">
+                          <div class="bg-primary text-white p-2 px-3 rounded-2">With pleasure</div>
+                        </div>
+                      </div>
+                    </div> {% endcomment %}
+                    <!-- Chat message right -->
+                     {% else %}
+                    <div class="d-flex justify-content-end text-end mb-1">
+                      <div class="w-100">
+                        <div class="d-flex flex-column align-items-end">
+                          <div class="bg-primary text-white p-2 px-3 rounded-2">{{message.message}}</div>
+                          <div class="d-flex my-2">
+                            <div class="small text-secondary">{{message.date_sent}}</div>
+                            <div class="small ms-2"><i class="fa-solid fa-check-double "></i></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+
+                    <!-- Chat time -->
+                    <div class="text-center small my-2">2 New Messages</div>
+
+                  </div></div></div><div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden"><div class="os-scrollbar-track os-scrollbar-track-off"><div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable os-scrollbar-auto-hidden"><div class="os-scrollbar-track os-scrollbar-track-off"><div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar-corner"></div></div>
+                  <!-- Chat conversation END -->
+                </div>
+                <!-- Conversation item END -->
+  
+  
+  
+  
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="d-sm-flex align-items-end">
+                <textarea class="form-control mb-sm-0 mb-3" data-autoresize="" placeholder="Type a message" rows="1"></textarea>
+                <button class="btn btn-sm btn-danger-soft ms-sm-2"><i class="fa-solid fa-face-smile fs-6"></i></button>
+                <button class="btn btn-sm btn-secondary-soft ms-2"><i class="fa-solid fa-paperclip fs-6"></i></button>
+                <button class="btn btn-sm btn-primary ms-2"><i class="fa-solid fa-paper-plane fs-6"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Chat conversation END -->
+      </div> <!-- Row END -->
+      <!-- =======================
+      Chat END -->
+  
+      </div>
+    <!-- Container END -->
+  
+</main>
+
+{% endblock %}
