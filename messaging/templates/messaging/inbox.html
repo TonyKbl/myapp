@@ -5,10 +5,10 @@
 
                                         <div class="card mb-3">
                                                 <div class="card-header border-0 pb-0">
-                                                        <h1>Messages</h1>
+                                                        <h1>Inbox</h1>
                                                 </div>
         {% for message in message %}
-                                                <div class="card-body  position-relative {% if not message.read %}border-start border-3 border-success {% endif %} stretched-link">                
+                                                <div class="card-body {% if not message.read %}border-start border-3 border-success {% endif %}">                
                                                         <div class="d-flex align-items-center justify-content-between">
                                                         <div class="d-flex align-items-center">
                                                         <!-- Avatar -->
