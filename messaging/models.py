@@ -24,4 +24,4 @@ class Message(models.Model):
     date_read = models.DateTimeField(auto_now=True)
     read = models.BooleanField()
     
-    attachment = ResizedImageField(size=[600, 200], upload_to='message_attachments', blank=True, null=True)
+    attachment = ResizedImageField(size=[600, 600], upload_to='message_attachments', blank=True, null=True)
