@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from itertools import chain
+from operator import attrgetter
 
 from .models import Message
 
@@ -37,7 +38,7 @@ class MessageView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         qs1 = Message.objects.filter(Q(msg_to=self.request.user) & Q(msg_from=self.kwargs['pk']))
         qs2 = Message.objects.filter(Q(msg_from=self.request.user) & Q(msg_to=self.kwargs['pk']))
-        queryset = chain(qs1,qs2)
+        queryset = sorted(chain(qs1,qs2),key=attrgetter('date_sent', 'time_sent'),reverse=True)[:25]
         return queryset
         # return Message.objects.filter(Q(msg_to=self.request.user) | Q(msg_from=self.request.user))
 

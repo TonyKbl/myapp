@@ -27,7 +27,7 @@
                         <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
                       </div>
                       <div class="d-block flex-grow-1">
-                        <h6 class="mb-0 mt-1">{{ message.msg_from.profile.display_name}}</h6>
+                        <h6 class="mb-0 mt-1">{{ message.display_name.from_msg_id.profile.display_name}}</h6>
                         <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
                       </div>
                     </div>
@@ -70,52 +70,44 @@
                         <div class="os-viewport os-viewport-native-scrollbars-invisible" style="overflow: visible;">
                             <div class="os-content" style="padding: 0px; height: auto; width: 100%;">
                     <!-- Chat time -->
-                    <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
-                    {% for message in message_list %}
-                    {% if message.msg_from.username != user.username %}
-                    {% comment %} {{message.msg_from.username}}
-                    {{user.username}} {% endcomment %}
-                    <!-- Chat message left -->
-                    <div class="d-flex mb-1">
-                      <div class="flex-shrink-0 avatar avatar-xs me-2">
-                        <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
-                      </div>
-                      <div class="flex-grow-1">
-                        <div class="w-100">
-                          <div class="d-flex flex-column align-items-start">
-                            <div class="bg-light text-secondary p-2 px-3 rounded-2">{{message.message}}</div>
-                            <div class="small my-2">{{message.date_sent}}</div>
+                    {% regroup message_list by date_sent as newlist %}
+                    {% for x in newlist %}
+                      <div class="text-center small my-2">{{ x.grouper }}</div>
+                      {% for message in x.list %}
+                        {% if message.msg_from.username != user.username %}
+                        <!-- Chat message left -->
+                        <div class="d-flex mb-1">
+                          <div class="flex-shrink-0 avatar avatar-xs me-2">
+                            <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
+                          </div>
+                          <div class="flex-grow-1">
+                            <div class="w-100">
+                              <div class="d-flex flex-column align-items-start">
+                                <div class="bg-light text-secondary p-2 px-3 rounded-2">{{message.message}}</div>
+                                <div class="small my-2">{{message.time_sent|date:"H:i"}}</div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <!-- Chat message right -->
-                    {% comment %} <div class="d-flex justify-content-end text-end mb-1">
-                      <div class="w-100">
-                        <div class="d-flex flex-column align-items-end">
-                          <div class="bg-primary text-white p-2 px-3 rounded-2">With pleasure</div>
-                        </div>
-                      </div>
-                    </div> {% endcomment %}
-                    <!-- Chat message right -->
-                     {% else %}
-                    <div class="d-flex justify-content-end text-end mb-1">
-                      <div class="w-100">
-                        <div class="d-flex flex-column align-items-end">
-                          <div class="bg-primary text-white p-2 px-3 rounded-2">{{message.message}}</div>
-                          <div class="d-flex my-2">
-                            <div class="small text-secondary">{{message.date_sent}}</div>
-                            <div class="small ms-2"><i class="fa-solid fa-check-double "></i></div>
+                        <!-- Chat message right -->
+                        {% else %}
+                        <div class="d-flex justify-content-end text-end mb-1">
+                          <div class="w-100">
+                            <div class="d-flex flex-column align-items-end">
+                              <div class="bg-primary text-white p-2 px-3 rounded-2">{{message.message}}</div>
+                              <div class="d-flex my-2">
+                                <div class="small text-secondary">{{message.time_sent|date:"H:i"}}</div>
+                                <div class="small ms-2"><i class="fa-solid fa-check-double "></i></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    {% endif %}
-                {% endfor %}
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
 
 
                     <!-- Chat time -->
-                    <div class="text-center small my-2">2 New Messages</div>
 
                   </div></div></div><div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden"><div class="os-scrollbar-track os-scrollbar-track-off"><div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar os-scrollbar-vertical os-scrollbar-unusable os-scrollbar-auto-hidden"><div class="os-scrollbar-track os-scrollbar-track-off"><div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar-corner"></div></div>
                   <!-- Chat conversation END -->
