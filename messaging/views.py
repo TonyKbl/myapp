@@ -8,6 +8,7 @@ from itertools import chain
 from operator import attrgetter
 
 from .models import Message
+from profiles.models import Profile
 
 # Create your views here.
 
@@ -31,7 +32,7 @@ class MessageView(LoginRequiredMixin, ListView):
     
     http_method_names = ["get"]
     template_name = "messaging/message.html"
-    model = Message
+    model = Message, User, Profile
     context_object_name = "message_list"
 
  
@@ -40,20 +41,16 @@ class MessageView(LoginRequiredMixin, ListView):
         qs2 = Message.objects.filter(Q(msg_from=self.request.user) & Q(msg_to=self.kwargs['pk']))
         queryset = sorted(chain(qs1,qs2),key=attrgetter('date_sent', 'time_sent'),reverse=True)[:25]
         return queryset
-        # return Message.objects.filter(Q(msg_to=self.request.user) | Q(msg_from=self.request.user))
-
-            # return PagePost.objects.filter(id=self.kwargs['pk'])
-    #  def get_queryset(self):
-        
-    #     followed_users = self.request.user.following.all()      
-    #     qs1 = Post.objects.filter(Q(author__in=followed_users.values('following'))) #your first qs
-
-    #     followed_pages = self.request.user.page_following.all()
-    #     qs2 = PagePost.objects.filter(Q(name__in=followed_pages.values('following')))  #your second qs
-        
-    #     queryset = sorted(chain(qs1,qs2),key=attrgetter('date'),reverse=True)[:25]
-    #     return queryset
     
+    def get_context_data(self, *args, **kwargs):
+        context = super(MessageView, self).get_context_data(*args, **kwargs)
+        context['profile'] = Profile.objects.filter(user__id=self.kwargs['pk']).values()
+        print(context)
+        return context
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(id=self.kwargs.get('pk'))
+        return obj
 
     def get_object(self):
        return self.request.user
