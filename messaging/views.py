@@ -54,3 +54,17 @@ class MessageView(LoginRequiredMixin, ListView):
 
     def get_object(self):
        return self.request.user
+    
+
+class SendMessageView(LoginRequiredMixin, CreateView):
+    template_name = "messaging/send.html"
+    model = Message
+    context_object_name = "message_send"
+    fields = ['message']
+    queryset = Message.objects.all()
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.msg_to_id = self.kwargs.get('pk')        
+        form.instance.msg_from = self.request.user
+        return super(SendMessageView, self).form_valid(form)
