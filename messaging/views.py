@@ -45,7 +45,6 @@ class MessageView(LoginRequiredMixin, ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(MessageView, self).get_context_data(*args, **kwargs)
         context['profile'] = Profile.objects.filter(user__id=self.kwargs['pk']).values()
-        print(context)
         return context
     
     def get_object(self, queryset=None):
