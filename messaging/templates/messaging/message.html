@@ -68,12 +68,7 @@
                       {% for message in x.list %}
                         {% if message.msg_from.username != user.username %}
                         <!-- Chat message left -->
-                        <div class="d-flex mb-1">
-                          <div class="flex-shrink-0 avatar avatar-xs me-2">
-                            {% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
-                            <img class="avatar-img rounded-circle" src="{{ im.url }}" >
-                            {% endthumbnail %}
-                          </div>
+                        <div class="d-flex me-6 mb-1">
                           <div class="flex-grow-1">
                             <div class="w-100">
                               <div class="d-flex flex-column align-items-start">
@@ -85,7 +80,7 @@
                         </div>
                         <!-- Chat message right -->
                         {% else %}
-                        <div class="d-flex justify-content-end text-end ms-3 mb-1">
+                        <div class="d-flex justify-content-end ms-6 mb-1">
                           <div class="w-100">
                             <div class="d-flex flex-column align-items-end">
                               <div class="bg-primary opacity-75 text-white p-2 px-3 rounded-2">{{message.message}}</div>
