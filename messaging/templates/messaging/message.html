@@ -69,14 +69,12 @@
                         {% if message.msg_from.username != user.username %}
                         <!-- Chat message left -->
                         <div class="d-flex me-5 mb-1">
-                          <div class="flex-grow-1">
                             <div class="w-100">
                               <div class="d-flex flex-column align-items-start">
                                 <div class="bg-body text-secondary border border-success p-2 px-3 rounded-2">{{message.message}}</div>
                                 <div class="small my-2">{{message.time_sent|date:"H:i"}}</div>
                               </div>
                             </div>
-                          </div>
                         </div>
                         <!-- Chat message right -->
                         {% else %}
