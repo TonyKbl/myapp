@@ -8,6 +8,13 @@ from django.template.defaultfilters import slugify
 from profanity.validators import validate_is_profane
 
 class Page(models.Model):
+    def custom_user():
+        return User.objects.get(username='admin')
+
+
+# class Book(models.Model):
+#     title = models.CharField(max_length=200)
+#     author = models.ForeignKey(Author, on_delete=models.SET(custom_user))
     
     class PageTypes(models.TextChoices):
         SWINGERS_CLUB = "Swingers Club",
@@ -15,7 +22,7 @@ class Page(models.Model):
         CINEMA = "Adult Cinema",
         ONLINE_SHOP = "Online Shop",
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name = "user")
+    user = models.ForeignKey(User, on_delete=models.SET(custom_user), related_name = "user")
         
     page_type = models.CharField(max_length = 15, choices = PageTypes.choices)
 
