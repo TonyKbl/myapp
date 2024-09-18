@@ -29,3 +29,5 @@ class Message(models.Model):
     read = models.BooleanField(null=True)
     
     attachment = ResizedImageField(size=[600, 600], upload_to='message_attachments', blank=True, null=True)
+
+    ordering = ['-date_sent']
