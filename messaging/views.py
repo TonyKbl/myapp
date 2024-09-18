@@ -23,7 +23,7 @@ class MessageInboxView(LoginRequiredMixin, ListView):
  
     def get_queryset(self):
         qs1 = Message.objects.filter(msg_to=self.request.user)
-        qs2 = qs1.order_by('msg_from', '-date_sent').distinct('msg_from', 'date_sent')
+        qs2 = qs1.order_by('msg_from', '-date_sent').distinct('msg_from')
         return qs2.order_by('-date_sent')
         # return Message.objects.order_by('msg_from').distinct().filter(msg_to=self.request.user)
     # WeatherReport.objects.order_by('-date').distinct('city')
