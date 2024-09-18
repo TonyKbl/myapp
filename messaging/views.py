@@ -22,7 +22,7 @@ class MessageInboxView(LoginRequiredMixin, ListView):
 
  
     def get_queryset(self):
-        return Message.objects.filter(msg_to=self.request.user).distinct('msg_from').order_by('-id')
+        return Message.objects.filter(msg_to=self.request.user).order_by('-id').distinct('msg_from')
 
     
     def get_object(self):
