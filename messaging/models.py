@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django_resized import ResizedImageField
+
+from profanity.validators import validate_is_profane
 # from sorl.thumbnail import ImageField
 
 
@@ -19,7 +21,7 @@ class Message(models.Model):
       on_delete=models.CASCADE,
       related_name = "msg_to"
     )
-    message = models.TextField(blank=True, null=True)
+    message = models.TextField(blank=True, null=True, validators=[validate_is_profane])
     date_sent = models.DateField(auto_now=True)
     date_read = models.DateField(auto_now=True)
     time_sent = models.TimeField(auto_now=True)

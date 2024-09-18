@@ -8,6 +8,7 @@ from itertools import chain
 from operator import attrgetter
 
 from .models import Message
+from .forms import MessageSendForm
 from profiles.models import Profile
 
 # Create your views here.
@@ -21,7 +22,7 @@ class MessageInboxView(LoginRequiredMixin, ListView):
 
  
     def get_queryset(self):
-        return Message.objects.filter(msg_to=self.request.user).distinct('msg_from')
+        return Message.objects.filter(msg_to=self.request.user).distinct('msg_from').order_by()
 
     
     def get_object(self):
@@ -57,9 +58,9 @@ class MessageView(LoginRequiredMixin, ListView):
 
 class SendMessageView(LoginRequiredMixin, CreateView):
     template_name = "messaging/send.html"
-    model = Message
+    model = Message    
+    form_class = MessageSendForm
     context_object_name = "message_send"
-    fields = ['message']
     queryset = Message.objects.all()
     success_url = '/'
 
