@@ -8,15 +8,15 @@
 						<div class="card">
 							<!-- Card header START -->
 							<div class="card-body border-0">
-								<h5 class="card-title"> Pages</h5> 
+								<h5 class="card-title"> inbox</h5> 
 							</div>
 						</div>
 						{% comment %} {% for page in pages %} {% endcomment %}
 
 
-						{% for message in message %}
 							<div class="card mb-0">
 										<div class="card-body">
+						{% for message in message %}
 											<div class="row position-relative">
 												<div class="col-3">
 												<!-- Blog image -->
@@ -33,9 +33,9 @@
 													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{ message.message}}</p>
 												</div>
 											</div>
+						{% endfor %}
 										</div>
 							</div>
-						{% endfor %}
 
 
 
