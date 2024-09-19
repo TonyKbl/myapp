@@ -19,21 +19,23 @@ class MessageInboxView(LoginRequiredMixin, ListView):
     template_name = "messaging/inbox.html"
     model = Message
     context_object_name = "message"
-
- 
+    
+    def get_object(self):
+       return self.request.user 
+    
     def get_queryset(self):
         qs1 = Message.objects.filter(msg_to=self.request.user).order_by('-date_sent')
-        qs2 = qs1.filter(msg_to=self.request.user).distinct('date_sent', 'msg_from')
+        # qs2 = qs1.filter(msg_to=self.request.user).distinct('date_sent', 'msg_from')
+        qs2 = Message.objects.raw("SELECT * FROM messaging_message WHERE msg_to_id = %s GROUP BY msg_from_id ORDER BY date_sent, time_sent DESC", [self.request.user.id])
         # qs2 = qs1.order_by('msg_from', '-date_sent').distinct('msg_from').order_by('-date_sent')
         # return qs2
+        print(qs1, qs2)
         return qs2
         # return Message.objects.order_by('msg_from').distinct().filter(msg_to=self.request.user)
     # WeatherReport.objects.order_by('-date').distinct('city')
         # return Message.objects.filter(msg_to=self.request.user).distinct('msg_from')
 
-    
-    def get_object(self):
-       return self.request.user
+
 
 
 class MessageView(LoginRequiredMixin, ListView):
