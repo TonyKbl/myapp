@@ -5,13 +5,22 @@
 {% block description %}Swinger club list of swingers clubs in the United Kingdom, France and Spain {% endblock %}
 
 {% block content %}
-						<div class="card">
+
+{% regroup message by msg_from as newlist %}
+{% for x in newlist %}
+  <div class="text-center small my-2">{{ x.grouper }}</div>
+  {% for m in x.list %}
+{{ x.list.date_sent }}
+  {% endfor %}
+{% endfor %}
+
+
+						{% comment %} <div class="card">
 							<!-- Card header START -->
 							<div class="card-body border-0">
 								<h5 class="card-title"> inbox</h5> 
 							</div>
 						</div>
-						{% comment %} {% for page in pages %} {% endcomment %}
 
 
 							<div class="card mb-0">
@@ -36,7 +45,7 @@
                                                                                         <hr>
 						{% endfor %}
 										</div>
-							</div>
+							</div> {% endcomment %}
 
 
 
