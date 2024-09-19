@@ -62,9 +62,9 @@
                   <!-- Chat conversation START -->
   
                     <!-- Chat time -->
-                    {% regroup message_list by date_sent|date:'Y-m-d' as newlist %}
+                    {% regroup message_list by date_sent|date:'D dS M Y' as newlist %}
                     {% for x in newlist %}
-                      <div class="text-center small my-2">{{ x.grouper|date:'D d M Y' }}</div>
+                      <div class="text-center small my-2">{{ x.grouper }}</div>
                       {% for message in x.list %}
                         {% if message.msg_from.username != user.username %}
                         <!-- Chat message left -->
