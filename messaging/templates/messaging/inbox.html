@@ -6,16 +6,16 @@
 
 {% block content %}
 
-{% regroup message by msg_from as newlist %}
+{% comment %} {% regroup message by msg_from as newlist %}
 {% for x in newlist %}
   <div class="text-center small my-2">{{ x.grouper }}</div>
   {% for m in x.list %}
 {{ x.list.date_sent }}
   {% endfor %}
-{% endfor %}
+{% endfor %} {% endcomment %}
 
 
-						{% comment %} <div class="card">
+						<div class="card">
 							<!-- Card header START -->
 							<div class="card-body border-0">
 								<h5 class="card-title"> inbox</h5> 
@@ -45,7 +45,7 @@
                                                                                         <hr>
 						{% endfor %}
 										</div>
-							</div> {% endcomment %}
+							</div>
 
 
 
