@@ -29,7 +29,7 @@ class MessageInboxView(LoginRequiredMixin, ListView):
         qs2 = Message.objects.raw("SELECT * FROM messaging_message WHERE msg_to_id = %s GROUP BY msg_from_id ORDER BY date_sent DESC", [self.request.user.id])
         # qs2 = qs1.order_by('msg_from', '-date_sent').distinct('msg_from').order_by('-date_sent')
         # return qs2
-        print(qs1, qs2)
+        # print(qs1, qs2)
         return qs2
         # return Message.objects.order_by('msg_from').distinct().filter(msg_to=self.request.user)
     # WeatherReport.objects.order_by('-date').distinct('city')
