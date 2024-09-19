@@ -26,7 +26,7 @@ class MessageInboxView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         qs1 = Message.objects.filter(msg_to=self.request.user).order_by('-date_sent')
         # qs2 = qs1.filter(msg_to=self.request.user).distinct('date_sent', 'msg_from')
-        qs2 = Message.objects.raw("SELECT * FROM messaging_message WHERE msg_to_id = %s GROUP BY msg_from_id ORDER BY MIN(date_sent) DESC", [self.request.user.id])
+        qs2 = Message.objects.raw("SELECT * FROM messaging_message WHERE msg_to_id = %s ORDER BY MIN(msg_from_id,date_sent) GROUP BY msg_from_id DESC", [self.request.user.id])
         # qs2 = qs1.order_by('msg_from', '-date_sent').distinct('msg_from').order_by('-date_sent')
         # return qs2
         # print(qs1, qs2)
