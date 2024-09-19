@@ -22,8 +22,8 @@ class Message(models.Model):
       related_name = "msg_to"
     )
     message = models.TextField(blank=True, null=True, validators=[validate_is_profane])
-    date_sent = models.DateField(auto_now=True)
-    date_read = models.DateField(auto_now=True)
+    date_sent = models.DateTimeField(auto_now=True)
+    date_read = models.DateTimeField(auto_now=True)
     time_sent = models.TimeField(auto_now=True)
     time_read = models.TimeField(auto_now=True)
     read = models.BooleanField(null=True)
