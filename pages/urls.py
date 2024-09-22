@@ -14,6 +14,7 @@ urlpatterns = [
     path("edit_page/<int:pk>/<slug:slug>", views.PageUpdateView.as_view(), name="edit_page"),
     path("new_page_post/<int:id>", feedviews.CreateNewPagePost.as_view(), name="new_page_post"),
     path("add_review/<int:pk>", views.PageAddReviewView.as_view(), name="add_review"),
+    path("add_host/<int:pk>/", views.PageAddHostView.as_view(), name="add_host"),
     path("page_feed/<slug:slug>", views.PageFeedView.as_view(), name="page_feed"),
     # path("page_gallery/<slug:slug>", views.PageGalleryView.as_view(), name="gallery"),
     path("page_reviews/<slug:slug>", views.PageReviewsView.as_view(), name="page_reviews"),

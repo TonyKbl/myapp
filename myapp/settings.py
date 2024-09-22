@@ -261,4 +261,4 @@ REQUEST_IGNORE_PATHS = (
     r'^admin/',
 )
 
-# REQUEST_BASE_URL = {'http://%s' % Site.objects.get_current().domain}
+# REQUEST_BASE_URL = {'https://%s' % Site.objects.get_current().domain}

@@ -10,12 +10,7 @@ from profanity.validators import validate_is_profane
 class Page(models.Model):
     def custom_user():
         return User.objects.get(username='admin')
-
-
-# class Book(models.Model):
-#     title = models.CharField(max_length=200)
-#     author = models.ForeignKey(Author, on_delete=models.SET(custom_user))
-    
+   
     class PageTypes(models.TextChoices):
         SWINGERS_CLUB = "Swingers Club",
         GAY_SAUNA = "Gay Sauna",
@@ -69,7 +64,18 @@ class PageFollow(models.Model):
     date = models.DateTimeField(auto_now_add='True')
 
     class Meta:
-        unique_together = ('follower', 'following')
+        unique_together = ('follower', 'following')  
+
+
+class PageHost(models.Model):
+    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='host')
+    page_name = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='host_for')
+
+    class Meta:
+        unique_together = ('host', 'page_name')
+
+    def __str__(self):
+        return self.host.username
 
 class PageReviews(models.Model):
     class PageRatings(models.IntegerChoices):

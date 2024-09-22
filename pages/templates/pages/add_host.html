@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load thumbnail %}
+
+{% block title %}Add Host{% endblock title %}
+
+{% block content %}
+                <!-- Card feed item START -->
+                <div class="card">
+                    <!-- Card header START -->
+                    <div class="card-header border-0 pb-0">
+                        <h2>Add Event Host</h2>
+                    </div>                     
+                    <!-- Card header END -->
+                    <!-- Card body START -->
+                    <div class="card-body">
+                        {% comment %} <div class="form_group">
+                            <form class="form-with-validation" method="post">
+                                {% csrf_token %}
+                                <div id="div_id_host" class="mb-3"> 
+                                    <label for="id_host" class="form-label requiredField">Host<span class="asteriskField">*</span></label> 
+                                    <select name="host" class="select form-select" required="" id="id_host"> 
+                                        <option value="" selected="">---------</option> 
+                                        <option value="1">ynot69</option> 
+                                        <option value="2">kynot</option> 
+                                        <option value="3">tonyk</option> 
+                                        <option value="4">admin</option> 
+                                        <option value="5">test</option> 
+                                        <option value="9">clubswing</option>
+                                    </select> 
+                                </div>
+                                <input type="submit" value="Add Host" class="btn btn-primary">
+                            </form>
+                        </div> {% endcomment %}
+                        <div class="form_group">
+                            <form class="form-with-validation" method="post" >
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <input type="submit" value="Add Host" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}

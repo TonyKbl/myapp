@@ -51,7 +51,11 @@
                 <!-- Card share action dropdown menu -->
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
                   <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Page Post</a></li>
-                  <li><a class="dropdown-item" href="/add_event/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>Add Event</a></li>
+                  {% if page.user.username == request.user.username %}
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/add_event/{{page.id}}"> <i class="bi bi-calendar fa-fw pe-2"></i>Add Event</a></li>
+                    <li><a class="dropdown-item" href="/add_host/{{page.id}}"> <i class="bi bi-person fa-fw pe-2"></i>Add Event Host</a></li>
+                  {% endif %}
                   {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
                   <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>

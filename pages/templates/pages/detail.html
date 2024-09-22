@@ -8,10 +8,13 @@
 
 {% include 'includes/page_head.html' with about_active="active" %}
 {% if page.user.username == 'admin' %}
-  <div class="border border-2 py-5 border-solid h-50 rounded text-center d-flex align-items-center justify-content-center position-relative">
-    <a class="stretched-link" href="{% url 'pages:claim_page'  page.id %}">
-      <h6 class="mt-2">Are you the owner of this venue? Claim this page</h6>
-    </a>
+<div class="card card-body">
+  <div class="d-flex mb-0">
+      
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <a class = "btn btn-outline-primary btn-sm" href="{% url 'pages:claim_page'  page.id %}">Are you the owner of this venue?<br> Click here to claim this page</a>
+    </div>
+  </div>
 </div>
 {% endif %}
     <!-- Card about item START -->

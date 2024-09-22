@@ -11,11 +11,11 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 
-from .models import Page, PageFollow, PageReviews, ClaimPage
+from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
 from feed.models import PagePost
 from profiles.models import Profile
 # from gallery.models import PageGallery
-from .forms import PageUpdateForm, PageCreateForm, PageReviewForm, PageClaimForm
+from .forms import PageUpdateForm, PageCreateForm, PageReviewForm, PageClaimForm, PageAddHostForm
 
 
 class PageListView(ListView):    
@@ -93,7 +93,7 @@ class PageAddReviewView(LoginRequiredMixin, CreateView):
     models = PageReviews
     form_class = PageReviewForm
     template_name = "pages/add_review.html"
-    queryset = PageReviews.objects.all()    
+    # queryset = PageReviews.objects.all()    
     success_message = "Your review was added successfully"
     success_url = "/"
 
@@ -101,6 +101,21 @@ class PageAddReviewView(LoginRequiredMixin, CreateView):
         form.instance.page_name_id = self.kwargs.get('pk')        
         form.instance.author = self.request.user
         return super(PageAddReviewView, self).form_valid(form)
+
+    def get_object(self):
+       return self.request.user
+
+class PageAddHostView(LoginRequiredMixin, CreateView):
+    models = PageHost
+    form_class = PageAddHostForm
+    template_name = "pages/add_host.html"
+    # queryset = PageReviews.objects.all()    
+    success_message = "Your host was added successfully"
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.page_name_id = self.kwargs.get('pk')
+        return super(PageAddHostView, self).form_valid(form)
 
     def get_object(self):
        return self.request.user

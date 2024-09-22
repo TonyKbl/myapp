@@ -1,5 +1,5 @@
 from django import forms
-from .models import Page, PageReviews, ClaimPage
+from .models import Page, PageReviews, ClaimPage, PageHost
 from django.contrib.auth.models import User
 
 
@@ -44,6 +44,16 @@ class PageReviewForm(forms.ModelForm):
             "rating",
             "text",
             )
+        
+
+class PageAddHostForm(forms.ModelForm):
+    
+    class Meta:
+        model = PageHost
+        fields = (
+            "host",
+            )
+
 
 
 class PageClaimForm(forms.ModelForm):

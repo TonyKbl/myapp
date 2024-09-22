@@ -6,15 +6,6 @@
 
 {% block content %}
 
-{% comment %} {% regroup message by msg_from as newlist %}
-{% for x in newlist %}
-  <div class="text-center small my-2">{{ x.grouper }}</div>
-  {% for m in x.list %}
-{{ x.list.date_sent }}
-  {% endfor %}
-{% endfor %} {% endcomment %}
-
-
 						<div class="card">
 							<!-- Card header START -->
 							<div class="card-body border-0">

@@ -37,12 +37,11 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
        return self.request.user
     
-    
-    
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
         return obj
-    
+
+   
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileCoverUpdateForm

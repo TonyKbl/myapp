@@ -1,10 +1,11 @@
 from django.db.models.base import Model as Model
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 
-from pages.models import Page
+from pages.models import Page, PageHost
 from .models import Event, EventDate
 from .forms import EventCreateForm, EventAddDatesForm
 
@@ -26,7 +27,7 @@ class PageEventsList(ListView):
     # queryset = Events.objects.all().order_by('-id')[0:30]
     http_method_names = ["get"]
     template_name = "events/date_list.html"
-    model = Page
+    model = EventsList
     context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
@@ -43,20 +44,50 @@ class PageEventsList(ListView):
 class EventDetailView(DetailView):    
     html_method_names = ["get"]
     template_name = "events/detail.html"
-    models = Event,
+    models = EventDate, Event,
     context_object_name = "event"
 
     def get_queryset(self, **kwargs):
-        return Event.objects.filter(id=self.kwargs['pk'])
+        return EventDate.objects.filter(id=self.kwargs['pk'])
+    
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(EventDetailView, self).get_context_data(*args, **kwargs)
+    #     context['master_event'] = Event.objects.filter(id = event_id)
+        # context['page_reviews'] = PageReviews.objects.filter(page_name__slug=self.kwargs['slug']).order_by('-date')
+        
+        return context
 
 
 class PageAddEventView(LoginRequiredMixin, CreateView):
-    models = Event
+    models = Event, Page
     form_class = EventCreateForm
+    # form = EventCreateForm(page=3)
     template_name = "events/add_event.html"
     # queryset = Event.objects.all()
     success_message = "Your event was added successfully"
-    success_url = "/"
+    # fields = (
+    #         "title",
+    #         "description",
+    #         "image",
+    #         "host_list",
+    #     )
+    success_url = reverse_lazy("events:events") 
+    # def __init__(self, page=None, **kwargs):
+    #     form = EventCreateForm(page=self.page)
+
+    # def get_form_kwargs(self, *args, **kwargs):
+
+
+    # def get_form_kwargs(self) -> dict:
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs['request'] = self.request.pk
+    #     return kwargs
+
+        # pk = kwargs.pop('pk', 0)
+        # kwargs = super(PageAddEventView, self).get_form_kwargs(*args, **kwargs)
+        # # print(kwargs)
+        # kwargs['pk'] = self.kwargs['pk']
+        # return kwargs
 
     def form_valid(self, form):
         form.instance.location_id = self.kwargs.get('pk')        
@@ -66,13 +97,18 @@ class PageAddEventView(LoginRequiredMixin, CreateView):
     def get_object(self):
        return self.request.user
     
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageAddEventView, self).get_context_data(*args, **kwargs)
+        context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
+        return context
+    
 class AddEventDateView(LoginRequiredMixin, CreateView):
     models = EventDate
     form_class = EventAddDatesForm
     template_name = "events/add_date.html"
     # queryset = Event.objects.all()
     success_message = "Your event was added successfully"
-    success_url = "/"
+    success_url = "/events/"
 
     def form_valid(self, form):
         form.instance.event_id = self.kwargs.get('pk')        
