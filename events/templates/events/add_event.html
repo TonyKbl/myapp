@@ -23,7 +23,7 @@
                                 Select Hosts for this event<br>
                     <div class="card-body border" >
                                 {% for i in host_choices%}
-                                    <input type="checkbox" name="host_list" id="host_{{i.id}}" multiple="True">
+                                    <input type="checkbox" name="host_list" id="host_{{i.id}}" value="{{i.id}}" multiple="True">
                                     <label for="host_{{i.id}}">@{{ i.host }}</label>
                                     &nbsp
                                 {% endfor %}

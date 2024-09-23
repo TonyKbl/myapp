@@ -61,9 +61,7 @@ class EventDetailView(DetailView):
 class PageAddEventView(LoginRequiredMixin, CreateView):
     models = Event, Page
     form_class = EventCreateForm
-    # form = EventCreateForm(page=3)
     template_name = "events/add_event.html"
-    # queryset = Event.objects.all()
     success_message = "Your event was added successfully"
     # fields = (
     #         "title",
@@ -72,22 +70,8 @@ class PageAddEventView(LoginRequiredMixin, CreateView):
     #         "host_list",
     #     )
     success_url = reverse_lazy("events:events") 
-    # def __init__(self, page=None, **kwargs):
-    #     form = EventCreateForm(page=self.page)
-
-    # def get_form_kwargs(self, *args, **kwargs):
 
 
-    # def get_form_kwargs(self) -> dict:
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['request'] = self.request.pk
-    #     return kwargs
-
-        # pk = kwargs.pop('pk', 0)
-        # kwargs = super(PageAddEventView, self).get_form_kwargs(*args, **kwargs)
-        # # print(kwargs)
-        # kwargs['pk'] = self.kwargs['pk']
-        # return kwargs
 
     def form_valid(self, form):
         form.instance.location_id = self.kwargs.get('pk')        

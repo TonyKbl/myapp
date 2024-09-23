@@ -2,7 +2,7 @@ from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
@@ -32,7 +32,10 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileUpdateForm
     template_name = "profiles/profile_update_form.html"
-    success_url = "/"
+    # success_url = reverse('profile:detail', user.username)
+    
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={'username': self.request.user})
 
     def get_object(self):
        return self.request.user
@@ -41,18 +44,18 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         obj = Profile.objects.get(user=self.request.user)
         return obj
 
-   
+
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileCoverUpdateForm
     template_name = "profiles/cover_update_form.html"
-    success_url = "/pages/"
+    
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={'username': self.request.user})
    
-
     def get_object(self):
         return self.request.user    
-    
-    
+        
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
         return obj  
@@ -63,12 +66,13 @@ class AvatarImageUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProfileAvatarUpdateForm
     template_name = "profiles/avatar_update_form.html"
     success_url = "/pages/"
-   
+       
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={'username': self.request.user})
 
     def get_object(self):
         return self.request.user    
-    
-    
+        
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
         return obj
@@ -118,7 +122,10 @@ class ProfileAddGalleryView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_object(self):
-       return self.request.user
+       return self.request.user    
+        
+    def get_success_url(self):
+        return reverse("profiles:gallery", kwargs={'username': self.request.user})
 
     # def get_object(self, queryset=None):
     #     obj = Profile.objects.get(user=self.request.user)
