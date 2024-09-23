@@ -1,9 +1,14 @@
 from django import template
 from django.db.models import Avg, Count
-from ..models import PageFollow, PageReviews
+from ..models import PageFollow, PageReviews, PageHost
 from django.http import HttpResponse
 
 register = template.Library()
+
+@register.filter
+def is_page_host(target_user, target_page):
+    return PageHost.objects.filter(host=target_user, page_name=target_page).exists()
+
 
 @register.filter
 def is_following_page(user, target_page):

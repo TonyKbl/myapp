@@ -5,8 +5,8 @@ register = template.Library()
 
 @register.filter
 def is_following(user, target_user):
-    print('User-', user)
-    print('Target User-', target_user)
+    # print('User-', user)
+    # print('Target User-', target_user)
     return Follow.objects.filter(follower=user, following=target_user).exists()
 
 @register.simple_tag(takes_context=True)
