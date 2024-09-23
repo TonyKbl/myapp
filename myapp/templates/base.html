@@ -69,7 +69,14 @@
 		</script>
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="media/images/favicon.png">
+		{% comment %} <link rel="shortcut icon" href="static/images/favicon-32x32.png"> {% endcomment %}
+
+		<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+		<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
 
 		<!-- Google Font -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
