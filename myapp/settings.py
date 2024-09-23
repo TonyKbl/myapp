@@ -1,4 +1,3 @@
-from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 import os
 import sys
@@ -234,6 +233,26 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
     
 )
+ACCOUNT_USERNAME_BLACKLIST = (
+    'page',
+    'pages',
+    'add_page',
+    'claim_page',
+    'edit_page',
+    'new_page_post',
+    'add_review',
+    'add_host',
+    'page_feed',
+    'page_gallery',
+    'page_reviews',
+    'page_follow',
+    'edit_profile',
+    'feed',
+    
+
+)
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

@@ -17,11 +17,11 @@
                             <!-- Info -->
                             <div>
                               <div class="nav nav-divider">
-                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'pages:detail' post.name.slug %}">{{ post.name }}</a></h6>
+                                  <h6 class="nav-item card-title mb-0"> <a class="flex items_center" href="{% url 'pages:detail' post.name.slug %}">{{ post.name }}</a></h6>
                                 
                                 <span class="nav-item small"> {{post.date|timesince}} ago </span>
                               </div>
-                              <p class="mb-0 small">{{ post.author.profile.display_name }} - @{{ post.author.username}}</p>
+                              <p class="nav-item card-title mb-0 small"><a href ="{% url 'profiles:detail' post.author.profile.user %}">{{ post.author.profile.display_name }} - @{{ post.author.username}}</a></p>
                             </div>
                           </div>
                           <!-- Card feed action dropdown START -->
