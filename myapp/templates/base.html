@@ -236,64 +236,7 @@
 										<div class="card-body p-0">
 											<ul class="list-group list-group-flush list-unstyled p-2">
 												<!-- Notif item -->
-												<li>
-													<div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3">
-														<div class="avatar text-center d-none d-sm-inline-block">
-															<img class="avatar-img rounded-circle" src="media/images/avatar/01.jpg" alt="">
-														</div>
-														<div class="ms-sm-3">
-															<div class=" d-flex">
-															<p class="small mb-2"><b>Judy Nguyen</b> sent you a friend request.</p>
-															<p class="small ms-3 text-nowrap">Just now</p>
-														</div>
-														<div class="d-flex">
-															<button class="btn btn-sm py-1 btn-primary me-2">Accept </button>
-															<button class="btn btn-sm py-1 btn-danger-soft">Delete </button>
-														</div>
-													</div>
-												</div>
-												</li>
-												<!-- Notif item -->
-												<li>
-													<div class="list-group-item list-group-item-action rounded badge-unread d-flex border-0 mb-1 p-3 position-relative">
-														<div class="avatar text-center d-none d-sm-inline-block">
-															<img class="avatar-img rounded-circle" src="media/images/avatar/02.jpg" alt="">
-														</div>
-														<div class="ms-sm-3 d-flex">
-															<div>
-																<p class="small mb-2">Wish <b>Amanda Reed</b> a happy birthday (Nov 12)</p>
-																<button class="btn btn-sm btn-outline-light py-1 me-2">Say happy birthday 🎂</button>
-															</div>
-															<p class="small ms-3">2min</p>
-														</div>
-													</div>
-												</li>
-												<!-- Notif item -->
-												<li>
-													<a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 mb-1 p-3">
-														<div class="avatar text-center d-none d-sm-inline-block">
-															<div class="avatar-img rounded-circle bg-success"><span class="text-white position-absolute top-50 start-50 translate-middle fw-bold">WB</span></div>
-														</div>
-														<div class="ms-sm-3">
-															<div class="d-flex">
-																<p class="small mb-2">Webestica has 15 like and 1 new activity</p>
-																<p class="small ms-3">1hr</p>
-															</div>
-														</div>
-													</a>
-												</li>
-												<!-- Notif item -->
-												<li>
-													<a href="#" class="list-group-item list-group-item-action rounded d-flex border-0 p-3 mb-1">
-														<div class="avatar text-center d-none d-sm-inline-block">
-															<img class="avatar-img rounded-circle" src="media/images/logo/12.svg" alt="">
-														</div>
-														<div class="ms-sm-3 d-flex">
-															<p class="small mb-2"><b>Bootstrap in the news:</b> The search giant’s parent company, Alphabet, just joined an exclusive club of tech stocks.</p>
-															<p class="small ms-3">4hr</p>
-														</div>
-													</a>
-												</li>
+
 											</ul>
 										</div>
 										<div class="card-footer text-center">
@@ -331,7 +274,7 @@
 									<li><a class="dropdown-item" href="{% url "pages:add_page" %}"><i class="bi bi-flag fa-fw me-2"></i>Add New Page</a></li>
 									
 									<li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings & Privacy</a></li>
-									<li> 
+									{% comment %} <li> 
 										<a class="dropdown-item" href="https://support.webestica.com/" target="_blank">
 											<i class="fa-fw bi bi-life-preserver me-2"></i>Support
 										</a> 
@@ -340,7 +283,7 @@
 										<a class="dropdown-item" href="docs/index.html" target="_blank">
 											<i class="fa-fw bi bi-card-text me-2"></i>Documentation
 										</a> 
-									</li>
+									</li> {% endcomment %}
 									<li class="dropdown-divider"></li>
 									<li><a class="dropdown-item bg-danger-soft-hover" href="{% url 'account_logout'%}"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
 									<li> <hr class="dropdown-divider"></li>
@@ -468,7 +411,7 @@
 													<li class="nav-item">
 														<a class="nav-link" href="/events/"><i class="fa fa-calendar-day me-2 h-20px fa-fw"></i><span>Events </span></a>
 													</li>
-													<li class="nav-item">
+													{% comment %} <li class="nav-item">
 														<a class="nav-link" href="groups.html"> <i class="fa-solid fa-user-group me-2 h-20px fa-fw"></i><span>Groups </span></a>
 													</li>
 													<li class="nav-item">
@@ -476,7 +419,7 @@
 													</li>
 													<li class="nav-item">
 														<a class="nav-link" href="settings.html"> <i class="fa-solid fa-gear me-2 h-20px fa-fw"></i><span>Settings </span></a>
-													</li>
+													</li> {% endcomment %}
 												</ul>
 												<!-- Side Nav END -->
 											</div>
@@ -489,7 +432,7 @@
 										<!-- Card END -->
 
 										<!-- Helper link START -->
-										<ul class="nav small mt-4 justify-content-center lh-1">
+										{% comment %} <ul class="nav small mt-4 justify-content-center lh-1">
 											<li class="nav-item">
 												<a class="nav-link" href="my-profile-about.html">About</a>
 											</li>
@@ -508,10 +451,10 @@
 											<li class="nav-item">
 												<a class="nav-link" href="privacy-and-terms.html">Privacy & terms</a>
 											</li>
-										</ul>
+										</ul> {% endcomment %}
 										<!-- Helper link END -->
 										<!-- Copyright -->
-										<p class="small text-center mt-1">©2024 <a class="text-reset" target="_blank" href="https://www.clubswing.com/"> Club Swing </a></p>
+										<p class="small text-center mt-1">©2024 <a class="text-reset" target="_blank" href="https://www.clubsforfun.com/"> Club Swing </a></p>
 									</div>
 								</div>
 							</nav>

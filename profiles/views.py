@@ -143,5 +143,5 @@ def follow(request, username):
                 follow_relationship.delete()
                 messages.warning(request, "You have stopped following a user")
 
-    return redirect('/', username=username)
+    return redirect('profiles:detail', username=username)
 

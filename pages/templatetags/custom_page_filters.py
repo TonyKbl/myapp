@@ -41,3 +41,4 @@ def review_count(target_page):
     count = PageReviews.objects.filter(page_name=target_page).aggregate(Count('rating'))
     return count['rating__count']
     # return PageReviews.objects.aggregate(Avg('rating'))
+

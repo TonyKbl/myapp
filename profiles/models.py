@@ -311,13 +311,13 @@ class Follow(models.Model):
         unique_together = ('follower', 'following')
 
     
-class MyImage(models.Model):
-     photo = models.ImageField(upload_to="profile_gallery", verbose_name=("Image"))
-     creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False, verbose_name=('Creator'), on_delete=models.CASCADE)
-     creation_time = models.DateTimeField(auto_now_add=True, blank=False)
+# class MyImage(models.Model):
+#      photo = models.ImageField(upload_to="profile_gallery", verbose_name=("Image"))
+#      creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False, verbose_name=('Creator'), on_delete=models.CASCADE)
+#      creation_time = models.DateTimeField(auto_now_add=True, blank=False)
 
-     @classmethod
-     def get_image_field(cls):
-         return cls._meta.get_field("photo")
+#      @classmethod
+#      def get_image_field(cls):
+#          return cls._meta.get_field("photo")
 
 
