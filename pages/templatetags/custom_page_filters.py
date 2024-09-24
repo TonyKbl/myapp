@@ -15,7 +15,7 @@ def is_following_page(user, target_page):
     return PageFollow.objects.filter(follower=user, following=target_page).exists()
 
 @register.simple_tag
-def avg_rating(target_page):
+def avg_stars(target_page):
     # return PageReviews.objects.filter(page_name=target_page).values()[0]
     average = PageReviews.objects.filter(page_name=target_page).aggregate(Avg('rating'))
     if average['rating__avg'] == None:
@@ -34,6 +34,12 @@ def avg_rating(target_page):
     else:        
         return round(average['rating__avg'], 2)
     # return PageReviews.objects.aggregate(Avg('rating'))
+
+@register.simple_tag
+def avg_rating(target_page):
+    # return PageReviews.objects.filter(page_name=target_page).values()[0]
+    average = PageReviews.objects.filter(page_name=target_page).aggregate(Avg('rating'))
+    return round(average['rating__avg'], 1)
 
 @register.simple_tag
 def review_count(target_page):

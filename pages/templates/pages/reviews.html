@@ -18,7 +18,11 @@
 
 					<div id="posts-container">
 						{% for review in page_reviews %}
+						{% if user.is_authenticated %}
 						{% include 'includes/page_review.html' %}
+						{% else %}
+						{% include 'includes/page_review_public.html' %}
+						{% endif %}
 						<hr>
 						{% empty %}
 						<p>There are currently no reviews for {{page.page_name}}

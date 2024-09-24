@@ -88,7 +88,18 @@
                       <!-- Card header END -->
                       <!-- Card body START -->
                       <div class="card-body">
+                        {% with wc=post.text|wordcount %}
+                        {% if not full%}
+                        {% if wc > 30 %}
+                        <p>{{post.text|truncatewords:30}} <a href="{% url 'feed:detail' post.post_type post.id %}" class="text-secondary" aria-pressed="true">See More</a></p>
+                        {% else %}
                         <p>{{post.text}}</p>
+                        {% endif %}
+                        {% else %}
+                        <p>{{post.text}}</p>
+                        {% endif %}
+
+                        {% endwith %}
                         <!-- Card img -->
                           <a class="fles items_center" href="#">
                             {% thumbnail post.image "300x300" crop="center" as im %}
@@ -97,7 +108,7 @@
                           </a>
                             
                         <!-- Feed react START -->
-                        <ul class="nav nav-stack py-3 small">
+                        {% comment %} <ul class="nav nav-stack py-3 small">
                           <li class="nav-item">
                             <a class="nav-link active" href="#!" data-bs-container="body" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" data-bs-custom-class="tooltip-text-start" data-bs-title="Frances Guerrero<br> Lori Stevens<br> Billy Vasquez<br> Judy Nguyen<br> Larry Lawson<br> Amanda Reed<br> Louis Crawford"> <i class="bi bi-hand-thumbs-up-fill pe-1"></i>Liked (56)</a>
                           </li>
@@ -120,11 +131,11 @@
                             </ul>
                           </li>
                           <!-- Card share action END -->
-                        </ul>
+                        </ul> {% endcomment %}
                         <!-- Feed react END -->
             
                         <!-- Add comment -->
-                        <div class="d-flex mb-3">
+                        {% comment %} <div class="d-flex mb-3">
                           <!-- Avatar -->
                           <div class="avatar avatar-xs me-2">
                             <a href="#!"> <img class="avatar-img rounded-circle" src="assets/images/avatar/12.jpg" alt=""> </a>
@@ -136,7 +147,9 @@
                               <i class="bi bi-send-fill"> </i>
                             </button>
                           </form>
-                        </div>
+                        </div> {% endcomment %}
+
+
                         {% comment %} <!-- Comment wrap START -->
                         <ul class="comment-wrap list-unstyled">
                           <!-- Comment item START -->
@@ -281,10 +294,10 @@
                       <!-- Card footer START -->
                       <div class="card-footer border-0 pt-0">
                         <!-- Load more comments -->
-                        <a href="{% url 'feed:detail' post.post_type post.id %}" role="link" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" aria-pressed="true">
+                        {% comment %} <a href="{% url 'feed:detail' post.post_type post.id %}" role="link" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" aria-pressed="true">
         
                           Load more comments 
-                        </a>
+                        </a> {% endcomment %}
         
                         {% comment %} <a href="{% url 'feed:detail' post.id %}" role="link" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
                           <div class="spinner-dots me-2">

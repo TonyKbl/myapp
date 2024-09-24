@@ -1,0 +1,105 @@
+{% load thumbnail %}
+                <!-- Card feed item START -->
+                    <div class="card">
+                      <!-- Card header START -->
+                      <div class="card-header border-0 pb-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="d-flex align-items-center">
+                            <!-- Avatar -->
+                            <div class="avatar avatar-story me-2">
+                                {% comment %} {% thumbnail https://clubs4fun.s3.amazonaws.com/static/images/logo_small.png "100x100" crop="center" as im %} {% endcomment %}
+                                  <a class="flex items_center" href="#"> 
+                                    <img class="avatar-img rounded-circle border-danger" src="https://clubs4fun.s3.amazonaws.com/static/images/logo_small.png" width="100" height="100" alt="">
+                                  </a>
+                                {% comment %} {% endthumbnail %} {% endcomment %}
+                            </div>
+        
+                            <!-- Info -->
+                            <div>
+                              <div class="nav nav-divider">
+                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="/login/">A ClubSwing Member</a></h6>
+                              </div>
+                              <p class="mb-0 small">
+                                {% if review.rating == 5 %}
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                <i class="bi bi-star-fill text-warning"></i>
+                                  {% elif review.rating == 4 %}
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  {% elif review.rating == 3 %}
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  {% elif review.rating == 2 %}
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  {% elif review.rating == 1 %}
+                                  <i class="bi bi-star-fill text-warning"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                  <i style = "color:gray;" class="bi bi-star"></i>
+                                {% endif %}
+                              </p>
+                            </div>
+                          </div>
+                          <!-- Card feed action dropdown START -->
+                          <div class="dropdown">
+                            <a href="#" class="text-secondary btn btn-secondary-soft-hover py-1 px-2" id="cardFeedAction" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-three-dots"></i>
+                            </a>
+                            <!-- Card feed action dropdown menu -->
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardFeedAction">
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Save post</a></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-person-x fa-fw pe-2"></i>Unfollow lori ferguson </a></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-x-circle fa-fw pe-2"></i>Hide post</a></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-slash-circle fa-fw pe-2"></i>Block</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="#"> <i class="bi bi-flag fa-fw pe-2"></i>Report post</a></li>
+                            </ul>
+                          </div>
+                          <!-- Card feed action dropdown END -->
+                        </div>
+                      </div>
+                      <!-- Card header END -->
+                      <!-- Card body START -->
+                      <div class="card-body">
+                        <p>{{review.text}}</p>
+                      </div>
+                      <!-- Card body END -->
+                      <!-- Card footer START -->
+                      <div class="card-footer border-0 pt-0">
+                        <!-- Load more comments -->
+
+                          Reviewed on {{ review.date|date:"D, jS M, Y" }}
+                        
+        
+                        {% comment %} <a href="{% url 'feed:detail' post.id %}" role="link" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+                          <div class="spinner-dots me-2">
+                            <span class="spinner-dot"></span>
+                            <span class="spinner-dot"></span>
+                            <span class="spinner-dot"></span>
+                          </div>
+                          Load more comments 
+                        </a> {% endcomment %}
+                      </div>
+                      <!-- Card footer END -->
+                    </div>
+                    <!-- Card feed item END -->
+        
+           
+
+                     
+
+

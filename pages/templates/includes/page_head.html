@@ -21,7 +21,7 @@
             <div class="ms-sm-4 mt-sm-3">
               <!-- Info -->
               <h1 class="mb-0 h5">{{ page.page_name }} <i class="bi bi-patch-check-fill text-success small"></i></h1>
-              <p>{% autoescape off %}{% avg_rating page.id %}{% endautoescape %} from {% review_count page.id %} reviews</p>
+              <p>{% avg_rating page.id %} {% autoescape off %}{% avg_stars page.id %}{% endautoescape %} ({% review_count page.id %})</p>
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">
@@ -69,22 +69,24 @@
             </div>
           </div>
           <!-- List profile -->
+         <div id="page_menu">
           <ul class="list-inline mb-0 text-center text-sm-start mt-3 mt-sm-0">
             <li class="list-inline-item"><i class="bi bi-briefcase me-1"></i> {{ page.page_type }}</li>
             <li class="list-inline-item"><i class="bi bi-geo-alt me-1"></i> {{ page.town_city }}, {{page.county}}</li>
             <li class="list-inline-item"><i class="bi bi-calendar2-plus me-1"></i> Joined on {{ page.page_created|date:"d M Y" }}</li>
           </ul>
         </div>
+        </div>
         <!-- Card body END -->
         <div class="card-footer mt-3 pt-2 pb-0">
           <!-- Nav profile pages -->
           <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
-            <li class="nav-item"> <a class="nav-link {{ feed_active }}" href="{% url 'pages:page_feed' page.slug %}">&nbsp Feed </a> </li>
-            <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.slug %}"> About </a> </li>
-            <li class="nav-item"> <a class="nav-link {{ gallery_active }}" href="#"> Gallery</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="my-profile-events.html"> Events</a> </li>
-            <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.slug %}"> Reviews</a> </li>
+            <li class="nav-item"> <a class="nav-link {{ feed_active }}" href="{% url 'pages:page_feed' page.slug %}#page_menu">&nbsp Feed </a> </li>
+            <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.slug %}#page_menu"> About </a> </li>
+            <li class="nav-item"> <a class="nav-link {{ gallery_active }}" href="#page_menu"> Gallery</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#page_menu"> Events</a> </li>
+            <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.slug %}#page_menu"> Reviews</a> </li>
           </ul>
-        </div>
+      </div>
       </div>
       <!-- Card END -->

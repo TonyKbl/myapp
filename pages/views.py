@@ -77,7 +77,7 @@ class PageFeedView(LoginRequiredMixin, DetailView):
         return context
 
 
-class PageReviewsView(LoginRequiredMixin, DetailView): 
+class PageReviewsView(DetailView): 
     http_method_names = ["get"]
     template_name = "pages/reviews.html"
     model = Page
