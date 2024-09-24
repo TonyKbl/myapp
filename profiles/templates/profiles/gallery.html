@@ -37,7 +37,7 @@
         <div class="col-6 col-sm-6 col-md-4 col-lg-3">
           <!-- Photo -->
             {% thumbnail image.image "600x600" crop="center"  as im %}
-                <a href="https://clubs4fun.s3.amazonaws.com/static/{{ image.image }}" data-gallery="image-popup">
+                <a href="https://clubs4fun.s3.amazonaws.com/static/{{ image.image }}" data-gallery="image-popup" data-glightbox="description: .custom-desc2; descPosition: left;">
                     <img class="rounded img-fluid" src="{{ im.url }}" alt="">
                 </a>
             {% endthumbnail %}
