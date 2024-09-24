@@ -6,6 +6,9 @@ from profiles.models import Profile
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from profanity.validators import validate_is_profane
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
 
 class Page(models.Model):
     def custom_user():
@@ -106,4 +109,32 @@ class ClaimPage(models.Model):
 
     def __str__(self):
         return self.page_claimed.page_name
+    
+
+
+@receiver(post_save, sender=ClaimPage)
+def send_claim_email(sender, instance, **kwargs):
+    # obj_id = instance._id
+
+
+    message = """A claim has been made for - 
+    
+    Page - {pg_name}
+    Claimant - {claimant}
+    Email - {email}
+    Phone - {phone}
+    
+    Message
+    =======
+    {message}
+
+    """.format(
+        pg_name = instance.page_claimed.page_name,
+        claimant = instance.claimant,
+        email = instance.email,
+        phone = instance.phone,
+        message = instance.reason
+        )
+    
+    send_mail('New Page Claim', message, 'tonykbl@yahoo.co.uk', ['tonykbl@yahoo.co.uk'], fail_silently=False)
  
