@@ -62,7 +62,8 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     
     def get_success_url(self):
         slug = self.kwargs["slug"]
-        return reverse_lazy("pages:detail", kwargs={"slug": slug})
+        page_type = self.kwargs["page_type"]
+        return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
     
 
 class PageFeedView(LoginRequiredMixin, DetailView): 

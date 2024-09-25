@@ -33,6 +33,7 @@ class PageUpdateForm(forms.ModelForm):
             "town_city",
             "county",
             "post_code",
+            "region",
             "description",
         )
 

@@ -33,7 +33,7 @@
 												</div>
 												</div>
 												<div class="col">
-													<h6><a href="{% url 'pages:detail' y.page_type|urlencode y.slug %}" class="btn-link stretched-link text-reset fw-bold">{{y.page_name}}</a></h6>
+													<h6><a href="{% url 'pages:detail' y.page_type|slugify y.slug %}" class="btn-link stretched-link text-reset fw-bold">{{y.page_name}}</a></h6>
 													<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.page_type}}</a>
 													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.town_city}}, {{y.county}}, {{y.post_code}}</p>
 												</div>

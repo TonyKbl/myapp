@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django_resized import ResizedImageField
 from django.conf import settings
 from profiles.models import Profile
+from place_area.models import Region
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from profanity.validators import validate_is_profane
@@ -35,6 +36,8 @@ class Page(models.Model):
     town_city = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     county = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     post_code = models.CharField( max_length=10, null=False, blank=False, validators=[validate_is_profane])
+
+    region = models.ForeignKey(Region, null=True, blank=False, on_delete=models.SET_NULL)
 
     description = models.TextField( null=False, blank=False, validators=[validate_is_profane])
 

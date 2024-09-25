@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'profanity',
     'request',
 
+    'blog',
     'events',
     'feed',
     'friend',
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'notifications',
     'pages',
     'parties',
+    'place_area',
     'profiles',
 
     # This app must be the last app
@@ -248,7 +250,7 @@ ACCOUNT_USERNAME_BLACKLIST = (
     'page_follow',
     'edit_profile',
     'feed',
-    
+
 
 )
 
