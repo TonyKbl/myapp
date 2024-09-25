@@ -18,7 +18,7 @@
                             <!-- Info -->
                             <div>
                               <div class="nav nav-divider">
-                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'pages:detail' post.name.slug %}">{{ post.name }}</a></h6>
+                                  <h6 class="nav-item card-title mb-0"> <a class="fles items_center" href="{% url 'pages:detail' post.name.page_type post.name.slug %}">{{ post.name }}</a></h6>
                                 
                                 <span class="nav-item small"> {{post.date|timesince}} ago</span>
                               </div>
