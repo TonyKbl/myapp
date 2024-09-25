@@ -8,7 +8,7 @@
                             <!-- Avatar -->
                             <div class="avatar avatar-story me-2">
                                 {% thumbnail post.name.image "100x100" crop="center" as im %}
-                                  <a class="fles items_center" href="{% url 'pages:detail' post.name.slug %}">
+                                  <a class="fles items_center" href="{% url 'pages:detail' post.name.page_type post.name.slug %}">
                                     <img class="avatar-img rounded-circle" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="">
                                   </a>
                                 {% endthumbnail %}
@@ -17,7 +17,7 @@
                             <!-- Info -->
                             <div>
                               <div class="nav nav-divider">
-                                  <h6 class="nav-item card-title mb-0"> <a class="flex items_center" href="{% url 'pages:detail' post.name.slug %}">{{ post.name }}</a></h6>
+                                  <h6 class="nav-item card-title mb-0"> <a class="flex items_center" href="{% url 'pages:detail' post.name.page_type post.name.slug %}">{{ post.name }}</a></h6>
                                 
                                 <span class="nav-item small"> {{post.date|timesince}} ago </span>
                               </div>

@@ -292,9 +292,9 @@
                       </div>
                       <!-- Card body END -->
                       <!-- Card footer START -->
+                        {% comment %} 
                       <div class="card-footer border-0 pt-0">
-                        <!-- Load more comments -->
-                        {% comment %} <a href="{% url 'feed:detail' post.post_type post.id %}" role="link" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" aria-pressed="true">
+                        <!-- Load more comments --><a href="{% url 'feed:detail' post.post_type post.id %}" role="link" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" aria-pressed="true">
         
                           Load more comments 
                         </a> {% endcomment %}
@@ -306,8 +306,8 @@
                             <span class="spinner-dot"></span>
                           </div>
                           Load more comments 
-                        </a> {% endcomment %}
-                      </div>
+                        </a>
+                      </div> {% endcomment %}
                       <!-- Card footer END -->
                     </div>
                     <!-- Card feed item END -->

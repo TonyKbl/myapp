@@ -82,7 +82,7 @@
           <!-- Nav profile pages -->
           <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
             <li class="nav-item"> <a class="nav-link {{ feed_active }}" href="{% url 'pages:page_feed' page.slug %}#page_menu">&nbsp Feed </a> </li>
-            <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.slug %}#page_menu"> About </a> </li>
+            <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.page_type|urlencode page.slug %}#page_menu"> About </a> </li>
             <li class="nav-item"> <a class="nav-link {{ gallery_active }}" href="#page_menu"> Gallery</a> </li>
             <li class="nav-item"> <a class="nav-link" href="#page_menu"> Events</a> </li>
             <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.slug %}#page_menu"> Reviews</a> </li>
