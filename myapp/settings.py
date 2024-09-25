@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'formtools',
     'profanity',
     'request',
-
+    
     'blog',
     'events',
     'feed',
