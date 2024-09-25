@@ -20,6 +20,8 @@ class Blog(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
     title = models.CharField(max_length=255, blank=False, null=False)
     article = models.TextField(blank=False, null=False)
+    headerImage = ResizedImageField(size=[600, 200], upload_to='blog_headers', max_length=200, null=True, blank=True)
+
     tags = models.ManyToManyField(Tags, blank=True)
 
     def __str__(self):
