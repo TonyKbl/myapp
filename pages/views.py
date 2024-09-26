@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.http import HttpRequest, request
 
 from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
 from feed.models import PagePost
@@ -23,7 +24,32 @@ class PageListView(ListView):
     template_name = "pages/list.html"
     model = Page
     context_object_name = "pages"
-    queryset = Page.objects.all().order_by('county')
+   
+    
+    def get_queryset(self):
+        # ord = self.kwargs['ord']
+        ord = self.request.GET.get('ord')
+        if ord == 'county':
+            queryset = Page.objects.all().order_by('county', 'page_name')
+        elif ord == 'region':             
+            queryset = Page.objects.all().order_by('region', 'page_name')
+        else:
+            queryset = Page.objects.all().order_by('page_name')
+                
+        
+        order = {"ord": ord}
+        return (queryset)
+
+
+        
+
+    # def load_d(self):
+    #     r = webapp2.get_request()
+
+    #     self.d['title'] = r.get('title')
+    #     self.d['author'] = r.get('author')
+
+
 
 
 class PageDetailView(DetailView):

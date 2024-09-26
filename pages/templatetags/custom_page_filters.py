@@ -1,9 +1,20 @@
 from django import template
 from django.db.models import Avg, Count
 from ..models import PageFollow, PageReviews, PageHost
-from django.http import HttpResponse
+from django.http import HttpResponse, request
+from urllib.parse import urlencode
 
 register = template.Library()
+
+# @register.simple_tag
+# def order(*_, **kwargs):
+    
+#     ord = request('ord')
+#     safe_args = ord
+#     print(safe_args)
+#     if safe_args:
+#         return '?{}'.format(urlencode(safe_args))
+#     return ''
 
 @register.filter
 def is_page_host(target_user, target_page):
