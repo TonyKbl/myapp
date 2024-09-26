@@ -16,9 +16,9 @@
 
 							<div class="card mb-0">
 						{% for message in message %}
-										<div class="card-body border-start border-danger border-3 ms-0">
-											<div class="row position-relative border-bottom border-secondary border-1 mb-3 ms-0 ps-3">
-												<div class="col-3">
+										<div class="card-body border-start border-danger border-3 ms-0 mb-3 ">
+											<div class="row position-relative border-bottom border-secondary border-1 ms-0 ps-3">
+												<div class="col-md-auto">
 												<!-- Blog image -->
 													<div class="avatar avatar-xl">
 														{% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
