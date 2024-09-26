@@ -17,14 +17,14 @@
 							<div class="card mb-0">
 										<div class="card-body">
 						{% for message in message %}
-											<div class="row position-relative border-left border-primary border-2">
+											<div class="row position-relative border border-left border-primary border-2">
 												<div class="col-3">
 												<!-- Blog image -->
-												<div class="avatar avatar-xl">
-													{% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
-														<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
-													{% endthumbnail %}
-												</div>
+													<div class="avatar avatar-xl">
+														{% thumbnail message.msg_from.profile.image "100x100" crop="center" as im %}
+															<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+														{% endthumbnail %}
+													</div>
 												</div>
 												<div class="col">
 													<h6><a href="{% url 'messaging:message' message.msg_from_id %}" class="btn-link stretched-link text-reset fw-bold">{{message.msg_from.profile.display_name}}</a></h6>
