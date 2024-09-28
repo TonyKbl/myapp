@@ -121,7 +121,7 @@ class PageFeedView(DetailView):
     # context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
-        per_page = int(1)
+        per_page = int(6)
         item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
         if self.request.GET.get('pg'):
             page_num = int(self.request.GET.get('pg', 1))
