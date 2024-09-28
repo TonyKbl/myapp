@@ -14,6 +14,9 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create a new profile when a new user joins"""
     if created:
         Profile.objects.create(user=instance)
+        UserLevel.objects.create(user=instance)
+        LookingFor.objects.create(user=instance)
+        
 
 # Create your models here.
 class Profile(models.Model):
@@ -22,6 +25,7 @@ class Profile(models.Model):
       on_delete=models.CASCADE,
       related_name = "profile"
     )
+
 
         # Height Option
 
@@ -302,6 +306,23 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
     
+
+class Level(models.Model):
+    level = models.IntegerField(null=True, blank=False)
+    level_name = models.CharField(max_length=50, null=True, blank=False)
+
+    def __str__(self):
+        return self.level_name
+    
+
+class UserLevel(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='level')
+    level = models.OneToOneField(Level, on_delete=models.DO_NOTHING, null=False, blank=False, default=10)
+
+    def __str__(self):
+        return self.user.username
+
+
 class Follow(models.Model):
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
@@ -311,13 +332,32 @@ class Follow(models.Model):
         unique_together = ('follower', 'following')
 
     
-# class MyImage(models.Model):
-#      photo = models.ImageField(upload_to="profile_gallery", verbose_name=("Image"))
-#      creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=False, blank=False, verbose_name=('Creator'), on_delete=models.CASCADE)
-#      creation_time = models.DateTimeField(auto_now_add=True, blank=False)
+class LookingFor(models.Model):
+    user = models.OneToOneField(User, models.CASCADE)
+    age_min = models.IntegerField(null=False, blank=False, default=18)
+    age_max = models.IntegerField(null=False, blank=False, default=99)
+    men = models.BooleanField(null=False, blank=False)
+    women = models.BooleanField(null=False, blank=False, default=1)
+    mf_couple = models.BooleanField(null=False, blank=False, default=1)
+    ff_couple = models.BooleanField(null=False, blank=False, default=1)
+    cd_tv = models.BooleanField(null=False, blank=False)
+    tg_ts = models.BooleanField(null=False, blank=False)
+    smokers = models.BooleanField(null=False, blank=False)
+    can_travel = models.BooleanField(null=False, blank=False)
+    can_accom = models.BooleanField(null=False, blank=False)
 
-#      @classmethod
-#      def get_image_field(cls):
-#          return cls._meta.get_field("photo")
+    def __str__(self):
+        return self.user.username
+    
+
+class BlockedList(models.Model):
+    blocker = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocker')
+    blocked =models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocked')
+
+    class Meta:
+        unique_together = ('blocker', 'blocked')
+
+    def __str__(self):
+        return self.blocker.username
 
 

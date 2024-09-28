@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.http import HttpRequest, request
+from django.core.paginator import Paginator
 
 from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
 from feed.models import PagePost
@@ -92,16 +93,85 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
     
 
-class PageFeedView(LoginRequiredMixin, DetailView): 
+# class PageFeedView(LoginRequiredMixin, DetailView): 
+#     http_method_names = ["get"]
+#     template_name = "pages/feed.html"
+#     model = Page
+#     context_object_name = "[page]"
+
+    # def get_object(self, queryset=None):
+    #     obj = Page.objects.get(slug=self.kwargs.get('slug'))
+    #     return obj
+
+    # def get_queryset(self, *args, **kwargs):
+    #     qs = PagePost.objects.filter(slug__name=self.kwargs['slug']).order_by('-date')
+    #     print(qs)
+    #     return qs
+
+
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(PageFeedView, self).get_context_data(*args, **kwargs)
+    #     context = Page.objects.filter(slug=self.kwargs['slug'])
+    #     print(context)
+    #     return context
+class PageFeedView(DetailView):
     http_method_names = ["get"]
     template_name = "pages/feed.html"
     model = Page
-    context_object_name = "page"
+    # context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
+        per_page = int(1)
+        item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
+        if self.request.GET.get('pg'):
+            page_num = int(self.request.GET.get('pg', 1))
+        else:
+            page_num = 1
+        start = page_num*per_page-per_page+1
+        end = start+per_page
+        print(item_cnt, page_num, start, end)
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
-        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')
+        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start:end]
+        context['total_pages'] = str(int(item_cnt/per_page)-1)
+        context['page_num'] = str(page_num)
+        context['prev'] = str(page_num-1)
+        context['next'] = str(page_num+1)
+        print(context)
         return context
+    
+    # http_method_names = ["get"]
+    # template_name = "pages/detail.html"
+    # model = Page
+    # context_object_name = "page"
+    
+    # http_method_names = ["get"]
+    # template_name = "pages/feed.html"
+    # model = Page
+    # slug_field = 'slug'
+    # slug_url_kwarg = 'slug'
+    # context_object_name = 'page'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     page = kwargs.get('object')
+    #     page_num = self.request.GET.get('page', 1)
+    #     results = page.pagepost.all()
+    #     paginator = Paginator(results, per_page=15)
+    #     context['page_feed'] = paginator.get_page(page_num)
+    #     return context
+
+#### START OF COOD CODE #####
+
+# class PageFeedView(LoginRequiredMixin, DetailView):
+#     http_method_names = ["get"]
+#     template_name = "pages/feed.html"
+#     model = Page
+#     context_object_name = "page"
+
+#     def get_context_data(self, *args, **kwargs):
+#         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
+#         context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')
+#         return context
 
 
 class PageReviewsView(DetailView): 

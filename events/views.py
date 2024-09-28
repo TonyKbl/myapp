@@ -12,6 +12,7 @@ from .forms import EventCreateForm, EventAddDatesForm
 # Create your views here.
 
 class EventsList(ListView):
+    paginate_by = 1
     html_method_names = ["get"]
     template_name = "events/date_list.html"
     models = EventDate

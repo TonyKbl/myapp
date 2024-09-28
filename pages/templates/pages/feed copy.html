@@ -6,7 +6,7 @@
 
 {% block content %}
 {% include 'includes/page_head.html' with feed_active="active" %}
-					{% comment %} 
+{% comment %} 
 					<!-- Share feed START -->
 					<div class="card card-body">
 						<div class="d-flex mb-3">
@@ -48,10 +48,7 @@
 						</ul>
 						<!-- Share feed toolbar END -->
 					</div>
-					<!-- Share feed END -->{% endcomment %}
-{% comment %} {% for num in total_pages %}
-{{num}}
-{%endfor%} {% endcomment %}
+					<!-- Share feed END --> {% endcomment %}
 
 					<div id="posts-container">
 						{% for post in page_posts %}
@@ -62,17 +59,17 @@
 
 					<div class="row mx-1 mx-md-4">
 						<div class="col-4 text-start">
-						  {% if page_num > '1' %}
+						  {% if page_obj.has_previous %}
 							  {% comment %} <a class="btn btn-small" href="?page=1">&laquo; first</a> {% endcomment %}
-							  <a class="btn btn-small" href="?pg={{ prev }}">previous</a>
+							  <a class="btn btn-small" href="?page={{ page_obj.previous_page_number }}">previous</a>
 						  {% endif %}
 						</div>      
 						<div class="col-4 text-center text-middle my-auto">
-							  Page {{ page_num }} of {{ total_pages }}.
+							  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
 						</div>      
 						<div class="col-4 text-end ">
-						  {% if page_num < total_pages %}
-							  <a class="btn btn-small" href="?pg={{ next }}">next</a>
+						  {% if page_obj.has_next %}
+							  <a class="btn btn-small" href="?page={{ page_obj.next_page_number }}">next</a>
 							  {% comment %} <a class="btn btn-small" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> {% endcomment %}
 						  {% endif %}
 						</div>

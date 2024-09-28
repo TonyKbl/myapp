@@ -34,7 +34,7 @@
 													<h6><a href="{% url 'messaging:message' message.msg_from_id %}" class="btn-link stretched-link text-reset fw-bold">{{message.msg_from.profile.display_name}}</a></h6>
 													
 													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{ message.msg_from.profile.profile_type}} - {{ message.msg_from.profile.age}} - {{ message.msg_from.profile.location}}</p>
-													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{ message.message}}</p>
+													<p class="small text-secondary mb-2 me-1"> {{ message.message}}</p>
 												</div>
 											</div>
 										</div>

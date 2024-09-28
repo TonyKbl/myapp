@@ -64,6 +64,7 @@ class Page(models.Model):
     def __str__(self):
         return self.page_name
     
+    
 class PageFollow(models.Model):
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='page_following')
     following = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='page_followers')

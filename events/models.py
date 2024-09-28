@@ -26,7 +26,7 @@ class Event(models.Model):
     title = models.CharField(max_length=250, blank=False, null=False)
 
     description = models.TextField(blank=False, null=False)
-    host_list = models.ManyToManyField(PageHost, max_length=100, blank=True, null=True)    
+    host_list = models.ManyToManyField(PageHost, max_length=100, blank=True)    
     image = ResizedImageField(blank=True, null=True, size=[900, 900], quality=70, upload_to=upload_dir, max_length=200)
        
     def __str__(self):
