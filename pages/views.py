@@ -132,7 +132,7 @@ class PageFeedView(DetailView):
         print(item_cnt, page_num, start, end)
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
         context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start:end]
-        context['total_pages'] = str(int(item_cnt/per_page)-1)
+        context['total_pages'] = str(int(item_cnt/per_page))
         context['page_num'] = str(page_num)
         context['prev'] = str(page_num-1)
         context['next'] = str(page_num+1)
