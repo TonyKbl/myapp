@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.http import HttpRequest, request
+from django.http import HttpRequest, request, Http404
 from django.core.paginator import Paginator
 
 from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
@@ -137,13 +137,18 @@ class PageFeedView(LoginRequiredMixin, DetailView):
                 print("Page data:", page_number, start_index, end_index)
                 
             else:
-                page_number = 1
-                start_index = (page_number - 1) * page_size
-                end_index = page_number * page_size
-                print("Invalid page number. Please enter a valid page number.")
+                raise Http404
+                # page_number = 1
+                # start_index = (page_number - 1) * page_size
+                # end_index = page_number * page_size
+                # print("Invalid page number. Please enter a valid page number.")
+                # context['no_results'] = True
+                # return context
+                
         
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
+            raise Http404
 
 
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
