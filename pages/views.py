@@ -114,7 +114,7 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     #     context = Page.objects.filter(slug=self.kwargs['slug'])
     #     print(context)
     #     return context
-class PageFeedView(DetailView):
+class PageFeedView(LoginRequiredMixin, DetailView):
     http_method_names = ["get"]
     template_name = "pages/feed.html"
     model = Page
@@ -122,7 +122,7 @@ class PageFeedView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         # per_page = int(6)
-        page_size = int(3)
+        page_size = 3
         item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
         # item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
         total_pages = (item_cnt + page_size - 1) // page_size
@@ -130,27 +130,22 @@ class PageFeedView(DetailView):
         try:
             page_number = int(self.request.GET.get('pg', 1))
                         
-            # if 1 <= page_number <= total_pages:
-            start_index = (page_number - 1) * page_size
-            end_index = page_number * page_size
-            # page_data = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start_index:end_index]
-            print("Page data:", page_number, start_index, end_index)
+            if 1 <= page_number <= total_pages:
+                start_index = (page_number - 1) * page_size
+                end_index = page_number * page_size
+                # page_data = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start_index:end_index]
+                print("Page data:", page_number, start_index, end_index)
                 
-            # else:
-            print("Invalid page number. Please enter a valid page number.")
+            else:
+                page_number = 1
+                start_index = (page_number - 1) * page_size
+                end_index = page_number * page_size
+                print("Invalid page number. Please enter a valid page number.")
         
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
 
 
-
-        # if self.request.GET.get('pg'):
-        #     page_num = int(self.request.GET.get('pg', 1))
-        # else:
-        #     page_num = 1
-        # start = page_num*per_page-per_page+1
-        # end = start+per_page
-        # print(item_cnt, page_num, start, end)
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
         context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start_index:end_index]
         context['total_pages'] = str(total_pages)
