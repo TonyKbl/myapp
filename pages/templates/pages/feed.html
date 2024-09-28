@@ -62,16 +62,16 @@
 
 					<div class="row mx-1 mx-md-4">
 						<div class="col-4 text-start">
-						  {% if page_num > '1' %}
+						  {% if page_number > '1' %}
 							  {% comment %} <a class="btn btn-small" href="?page=1">&laquo; first</a> {% endcomment %}
 							  <a class="btn btn-small" href="?pg={{ prev }}">previous</a>
 						  {% endif %}
 						</div>      
 						<div class="col-4 text-center text-middle my-auto">
-							  Page {{ page_num }} of {{ total_pages }}.
+							  Page {{ page_number }} of {{ total_pages }}.
 						</div>      
 						<div class="col-4 text-end ">
-						  {% if page_num < total_pages %}
+						  {% if page_number < total_pages %}
 							  <a class="btn btn-small" href="?pg={{ next }}">next</a>
 							  {% comment %} <a class="btn btn-small" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> {% endcomment %}
 						  {% endif %}

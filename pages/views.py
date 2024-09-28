@@ -121,21 +121,42 @@ class PageFeedView(DetailView):
     # context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
-        per_page = int(6)
+        # per_page = int(6)
+        page_size = int(3)
         item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
-        if self.request.GET.get('pg'):
-            page_num = int(self.request.GET.get('pg', 1))
-        else:
-            page_num = 1
-        start = page_num*per_page-per_page+1
-        end = start+per_page
-        print(item_cnt, page_num, start, end)
+        # item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
+        total_pages = (item_cnt + page_size - 1) // page_size
+
+        try:
+            page_number = int(self.request.GET.get('pg', 1))
+                        
+            # if 1 <= page_number <= total_pages:
+            start_index = (page_number - 1) * page_size
+            end_index = page_number * page_size
+            # page_data = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start_index:end_index]
+            print("Page data:", page_number, start_index, end_index)
+                
+            # else:
+            print("Invalid page number. Please enter a valid page number.")
+        
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+
+
+
+        # if self.request.GET.get('pg'):
+        #     page_num = int(self.request.GET.get('pg', 1))
+        # else:
+        #     page_num = 1
+        # start = page_num*per_page-per_page+1
+        # end = start+per_page
+        # print(item_cnt, page_num, start, end)
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
-        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start:end]
-        context['total_pages'] = str(int(item_cnt/per_page))
-        context['page_num'] = str(page_num)
-        context['prev'] = str(page_num-1)
-        context['next'] = str(page_num+1)
+        context['page_posts'] = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start_index:end_index]
+        context['total_pages'] = str(total_pages)
+        context['page_number'] = str(page_number)
+        context['prev'] = str(page_number-1)
+        context['next'] = str(page_number+1)
         print(context)
         return context
     
