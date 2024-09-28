@@ -7,7 +7,7 @@ from django_resized import ResizedImageField
 from profanity.validators import validate_is_profane
 # from sorl.thumbnail import ImageField
 
-
+# TODO HELLO
 # Create your models here.
 class Message(models.Model):
     msg_from = models.ForeignKey(

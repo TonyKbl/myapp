@@ -23,6 +23,7 @@ class Home(ListView):
 
 
 class HomePage(LoginRequiredMixin, ListView):
+    paginate_by = 15
     html_method_names = ["get"]
     template_name = "feed/homepage.html"
     models = User, Post, PagePost, Page, Profile

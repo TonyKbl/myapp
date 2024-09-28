@@ -56,7 +56,24 @@
 						{% include 'includes/post.html' %}
 						{% endfor%}
 					</div>
-             
+					<div class="row mx-1 mx-md-4">
+						<div class="col-4 text-start">
+						  {% if page_obj.has_previous %}
+							  {% comment %} <a class="btn btn-small" href="?page=1">&laquo; first</a> {% endcomment %}
+							  <a class="btn btn-small" href="?page={{ page_obj.previous_page_number }}">previous</a>
+						  {% endif %}
+						</div>      
+						<div class="col-4 text-center text-middle my-auto">
+							  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+						</div>      
+						<div class="col-4 text-end ">
+						  {% if page_obj.has_next %}
+							  <a class="btn btn-small" href="?page={{ page_obj.next_page_number }}">next</a>
+							  {% comment %} <a class="btn btn-small" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> {% endcomment %}
+						  {% endif %}
+						</div>
+					</div>
+		  
 					<!-- Load more button START -->
 					{% comment %} <a href="#!" role="button" class="btn btn-loader btn-primary-soft" data-bs-toggle="button" aria-pressed="true">
 						<span class="load-text"> Load more </span>

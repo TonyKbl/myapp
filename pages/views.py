@@ -16,7 +16,6 @@ from django.core.paginator import Paginator
 from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
 from feed.models import PagePost
 from profiles.models import Profile
-# from gallery.models import PageGallery
 from .forms import PageUpdateForm, PageCreateForm, PageReviewForm, PageClaimForm, PageAddHostForm
 
 
@@ -40,17 +39,6 @@ class PageListView(ListView):
         
         order = {"ord": ord}
         return (queryset)
-
-
-        
-
-    # def load_d(self):
-    #     r = webapp2.get_request()
-
-    #     self.d['title'] = r.get('title')
-    #     self.d['author'] = r.get('author')
-
-
 
 
 class PageDetailView(DetailView):
@@ -93,38 +81,14 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
     
 
-# class PageFeedView(LoginRequiredMixin, DetailView): 
-#     http_method_names = ["get"]
-#     template_name = "pages/feed.html"
-#     model = Page
-#     context_object_name = "[page]"
-
-    # def get_object(self, queryset=None):
-    #     obj = Page.objects.get(slug=self.kwargs.get('slug'))
-    #     return obj
-
-    # def get_queryset(self, *args, **kwargs):
-    #     qs = PagePost.objects.filter(slug__name=self.kwargs['slug']).order_by('-date')
-    #     print(qs)
-    #     return qs
-
-
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(PageFeedView, self).get_context_data(*args, **kwargs)
-    #     context = Page.objects.filter(slug=self.kwargs['slug'])
-    #     print(context)
-    #     return context
 class PageFeedView(LoginRequiredMixin, DetailView):
     http_method_names = ["get"]
     template_name = "pages/feed.html"
     model = Page
-    # context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
-        # per_page = int(6)
-        page_size = 3
+        page_size = 15
         item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
-        # item_cnt = PagePost.objects.filter(name__slug=self.kwargs['slug']).count()
         total_pages = (item_cnt + page_size - 1) // page_size
 
         try:
@@ -133,18 +97,9 @@ class PageFeedView(LoginRequiredMixin, DetailView):
             if 1 <= page_number <= total_pages:
                 start_index = (page_number - 1) * page_size
                 end_index = page_number * page_size
-                # page_data = PagePost.objects.filter(name__slug=self.kwargs['slug']).order_by('-date')[start_index:end_index]
-                print("Page data:", page_number, start_index, end_index)
                 
             else:
                 raise Http404
-                # page_number = 1
-                # start_index = (page_number - 1) * page_size
-                # end_index = page_number * page_size
-                # print("Invalid page number. Please enter a valid page number.")
-                # context['no_results'] = True
-                # return context
-                
         
         except ValueError:
             print("Invalid input. Please enter a valid integer.")
@@ -160,26 +115,7 @@ class PageFeedView(LoginRequiredMixin, DetailView):
         print(context)
         return context
     
-    # http_method_names = ["get"]
-    # template_name = "pages/detail.html"
-    # model = Page
-    # context_object_name = "page"
-    
-    # http_method_names = ["get"]
-    # template_name = "pages/feed.html"
-    # model = Page
-    # slug_field = 'slug'
-    # slug_url_kwarg = 'slug'
-    # context_object_name = 'page'
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     page = kwargs.get('object')
-    #     page_num = self.request.GET.get('page', 1)
-    #     results = page.pagepost.all()
-    #     paginator = Paginator(results, per_page=15)
-    #     context['page_feed'] = paginator.get_page(page_num)
-    #     return context
+  
 
 #### START OF COOD CODE #####
 
