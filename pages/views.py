@@ -33,8 +33,11 @@ class PageListView(ListView):
             queryset = Page.objects.all().order_by('county', 'page_name')
         elif ord == 'region':             
             queryset = Page.objects.all().order_by('region', 'page_name')
+        elif ord == 'rating':
+            queryset = Page.objects.all().order_by(PageReviews.page_name.Avg('rating'))
         else:
             queryset = Page.objects.all().order_by('page_name')
+        return self.Avg('rating')
                 
         
         order = {"ord": ord}
@@ -112,7 +115,6 @@ class PageFeedView(LoginRequiredMixin, DetailView):
         context['page_number'] = str(page_number)
         context['prev'] = str(page_number-1)
         context['next'] = str(page_number+1)
-        print(context)
         return context
     
   

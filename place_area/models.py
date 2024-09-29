@@ -10,3 +10,12 @@ class Region(models.Model):
 
     def __str__(self):
         return self.region_name
+    
+
+class OuterPostCode(models.Model):
+    outer_pc=models.TextField(max_length=10)
+    lat=models.FloatField()
+    lon=models.FloatField()
+
+    def __str__(self):
+        return self.postcode

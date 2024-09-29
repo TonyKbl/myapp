@@ -36,18 +36,23 @@ class Page(models.Model):
     town_city = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     county = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     post_code = models.CharField( max_length=10, null=False, blank=False, validators=[validate_is_profane])
+    lat=models.FloatField(null=True)
+    lon=models.FloatField(null=True)
 
     region = models.ForeignKey(Region, null=True, blank=False, on_delete=models.SET_NULL)
 
     description = models.TextField( null=False, blank=False, validators=[validate_is_profane])
 
     phone_number = models.CharField( max_length=10, null=True, blank=True)
+    show_phone_button = models.BooleanField(default=1)
+    email = models.EmailField(max_length=255)
+    show_email_button = models.BooleanField(default=1)
 
-    website = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
-    facebook = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
-    x_twitter = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
-    insta = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
-    tiktok = models.CharField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    website = models.URLField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    facebook = models.URLField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    x_twitter = models.URLField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    insta = models.URLField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
+    tiktok = models.URLField( max_length=255, null=True, blank=True, validators=[validate_is_profane])
         
     slug = models.SlugField(default="", null=False, unique=True)
     page_created = models.DateField(auto_now_add=True)
@@ -107,7 +112,7 @@ class ClaimPage(models.Model):
     claimant = models.ForeignKey(User, on_delete=models.CASCADE, related_name='claimant')
     page_claimed = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='claimed_page')
     name = models.CharField(max_length=255, blank=False)
-    email = models.EmailField(blank=False)
+    email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True)
     reason = models.TextField(blank=False, verbose_name='Reason for your claim')
 

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'gunicorn',
+    'django_extensions',
 
     'allauth',
     'allauth.account',
