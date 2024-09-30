@@ -36,11 +36,9 @@ class PageListView(ListView):
         elif ord == 'rating':
             queryset = Page.objects.all().order_by(PageReviews.page_name.Avg('rating'))
         else:
-            queryset = Page.objects.all().order_by('page_name')
-        return self.Avg('rating')
-                
+            queryset = Page.objects.all().order_by('page_name')                
         
-        order = {"ord": ord}
+        # order = {"ord": ord}
         return (queryset)
 
 

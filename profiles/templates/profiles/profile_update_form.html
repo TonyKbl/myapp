@@ -16,7 +16,7 @@
                     <!-- Card header END -->
                     <!-- Card body START -->
                     <div class="card-body">
-                        <div class="form_group">
+                        <div class="form_group" id="profile_form">
                             <form class="form-with-validation" method="post" >
                                 {% csrf_token %}
                                 {{ form|crispy }}
@@ -31,7 +31,9 @@
 {% block scripts %}
 
 <script>
-    $("#id_outer_postcode").select2
+    $(document).ready(function() {
+    $("#id_outer_postcode").select2({dropdownParent: $('#div_id_outer_postcode')});
+});
 </script>
 
 {% endblock %}
