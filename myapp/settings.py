@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'gunicorn',
     'django_extensions',
+    'django_select2',
 
     'allauth',
     'allauth.account',
