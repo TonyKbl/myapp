@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
 from .models import Profile, Follow
+from place_area.models import OuterPostCode
 from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm
 from feed.models import Post
 from gallery.models import UserGallery
@@ -43,6 +44,31 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
         return obj
+    
+    def form_valid(self, form):
+        kwargs = super().get_form_kwargs()
+        location = OuterPostCode.objects.get(postcode=form.instance.outer_postcode)
+        form.instance.lat = location.lat
+        form.instance.lon = location.lon
+        return super().form_valid(form)
+    
+    # def get_form_kwargs(self):
+    #     # kwargs['postcode'] = OuterPostCode.objects.get(ProfileUpdateView=self.object).postcode
+    #     # kwargs['lat'] = OuterPostCode.objects.get(postcode=self.object.outer_postcode)
+    #     lat = self.kwargs['outer_postcode']
+    #     return lat
+    
+    # def get_object(self, *args, **kwargs):
+    #     # coords = OuterPostCode.objects.get(id=self.kwargs.get('outer_postcode'))
+    #     print(kwargs)
+    #     return True
+    
+    # def save(self, *args, **kwargs):
+    #     # Do the maths here to calculate lat/lon
+    #     # self.latitude = ... 
+    #     # self.longitude = ...
+    #     super(Profile, self).save(*args, **kwargs)
+    #     print(kwargs)
 
 
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):

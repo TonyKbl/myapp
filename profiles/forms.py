@@ -17,6 +17,9 @@ class ProfileUpdateForm(forms.ModelForm):
             "intro", 
             "description", 
             "location", 
+            "outer_postcode",
+            "lat",
+            "lon",
             "name",
             "DOB",
             "sexuality",
@@ -39,6 +42,9 @@ class ProfileUpdateForm(forms.ModelForm):
             'intro': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'outer_postcode': forms.Select(attrs={'class': 'form-control'}),
+            'lat': forms.HiddenInput(attrs={'class': 'form-control'}),
+            'lon': forms.HiddenInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'DOB': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'sexuality': forms.Select(attrs={'class': 'form-control'}),
@@ -57,6 +63,13 @@ class ProfileUpdateForm(forms.ModelForm):
 
         def __str__(self):
             return self.user
+        
+        # def form_valid(self, form):
+        #     form.instance.lat = 'tony'
+        #     form.instance.lon = 'keeble'
+        #     coords = super().form_valid(form)
+        #     print(coords)
+        #     return coords
         
 class ProfileCoverUpdateForm(forms.ModelForm):
     

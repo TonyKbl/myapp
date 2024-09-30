@@ -8,6 +8,7 @@ from datetime import date
 from django.utils import timezone
 from django.conf import settings
 from profanity.validators import validate_is_profane
+from place_area.models import OuterPostCode
 
 @receiver(post_save, sender=User)   
 def create_user_profile(sender, instance, created, **kwargs):
@@ -176,6 +177,11 @@ class Profile(models.Model):
     )
 
     location = models.CharField(max_length=25)
+    # outer_postcode = models.CharField(max_length=10, null=True, blank=False)
+    outer_postcode = models.ForeignKey(OuterPostCode, on_delete=models.CASCADE, blank=False, null=True)
+    lat = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True, blank=True)
+
     
     name = models.CharField(max_length=20)
     
@@ -303,9 +309,17 @@ class Profile(models.Model):
         )
         return age2
     
+    # def save(self, *args, **kwargs):
+    #     # Do the maths here to calculate lat/lon
+    #     # self.latitude = ... 
+    #     # self.longitude = ...
+    #     # super(Profile, self).save(*args, **kwargs)
+    #     lat = OuterPostCode.objects.get(OuterPostCode.outer_pc == Profile.outer_postcode)
+    #     lon = OuterPostCode.objects.get(OuterPostCode.outer_pc == Profile.outer_postcode)
+    #     print(lat, lon)   
+
     def __str__(self):
-        return self.user.username
-    
+        return self.user.username    
 
 class Level(models.Model):
     level = models.IntegerField(null=True, blank=False)

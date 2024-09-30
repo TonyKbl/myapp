@@ -6,15 +6,6 @@ from urllib.parse import urlencode
 
 register = template.Library()
 
-# @register.simple_tag
-# def order(*_, **kwargs):
-    
-#     ord = request('ord')
-#     safe_args = ord
-#     print(safe_args)
-#     if safe_args:
-#         return '?{}'.format(urlencode(safe_args))
-#     return ''
 
 @register.filter
 def is_page_host(target_user, target_page):

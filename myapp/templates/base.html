@@ -95,6 +95,8 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'vendor/flatpickr/dist/flatpickr.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'vendor/plyr/plyr.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'vendor/zuck.js/dist/zuck.min.css' %}">
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -525,13 +527,16 @@
 		<script src="{% static 'vendor/dropzone/dist/min/dropzone.min.js' %}"></script>
 		<script src="{% static 'vendor/zuck.js/dist/zuck.min.js' %}"></script>
 		{% comment %} <script src="{% static 'js/zuck-stories.js' %}"></script> {% endcomment %}
-
+		
 		<!-- jquery -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 		<!-- Theme Functions -->
 		<script src="{% static 'js/functions.js' %}"></script>
 		<script src="{% static 'js/additional.js' %}"></script>
+		{% block scripts %}
+
+		{% endblock %}
 
 
 	</body>
