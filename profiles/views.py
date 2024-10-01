@@ -28,6 +28,12 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
     # if(profile_page):
     #     pass
     
+class ProfileList(LoginRequiredMixin, ListView):   
+    http_method_names = ["get"]
+    model = Profile
+    template_name = "profiles/list.html"
+    context_object_name = "profiles"
+    queryset = Profile.objects.all().order_by('last_updated')
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile

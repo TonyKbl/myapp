@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load custom_page_filters %}
+
+{% block title %}Club Swing | Pages | Swinger Venues{% endblock title %}
+{% block description %}Swinger club list of swingers clubs in the United Kingdom, France and Spain {% endblock %}
+
+{% block content %}
+						<div class="card">
+							<!-- Card header START -->
+							<div class="card-body border-0">
+								<h5 class="card-title"> Pages</h5>
+								  <div class="dropdown">
+									<!-- Card share action menu -->
+									<button class="btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+									  Order By...
+									</button>
+									<!-- Card share action dropdown menu -->
+									<ul class="dropdown-menu" aria-labelledby="profileAction2">
+										<li><a class="dropdown-item" href="/pages.html">Page Type</a></li>
+										<li><a class="dropdown-item" href="/pages.html?ord=county">County</a></li>
+										<li><a class="dropdown-item" href="/pages.html?ord=region">Region</a></li>
+
+									  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
+									  <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
+									  <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
+									  <li><hr class="dropdown-divider"></li>
+									  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
+									</ul>
+								  </div>
+								
+							</div>
+							
+						</div>
+						{% comment %} {% for page in pages %} {% endcomment %}
+
+
+
+							<div class="card mb-0">
+									{% for y in profiles %}
+										<div class="card-body">
+											<div class="row position-relative">
+												<div class="col-auto">
+												<!-- Blog image -->
+												<div class="avatar avatar-xl">
+													{% thumbnail y.image "100x100" crop="center" as im %}
+														<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+													{% endthumbnail %}
+												</div>
+												</div>
+												<div class="col">
+													<h6><a href="{% url 'profiles:detail' y.user %}" class="btn-link stretched-link text-reset fw-bold">{{y.display_name}}</a></h6>
+													<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.page_type}}</a>
+													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.profile_type}}, {{y.secuality}},  {{y.location}}</p>
+													<p class="small text-secondary mb-2 me-1"> {{y.status}}</p>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+							</div>
+
+{% endblock %}
