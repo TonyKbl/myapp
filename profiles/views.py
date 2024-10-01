@@ -42,9 +42,8 @@ class ProfileList(LoginRequiredMixin, ListView):
         elif ord == 'updated':             
             queryset = Profile.objects.all().order_by('-last_updated')
         else:
-            queryset = Profile.objects.all().order_by('user')                
-        
-        # order = {"ord": ord}
+            queryset = Profile.objects.all().order_by('user')
+
         return (queryset)
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

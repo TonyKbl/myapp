@@ -20,13 +20,7 @@
 										<li><a class="dropdown-item" href="/search_user.html">User</a></li>
 										<li><a class="dropdown-item" href="/search_user.html?ord=new">Newest User</a></li>
 										<li><a class="dropdown-item" href="/search_user.html?ord=updated">Latest Update</a></li>
-
-									  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
-									  <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
-									  <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
-									  <li><hr class="dropdown-divider"></li>
-									  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
-									</ul>
+                                    </ul>
 								  </div>
 								
 							</div>
@@ -42,9 +36,9 @@
 											<div class="row position-relative">
 												<div class="col-auto">
 												<!-- Blog image -->
-												<div class="avatar avatar-xl">
+												<div class="avatar">
 													{% thumbnail y.image "100x100" crop="center" as im %}
-														<img class="rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+														<img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
 													{% endthumbnail %}
 												</div>
 												</div>
