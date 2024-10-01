@@ -33,7 +33,19 @@ class ProfileList(LoginRequiredMixin, ListView):
     model = Profile
     template_name = "profiles/list.html"
     context_object_name = "profiles"
-    queryset = Profile.objects.all().order_by('last_updated')
+
+    def get_queryset(self):
+        # ord = self.kwargs['ord']
+        ord = self.request.GET.get('ord')
+        if ord == 'new':
+            queryset = Profile.objects.all().order_by('-date_joined')
+        elif ord == 'updated':             
+            queryset = Profile.objects.all().order_by('-last_updated')
+        else:
+            queryset = Profile.objects.all().order_by('user')                
+        
+        # order = {"ord": ord}
+        return (queryset)
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
