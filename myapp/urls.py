@@ -25,6 +25,7 @@ from pages import urls as pages_urls
 from parties import urls as parties_urls
 from profiles import urls as profiles_urls
 from messaging import urls as messaging_urls
+from search import urls as search_urls
 from django.conf import settings
 from django.urls import re_path as url
 from django.shortcuts import render
@@ -44,6 +45,7 @@ urlpatterns = [
     path("", include(profiles_urls, namespace="profiles/")),
     path("", include(profiles_urls, namespace="edit_profile/")),
     path("", include(messaging_urls, namespace="messages/")),
+    path("", include(search_urls, namespace="search/")),
 
     url("", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

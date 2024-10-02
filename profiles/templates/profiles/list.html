@@ -43,14 +43,15 @@
 												</div>
 												</div>
 												<div class="col">
-													<h6><a href="{% url 'profiles:detail' y.user %}" class="btn-link stretched-link text-reset fw-bold">{{y.display_name}}</a></h6>
+                                                   	<h6><a href="{% url 'profiles:detail' y.user %}" class="btn-link stretched-link text-reset fw-bold">{{y.display_name}}</a></h6>
 													<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.page_type}}</a>
-													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.profile_type}}, {{y.secuality}},  {{y.location}}</p>
+													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.profile_type}},{{y.location}}</p>
 													<p class="small text-secondary mb-2 me-1"> {{y.status}}</p>
 												</div>
 											</div>
 										</div>
 									{% endfor %}
 							</div>
+
 
 {% endblock %}

@@ -63,7 +63,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         return obj
     
     def form_valid(self, form):
-        kwargs = super().get_form_kwargs()
+        # kwargs = super().get_form_kwargs()
         location = OuterPostCode.objects.get(postcode=form.instance.outer_postcode)
         form.instance.lat = location.lat
         form.instance.lon = location.lon

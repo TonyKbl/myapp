@@ -293,8 +293,8 @@ class Profile(models.Model):
     def age(self):
         today = timezone.now().date()
         age = int(
-            today.year
-            - (self.DOB.year)
+            today.year 
+            - (self.DOB.year) 
             - ((today.month, today.day) < (self.DOB.month, self.DOB.day))
         )
         return age 
@@ -308,18 +308,10 @@ class Profile(models.Model):
             - ((today.month, today.day) < (self.DOB2.month, self.DOB2.day))
         )
         return age2
-    
-    # def save(self, *args, **kwargs):
-    #     # Do the maths here to calculate lat/lon
-    #     # self.latitude = ... 
-    #     # self.longitude = ...
-    #     # super(Profile, self).save(*args, **kwargs)
-    #     lat = OuterPostCode.objects.get(OuterPostCode.outer_pc == Profile.outer_postcode)
-    #     lon = OuterPostCode.objects.get(OuterPostCode.outer_pc == Profile.outer_postcode)
-    #     print(lat, lon)   
 
     def __str__(self):
         return self.user.username    
+    
 
 class Level(models.Model):
     level = models.IntegerField(null=True, blank=False)
