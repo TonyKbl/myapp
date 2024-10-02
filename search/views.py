@@ -16,8 +16,8 @@ class SearchAll(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         # ord = self.kwargs['ord']
         q = self.request.GET.get('q')
-        context['profiles'] = Profile.objects.filter(display_name__contains=q).order_by('-date_joined')[:3]
-        context['pages'] = Page.objects.filter(page_name__contains=q).order_by('-page_updated')
+        context['profiles'] = Profile.objects.filter(display_name__icontains=q).order_by('-date_joined')[:3]
+        context['pages'] = Page.objects.filter(page_name__icontains=q).order_by('-page_updated')
 
         # elif q == 'updated':             
         #     queryset = Profile.objects.all().order_by('-last_updated')
