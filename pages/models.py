@@ -82,7 +82,7 @@ class PageFollow(models.Model):
         return self.follower.username
 
 class PageHost(models.Model):
-    host = models.ForeignKey(PageFollow, on_delete=models.CASCADE, related_name='host')
+    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='host')
     page_name = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='host_for')
 
     class Meta:
