@@ -170,6 +170,10 @@ class PageAddHostView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.page_name_id = self.kwargs.get('pk')
         return super(PageAddHostView, self).form_valid(form)
+    
+    def get_queryset(self):
+        qs = PageFollow.follower.filter(following=self.kwargs.get('pk'))
+        return qs
 
     def get_object(self):
        return self.request.user

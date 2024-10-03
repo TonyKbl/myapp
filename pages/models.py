@@ -78,9 +78,11 @@ class PageFollow(models.Model):
     class Meta:
         unique_together = ('follower', 'following')  
 
+    def __str__(self):
+        return self.follower.username
 
 class PageHost(models.Model):
-    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='host')
+    host = models.ForeignKey(PageFollow, on_delete=models.CASCADE, related_name='host')
     page_name = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='host_for')
 
     class Meta:

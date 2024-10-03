@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from itertools import chain
 from operator import attrgetter
@@ -39,6 +39,7 @@ class MessageInboxView(LoginRequiredMixin, ListView):
 
 class MessageView(LoginRequiredMixin, ListView):
     
+    
     http_method_names = ["get"]
     template_name = "messaging/message.html"
     model = Message, User, Profile
@@ -66,6 +67,7 @@ class MessageView(LoginRequiredMixin, ListView):
     
 
 class SendMessageView(LoginRequiredMixin, CreateView):
+    # permission_required = "messaging.can_add_message"
     template_name = "messaging/send.html"
     model = Message    
     form_class = MessageSendForm

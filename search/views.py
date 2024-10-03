@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from profiles.models import Profile
 from pages.models import Page
+from events.models import Event, EventDate
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import ListView, DetailView, CreateView
@@ -17,7 +18,8 @@ class SearchAll(LoginRequiredMixin, ListView):
         # ord = self.kwargs['ord']
         q = self.request.GET.get('q')
         context['profiles'] = Profile.objects.filter(display_name__icontains=q).order_by('-date_joined')[:3]
-        context['pages'] = Page.objects.filter(page_name__icontains=q).order_by('-page_updated')
+        context['pages'] = Page.objects.filter(page_name__icontains=q).order_by('-page_updated')[:3]
+        context['events'] = Event.objects.filter(title__icontains=q)[:3]
 
         # elif q == 'updated':             
         #     queryset = Profile.objects.all().order_by('-last_updated')
@@ -25,3 +27,4 @@ class SearchAll(LoginRequiredMixin, ListView):
         #     queryset = Profile.objects.all().order_by('user')
 
         return (context)
+    

@@ -27,13 +27,13 @@ class PageEventsList(ListView):
     # context_object_name = "events"
     # queryset = Events.objects.all().order_by('-id')[0:30]
     http_method_names = ["get"]
-    template_name = "events/date_list.html"
-    model = EventsList
-    context_object_name = "page"
+    template_name = "events/main_events.html"
+    model = Page
+    context_object_name = "event"
 
     def get_context_data(self, *args, **kwargs):
         context = super(PageEventsList, self).get_context_data(*args, **kwargs)
-        context['events'] = EventDate.objects.filter(event__id=self.kwargs['pk']).order_by('date')
+        context['event'] = Event.objects.filter(location__id=self.kwargs['pk']).order_by('id')
         return context
 
     # def get_context_data(self, *args, **kwargs):
@@ -86,7 +86,8 @@ class PageAddEventView(LoginRequiredMixin, CreateView):
         context = super(PageAddEventView, self).get_context_data(*args, **kwargs)
         context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
         return context
-    
+
+
 class AddEventDateView(LoginRequiredMixin, CreateView):
     models = EventDate
     form_class = EventAddDatesForm

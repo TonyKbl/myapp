@@ -8,7 +8,7 @@
 						<div class="card">
 							<!-- Card header START -->
 							<div class="card-body border-0">
-								<h5 class="card-title"> Pages</h5>								
+								<h5 class="card-title"> Search Results</h5>								
 							</div>
 							
 						</div>
@@ -39,6 +39,7 @@
 							</div>
 									{% endfor %}
 {%endif%}
+
 {% if pages %}
                                 {% for y in pages %}
                             <div class="card mb-0">
@@ -62,4 +63,33 @@
                         </div>
                                 {% endfor %}
 {% endif %}
+
+
+{% if events %}
+                                {% for y in events %}
+                            <div class="card mb-0">
+                                    <div class="card-body">
+                                        <div class="row position-relative">
+                                            <div class="col-auto">
+                                            <!-- Blog image -->
+                                            <div class="avatar">
+                                                {% thumbnail y.image "100x100" crop="center" as im %}
+                                                    <img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+                                                {% endthumbnail %}
+                                            </div>
+                                            </div>
+                                            <div class="col">
+                                                   {% comment %} <h6><a href="{% url 'events:detail' y.page_type|slugify y.slug %}" class="btn-link stretched-link text-reset fw-bold">{{y.page_name}}</a></h6> {% endcomment %}
+                                                <h6><a href="#" class="btn-link stretched-link text-reset fw-bold">{{y.title}}</a></h6>
+                                                <a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.page_type}}</a>
+                                                <p class="small text-secondary mb-2 me-1"> @{{y.organiser}}, {{y.location}}</p>
+                                                <p class="small text-secondary mb-2 me-1"> {{y.description|truncatewords:30}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
+                                {% endfor %}
+{% endif %}
+
+
 {% endblock %}

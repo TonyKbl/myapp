@@ -10,6 +10,8 @@ from django.conf import settings
 from profanity.validators import validate_is_profane
 from place_area.models import OuterPostCode
 
+from django.db.models.expressions import RawSQL
+
 @receiver(post_save, sender=User)   
 def create_user_profile(sender, instance, created, **kwargs):
     """Create a new profile when a new user joins"""
@@ -308,6 +310,35 @@ class Profile(models.Model):
             - ((today.month, today.day) < (self.DOB2.month, self.DOB2.day))
         )
         return age2
+    
+
+
+
+
+def get_locations_nearby_coords(latitude, longitude, max_distance=None):
+    """
+    Return objects sorted by distance to specified coordinates
+    which distance is less than max_distance given in kilometers
+    """
+    # Great circle distance formula
+    gcd_formula = "6371 * acos(least(greatest(\
+    cos(radians(%s)) * cos(radians(latitude)) \
+    * cos(radians(longitude) - radians(%s)) + \
+    sin(radians(%s)) * sin(radians(latitude)) \
+    , -1), 1))"
+    distance_raw_sql = RawSQL(
+        gcd_formula,
+        (latitude, longitude, latitude)
+    )
+    qs = Profile.objects.all() \
+    .annotate(distance=distance_raw_sql) \
+    .order_by('distance')
+    if max_distance is not None:
+        qs = qs.filter(distance__lt=max_distance)
+    return qs
+
+
+
 
     def __str__(self):
         return self.user.username    
