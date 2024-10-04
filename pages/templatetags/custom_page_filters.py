@@ -34,14 +34,18 @@ def avg_stars(target_page):
         return '<i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i><i class="bi bi-star-fill text-warning"></i>'
         
     else:        
-        return round(average['rating__avg'], 2)
+        return 0
     # return PageReviews.objects.aggregate(Avg('rating'))
 
 @register.simple_tag
 def avg_rating(target_page):
     # return PageReviews.objects.filter(page_name=target_page).values()[0]
     average = PageReviews.objects.filter(page_name=target_page).aggregate(Avg('rating'))
-    return round(average['rating__avg'], 1)
+    print(average['rating__avg'])
+    if average['rating__avg'] != None:
+        return round(average['rating__avg'], 1)
+    else:
+        return 0.0
 
 @register.simple_tag
 def review_count(target_page):

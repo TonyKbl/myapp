@@ -56,11 +56,16 @@ class PageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = PageCreateForm
     template_name = "pages/page_add_edit_form.html"
     success_message = "Page successfully added"
-    success_url = "/pages/" 
+    # success_url = "/pages/" 
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        return super().form_valid(form)    
+    
+    def get_success_url(self):
+        slug = self.kwargs["slug"]
+        page_type = self.kwargs["page_type"]
+        return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
 
 
 class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

@@ -74,7 +74,7 @@
       </div>
       <!-- Button -->
       <div class="col-lg-3 text-lg-end">
-        <a class="btn btn-primary" href="#!"> Buy ticket </a>
+        <a class="btn btn-primary" href="#!"> Add to Guestlist </a>
       </div>
     </div>
     <!-- Event name END -->
@@ -92,25 +92,12 @@
       <div class="col-sm-6 col-lg-4">
         <!-- Timings -->
         <h5>Timings</h5>
-        <p class="small mb-0">{{ event.start_time|time}} - {{ event.end_time|time}}</p>
+        <p class="mb-0">{{ event.start_time|time}} - {{ event.end_time|time}}</p>
       </div>
       <!-- Entry Fees -->
       <div class="col-sm-6 col-lg-4">
         <h5>Entry fees</h5>
         <p class="small mb-0">{{ event.entry_fees}}</p>
-      </div>
-      <!-- Category & Type -->
-      <div class="col-sm-6 col-lg-4">
-        <h5>Category &amp; type</h5>
-        <p class="small mb-0">Trade Show</p>
-        <p class="small mb-0"> Photography &amp; Prewedding</p>
-      </div>
-      <!-- Estimated Turnout -->
-      <div class="col-sm-6 col-lg-4">
-        <h5>Estimated turnout</h5>
-        <p class="small mb-0">140000 Visitors</p>
-        <p class="small mb-0"> 1800 Exhibitors</p>
-        <span class="badge bg-danger text-danger bg-opacity-10 small">Estimated Count</span>
       </div>
       <div class="col-sm-6 col-lg-4">
         <!-- Rating -->
@@ -123,7 +110,6 @@
           <li><i class="fa-solid fa-star-half-stroke text-warning"></i></li>
           <li class="ms-1 small">132 Ratings</li>
         </ul>
-        <p class="mb-0 small"> <strong> #2 of 3506</strong> Events in Photography &amp; Prewedding</p>
       </div>
       <div class="col-sm-6 col-lg-4">
         <!-- Interested -->
@@ -134,68 +120,7 @@
         <button class="btn btn-success-soft btn-sm">Interested?</button>
       </div>
       </div>
-      <hr class="mt-4">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <h5>Attendees</h5>
-          <!-- Avatar group START -->
-          <ul class="avatar-group list-unstyled align-items-center">
-            <li class="avatar avatar-xs">
-              <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
-            </li>
-            <li class="avatar avatar-xs">
-              <img class="avatar-img rounded-circle" src="assets/images/avatar/03.jpg" alt="avatar">
-            </li>
-            <li class="avatar avatar-xs">
-              <img class="avatar-img rounded-circle" src="assets/images/avatar/04.jpg" alt="avatar">
-            </li>
-            <li class="avatar avatar-xs">
-              <img class="avatar-img rounded-circle" src="assets/images/avatar/05.jpg" alt="avatar">
-            </li>
-            <li class="avatar avatar-xs">
-              <img class="avatar-img rounded-circle" src="assets/images/avatar/06.jpg" alt="avatar">
-            </li>
-            <li class="ms-4">
-              <small> 148.9K people responded</small>
-            </li>
-          </ul>
-        </div>
-        <div class="col-lg-6">
-          <!-- Avatar group END -->
-          <div class="row g-2">
-            <div class="col-sm-4">
-              <!-- Visitors -->
-              <div class="d-flex">
-                <i class="bi bi-globe fs-4"></i>
-                <div class="ms-3">
-                  <h5 class="mb-0">125</h5>
-                  <p class="mb-0">Visitors</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <!-- Registred -->
-              <div class="d-flex">
-                <i class="bi bi-person-plus fs-4"></i>
-                <div class="ms-3">
-                  <h5 class="mb-0">356</h5>
-                  <p class="mb-0">Registred</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <!-- Attendance -->
-              <div class="d-flex">
-                <i class="bi bi-people fs-4"></i>
-                <div class="ms-3">
-                  <h5 class="mb-0">350</h5>
-                  <p class="mb-0">Attendance</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
   </div>
   <!-- Card About END -->
 
@@ -206,16 +131,20 @@
       <div class="card">
         <div class="card-header border-0 pb-0">
           <h5 class="card-title mb-0">Event location</h5>
-          <p class="small"> <i class="bi bi-geo-alt pe-1"></i><strong>{{ event.event.location }}</strong>, {{ event.event.location.town_city }}, {{ event.event.location.county }}, {{ event.event.location.post_code }} </p>
-          <!-- Button modal -->
         </div>
-        <!-- Card body START -->
         <div class="card-body pt-0">
-          <a href="https://maps.google.co.uk/maps?q={{event.event.location|urlencode}}+{{event.event.location.address1|urlencode}}+{{event.event.location.county|urlencode}}+{{event.event.location.post_code|urlencode}}" class="btn btn-primary btn-small" target="_blank">View Map </a> 
-          <a href="https://www.google.com/maps/dir/?api=1&destination={{event.event.location|urlencode}}+{{event.event.location.address1|urlencode}}+{{event.event.location.county|urlencode}}+{{event.event.location.post_code|urlencode}}" class="btn btn-primary btn-small" target="_blank">Get Directions</a>
+          <div class="row mt-0">
+            <div class="col">
+              <p class="small"><h6> <i class="bi bi-geo-alt pe-1"></i>{{ event.event.location }}</h6>{{ event.event.location.town_city }}, {{ event.event.location.county }}, {{ event.event.location.post_code }} </p>
+              <!-- Button modal -->
+            </div>
+            <div class="col my-auto mx-auto px-auto">
+                <a href="https://maps.google.co.uk/maps?q={{event.event.location|urlencode}}+{{event.event.location.address1|urlencode}}+{{event.event.location.county|urlencode}}+{{event.event.location.post_code|urlencode}}" class="btn btn-primary btn-small mx-auto mb-2" target="_blank">View Map </a> 
+                <a href="https://www.google.com/maps/dir/?api=1&destination={{event.event.location|urlencode}}+{{event.event.location.address1|urlencode}}+{{event.event.location.county|urlencode}}+{{event.event.location.post_code|urlencode}}" class="btn btn-primary btn-small mx-auto mb-2" target="_blank">Get Directions</a>
+          <!-- Card body END -->
+            </div>
+          </div>
         </div>
-        <!-- Card body END -->
-      </div>
       <!-- Card END -->
     </div>
   </div>

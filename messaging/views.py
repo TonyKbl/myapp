@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -78,4 +78,16 @@ class SendMessageView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.msg_to_id = self.kwargs.get('pk')        
         form.instance.msg_from = self.request.user
-        return super(SendMessageView, self).form_valid(form)
+        return super(SendMessageView, self).form_valid(form)    
+
+class SettingsView(LoginRequiredMixin, UpdateView):
+    # permission_required = "messaging.can_add_message"
+    template_name = "messaging/settings.html"
+    model = Message    
+    fields={'message'}
+    def get_object(self):
+       return self.request.user
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
