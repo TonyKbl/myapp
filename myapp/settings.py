@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'gunicorn',
     'django_extensions',
     'django_select2',
+    'django.contrib.gis',
 
     'allauth',
     'allauth.account',
