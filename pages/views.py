@@ -105,7 +105,8 @@ class PageFeedView(LoginRequiredMixin, DetailView):
                 end_index = page_number * page_size
                 
             else:
-                raise Http404
+                start_index = 1 * page_size
+                end_index = page_number * page_size
         
         except ValueError:
             print("Invalid input. Please enter a valid integer.")

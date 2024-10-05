@@ -52,8 +52,9 @@
 {% comment %} {% for num in total_pages %}
 {{num}}
 {%endfor%} {% endcomment %}
-{% if not no_results %}
+{% if total_pages > 0 %}
 					<div id="posts-container">
+
 						{% for post in page_posts %}
 						{% include 'includes/page_post.html' %}
 						{% endfor%}
@@ -78,7 +79,12 @@
 						</div>
 					</div>
 {% else %}
-No Results Found
+
+<div id="posts-container">
+
+	{% include 'includes/no_results.html' %}
+	
+</div>
 {% endif %}
 {% endblock  %}
 
