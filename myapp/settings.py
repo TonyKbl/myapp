@@ -4,6 +4,19 @@ import sys
 import dj_database_url
 import env
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 5000
+
+if os.name == 'nt':
+    import platform
+    OSGEO4W = r"C:\\OSGeo4W"
+    # if '64' in platform.architecture()[0]:
+    #     OSGEO4W += "64"
+    assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
+    os.environ['OSGEO4W_ROOT'] = OSGEO4W
+    os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
+    os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
+    os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -118,12 +131,23 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 if DEVELOPMENT_MODE == 'True':
     print("DEVELOPMENT_MODE = True")
+    # DATABASES = {
+    #     "default": {
+    #         "ENGINE": "django.db.backends.sqlite3",
+    #         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    #     }
+    # }
     DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        'default': {
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'clubswing',
+            'USER': 'postgres',
+            'PASSWORD': 'TK8bw@5418',
+            'HOST': 'localhost',
+            'PORT': '5432'
         }
     }
+    GDAL_LIBRARY_PATH = "C:\\OSGEO4W\\bin\\gdal309"
     print(os.path.join(BASE_DIR, "db.sqlite3"))
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     print("DEVELOPMENT_MODE = False")

@@ -1,4 +1,5 @@
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from django_resized import ResizedImageField
 from django.conf import settings
@@ -36,8 +37,9 @@ class Page(models.Model):
     town_city = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     county = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     post_code = models.CharField( max_length=10, null=False, blank=False, validators=[validate_is_profane])
-    lat=models.FloatField(null=True)
-    lon=models.FloatField(null=True)
+    lat=models.FloatField(null=True, blank=True)
+    lon=models.FloatField(null=True, blank=True)
+    loc = models.PointField(null=True, blank=True, srid=4326)
 
     region = models.ForeignKey(Region, null=True, blank=False, on_delete=models.SET_NULL)
 
@@ -58,16 +60,19 @@ class Page(models.Model):
     page_created = models.DateField(auto_now_add=True)
     page_updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.page_name
+    
     def get_absolute_url(self):
         return reverse("page", kwargs={"slug": self.slug})
     
     def save(self, *args, **kwargs):  # new
         if not self.slug:
             self.slug = slugify(self.page_name)
+
+        
         return super().save(*args, **kwargs)
 
-    def __str__(self):
-        return self.page_name
     
     
 class PageFollow(models.Model):

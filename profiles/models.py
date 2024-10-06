@@ -1,4 +1,5 @@
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -183,6 +184,7 @@ class Profile(models.Model):
     outer_postcode = models.ForeignKey(OuterPostCode, on_delete=models.CASCADE, blank=False, null=True)
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
+    loc = models.PointField(null=True, blank=True)
 
     
     name = models.CharField(max_length=20)
@@ -313,36 +315,11 @@ class Profile(models.Model):
     
 
 
-
-
-def get_locations_nearby_coords(latitude, longitude, max_distance=None):
-    """
-    Return objects sorted by distance to specified coordinates
-    which distance is less than max_distance given in kilometers
-    """
-    # Great circle distance formula
-    gcd_formula = "6371 * acos(least(greatest(\
-    cos(radians(%s)) * cos(radians(latitude)) \
-    * cos(radians(longitude) - radians(%s)) + \
-    sin(radians(%s)) * sin(radians(latitude)) \
-    , -1), 1))"
-    distance_raw_sql = RawSQL(
-        gcd_formula,
-        (latitude, longitude, latitude)
-    )
-    qs = Profile.objects.all() \
-    .annotate(distance=distance_raw_sql) \
-    .order_by('distance')
-    if max_distance is not None:
-        qs = qs.filter(distance__lt=max_distance)
-    return qs
-
-
-
-
     def __str__(self):
         return self.user.username    
     
+
+
 
 class Level(models.Model):
     level = models.IntegerField(null=True, blank=False)

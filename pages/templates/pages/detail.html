@@ -43,6 +43,10 @@
               {{page.county}}<br>
               {{page.town_city}}<br>
               {{page.post_code}}
+              {% comment %} {% load leaflet_tags %}
+              {% leaflet_css %}
+              {% leaflet_js %} {% endcomment %}
+              {{page.loc}}
             </p>
             <!-- Address END -->
           </div>

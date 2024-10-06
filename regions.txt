@@ -1,0 +1,13 @@
+id,region_name,slug
+1,North East,north-east
+2,North West,north-west
+3,South West,south-west
+4,South East,south-east
+5,Yorkshire and The Humber,yorkshire-and-the-humber
+6,Wales,wales
+7,Northern Ireland,northern-ireland
+8,East Midlands,east-midlands
+9,Scotland,scotland
+10,East of England,east-of-england
+11,London,london
+12,West Midlands,west-midlands

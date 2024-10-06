@@ -1,4 +1,6 @@
-from django.db.models.base import Model as Model
+# from django.db.models.base import Model as Model
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.db.models import Avg
 from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView, CreateView
@@ -16,6 +18,7 @@ from django.core.paginator import Paginator
 from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
 from feed.models import PagePost
 from profiles.models import Profile
+from place_area.models import PostCode
 from .forms import PageUpdateForm, PageCreateForm, PageReviewForm, PageClaimForm, PageAddHostForm
 
 
@@ -56,16 +59,21 @@ class PageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = PageCreateForm
     template_name = "pages/page_add_edit_form.html"
     success_message = "Page successfully added"
-    # success_url = "/pages/" 
+    success_url = "/pages/" 
 
     def form_valid(self, form):
+        location = PostCode.objects.get(postcode=form.instance.post_code)
+        print(location)
+        form.instance.lat = location.lat
+        form.instance.lon = location.lon
+        form.instance.loc = Point(float(location.lat),float(location.lon))
         form.instance.user = self.request.user
         return super().form_valid(form)    
     
-    def get_success_url(self):
-        slug = self.kwargs["slug"]
-        page_type = self.kwargs["page_type"]
-        return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
+    # def get_success_url(self):
+    #     slug = self.kwargs["slug"]
+    #     page_type = self.kwargs["page_type"]
+    #     return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
 
 
 class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):

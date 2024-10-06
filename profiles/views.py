@@ -1,4 +1,6 @@
-from django.db.models.base import Model as Model
+# from django.db.models.base import Model as Model
+from django.contrib.gis.db import models
+from django.contrib.gis.geos import Point
 from django.db.models.query import QuerySet
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import UpdateView
@@ -67,26 +69,9 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         location = OuterPostCode.objects.get(postcode=form.instance.outer_postcode)
         form.instance.lat = location.lat
         form.instance.lon = location.lon
+        form.instance.loc = Point(float(location.lat),float(location.lon))
         return super().form_valid(form)
     
-    # def get_form_kwargs(self):
-    #     # kwargs['postcode'] = OuterPostCode.objects.get(ProfileUpdateView=self.object).postcode
-    #     # kwargs['lat'] = OuterPostCode.objects.get(postcode=self.object.outer_postcode)
-    #     lat = self.kwargs['outer_postcode']
-    #     return lat
-    
-    # def get_object(self, *args, **kwargs):
-    #     # coords = OuterPostCode.objects.get(id=self.kwargs.get('outer_postcode'))
-    #     print(kwargs)
-    #     return True
-    
-    # def save(self, *args, **kwargs):
-    #     # Do the maths here to calculate lat/lon
-    #     # self.latitude = ... 
-    #     # self.longitude = ...
-    #     super(Profile, self).save(*args, **kwargs)
-    #     print(kwargs)
-
 
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile

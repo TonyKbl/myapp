@@ -11,13 +11,13 @@ def run():
     # Iterate through the DataFrame and create model instances
     for index, row in df.iterrows():
         print(row, index)
-        # Create or get the Category instance
-        i = OuterPostCode.objects.get_or_create(
-            id=row['id'],
-            outer_pc=row['postcode'],
-            lat=row['lat'],
-            lon=row['lon']
-        )
+        # # Create or get the Category instance
+        # i = OuterPostCode.objects.get_or_create(
+        #     id=row['id'],
+        #     postcode=row['postcode'],
+        #     lat=row['lat'],
+        #     lon=row['lon']
+        # )
 
 
 

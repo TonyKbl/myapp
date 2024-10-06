@@ -22,3 +22,14 @@ class OuterPostCode(models.Model):
 
     def __str__(self):
         return self.postcode
+    
+class PostCode(models.Model):
+    postcode=models.TextField(max_length=10)
+    lat=models.FloatField()
+    lon=models.FloatField()
+
+    class Meta():
+        ordering = ["postcode"]
+
+    def __str__(self):
+        return self.postcode
