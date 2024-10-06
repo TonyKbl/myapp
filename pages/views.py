@@ -95,6 +95,15 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
     
 
+    def form_valid(self, form):
+        location = PostCode.objects.get(postcode=form.instance.post_code)
+        print(location)
+        form.instance.lat = location.lat
+        form.instance.lon = location.lon
+        form.instance.loc = Point(float(location.lat),float(location.lon))
+        return super().form_valid(form)    
+    
+
 class PageFeedView(LoginRequiredMixin, DetailView):
     http_method_names = ["get"]
     template_name = "pages/feed.html"

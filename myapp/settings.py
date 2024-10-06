@@ -24,8 +24,8 @@ DEBUG = env.DEBUG
 USE_AWS = env.USE_AWS
 
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
-DATABASE_URL = env.DATABASE_URL
-DATABASE_DB = env.DATABASE_DB
+# DATABASE_URL = env.DATABASE_URL
+# DATABASE_DB = env.DATABASE_DB
 
 DEVELOPMENT_MODE = env.DEVELOPMENT_MODE
 
@@ -138,36 +138,25 @@ if DEVELOPMENT_MODE == 'True':
     #         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     #     }
     # }
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': 'clubswing',
-            'USER': 'postgres',
-            'PASSWORD': 'TK8bw@5418',
-            'HOST': 'localhost',
-            'PORT': '5432'
-        }
-    }
+
+
     GDAL_LIBRARY_PATH = "C:\\OSGEO4W\\bin\\gdal309"
     print(os.path.join(BASE_DIR, "db.sqlite3"))
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     print("DEVELOPMENT_MODE = False")
     
-    # SESSION_COOKIE_SECURE = True
-    # CSRF_COOKIE_SECURE = True
-    # SECURE_SSL_REDIRECT = True
 
-    if DATABASE_URL == None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_DB,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
+DATABASES = {
+        'default': {
+            'ENGINE': env.DATABASE_ENGINE,
+            'NAME': env.DATABASE_NAME,
+            'USER': env.DATABASE_USER,
+            'PASSWORD': env.DATABASE_PASS,
+            'HOST': env.DATABASE_HOST,
+            'PORT': env.DATABASE_PORT
+        }
 
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
