@@ -305,12 +305,15 @@ class Profile(models.Model):
 
     @property
     def age2(self):
-        today = timezone.now().date()
-        age2 = int(
-            today.year
-            - (self.DOB2.year)
-            - ((today.month, today.day) < (self.DOB2.month, self.DOB2.day))
-        )
+        if self.DOB2:
+            today = timezone.now().date()
+            age2 = int(
+                today.year
+                - (self.DOB2.year)
+                - ((today.month, today.day) < (self.DOB2.month, self.DOB2.day))
+            )
+        else:
+            age2 = 0
         return age2
     
 

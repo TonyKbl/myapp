@@ -7,6 +7,7 @@ class PageAdmin(admin.ModelAdmin):
 
 class HostAdmin(admin.ModelAdmin):   
     list_display = ('page_name', 'host')
+    
 admin.site.register(Page, admin.GISModelAdmin)
 # admin.site.register(Page, PageAdmin)
 admin.site.register(PageFollow)
