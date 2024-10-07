@@ -23,6 +23,48 @@
             <p>{{ user.profile.description|linebreaks}}</p>
             <hr>
           <div class="row g-4">
+            <table class="table table-sm">
+              <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">{{user.profile.name}}</th>
+                <th scope="col">{{user.profile.name2}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Age</th>
+                <td>{{user.profile.age}}</td>
+                <td>{{user.profile.age2}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Sexuality</th>
+                <td>{{user.profile.sexuality}}</td>
+                <td>{{user.profile.sexuality2}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Height</th>
+                <td>{{user.profile.height}}</td>
+                <td>{{user.profile.height2}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Body Type:</th>
+                <td>{{user.profile.body_type}}</td>
+                <td>{{user.profile.body_type2}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Smoke/Vape</th>
+                <td>{{user.profile.smoke}}</td>
+                <td>{{user.profile.smoke2}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Drink</td>
+                  <td>{{user.profile.drink}}</td>
+                  <td>{{user.profile.drink2}}</td>
+              </tr>
+            </tbody>
+            </table>
+              
             <div class="col-6">
               <!-- Person 1 START -->
               <h6>{{user.profile.name}}</h6>
