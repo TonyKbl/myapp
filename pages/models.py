@@ -4,13 +4,15 @@ from django.contrib.auth.models import User
 from django_resized import ResizedImageField
 from django.conf import settings
 from profiles.models import Profile
-from place_area.models import Region
+from place_area.models import Region, PostCode
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from profanity.validators import validate_is_profane
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
+from django.core.exceptions import ValidationError
+
 
 class Page(models.Model):
     def custom_user():

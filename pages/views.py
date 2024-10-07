@@ -14,6 +14,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.http import HttpRequest, request, Http404
 from django.core.paginator import Paginator
+from django.core.exceptions import ValidationError
 
 from .models import Page, PageFollow, PageReviews, ClaimPage, PageHost
 from feed.models import PagePost
@@ -62,11 +63,15 @@ class PageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = "/pages/" 
 
     def form_valid(self, form):
-        location = PostCode.objects.get(postcode=form.instance.post_code)
+        
+        try:
+            location = PostCode.objects.get(postcode=form.instance.post_code)
+        except:
+            raise ValidationError('Please enter a valid Postcode')
         print(location)
         form.instance.lat = location.lat
         form.instance.lon = location.lon
-        form.instance.loc = Point(float(location.lat),float(location.lon))
+        form.instance.loc = Point(float(location.lon),float(location.lat))
         form.instance.user = self.request.user
         return super().form_valid(form)    
     
@@ -95,12 +100,14 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
     
 
-    def form_valid(self, form):
-        location = PostCode.objects.get(postcode=form.instance.post_code)
-        print(location)
-        form.instance.lat = location.lat
-        form.instance.lon = location.lon
-        form.instance.loc = Point(float(location.lat),float(location.lon))
+    def form_valid(self, form):        
+        try:
+            location = PostCode.objects.get(postcode=form.instance.post_code)
+            form.instance.lat = location.lat
+            form.instance.lon = location.lon
+            form.instance.loc = Point(float(location.lon),float(location.lat))
+        except:
+              alert = "Please enter a valid postcode"
         return super().form_valid(form)    
     
 

@@ -13,7 +13,7 @@ class Region(models.Model):
     
 
 class OuterPostCode(models.Model):
-    postcode=models.TextField(max_length=10)
+    postcode=models.CharField(max_length=10)
     lat=models.FloatField()
     lon=models.FloatField()
 
@@ -24,7 +24,7 @@ class OuterPostCode(models.Model):
         return self.postcode
     
 class PostCode(models.Model):
-    postcode=models.TextField(max_length=10)
+    postcode=models.CharField(max_length=10)
     lat=models.FloatField()
     lon=models.FloatField()
 
