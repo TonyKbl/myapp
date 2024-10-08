@@ -32,30 +32,48 @@
           <p>{{ page.description|linebreaks}}</p>
           </div>
         </div>
-              <hr>
-        <div class="row g-4 align-items-center">
-          <div class="col-lg-6">
-            <!-- Address START -->
-            <h6>Address</h6>
-            <p>
-              {{ page.address1 }}<br>
-              {% if page.address2 != None %}{{ page.address2 }}<br>{%endif%}
-              {{page.county}}<br>
-              {{page.town_city}}<br>
-              {{page.post_code}}
-              {% comment %} {% load leaflet_tags %}
-              {% leaflet_css %}
-              {% leaflet_js %} {% endcomment %}
-              {{page.loc}}
-            </p>
-            <!-- Address END -->
-          </div>
-          <div class="col-lg-6">
-            <!-- Map START -->     
-            <a href="https://www.google.com/maps/dir/?api=1&destination={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="btn btn-primary btn-small">Get Directions</a>
-            <!-- Map END -->
-          </div>
-        </div>
+        <hr>
+  <div class="row g-4 align-items-center">
+    <div class="col-lg-6">
+      <!-- Address START -->
+      <h6>Address</h6>
+      <p>
+        {{ page.address1 }}<br>
+        {% if page.address2 != None %}{{ page.address2 }}<br>{%endif%}
+        {{page.county}}<br>
+        {{page.town_city}}<br>
+        {{page.post_code}}
+        {% comment %} {% load leaflet_tags %}
+        {% leaflet_css %}
+        {% leaflet_js %} {% endcomment %}
+        {{page.loc}}
+      </p>
+      <!-- Address END -->
+    </div>
+    <div class="col-lg-6">
+      <!-- Map START -->     
+      <a href="https://www.google.com/maps/dir/?api=1&destination={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="btn btn-primary btn-small">Get Directions</a>
+      <!-- Map END -->
+    </div>
+  </div>
+  <hr>
+<div class="row g-4 align-items-center">
+<div class="col-lg-6">
+<!-- Address START -->
+<h6>Contact Us</h6>
+<p>
+{% if page.show_phone_button%}
+  <a class="btn btn-primary btn-small" href="tel:{{page.phone_number}}">CALL {{page.page_name}}</a>
+{% endif %}
+</p>
+<!-- Address END -->
+</div>
+<div class="col-lg-6">
+<!-- Map START -->     
+<a href="email:{{page.email}}">Email {{page.page_name}}</a>
+<!-- Map END -->
+</div>
+</div>
       </div>
       <!-- Card body END -->
     </div>

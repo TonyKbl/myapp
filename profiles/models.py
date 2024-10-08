@@ -10,8 +10,23 @@ from django.utils import timezone
 from django.conf import settings
 from profanity.validators import validate_is_profane
 from place_area.models import OuterPostCode
+import os
+from uuid import uuid4
 
-from django.db.models.expressions import RawSQL
+
+def path_and_rename(path):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        # get filename
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            # set filename as random string
+            filename = '{}.{}'.format(uuid4().hex, ext)
+        # return the whole path to the file
+        return os.path.join(path, filename)
+    return wrapper
+ 
 
 @receiver(post_save, sender=User)   
 def create_user_profile(sender, instance, created, **kwargs):
@@ -144,9 +159,9 @@ class Profile(models.Model):
     ]
 
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to='profiles', max_length=200)
+    cover_image = ResizedImageField(size=[600, 200], upload_to=path_and_rename('profile/cover'), max_length=200)
 
-    image = ResizedImageField(size=[100, 100], upload_to='profiles', max_length=200)
+    image = ResizedImageField(size=[100, 100], upload_to=path_and_rename('profile/avatar'), max_length=200)
 
     display_name = models.CharField( max_length=50, null = True, blank = False )
     

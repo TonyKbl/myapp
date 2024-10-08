@@ -12,7 +12,19 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.core.exceptions import ValidationError
+import os
+from uuid import uuid4
 
+
+def path_and_rename(path):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        # set filename as random string
+        filename = '{}.{}'.format(uuid4().hex, ext)
+        # return the whole path to the file
+        return os.path.join(path, filename)
+    return wrapper
+ 
 
 class Page(models.Model):
     def custom_user():
@@ -30,9 +42,9 @@ class Page(models.Model):
 
     page_name = models.CharField( max_length=50, null=False, blank=False, unique=True)
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to='page_covers', max_length=200, null=True, blank=True)
+    cover_image = ResizedImageField(size=[600, 200], upload_to=path_and_rename('page_covers'), max_length=200, null=True, blank=True)
 
-    image = ResizedImageField(size=[600, 600], upload_to='page_avatars', max_length=200, null=True, blank=True)
+    image = ResizedImageField(size=[600, 600], upload_to=path_and_rename('page_avatars'), max_length=200, null=True, blank=True)
 
     address1 = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     address2 = models.CharField( max_length=50, null=True, blank=True, validators=[validate_is_profane])
@@ -47,7 +59,7 @@ class Page(models.Model):
 
     description = models.TextField( null=False, blank=False, validators=[validate_is_profane])
 
-    phone_number = models.CharField( max_length=10, null=True, blank=True)
+    phone_number = models.CharField( max_length=15, null=True, blank=True)
     show_phone_button = models.BooleanField(default=1)
     email = models.EmailField(max_length=255)
     show_email_button = models.BooleanField(default=1)
@@ -155,4 +167,4 @@ def send_claim_email(sender, instance, **kwargs):
         )
     
     send_mail('New Page Claim', message, 'tonykbl@yahoo.co.uk', ['tonykbl@yahoo.co.uk'], fail_silently=False)
- 
+

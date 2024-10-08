@@ -8,6 +8,7 @@ class MessageSendForm(forms.ModelForm):
         model = Message
         fields = (
             "message",
+            'attachment',
             )
         widgets = {
             'message': forms.Textarea(attrs={'rows': '3'}),

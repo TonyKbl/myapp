@@ -72,8 +72,8 @@ class SendMessageView(LoginRequiredMixin, CreateView):
     model = Message    
     form_class = MessageSendForm
     context_object_name = "message_send"
-    queryset = Message.objects.all()
-    success_url = '/'
+    # queryset = Message.objects.all()
+    success_url = '/inbox.html'
 
     def form_valid(self, form):
         form.instance.msg_to_id = self.kwargs.get('pk')        

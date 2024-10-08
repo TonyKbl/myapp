@@ -6,6 +6,15 @@ from django.contrib.auth.models import User
 class DateInput(forms.DateInput):
     input_type = 'date'
 
+class SetProfileTypeForm(forms.ModelForm):
+    
+    class Meta:        
+        model = Profile
+        fields = (
+            "profile_type",
+        )
+
+
 class ProfileUpdateForm(forms.ModelForm):
     
     class Meta:        

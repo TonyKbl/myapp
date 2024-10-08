@@ -12,7 +12,7 @@ from django.contrib import messages
 
 from .models import Profile, Follow
 from place_area.models import OuterPostCode
-from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm
+from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm
 from feed.models import Post
 from gallery.models import UserGallery
 
@@ -72,6 +72,19 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.loc = Point(float(location.lat),float(location.lon))
         return super().form_valid(form)
     
+
+class SetProfileTypeView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = SetProfileTypeForm
+    template_name = "profiles/profile_update_form.html"
+    success_url = "/edit_profile/"
+
+    def get_object(self):
+       return self.request.user
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
 
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
