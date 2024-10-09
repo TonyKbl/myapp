@@ -51,10 +51,14 @@ class EventDetailView(DetailView):
     def get_queryset(self, **kwargs):
         return EventDate.objects.filter(id=self.kwargs['pk'])
     
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # context["host_list"] = ho
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        e = EventDate.objects.get(id=self.kwargs['pk'])
+        hosts = Event.objects.filter(id = e.event.id)
+        context["m_e"] = e.event.host_list
+        context["hosts"] = hosts
+        # context["host_list"] = Event.host_list.filter(host__)
+        return context
     
     
     # def get_context_data(self, *args, **kwargs):
