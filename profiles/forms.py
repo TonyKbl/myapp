@@ -44,6 +44,11 @@ class ProfileUpdateForm(forms.ModelForm):
             "smoke2",
             "drink2",
             )
+        
+        help_texts = {
+            'profile_type': "Select the profile type you wish to setup",
+
+        }
         widgets = {
             'profile_type': forms.Select(attrs={'class': 'form-control'}),
             'display_name': forms.TextInput(attrs={'class': 'form-control'}),

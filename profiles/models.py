@@ -34,7 +34,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create a new profile when a new user joins"""
     if created:
         Profile.objects.create(user=instance)
-        UserLevel.objects.create(user=instance)
+        # UserLevel.objects.create(user=instance)
         LookingFor.objects.create(user=instance)
         
 
@@ -340,20 +340,20 @@ class Profile(models.Model):
 
 
 
-class Level(models.Model):
-    level = models.IntegerField(null=True, blank=False)
-    level_name = models.CharField(max_length=50, null=True, blank=False)
+# class Level(models.Model):
+#     level = models.IntegerField(null=True, blank=False)
+#     level_name = models.CharField(max_length=50, null=True, blank=False)
 
-    def __str__(self):
-        return self.level_name
+#     def __str__(self):
+#         return self.level_name
     
 
-class UserLevel(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='level')
-    level = models.OneToOneField(Level, on_delete=models.DO_NOTHING, null=False, blank=False, default=10)
+# class UserLevel(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='level')
+#     level = models.OneToOneField(Level, on_delete=models.DO_NOTHING, null=False, blank=False, default=10)
 
-    def __str__(self):
-        return self.user.username
+#     def __str__(self):
+#         return self.user.username
 
 
 class Follow(models.Model):
@@ -367,17 +367,17 @@ class Follow(models.Model):
     
 class LookingFor(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
-    age_min = models.IntegerField(null=False, blank=False, default=18)
-    age_max = models.IntegerField(null=False, blank=False, default=99)
-    men = models.BooleanField(null=False, blank=False)
-    women = models.BooleanField(null=False, blank=False, default=1)
-    mf_couple = models.BooleanField(null=False, blank=False, default=1)
-    ff_couple = models.BooleanField(null=False, blank=False, default=1)
-    cd_tv = models.BooleanField(null=False, blank=False)
-    tg_ts = models.BooleanField(null=False, blank=False)
-    smokers = models.BooleanField(null=False, blank=False)
-    can_travel = models.BooleanField(null=False, blank=False)
-    can_accom = models.BooleanField(null=False, blank=False)
+    age_min = models.IntegerField(null=True, blank=True, default=18)
+    age_max = models.IntegerField(null=True, blank=True, default=99)
+    men = models.BooleanField(null=True, blank=True)
+    women = models.BooleanField(null=False, blank=True, default=1)
+    mf_couple = models.BooleanField(null=True, blank=True, default=1)
+    ff_couple = models.BooleanField(null=True, blank=True, default=1)
+    cd_tv = models.BooleanField(null=True, blank=True)
+    tg_ts = models.BooleanField(null=True, blank=True)
+    smokers = models.BooleanField(null=True, blank=True)
+    can_travel = models.BooleanField(null=True, blank=True)
+    can_accom = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username

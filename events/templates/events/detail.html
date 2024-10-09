@@ -127,15 +127,15 @@
         <!-- Avatar group START -->
         <ul class="avatar-group list-unstyled align-items-center">
           {{m_e}}
-          {% comment %} {% for host in event.event.host_list %} {% endcomment %}
-          {% comment %} {% for host in event.event.host_list%} {% endcomment %}
-          <h6>Host</h6>
-          {% comment %} {{event.event.host_list.user.username}} {% endcomment %}
-          {{host.id.profile}} - {{host}}
-          <li class="avatar avatar-xs">
+          {% for host in hosts %}
+          {% thumbnail host.user.profile.image "100x100" crop="center" as im %}
+              <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="{{ page.page_name }} | {{ page.page_type }} | Club Swing">
+          {% endthumbnail %}
+          {{host}} - {{event.event_host}}
+          {% comment %} <li class="avatar avatar-xs">
             <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
-          </li>
-          {% comment %} {% endfor %} {% endcomment %}
+          </li> {% endcomment %}
+          {% endfor %}
 
           <li class="ms-4">
             <small> 148.9K people responded</small>
