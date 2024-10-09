@@ -55,12 +55,12 @@ class EventDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         e = EventDate.objects.get(id=self.kwargs['pk'])
         
-        context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
+        # context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
         # context['hosts'] = PageHost.objects.filter(host_id__in=e.event.host_list)
         # hosts = Event.objects.filter(id = e.event.id)
         # hosts = Event.objects.filter(id = e.event.id__in=PageHost)
         # items = Items.objects.exclude(pk__in=user_items)
-        context["m_e"] = e.event.host_list
+        # context["m_e"] = e.event.host_list
         # context["host_list"] = Event.host_list.filter(host__)
         return context
     
