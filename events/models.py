@@ -20,7 +20,7 @@ class PathAndRename(object):
     def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
         # set filename as random string
-        filename = '/{}-{}.{}'.format(instance.pk, uuid4().hex, ext)
+        filename = '{}.{}'.format(uuid4().hex, ext)
         # return the whole path to the file
         return os.path.join(self.path, filename)
 
@@ -64,6 +64,17 @@ class EventDate(models.Model):
     def __str__(self):
         return self.event.title
 
+
+class EventHost(models.Model):
+    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='event_host')
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='host_for')
+
+    class Meta:
+        unique_together = ('host', 'event')
+
+    def __str__(self):
+        return self.host.username
+    
 
 class EventReview(models.Model):
     class EventRatings(models.IntegerChoices):
