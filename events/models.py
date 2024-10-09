@@ -7,6 +7,23 @@ from sorl.thumbnail import ImageField
 from pages.models import Page, PageHost
 from datetime import datetime
 from django_resized import ResizedImageField
+import os
+from uuid import uuid4
+from django.utils.deconstruct import deconstructible
+
+@deconstructible
+class PathAndRename(object):
+
+    def __init__(self, sub_path):
+        self.path = sub_path
+
+    def __call__(self, instance, filename):
+        ext = filename.split('.')[-1]
+        # set filename as random string
+        filename = '/{}-{}.{}'.format(instance.pk, uuid4().hex, ext)
+        # return the whole path to the file
+        return os.path.join(self.path, filename)
+
 
 
 
@@ -14,7 +31,8 @@ from django_resized import ResizedImageField
 class Event(models.Model):
     today = datetime.now()
     today_path = today.strftime("%Y/%m/%d") ## this will create something like "2011/08/30"
-    upload_dir = "event_images/%Y/%m/%d"
+    upload_dir = "event_images/"+today_path
+    print(upload_dir)
 
     organiser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organiser')
     location = models.ForeignKey(
@@ -26,8 +44,9 @@ class Event(models.Model):
     title = models.CharField(max_length=250, blank=False, null=False)
 
     description = models.TextField(blank=False, null=False)
+    image = ResizedImageField(size=[600, 600], upload_to=PathAndRename(upload_dir), max_length=200, null=True, blank=True)
     host_list = models.ManyToManyField(PageHost, max_length=100, blank=True)    
-    image = ResizedImageField(blank=True, null=True, size=[900, 900], quality=70, upload_to=upload_dir, max_length=200)
+    # image = ResizedImageField(upload_to=upload_dir, blank=True, null=True, size=[900, 900], quality=70, max_length=200)
        
     def __str__(self):
         return self.title 

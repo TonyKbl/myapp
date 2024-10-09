@@ -51,6 +51,12 @@ class EventDetailView(DetailView):
     def get_queryset(self, **kwargs):
         return EventDate.objects.filter(id=self.kwargs['pk'])
     
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # context["host_list"] = ho
+    #     return context
+    
+    
     # def get_context_data(self, *args, **kwargs):
     #     context = super(EventDetailView, self).get_context_data(*args, **kwargs)
     #     context['master_event'] = Event.objects.filter(id = event_id)
@@ -68,7 +74,6 @@ class PageAddEventView(LoginRequiredMixin, CreateView):
     #         "title",
     #         "description",
     #         "image",
-    #         "host_list",
     #     )
     success_url = reverse_lazy("events:events") 
 

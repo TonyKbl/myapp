@@ -12,20 +12,21 @@ from profanity.validators import validate_is_profane
 from place_area.models import OuterPostCode
 import os
 from uuid import uuid4
+from django.utils.deconstruct import deconstructible
 
 
-def path_and_rename(path):
-    def wrapper(instance, filename):
+@deconstructible
+class PathAndRename(object):
+
+    def __init__(self, sub_path):
+        self.path = sub_path
+
+    def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
-        # get filename
-        if instance.pk:
-            filename = '{}.{}'.format(instance.pk, ext)
-        else:
-            # set filename as random string
-            filename = '{}.{}'.format(uuid4().hex, ext)
+        # set filename as random string
+        filename = '{}-{}.{}'.format(instance.pk, uuid4().hex, ext)
         # return the whole path to the file
-        return os.path.join(path, filename)
-    return wrapper
+        return os.path.join(self.path, filename)
  
 
 @receiver(post_save, sender=User)   
@@ -159,9 +160,9 @@ class Profile(models.Model):
     ]
 
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to=path_and_rename('profile/cover'), max_length=200)
+    cover_image = ResizedImageField(size=[600, 200], upload_to=PathAndRename('profile/cover'), max_length=200)
 
-    image = ResizedImageField(size=[100, 100], upload_to=path_and_rename('profile/avatar'), max_length=200)
+    image = ResizedImageField(size=[100, 100], upload_to=PathAndRename('profile/avatar'), max_length=200)
 
     display_name = models.CharField( max_length=50, null = True, blank = False )
     

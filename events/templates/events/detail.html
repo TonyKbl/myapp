@@ -119,8 +119,63 @@
         </div>
         <button class="btn btn-success-soft btn-sm">Interested?</button>
       </div>
-      </div>
+    </div>
+    <hr>
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h5>Your Hosts</h5>
+        <!-- Avatar group START -->
+        <ul class="avatar-group list-unstyled align-items-center">
+          {{event.event.host_list}}
+          {{event.pages.host_list.host}}
+          {% comment %} {% for host in event.event.host_list%}
+          <h6>Host</h6>
+          <li class="avatar avatar-xs">
+            <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
+          </li>
+          {% endfor %} {% endcomment %}
 
+          <li class="ms-4">
+            <small> 148.9K people responded</small>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-6">
+        <!-- Avatar group END -->
+        <div class="row g-2">
+          <div class="col-sm-4">
+            <!-- Visitors -->
+            <div class="d-flex">
+              <i class="bi bi-globe fs-4"></i>
+              <div class="ms-3">
+                <h5 class="mb-0">125</h5>
+                <p class="mb-0">Visitors</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <!-- Registred -->
+            <div class="d-flex">
+              <i class="bi bi-person-plus fs-4"></i>
+              <div class="ms-3">
+                <h5 class="mb-0">356</h5>
+                <p class="mb-0">Registred</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <!-- Attendance -->
+            <div class="d-flex">
+              <i class="bi bi-people fs-4"></i>
+              <div class="ms-3">
+                <h5 class="mb-0">350</h5>
+                <p class="mb-0">Attendance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <!-- Card About END -->
 

@@ -19,6 +19,7 @@ class EventCreateForm(forms.ModelForm):
             "title",
             "description",
             "image",
+            "host_list"
         )
         
     def get_context_data(self, *args, **kwargs):

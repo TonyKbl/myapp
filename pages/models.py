@@ -14,17 +14,21 @@ from django.core.mail import send_mail
 from django.core.exceptions import ValidationError
 import os
 from uuid import uuid4
+from django.utils.deconstruct import deconstructible
 
+@deconstructible
+class PathAndRename(object):
 
-def path_and_rename(path):
-    def wrapper(instance, filename):
+    def __init__(self, sub_path):
+        self.path = sub_path
+
+    def __call__(self, instance, filename):
         ext = filename.split('.')[-1]
         # set filename as random string
-        filename = '{}.{}'.format(uuid4().hex, ext)
+        filename = '{}-{}.{}'.format(instance.pk, uuid4().hex, ext)
         # return the whole path to the file
-        return os.path.join(path, filename)
-    return wrapper
- 
+        return os.path.join(self.path, filename)
+
 
 class Page(models.Model):
     def custom_user():
@@ -42,9 +46,9 @@ class Page(models.Model):
 
     page_name = models.CharField( max_length=50, null=False, blank=False, unique=True)
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to=path_and_rename('page_covers'), max_length=200, null=True, blank=True)
+    cover_image = ResizedImageField(size=[600, 200], upload_to=PathAndRename('page_covers'), max_length=200, null=True, blank=True)
 
-    image = ResizedImageField(size=[600, 600], upload_to=path_and_rename('page_avatars'), max_length=200, null=True, blank=True)
+    image = ResizedImageField(size=[600, 600], upload_to=PathAndRename('page_avatars'), max_length=200, null=True, blank=True)
 
     address1 = models.CharField( max_length=50, null=False, blank=False, validators=[validate_is_profane])
     address2 = models.CharField( max_length=50, null=True, blank=True, validators=[validate_is_profane])
@@ -83,8 +87,7 @@ class Page(models.Model):
     def save(self, *args, **kwargs):  # new
         if not self.slug:
             self.slug = slugify(self.page_name)
-
-        
+     
         return super().save(*args, **kwargs)
 
     

@@ -17,7 +17,7 @@
                     <!-- Card body START -->
                     <div class="card-body">
                         <div class="form_group">
-                            <form class="form-with-validation" method="post" >
+                            <form class="form-with-validation" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{ form|crispy }}
                                 Select Hosts for this event<br>
