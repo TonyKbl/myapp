@@ -127,15 +127,15 @@
         <!-- Avatar group START -->
         <ul class="avatar-group list-unstyled align-items-center">
           {{m_e}}
-          {% for host in hosts %}
+          {% comment %} {% for host in event.event.host_list %} {% endcomment %}
           {% comment %} {% for host in event.event.host_list%} {% endcomment %}
           <h6>Host</h6>
           {% comment %} {{event.event.host_list.user.username}} {% endcomment %}
-          {{host.id}}
+          {{host.id.profile}} - {{host}}
           <li class="avatar avatar-xs">
             <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
           </li>
-          {% endfor %}
+          {% comment %} {% endfor %} {% endcomment %}
 
           <li class="ms-4">
             <small> 148.9K people responded</small>
