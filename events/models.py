@@ -45,7 +45,7 @@ class Event(models.Model):
 
     description = models.TextField(blank=False, null=False)
     image = ResizedImageField(size=[600, 600], upload_to=PathAndRename(upload_dir), max_length=200, null=True, blank=True)
-    host_list = models.ForeignKey(PageHost, on_delete=models.PROTECT, max_length=100, blank=True, null=True)    
+    # host_list = models.ForeignKey(PageHost, on_delete=models.PROTECT, max_length=100, blank=True, null=True)    
     # image = ResizedImageField(upload_to=upload_dir, blank=True, null=True, size=[900, 900], quality=70, max_length=200)
        
     def __str__(self):

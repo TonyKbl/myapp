@@ -21,10 +21,10 @@ class EventCreateForm(forms.ModelForm):
             "image",
         )
         
-    def get_context_data(self, *args, **kwargs):
-        context = super(EventCreateForm, self).get_context_data(*args, **kwargs)
-        context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
-        return context
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(EventCreateForm, self).get_context_data(*args, **kwargs)
+    #     context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
+    #     return context
         
 class EventAddDatesForm(forms.ModelForm):
 
