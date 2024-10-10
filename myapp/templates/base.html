@@ -133,7 +133,7 @@
 						<img class="dark-mode-item navbar-brand-item rounded-circle border border-danger border-2" src="https://clubs4fun.s3.amazonaws.com/static/images/logo_small.png" alt="logo">
 					</a>
 					<!-- Logo END -->
-
+					{% if request.user.profile.name %}
 					{% if request.user.is_authenticated %}
 
 						<!-- Responsive navbar toggler -->
@@ -331,6 +331,7 @@
 						<a class = "btn btn-primary-soft me-2" href="{% url 'account_login'%}">Login</a>
 					</div>
 					{% endif %}
+					{% endif %}
 				</div>
 			</nav>
 			<!-- Logo Nav END -->
@@ -345,7 +346,7 @@
 				<div class="row g-4">
 					<!-- Sidenav START -->
 					<div class="col-lg-3 mt-0">
-						{% if request.user.is_authenticated %}
+						{% if request.user.is_authenticated == True and request.user.profile.name %}
 							<nav class="navbar navbar-expand-lg mx-0"> 
 								<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSideNavbar">
 									<!-- Offcanvas header -->

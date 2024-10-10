@@ -13,6 +13,9 @@ class SetProfileTypeForm(forms.ModelForm):
         fields = (
             "profile_type",
         )
+        help_texts = {
+            'profile_type': "Select the profile type you wish to setup",
+        }
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -20,9 +23,7 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:        
         model = Profile
         fields = (
-            "profile_type",
             "display_name",
-            "status", 
             "intro", 
             "description", 
             "location", 
@@ -36,6 +37,14 @@ class ProfileUpdateForm(forms.ModelForm):
             "body_type",
             "smoke",
             "drink",
+            )
+
+
+class Profile2ndPersonForm(forms.ModelForm):
+    
+    class Meta:        
+        model = Profile
+        fields = (            
             "name2",
             "DOB2",
             "sexuality2",
@@ -45,8 +54,28 @@ class ProfileUpdateForm(forms.ModelForm):
             "drink2",
             )
         
-        help_texts = {
-            'profile_type': "Select the profile type you wish to setup",
+        # help_texts = {
+        #     'display_name': "This is the name that will be displayed on your posts and profile",
+        #     'intro': "A short paragraph that appears in bold at the top of your bio",
+        #     'description': "Your main bio",
+        #     'location': "Enter a rough location, Town, City, or County",
+        #     'outer_postcode': "Enter the first part of your postcode, e.g. AB12. Only you can see this",
+
+        # }
+        
+        labels = {
+            'display_name': "Enter the name that you want to be displayed on your posts and profile",
+            'intro': "Add a short paragraph that appears in bold at the top of your bio",
+            'description': "Your main bio",
+            'location': "Enter a rough location, Town, City, or County",
+            'outer_postcode': "Enter the first part of your postcode, e.g. AB12. Only you can see this",
+            'name2':"Name - Person 2 (Couples Only)",
+            'DOB2':"DOB - Person 2 (Couples Only)",
+            'sexuality2':"Sexuality - Person 2 (Couples Only)",
+            'height2':"Name - Person 2 (Couples Only)",
+            'body_type2':"Body Type - Person 2 (Couples Only)",
+            'smoke2':"Smoke - Person 2 (Couples Only)",
+            'drink2':"Drink - Person 2 (Couples Only)",
 
         }
         widgets = {

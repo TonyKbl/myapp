@@ -174,8 +174,8 @@ class Profile(models.Model):
 
     # profile type option
     SELECT = ""
-    MALE = "SM"
-    FEMALE = "SF"
+    MALE = "Man"
+    FEMALE = "Woman"
     CD_TV = "CD/TV"
     TV_TS = "TV/TS"
     COUPLE_MF = "MF Couple"

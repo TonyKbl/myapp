@@ -12,7 +12,7 @@ from django.contrib import messages
 
 from .models import Profile, Follow
 from place_area.models import OuterPostCode
-from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm
+from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm, Profile2ndPersonForm
 from feed.models import Post
 from gallery.models import UserGallery
 
@@ -52,10 +52,10 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileUpdateForm
     template_name = "profiles/profile_update_form.html"
-    # success_url = reverse('profile:detail', user.username)
+    success_url = "/edit_2nd_person/"
     
-    def get_success_url(self):
-        return reverse("profiles:detail", kwargs={'username': self.request.user})
+    # def get_success_url(self):
+    #     return reverse("/edit_2nd_person/")
 
     def get_object(self):
        return self.request.user
@@ -85,6 +85,24 @@ class SetProfileTypeView(LoginRequiredMixin, UpdateView):
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
         return obj
+
+
+class Profile2ndPersonView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = Profile2ndPersonForm
+    template_name = "profiles/profile_update_form.html"
+    # success_url = reverse('profile:detail', user.username)
+    
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={'username': self.request.user})
+
+    def get_object(self):
+       return self.request.user
+    
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
+    
 
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
