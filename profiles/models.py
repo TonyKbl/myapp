@@ -168,7 +168,7 @@ class Profile(models.Model):
     
     status = models.CharField( max_length=200, null=True, blank=True, validators=[validate_is_profane])
 
-    intro = models.CharField( max_length=200, null=True, blank=True, validators=[validate_is_profane])
+    intro = models.TextField( max_length=500, null=True, blank=True, validators=[validate_is_profane])
 
     description = models.TextField(null=True, validators=[validate_is_profane])
 

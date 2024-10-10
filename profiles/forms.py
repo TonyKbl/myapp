@@ -28,8 +28,6 @@ class ProfileUpdateForm(forms.ModelForm):
             "description", 
             "location", 
             "outer_postcode",
-            "lat",
-            "lon",
             "name",
             "DOB",
             "sexuality",
@@ -38,6 +36,30 @@ class ProfileUpdateForm(forms.ModelForm):
             "smoke",
             "drink",
             )
+        
+        labels = {
+            'display_name': "Enter the name that you want to be displayed on your posts and profile",
+            'intro': "Add a short paragraph that appears in bold at the top of your bio",
+            'description': "Your main bio",
+            'location': "Enter a rough location, Town, City, or County",
+            'outer_postcode': "Enter the first part of your postcode, e.g. AB12. Only you can see this",
+        }
+
+        widgets = {
+            'display_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'status': forms.TextInput(attrs={'class': 'form-control'}),
+            'intro': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'location': forms.TextInput(attrs={'class': 'form-control'}),
+            'outer_postcode': forms.Select(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'DOB': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'sexuality': forms.Select(attrs={'class': 'form-control'}),
+            'height': forms.Select(attrs={'class': 'form-control'}),
+            'body_type': forms.Select(attrs={'class': 'form-control'}),
+            'smoke': forms.Select(attrs={'class': 'form-control'}),
+            'drink': forms.Select(attrs={'class': 'form-control'}),
+        }
 
 
 class Profile2ndPersonForm(forms.ModelForm):
@@ -54,21 +76,7 @@ class Profile2ndPersonForm(forms.ModelForm):
             "drink2",
             )
         
-        # help_texts = {
-        #     'display_name': "This is the name that will be displayed on your posts and profile",
-        #     'intro': "A short paragraph that appears in bold at the top of your bio",
-        #     'description': "Your main bio",
-        #     'location': "Enter a rough location, Town, City, or County",
-        #     'outer_postcode': "Enter the first part of your postcode, e.g. AB12. Only you can see this",
-
-        # }
-        
         labels = {
-            'display_name': "Enter the name that you want to be displayed on your posts and profile",
-            'intro': "Add a short paragraph that appears in bold at the top of your bio",
-            'description': "Your main bio",
-            'location': "Enter a rough location, Town, City, or County",
-            'outer_postcode': "Enter the first part of your postcode, e.g. AB12. Only you can see this",
             'name2':"Name - Person 2 (Couples Only)",
             'DOB2':"DOB - Person 2 (Couples Only)",
             'sexuality2':"Sexuality - Person 2 (Couples Only)",
@@ -78,23 +86,8 @@ class Profile2ndPersonForm(forms.ModelForm):
             'drink2':"Drink - Person 2 (Couples Only)",
 
         }
+        
         widgets = {
-            'profile_type': forms.Select(attrs={'class': 'form-control'}),
-            'display_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'status': forms.TextInput(attrs={'class': 'form-control'}),
-            'intro': forms.TextInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'location': forms.TextInput(attrs={'class': 'form-control'}),
-            'outer_postcode': forms.Select(attrs={'class': 'form-control'}),
-            'lat': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'lon': forms.HiddenInput(attrs={'class': 'form-control'}),
-            'name': forms.TextInput(attrs={'class': 'form-control'}),
-            'DOB': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
-            'sexuality': forms.Select(attrs={'class': 'form-control'}),
-            'height': forms.Select(attrs={'class': 'form-control'}),
-            'body_type': forms.Select(attrs={'class': 'form-control'}),
-            'smoke': forms.Select(attrs={'class': 'form-control'}),
-            'drink': forms.Select(attrs={'class': 'form-control'}),
             'name2': forms.TextInput(attrs={'class': 'form-control'}),
             'DOB2': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'sexuality2': forms.Select(attrs={'class': 'form-control'}),
