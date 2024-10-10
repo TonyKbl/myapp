@@ -52,7 +52,13 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileUpdateForm
     template_name = "profiles/profile_update_form.html"
-    success_url = "/edit_2nd_person/"
+    
+    def get_success_url(self):
+        if self.request.user.profile.profile_type == "COUPLE_MF" or self.request.user.profile.profile_type == 'COUPLE_MM' or self.request.user.profile.profile_type == 'COUPLE_FF':
+            return "/edit_2nd_person/"
+        else:
+            return reverse("profiles:detail", kwargs={'username': self.request.user})
+        
     
     # def get_success_url(self):
     #     return reverse("/edit_2nd_person/")

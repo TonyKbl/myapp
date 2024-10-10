@@ -178,8 +178,9 @@ class Profile(models.Model):
     FEMALE = "Woman"
     CD_TV = "CD/TV"
     TV_TS = "TV/TS"
-    COUPLE_MF = "MF Couple"
+    COUPLE_MF = "Couple MF"
     COUPLE_FF = "Couple FF"
+    COUPLE_MM = "Couple MM"
     PROFILE_TYPE_CHOICES = [
         (SELECT, "Select Profile Type"),
         (MALE, "Single Male"),
@@ -188,6 +189,7 @@ class Profile(models.Model):
         (TV_TS, "TV_TS"),
         (COUPLE_MF, "Couple MF"),
         (COUPLE_FF, "Couple FF"),
+        (COUPLE_MM, "Couple MM"),
     ]
     profile_type = models.CharField(
         max_length=10,
