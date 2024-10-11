@@ -2,14 +2,18 @@
 <div class="card">
     <!-- Card header START -->
     <div class="card-header border-0 pb-0">
-      <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center text-center">
+      <div class="d-flex align-items-center">
+        <div class="d-flex mx-auto py-5text-center">
 
 
-          <div class="my-sm-5 py-sm-5">
+          <div class="my-sm-5 text-center">
             <i class="display-1 text-body-secondary bi bi-list"> </i>
             <h4 class="mt-2 mb-3 text-body">No posts found</h4>
-            <button class="btn btn-primary-soft btn-sm" data-bs-toggle="modal" data-bs-target="#modalCreateEvents"> Click here to add </button>
+            {% if request.user.is_authenticated %}
+              {% if page.user.username == request.user.username %}
+            <a href="/new_page_post/{{page.id}}" class="btn btn-primary-soft btn-sm mb-5"> Click here to add </a>
+            {% endif %}
+            {% endif %}
           </div>
 
          
