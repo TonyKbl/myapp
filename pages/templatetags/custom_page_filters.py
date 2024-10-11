@@ -41,7 +41,7 @@ def avg_stars(target_page):
 def avg_rating(target_page):
     # return PageReviews.objects.filter(page_name=target_page).values()[0]
     average = PageReviews.objects.filter(page_name=target_page).aggregate(Avg('rating'))
-    print(average['rating__avg'])
+    # print(average['rating__avg'])
     if average['rating__avg'] != None:
         return round(average['rating__avg'], 1)
     else:

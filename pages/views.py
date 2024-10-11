@@ -68,7 +68,7 @@ class PageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             location = PostCode.objects.get(postcode=form.instance.post_code)
         except:
             raise ValidationError('Please enter a valid Postcode')
-        print(location)
+        # print(location)
         form.instance.lat = location.lat
         form.instance.lon = location.lon
         form.instance.loc = Point(float(location.lon),float(location.lat))

@@ -32,7 +32,7 @@ class Event(models.Model):
     today = datetime.now()
     today_path = today.strftime("%Y/%m/%d") ## this will create something like "2011/08/30"
     upload_dir = "event_images/"+today_path
-    print(upload_dir)
+    # print(upload_dir)
 
     organiser = models.ForeignKey(User, on_delete=models.CASCADE, related_name='organiser')
     location = models.ForeignKey(
