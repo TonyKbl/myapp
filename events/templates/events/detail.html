@@ -97,7 +97,7 @@
       <!-- Entry Fees -->
       <div class="col-sm-6 col-lg-4">
         <h5>Entry fees</h5>
-        <p class="small mb-0">{{ event.entry_fees}}</p>
+        <p class="small mb-0">{{ event.admission_fees }}</p>
       </div>
       <div class="col-sm-6 col-lg-4">
         <!-- Rating -->
@@ -132,9 +132,6 @@
               <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="{{ page.page_name }} | {{ page.page_type }} | Club Swing">
           {% endthumbnail %}
           {{host}} - {{event.event_host}}
-          {% comment %} <li class="avatar avatar-xs">
-            <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
-          </li> {% endcomment %}
           {% endfor %}
 
           <li class="ms-4">

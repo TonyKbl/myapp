@@ -45,7 +45,7 @@ class PageEventsList(ListView):
 class EventDetailView(DetailView):    
     html_method_names = ["get"]
     template_name = "events/detail.html"
-    models = EventDate, Event,
+    models = EventDate, Event, EventHost
     context_object_name = "event"
 
     def get_queryset(self, **kwargs):
@@ -54,7 +54,7 @@ class EventDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         e = EventDate.objects.get(id=self.kwargs['pk'])
-        
+        print(e.event.id)
         # context['host_choices'] = PageHost.objects.filter(page_name_id=self.kwargs['pk'])
         context['hosts'] = EventHost.objects.filter(event_id=e.event.id)
         # hosts = Event.objects.filter(id = e.event.id)
@@ -108,7 +108,7 @@ class AddEventDateView(LoginRequiredMixin, CreateView):
     template_name = "events/add_date.html"
     # queryset = Event.objects.all()
     success_message = "Your event was added successfully"
-    success_url = "/events/"
+    success_url = "/events.html"
 
     def form_valid(self, form):
         form.instance.event_id = self.kwargs.get('pk')        

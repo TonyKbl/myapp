@@ -21,14 +21,14 @@
                                 {% csrf_token %}
                                 {{ form|crispy }}
                                 Select Hosts for this event<br>
-                    {% comment %} <div class="card-body border" >
+                    <div class="card-body border" >
                                 {% for i in host_choices%}
                                     <input type="checkbox" name="host_list" id="host_{{i.id}}" value="{{i.id}}" multiple="True">
                                     <label for="host_{{i.id}}">@{{ i.host }}</label>
                                     &nbsp
                                 {% endfor %}
                             </div>
-                            <br> {% endcomment %}
+                            <br>
                                 <input type="submit" value="Add Event" class="btn btn-primary">
                             </form>
                         </div>
