@@ -64,7 +64,7 @@ class ProfileList(LoginRequiredMixin, ListView):
 class LookingForUpdateView(LoginRequiredMixin, UpdateView):
     model = LookingFor
     form_class = LookingForUpdateForm
-    template_name = "profiles/looking_for_update_form.html"
+    template_name = "profiles/Looking_for_update_form.html"
     
     def get_success_url(self):
         return reverse("profiles:detail", kwargs={'username': self.request.user})
