@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile, LookingFor
 from gallery.models import UserGallery
 from django.contrib.auth.models import User
 
@@ -61,6 +61,26 @@ class ProfileUpdateForm(forms.ModelForm):
             'drink': forms.Select(attrs={'class': 'form-control'}),
         }
 
+
+class LookingForUpdateForm(forms.ModelForm):
+    
+    class Meta:        
+        model = LookingFor
+        fields = (
+            "age_min",
+            "age_max", 
+            "men", 
+            "women", 
+            "mf_couple",
+            "ff_couple",
+            "mm_couple",
+            "cd_tv",
+            "tg_ts",
+            "can_accom",
+            "can_travel",
+            "smokers",
+            )
+        
 
 class Profile2ndPersonForm(forms.ModelForm):
     

@@ -93,6 +93,8 @@
               </tr>
             </tbody>
             </table>
+            {% comment %} {% for lf in lookingfor %} {% endcomment %}
+             {% comment %} {% endfor %} {% endcomment %}
               
             {% comment %} <div class="col-6">
               <!-- Person 1 START -->
@@ -132,6 +134,39 @@
       <div class="card">
         <!-- Card header START -->
         <div class="card-header d-sm-flex justify-content-between border-0 pb-0">
+          <h5 class="card-title">Looking For</h5>
+          <a class="btn btn-primary-soft btn-sm" href="/edit_looking_for/"> Edit</a>
+        </div>
+        <!-- Card header END -->
+        <!-- Card body START -->
+        <div class="card-body">
+              <!-- Looking for item START -->
+
+              {% if lookingfor.men %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Men</button>{% endif %}
+              {% if lookingfor.women %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Women</button>{% endif %}
+              {% if lookingfor.mf_couple %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">MF Couples</button>{% endif %}
+              {% if lookingfor.ff_couple %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">FF Couples</button>{% endif %}
+              {% if lookingfor.mm_couple %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">MM Couples</button>{% endif %}
+              {% if lookingfor.cd_tv %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">CD/TV</button>{% endif %}
+              {% if lookingfor.tg_ts %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">TG/TS</button>{% endif %}
+              {% if lookingfor.smokers %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Will meet smokers</button>
+              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">Will NOT meet smokers</button>{% endif %}
+              {% if lookingfor.can_travel %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Can travel</button>
+              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">CANNOT travel</button>{% endif %}
+              {% if lookingfor.can_accom %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Can accomodate</button>
+              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">CANNOT accomodate</button>{% endif %}
+           
+
+              <!-- Looking for items end -->
+        </div>
+        <!-- Card body END -->
+      </div>
+      <!-- Card feed item END -->
+
+      <!-- Card feed item START -->
+      <div class="card">
+        <!-- Card header START -->
+        <div class="card-header d-sm-flex justify-content-between border-0 pb-0">
           <h5 class="card-title">Interests</h5>
           <a class="btn btn-primary-soft btn-sm" href="#!"> See all</a>
         </div>
@@ -139,6 +174,7 @@
         <!-- Card body START -->
         <div class="card-body">
               <!-- Interests item START -->
+
               <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Anal</button>
               <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Gangbangs</button>
               <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Orgies</button>

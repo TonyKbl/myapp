@@ -64,14 +64,6 @@ class EventDetailView(DetailView):
         # context["host_list"] = Event.host_list.filter(host__)
         print(context)
         return context
-    
-    
-    # def get_context_data(self, *args, **kwargs):
-    #     context = super(EventDetailView, self).get_context_data(*args, **kwargs)
-    #     context['master_event'] = Event.objects.filter(id = event_id)
-        # context['page_reviews'] = PageReviews.objects.filter(page_name__slug=self.kwargs['slug']).order_by('-date')
-        
-        return context
 
 
 class PageAddEventView(LoginRequiredMixin, CreateView):

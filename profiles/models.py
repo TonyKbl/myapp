@@ -369,17 +369,18 @@ class Follow(models.Model):
     
 class LookingFor(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
-    age_min = models.IntegerField(null=True, blank=True, default=18)
-    age_max = models.IntegerField(null=True, blank=True, default=99)
-    men = models.BooleanField(null=True, blank=True)
+    age_min = models.IntegerField(null=False, blank=True, default=18)
+    age_max = models.IntegerField(null=False, blank=True, default=99)
+    men = models.BooleanField(null=False, blank=True)
     women = models.BooleanField(null=False, blank=True, default=1)
-    mf_couple = models.BooleanField(null=True, blank=True, default=1)
-    ff_couple = models.BooleanField(null=True, blank=True, default=1)
-    cd_tv = models.BooleanField(null=True, blank=True)
-    tg_ts = models.BooleanField(null=True, blank=True)
-    smokers = models.BooleanField(null=True, blank=True)
-    can_travel = models.BooleanField(null=True, blank=True)
-    can_accom = models.BooleanField(null=True, blank=True)
+    mf_couple = models.BooleanField(null=False, blank=True, default=1)
+    ff_couple = models.BooleanField(null=False, blank=True, default=1)
+    mm_couple = models.BooleanField(null=False, blank=True)
+    cd_tv = models.BooleanField(null=False, blank=True)
+    tg_ts = models.BooleanField(null=False, blank=True)
+    smokers = models.BooleanField(null=False, blank=True)
+    can_travel = models.BooleanField(null=False, blank=True)
+    can_accom = models.BooleanField(null=False, blank=True)
 
     def __str__(self):
         return self.user.username

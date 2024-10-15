@@ -8,6 +8,7 @@ app_name = "profiles"
 urlpatterns = [
     path("search_user.html", views.ProfileList.as_view(), name="search_user"),
     path("edit_profile/", views.ProfileUpdateView.as_view(), name="edit_profile"),
+    path("edit_looking_for/", views.LookingForUpdateView.as_view(), name="edit_profile"),
     path("set_profile_type/", views.SetProfileTypeView.as_view(), name="set_profile_type"),
     path("edit_2nd_person/", views.Profile2ndPersonView.as_view(), name="edit_2nd_person"),
     path("feed/<str:username>/", views.ProfileFeedView.as_view(), name="feed"),

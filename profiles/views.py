@@ -10,9 +10,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
-from .models import Profile, Follow
+from .models import Profile, Follow, LookingFor
 from place_area.models import OuterPostCode
-from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm, Profile2ndPersonForm
+from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm, Profile2ndPersonForm, LookingForUpdateForm
 from feed.models import Post
 from gallery.models import UserGallery
 
@@ -26,7 +26,19 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
     target_user = id
 
-    context = {'target_user':target_user}
+    # context = {'target_user':target_user}
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+        
+        # context['something'] =Book.objects.filter(pk=self.kwargs.get('pk'))
+        # user = User.objects.filter(username = context)
+        # context['lookingfor'] = LookingFor.objects.get(user=self.kwargs.get('username'))
+        context['lookingfor'] = LookingFor.objects.get(user=self.request.user)
+        print(context)
+        # context["target_user"] = self.request.user
+        return context
+    
     # if(profile_page):
     #     pass
     
@@ -47,6 +59,28 @@ class ProfileList(LoginRequiredMixin, ListView):
             queryset = Profile.objects.all().order_by('user')
 
         return (queryset)
+    
+
+class LookingForUpdateView(LoginRequiredMixin, UpdateView):
+    model = LookingFor
+    form_class = LookingForUpdateForm
+    template_name = "profiles/looking_for_update_form.html"
+    
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={'username': self.request.user})
+        
+    
+    # def get_success_url(self):
+    #     return reverse("/edit_2nd_person/")
+
+    def get_object(self):
+       return self.request.user
+    
+    
+    def get_object(self, queryset=None):
+        obj = LookingFor.objects.get(user=self.request.user)
+        return obj
+
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
