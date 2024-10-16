@@ -145,19 +145,35 @@
         <div class="card-body">
               <!-- Looking for item START -->
 
-              {% if lookingfor.men %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Men</button>{% endif %}
-              {% if lookingfor.women %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Women</button>{% endif %}
-              {% if lookingfor.mf_couple %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">MF Couples</button>{% endif %}
-              {% if lookingfor.ff_couple %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">FF Couples</button>{% endif %}
-              {% if lookingfor.mm_couple %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">MM Couples</button>{% endif %}
-              {% if lookingfor.cd_tv %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">CD/TV</button>{% endif %}
-              {% if lookingfor.tg_ts %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">TG/TS</button>{% endif %}
+              {% if lookingfor.men %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Men</button>{% endif %}
+              {% if lookingfor.women %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Women</button>{% endif %}
+              {% if lookingfor.mf_couple %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">MF Couples</button>{% endif %}
+              {% if lookingfor.ff_couple %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">FF Couples</button>{% endif %}
+              {% if lookingfor.mm_couple %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">MM Couples</button>{% endif %}
+              {% if lookingfor.cd_tv %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">CD/TV</button>{% endif %}
+              {% if lookingfor.tg_ts %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">TG/TS</button>{% endif %}<br>
               {% if lookingfor.smokers %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Will meet smokers</button>
-              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">Will NOT meet smokers</button>{% endif %}
+              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">Will NOT meet smokers</button>{% endif %}<br>
               {% if lookingfor.can_travel %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Can travel</button>
-              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">CANNOT travel</button>{% endif %}
+              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">Can NOT travel</button>{% endif %}
               {% if lookingfor.can_accom %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Can accomodate</button>
-              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">CANNOT accomodate</button>{% endif %}
+              {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">Can NOT accomodate</button>{% endif %}
+           
+
+              
+              {% comment %} {% if lookingfor.men %}Men, {% endif %}
+              {% if lookingfor.women %}Women, {% endif %}
+              {% if lookingfor.mf_couple %}MF Couples, {% endif %}
+              {% if lookingfor.ff_couple %}FF Couples, {% endif %}
+              {% if lookingfor.mm_couple %}MM Couples, {% endif %}
+              {% if lookingfor.cd_tv %}CD/TV, {% endif %}
+              {% if lookingfor.tg_ts %}TG/TS, {% endif %}<br><br>
+              {% if lookingfor.smokers %}Will meet smokers, 
+              {% else %}Will NOT meet smokers, {% endif %}<br><br>
+              {% if lookingfor.can_travel %}Can travel, 
+              {% else %}CANNOT travel, {% endif %}
+              {% if lookingfor.can_accom %}Can accomodate. 
+              {% else %}CANNOT accomodate.{% endif %} {% endcomment %}
            
 
               <!-- Looking for items end -->
