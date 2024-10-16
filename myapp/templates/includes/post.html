@@ -111,10 +111,9 @@
                         {% endwith %}
                         <!-- Card img -->
                           <a class="fles items_center" href="#">
-                            {% comment %} {% thumbnail post.image "300x300" crop="center" as im %}
+                            {% thumbnail post.image "300x300" crop="center" as im %}
                               <img class="card-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Post">
-                            {% endthumbnail %} {% endcomment %}
-                            {% get_static_prefix as MEDIA_PREFIX %}
+                            {% endthumbnail %}
                             <img class="card-img" src="https://clubs4fun.s3.amazonaws.com/static/{{post.image}}" alt="Post">
                           </a>
                             
