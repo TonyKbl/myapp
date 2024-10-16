@@ -1,4 +1,5 @@
 {% load thumbnail %}
+{% load static %}
 {% load custom_page_filters %}
                 <!-- Card feed item START -->
                     <div class="card mb-3">
@@ -110,9 +111,11 @@
                         {% endwith %}
                         <!-- Card img -->
                           <a class="fles items_center" href="#">
-                            {% thumbnail post.image "300x300" crop="center" as im %}
+                            {% comment %} {% thumbnail post.image "300x300" crop="center" as im %}
                               <img class="card-img" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="Post">
-                            {% endthumbnail %}
+                            {% endthumbnail %} {% endcomment %}
+                            {% get_static_prefix as MEDIA_PREFIX %}
+                            <img class="card-img" src="https://clubs4fun.s3.amazonaws.com/static/{{post.image}}" alt="Post">
                           </a>
                             
                         <!-- Feed react START -->

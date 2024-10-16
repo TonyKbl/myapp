@@ -45,7 +45,7 @@ class PagePost(models.Model):
   post_type = models.CharField(max_length = 10, null = True, blank = True)
   text = models.CharField(max_length=500, validators=[validate_is_profane])
   date = models.DateTimeField(auto_now=True)
-  image = ResizedImageField(upload_to='page_feed_images', null=True, blank=True)    
+  image = ResizedImageField(size = [500, None], upload_to='page_feed_images', null=True, blank=True)    
   slug = models.SlugField("name")
   likes = models.ManyToManyField(User, related_name='liked_page_posts', through='PagePostLike')
 

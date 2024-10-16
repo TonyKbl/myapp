@@ -26,7 +26,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
     target_user = id
 
-    # context = {'target_user':target_user}
+    context = {'target_user':target_user}
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
@@ -34,7 +34,11 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         # context['something'] =Book.objects.filter(pk=self.kwargs.get('pk'))
         # user = User.objects.filter(username = context)
         # context['lookingfor'] = LookingFor.objects.get(user=self.kwargs.get('username'))
-        context['lookingfor'] = LookingFor.objects.get(user=self.request.user)
+        # context['lookingfor'] = LookingFor.objects.get(user=self.kwargs.get['id'])
+
+
+        context['lookingfor'] = LookingFor.objects.get(user__username=self.kwargs['username'])
+
         print(context)
         # context["target_user"] = self.request.user
         return context
