@@ -39,9 +39,7 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
         context['lookingfor'] = LookingFor.objects.get(user__username=self.kwargs['username'])
         context['interests'] = Interest.objects.filter(user__username=self.kwargs['username'])
-        print(context)
 
-        print(context)
         # context["target_user"] = self.request.user
         return context
     

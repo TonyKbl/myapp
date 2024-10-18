@@ -87,6 +87,7 @@ class InterestUpdateForm(forms.ModelForm):
     class Meta:        
         model = Interest
         fields = '__all__'
+        exclude = ('user',)
 
 class Profile2ndPersonForm(forms.ModelForm):
     

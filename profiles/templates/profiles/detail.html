@@ -151,7 +151,8 @@
               {% if lookingfor.ff_couple %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">FF Couples</button>{% endif %}
               {% if lookingfor.mm_couple %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">MM Couples</button>{% endif %}
               {% if lookingfor.cd_tv %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">CD/TV</button>{% endif %}
-              {% if lookingfor.tg_ts %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">TG/TS</button>{% endif %}<br>
+              {% if lookingfor.tg_ts %}<button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">TG/TS</button>{% endif %}
+              <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Aged {{lookingfor.age_min}} to {{lookingfor.age_max}}</button><br>
               {% if lookingfor.smokers %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Will meet smokers</button>
               {% else %}<button type="button" class="btn btn-danger-soft mt-2 btn-sm rounded-pill">Will NOT meet smokers</button>{% endif %}<br>
               {% if lookingfor.can_travel %}<button type="button" class="btn btn-success-soft mt-2 btn-sm rounded-pill">Can travel</button>
@@ -189,7 +190,7 @@
           <h5 class="card-title">Interests</h5>
           
           {% if user.username == request.user.username %}
-          <a class="btn btn-primary-soft btn-sm" href="#!"> Edit</a>
+          <a class="btn btn-primary-soft btn-sm" href="/edit_interests/"> Edit</a>
           {% endif %}
         </div>
         <!-- Card header END -->
