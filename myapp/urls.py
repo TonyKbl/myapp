@@ -25,6 +25,7 @@ from pages import urls as pages_urls
 from parties import urls as parties_urls
 from profiles import urls as profiles_urls
 from messaging import urls as messaging_urls
+from report import urls as report_urls
 from search import urls as search_urls
 from django.conf import settings
 from django.urls import re_path as url
@@ -32,6 +33,8 @@ from django.shortcuts import render
 
 def custom_page_not_found_view(request, exception):
    return render(request, "404.html", {})
+admin.site.site_header = 'Club Swing Administration'
+admin.site.site_title = 'Club Swing'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -45,6 +48,7 @@ urlpatterns = [
     path("", include(profiles_urls, namespace="profiles/")),
     path("", include(profiles_urls, namespace="edit_profile/")),
     path("", include(messaging_urls, namespace="messages/")),
+    path("", include(report_urls, namespace="reports/")),
     path("", include(search_urls, namespace="search/")),
 
     url("", include("allauth.urls")),

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, LookingFor
+from .models import Profile, LookingFor, Interest
 from gallery.models import UserGallery
 from django.contrib.auth.models import User
 
@@ -80,7 +80,13 @@ class LookingForUpdateForm(forms.ModelForm):
             "can_travel",
             "smokers",
             )
-        
+
+
+class InterestUpdateForm(forms.ModelForm):
+    
+    class Meta:        
+        model = Interest
+        fields = '__all__'
 
 class Profile2ndPersonForm(forms.ModelForm):
     

@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'place_area',
     'profiles',
     'search',
+    'report',
 
     # This app must be the last app
     'django_cleanup.apps.CleanupConfig',

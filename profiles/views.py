@@ -10,9 +10,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
-from .models import Profile, Follow, LookingFor
+from .models import Profile, Follow, LookingFor, Interest
 from place_area.models import OuterPostCode
-from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm, Profile2ndPersonForm, LookingForUpdateForm
+from .forms import ProfileUpdateForm, ProfileCoverUpdateForm, ProfileAvatarUpdateForm,  ProfileGalleryCreateForm, SetProfileTypeForm, Profile2ndPersonForm, LookingForUpdateForm, InterestUpdateForm
 from feed.models import Post
 from gallery.models import UserGallery
 
@@ -38,6 +38,8 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
 
         context['lookingfor'] = LookingFor.objects.get(user__username=self.kwargs['username'])
+        context['interests'] = Interest.objects.filter(user__username=self.kwargs['username'])
+        print(context)
 
         print(context)
         # context["target_user"] = self.request.user
@@ -83,6 +85,27 @@ class LookingForUpdateView(LoginRequiredMixin, UpdateView):
     
     def get_object(self, queryset=None):
         obj = LookingFor.objects.get(user=self.request.user)
+        return obj
+    
+
+class InterestUpdateView(LoginRequiredMixin, UpdateView):
+    model = Interest
+    form_class = InterestUpdateForm
+    template_name = "profiles/interest_update_form.html"
+    
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={'username': self.request.user})
+        
+    
+    # def get_success_url(self):
+    #     return reverse("/edit_2nd_person/")
+
+    def get_object(self):
+       return self.request.user
+    
+    
+    def get_object(self, queryset=None):
+        obj = Interest.objects.get(user=self.request.user)
         return obj
 
 

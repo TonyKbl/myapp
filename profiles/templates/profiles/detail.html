@@ -196,15 +196,110 @@
         <!-- Card body START -->
         <div class="card-body">
               <!-- Interests item START -->
-
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Anal</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Gangbangs</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Orgies</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Oral Giving</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Oral Receiving</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">BDSM</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Threesoms</button>
-              <button type="button" class="btn btn-primary-soft mt-2 btn-sm rounded-pill">Bi MMF's</button>
+              {% for interest in interests %}
+              {% if interest.adult_parties %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Adult Parties</button>
+              {% endif %}
+              {% if interest.anal_giving %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Anal(giving)</button>
+              {% endif %}
+              {% if interest.anal_receiving %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Anal(Receiving)</button>
+              {% endif %}
+              {% if interest.blindfolds %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Blindfolds</button>
+              {% endif %}
+              {% if interest.cross_dressing %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Cross Dressing</button>
+              {% endif %}
+              {% if interest.cuckolding %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Cuckolding</button>
+              {% endif %}
+              {% if interest.cybersex %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Cybersex</button>
+              {% endif %}
+              {% if interest.dogging %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Dogging</button>
+              {% endif %}
+              {% if interest.DP %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">DP</button>
+              {% endif %}
+              {% if interest.fisting %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Fisting</button>
+              {% endif %}
+              {% if interest.gangbangs %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Gangbangs</button>
+              {% endif %}
+              {% if interest.group_sex %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Group Sex</button>
+              {% endif %}
+              {% if interest.making_videos %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Making Videos</button>
+              {% endif %}
+              {% if interest.oral_receiving %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Oral (Receiving)</button>
+              {% endif %}
+              {% if interest.oral_giving_pussy_licking %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Licking Pussy</button>
+              {% endif %}
+              {% if interest.oral_giving_blowjob %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Giving Blowjobs</button>
+              {% endif %}
+              {% if interest.pegging_giving %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Pegging (Giving)</button>
+              {% endif %}
+              {% if interest.pegging_receiving %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Pegging (Receiving)</button>
+              {% endif %}
+              {% if interest.phone_sex %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Phone Sex</button>
+              {% endif %}
+              {% if interest.rimming %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Rimming</button>
+              {% endif %}
+              {% if interest.role_play %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Role Play</button>
+              {% endif %}
+              {% if interest.safe_sex %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Safe Sex</button>
+              {% endif %}
+              {% if interest.same_room_swapping %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Swapping (Same Room)</button>
+              {% endif %}
+              {% if interest.separate_room_swapping %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Swapping (Seperate Rooms)</button>
+              {% endif %}
+              {% if interest.SM %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">S&M</button>
+              {% endif %}
+              {% if interest.soft_swing %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Soft Swing</button>
+              {% endif %}
+              {% if interest.spanking %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Spanking</button>
+              {% endif %}
+              {% if interest.swingers_clubs %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Swingers Clubs</button>
+              {% endif %}
+              {% if interest.taking_photos %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Taking Photos</button>
+              {% endif %}
+              {% if interest.threesomes %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Threesoomes</button>
+              {% endif %}
+              {% if interest.toys %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Toys</button>
+              {% endif %}
+              {% if interest.voyeurism %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Voyerism</button>
+              {% endif %}
+              {% if interest.watersports %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Watersports</button>
+              {% endif %}
+              {% if interest.webcams %}
+                <button type="button" class="btn btn-secondary-soft mt-2 btn-sm rounded-pill">Webcan</button>
+              {% endif %}
+              {% endfor %}
                <!-- Interests item END -->
         </div>
         <!-- Card body END -->

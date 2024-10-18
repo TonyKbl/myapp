@@ -34,7 +34,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Create a new profile when a new user joins"""
     if created:
         Profile.objects.create(user=instance)
-        # UserLevel.objects.create(user=instance)
+        Interest.objects.create(user=instance)
         LookingFor.objects.create(user=instance)
         
 
@@ -366,7 +366,47 @@ class Follow(models.Model):
     class Meta:
         unique_together = ('follower', 'following')
 
-    
+
+class Interest(models.Model):
+    user = models.OneToOneField(User, models.CASCADE)
+    adult_parties = models.BooleanField(null=False, blank=True)
+    anal_giving = models.BooleanField(null=False, blank=True)
+    anal_receiving = models.BooleanField(null=False, blank=True)
+    blindfolds = models.BooleanField(null=False, blank=True)
+    cross_dressing = models.BooleanField(null=False, blank=True)
+    cuckolding = models.BooleanField(null=False, blank=True)
+    cybersex = models.BooleanField(null=False, blank=True)
+    dogging = models.BooleanField(null=False, blank=True)
+    DP = models.BooleanField(null=False, blank=True)
+    fisting = models.BooleanField(null=False, blank=True)
+    gangbangs = models.BooleanField(null=False, blank=True)
+    group_sex = models.BooleanField(null=False, blank=True)
+    making_videos = models.BooleanField(null=False, blank=True)
+    oral_receiving = models.BooleanField(null=False, blank=True)
+    oral_giving_pussy_licking = models.BooleanField(null=False, blank=True)
+    oral_giving_blowjob = models.BooleanField(null=False, blank=True)
+    pegging_giving = models.BooleanField(null=False, blank=True)
+    pegging_receiving = models.BooleanField(null=False, blank=True)
+    phone_sex = models.BooleanField(null=False, blank=True)
+    rimming = models.BooleanField(null=False, blank=True)
+    role_play = models.BooleanField(null=False, blank=True)
+    safe_sex = models.BooleanField(null=False, blank=True)
+    same_room_swapping = models.BooleanField(null=False, blank=True)
+    separate_room_swapping = models.BooleanField(null=False, blank=True)
+    SM = models.BooleanField(null=False, blank=True)
+    soft_swing = models.BooleanField(null=False, blank=True)
+    spanking = models.BooleanField(null=False, blank=True)
+    swingers_clubs = models.BooleanField(null=False, blank=True)
+    taking_photos = models.BooleanField(null=False, blank=True)
+    threesomes = models.BooleanField(null=False, blank=True)
+    toys = models.BooleanField(null=False, blank=True)
+    voyeurism = models.BooleanField(null=False, blank=True)
+    watersports = models.BooleanField(null=False, blank=True)
+    webcams = models.BooleanField(null=False, blank=True)
+
+    def __str__(self):
+        return self.user.username
+
 class LookingFor(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
     age_min = models.IntegerField(null=False, blank=True, default=18)
