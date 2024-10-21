@@ -9,7 +9,7 @@ from datetime import datetime
 from pages.models import Page, PageHost
 from profiles.models import Profile
 
-from .models import MasterEvent, Event, ClubEvent
+from .models import MasterEvent, Event, ClubEvent, EventHost
 
 # uncommment this affter migration
 from .forms import ClubEventCreateForm
@@ -67,17 +67,22 @@ class ClubAddEventView(LoginRequiredMixin, CreateView):
 class EventDetailView(DetailView):
     html_method_names = ["get"]
     template_name = "event/detail.html"
-    models = Event, MasterEvent
+    models = MasterEvent
     context_object_name = "event_date"
 
     def get_queryset(self, **kwargs):
-        return Event.objects.filter(id=self.kwargs["pk"])
+        ev = Event.objects.filter(id=self.kwargs["pk"])
+        return ev
         # return EventHost.objects.all()
         # return EventHost.objects.filter(event_id=self.kwargs['pk'])
         #
 
     def get_context_data(self, *args, **kwargs):
         context = super(EventDetailView, self).get_context_data(*args, **kwargs)
-        context["hosts"] = Profile.objects.filter(user__id=self.kwargs["pk"])
+        event = Event.objects.get(id=self.kwargs["pk"])
+        master_event = MasterEvent.objects.get(master_event=event)
+        print(master_event)
+        # context["hosts"] = Profile.objects.filter(user__id=self.kwargs["pk"])
+        context["hosts"] = EventHost.objects.filter(event=master_event)
         print(context)
         return context

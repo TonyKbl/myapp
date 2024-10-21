@@ -133,40 +133,25 @@
           <li class="ms-1 small">132 Ratings</li>
         </ul>
       </div>
-      {% comment %} <div class="col-sm-6 col-lg-4">
-        <!-- Interested -->
-        <div class="d-flex">
-          <h6> <i class="bi bi-hand-thumbs-up-fill text-success"></i> 50</h6>
-          <p class="small">People have shown interest recently</p>
-        </div>
-        <button class="btn btn-success-soft btn-sm">Interested?</button>
-      </div> {% endcomment %}
     </div>
     <hr>
     <div class="row align-items-center">
+      <!-- Host group START-->
       <div class="col-lg-6">
         <h5>Your Hosts</h5>
-        <!-- Avatar group START -->
-        <ul class="avatar-group list-unstyled align-items-center">
-          {% comment %} {{e.id}}{{event.eventhost.host_id}}
-          {{event.event}} {% endcomment %}
-          {{event.id}}{{event_date.event.eventhost.host}}
-          {% for eventhost in event_date.event.eventhost %}
-          {% comment %} {% for eventhost in hosts %} {% endcomment %}
-          -
-          {% thumbnail eventhost.image "100x100" crop="center" as im %}
+        {% for host in hosts %}
+        <a href="/profile/{{host.profile.user}}/">
+          <div class="avatar avatar-sm mb-3">
+            {% thumbnail host.profile.image "50x50" crop="center" as im %}
               <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="{{ page.page_name }} | {{ page.page_type }} | Club Swing">
-          {% endthumbnail %}
-          {{eventhost.event.event.host_for}} - {{eventhost.host_id.profile}}{{eventhost.host_id.event.event}}
-          {% endfor %}
-
-          <li class="ms-4">
-            <small> 148.9K people responded</small>
-          </li>
-        </ul>
+            {% endthumbnail %}
+          </div>
+                    {{host}}
+        </a>
+        {% endfor %}
       </div>
+      <!-- Host group END -->
       <div class="col-lg-6">
-        <!-- Avatar group END -->
         <div class="row g-2">
           <div class="col-sm-4">
             <!-- Visitors -->

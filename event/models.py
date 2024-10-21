@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from pages.models import Page, PageHost
+from profiles.models import Profile
 from datetime import datetime
 from django_resized import ResizedImageField
 import os
@@ -145,19 +146,22 @@ class Event(models.Model):
         return self.event.title
 
 
-# class EventHost(models.Model):
-#     host = models.ForeignKey(
-#         Profile, on_delete=models.CASCADE, related_name="event_host"
-#     )
-#     event = models.ForeignKey(
-#         MasterEvent, on_delete=models.CASCADE, related_name="host_for"
-#     )
+class EventHost(models.Model):
+    host = models.ForeignKey(
+        Profile, on_delete=models.CASCADE, related_name="event_host"
+    )
+    event = models.ForeignKey(
+        MasterEvent, on_delete=models.CASCADE, related_name="host_for"
+    )
 
-#     class Meta:
-#         unique_together = ("host", "event")
+    class Meta:
+        unique_together = ("host", "event")
 
-#     def __str__(self):
-#         return self.host.display_name
+    def __str__(self):
+        return self.host.display_name
+
+    def profile(self):
+        return self.host
 
 
 # class EventReview(models.Model):

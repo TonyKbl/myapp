@@ -6,7 +6,7 @@ from .models import (
     Meet,
     Event,
     # EventReview,
-    # EventHost,
+    EventHost,
 )
 
 
@@ -19,11 +19,11 @@ class ClubEventAdmin(admin.ModelAdmin):
     list_display = ("title",)
 
 
-# class EventHostAdmin(admin.ModelAdmin):
-#     list_display = (
-#         "event",
-#         "host",
-#     )
+class EventHostAdmin(admin.ModelAdmin):
+    list_display = (
+        "event",
+        "host",
+    )
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -33,7 +33,7 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(MasterEvent, MasterEventAdmin)
 admin.site.register(ClubEvent, ClubEventAdmin)
 admin.site.register(Event, EventAdmin)
-# admin.site.register(EventHost, EventHostAdmin)
+admin.site.register(EventHost, EventHostAdmin)
 # admin.site.register(EventReview)
 admin.site.register(Social)
 admin.site.register(Meet)
