@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     "profanity",
     "request",
     "blog",
-    # 'events',
+    "event",
     "feed",
     "friend",
     "gallery",

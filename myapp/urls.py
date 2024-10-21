@@ -20,7 +20,7 @@ from django.conf.urls import include
 from django.conf.urls.static import static
 from blog import urls as blog_urls
 
-# from events import urls as events_urls
+from event import urls as event_urls
 from feed import urls as feed_urls
 from gallery import urls as gallery_urls
 from pages import urls as pages_urls
@@ -44,7 +44,7 @@ admin.site.site_title = "Club Swing"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(blog_urls, namespace="blogs/")),
-    # path("", include(events_urls, namespace="events/")),
+    path("", include(event_urls, namespace="events/")),
     path("", include(feed_urls, namespace="feed/")),
     path("", include(gallery_urls, namespace="gallery/")),
     path("", include(pages_urls, namespace="pages/")),
