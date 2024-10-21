@@ -13,12 +13,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.conf.urls.static import static
 from blog import urls as blog_urls
-from events import urls as events_urls
+
+# from events import urls as events_urls
 from feed import urls as feed_urls
 from gallery import urls as gallery_urls
 from pages import urls as pages_urls
@@ -31,15 +33,18 @@ from django.conf import settings
 from django.urls import re_path as url
 from django.shortcuts import render
 
+
 def custom_page_not_found_view(request, exception):
-   return render(request, "404.html", {})
-admin.site.site_header = 'Club Swing Administration'
-admin.site.site_title = 'Club Swing'
+    return render(request, "404.html", {})
+
+
+admin.site.site_header = "Club Swing Administration"
+admin.site.site_title = "Club Swing"
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("", include(blog_urls, namespace="blogs/")),
-    path("", include(events_urls, namespace="events/")),
+    # path("", include(events_urls, namespace="events/")),
     path("", include(feed_urls, namespace="feed/")),
     path("", include(gallery_urls, namespace="gallery/")),
     path("", include(pages_urls, namespace="pages/")),
@@ -50,6 +55,5 @@ urlpatterns = [
     path("", include(messaging_urls, namespace="messages/")),
     path("", include(report_urls, namespace="reports/")),
     path("", include(search_urls, namespace="search/")),
-
     url("", include("allauth.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

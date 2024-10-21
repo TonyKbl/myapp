@@ -39,10 +39,12 @@
       <h6>Address</h6>
       <p>
         {{ page.address1 }}<br>
-        {% if page.address2 != None %}{{ page.address2 }}<br>{%endif%}
+        {% if page.address2 != None %}
+          {{ page.address2 }}<br>
+        {%endif%}
         {{page.town_city}}<br>
         {{page.county}}<br>
-        {{page.post_code}}
+        {{page.post_code}}<br>
         {% comment %} {% load leaflet_tags %}
         {% leaflet_css %}
         {% leaflet_js %} {% endcomment %}
