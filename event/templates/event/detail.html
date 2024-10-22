@@ -91,9 +91,9 @@
       <div class="d-flex mt-3 justify-content-center ms-sm-auto">
       {% comment %} <div class=" col"> {% endcomment %}
         {% if request.user.id|is_on_guestlist:event_date.id %}
-        <a class="btn btn-warning mb-2" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
+        <a class="btn btn-warning mb-2 btn-sm" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
         {% else %}
-        <a class="btn btn-primary mb-2" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
+        <a class="btn btn-primary mb-2 btn-sm" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
         {% endif %}
       <div class="dropdown">
         <!-- Card share action menu -->
@@ -131,8 +131,8 @@
             <!-- Button modal -->
           </div>
           <div class="col-sm-4 px-auto text-center">
-              <a href="https://maps.google.co.uk/maps?q={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="mx-auto btn btn-primary btn-small mx-auto mb-2" target="_blank">View Map </a> 
-              <a href="https://www.google.com/maps/dir/?api=1&destination={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="btn btn-primary btn-small mx-auto mb-2" target="_blank">Get Directions</a>
+              <a href="https://maps.google.co.uk/maps?q={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="mx-auto btn btn-primary btn-sm mx-auto mb-2" target="_blank">View Map </a> 
+              <a href="https://www.google.com/maps/dir/?api=1&destination={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="btn btn-primary btn-sm mx-auto mb-2" target="_blank">Get Directions</a>
           </div>
           <hr>
         <!-- Card END -->
