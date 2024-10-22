@@ -5,6 +5,7 @@ from .models import (
     Social,
     Meet,
     Event,
+    Guestlist,
     # EventReview,
     EventHost,
 )
@@ -37,3 +38,4 @@ admin.site.register(EventHost, EventHostAdmin)
 # admin.site.register(EventReview)
 admin.site.register(Social)
 admin.site.register(Meet)
+admin.site.register(Guestlist)

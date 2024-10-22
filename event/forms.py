@@ -1,5 +1,5 @@
 from django import forms
-from .models import ClubEvent
+from .models import ClubEvent, Guestlist
 from pages.models import Page, PageHost
 from django.contrib.auth.models import User
 
@@ -33,3 +33,21 @@ class ClubEventCreateForm(forms.ModelForm):
             page_name_id=self.kwargs["pk"]
         )
         return context
+
+
+class GuestlistCreateForm(forms.ModelForm):
+    class Meta:
+        model = Guestlist
+        fields = ("private",)
+
+        class Meta:
+            unique_together = (
+                "guest",
+                "event",
+            )
+
+
+class GuestlistDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Guestlist
+        exclude = ("private", "event", "guest")

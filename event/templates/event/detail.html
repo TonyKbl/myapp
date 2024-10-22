@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
+{% load custom_event_filters %}
 
 {% block title %}{{ event.name }} - Event{% endblock title %}
 
@@ -71,12 +72,14 @@
     <div class="row g-3 justify-content-between align-items-center mt-5 pt-5 position-relative z-index-9">
       <div class="col-lg-9">
         <h1 class="h3 mb-1 text-white">{{ event_date.event}}</h1>
+        <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h1>
         {% comment %} <a class="text-white" href="https://themes.getbootstrap.com/store/webestica" target="_blank">https://themes.getbootstrap.com/store/webestica</a> {% endcomment %}
       </div>
       <!-- Button -->
-      <div class="col-lg-3 text-lg-end">
-        <a class="btn btn-primary" href="#!"> Add to Guestlist </a>
-      </div>
+      {% comment %} <div class="col-lg-3 text-lg-end text-center text-white">
+         <a class="btn btn-primary mb-2" href="#!"> Join Guestlist </a><br>
+         <a class=" text-white" href="#!"> View Guestlist </a>
+      </div> {% endcomment %}
     </div>
     <!-- Event name END -->
   </div>
@@ -84,21 +87,29 @@
   
   <!-- Card About START -->
   <div class="card card-body">
-
+    <div class="row g-4 ms-auto me-auto">
+      <div class=" col">
+        {% if request.user.id|is_on_guestlist:event_date.id %}
+        <a class="btn btn-warning mb-2" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
+        {% else %}
+        <a class="btn btn-primary mb-2" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
+        {% endif %}
+        <a class=" text-white" href="#!"> View Guestlist</a>
+      </div>
+    </div>
+<hr>
   <!-- Related events START -->
   <div class="row g-4">
     <div class="col">
       <!-- Card START -->
-        <div class="row  px=0">
-          <h5 class="col mb-0 mx-0"><i class="bi bi-geo-alt pe-1"></i> Location</h5>
-        </div>
         <div class="row mt-0 mx-0">
-          <div class="col-sm-6">
-            <p class="color-white"><strong>{{ event_date.event.clubevent.location }}</strong>, {{ event_date.event.clubevent.location.town_city }}, {{ event_date.event.clubevent.location.county }}, {{ event_date.event.clubevent.location.post_code }} </p>
+          <div class="col-sm-8">
+          <h5 class="col mb-0 mx-0"><i class="bi bi-geo-alt pe-1"></i> {{ event_date.event.clubevent.location }}</h5>
+            <p class="color-white">{{ event_date.event.clubevent.location.town_city }}, {{ event_date.event.clubevent.location.county }}, {{ event_date.event.clubevent.location.post_code }} </p>
             <!-- Button modal -->
           </div>
-          <div class="col-sm-6 my-auto mx-auto px-auto">
-              <a href="https://maps.google.co.uk/maps?q={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="btn btn-primary btn-small mx-auto mb-2" target="_blank">View Map </a> 
+          <div class="col-sm-4 px-auto text-center">
+              <a href="https://maps.google.co.uk/maps?q={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="mx-auto btn btn-primary btn-small mx-auto mb-2" target="_blank">View Map </a> 
               <a href="https://www.google.com/maps/dir/?api=1&destination={{event_date.event.clubevent.location|urlencode}}+{{event_date.event.clubevent.location.address1|urlencode}}+{{event_date.event.clubevent.location.county|urlencode}}+{{event_date.event.clubevent.location.post_code|urlencode}}" class="btn btn-primary btn-small mx-auto mb-2" target="_blank">Get Directions</a>
           </div>
           <hr>
@@ -108,20 +119,26 @@
   </div>
     <div class="row g-4">
       <!-- info -->
-      <div class="col-12">
+      {% comment %} <div class="col-12">
         <p class="mb-0">{{ event_date.event.description|linebreaks}}</p>
-      </div>
-      <div class="col-sm-6 col-lg-4">
+      </div> {% endcomment %}
+      <div class="col-xs-6 col-md-4">
         <!-- Timings -->
         <h5>Timings</h5>
-        <p class="mb-0">{{ event_date.start_time|time}} - {{ event_date.end_time|time}}</p>
-      </div>
-      <!-- Entry Fees -->
-      <div class="col-sm-6 col-lg-4">
+        <p>
+          {{ event_date.start_time|time}} - {{ event_date.end_time|time}}
+        </p>
         <h5>Entry fees</h5>
         <p class="small mb-0">{{ event_date.admission_fees|linebreaks }}</p>
       </div>
-      <div class="col-sm-6 col-lg-4">
+      <!-- Entry Fees -->
+      <div class="col-xs-6 col-md-8 border-start">
+        <h5>Overview</h5>
+        <p class="mb-0">{{ event_date.event.description|linebreaks}}</p>
+        {% comment %} <h5>Entry fees</h5>
+        <p class="small mb-0">{{ event_date.admission_fees|linebreaks }}</p> {% endcomment %}
+      </div>
+      {% comment %} <div class="col-sm-6 col-lg-4">
         <!-- Rating -->
         <ul class="d-flex list-unstyled mb-1">
           <li class="me-2">4.5</li>
@@ -132,7 +149,7 @@
           <li><i class="fa-solid fa-star-half-stroke text-warning"></i></li>
           <li class="ms-1 small">132 Ratings</li>
         </ul>
-      </div>
+      </div> {% endcomment %}
     </div>
     <hr>
     <div class="row align-items-center">
@@ -146,7 +163,8 @@
               <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="{{ page.page_name }} | {{ page.page_type }} | Club Swing">
             {% endthumbnail %}
           </div>
-                    {{host}}
+          <span class = "text-white">{{host}}&nbsp</span>
+        
         </a>
         {% endfor %}
       </div>

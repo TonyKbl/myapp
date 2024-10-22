@@ -17,4 +17,14 @@ urlpatterns = [
         views.EventDetailView.as_view(),
         name="event_detail",
     ),
+    path(
+        "join-guestlist/<int:pk>",
+        views.ClubAddGuestlistView.as_view(),
+        name="guestlist",
+    ),
+    path(
+        "remove-from-guestlist/<int:pk>",
+        views.ClubDeleteGuestlistView.as_view(),
+        name="guestlist",
+    ),
 ]

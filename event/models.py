@@ -191,3 +191,15 @@ class EventHost(models.Model):
 #     """Create event dates when a master event is created"""
 #     if created:
 #         EventDate.objects.create(event=instance)
+
+
+class Guestlist(models.Model):
+    guest = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    private = models.BooleanField(null=False, blank=True)
+
+    class Meta:
+        unique_together = (
+            "guest",
+            "event",
+        )

@@ -7,32 +7,27 @@
 {% block title %}Add Event{% endblock title %}
 
 {% block content %}
+
                 <!-- Card feed item START -->
                 <div class="card">
                     <!-- Card header START -->
                     <div class="card-header border-0 pb-0">
-                        <h2>Add Event</h2>
+                        <h2> Remove from Guestlist</h2>
+<p> You are about to remove yourself from this guestlist. Click the button below to continue.</p>
                     </div>                     
                     <!-- Card header END -->
                     <!-- Card body START -->
                     <div class="card-body">
                         <div class="form_group">
                             <form class="form-with-validation" method="post" enctype="multipart/form-data">
+
+
                                 {% csrf_token %}
                                 {{ form|crispy }}
-                                Select Hosts for this event<br>
-                                <div class="card-body border" >
-                                {% for i in host_choices%}
-                                    <input type="checkbox" name="host_list" id="host_{{i.id}}" value="{{i.id}}" multiple="True">
-                                    <label for="host_{{i.id}}">@{{ i.host }}</label>
-                                    &nbsp
-                                {% endfor %}
-                                </div>
-                            <br>
-                                <input type="submit" value="Add Event" class="btn btn-primary">
+                                <input type="submit" value="Remove from Gustlist" class="btn btn-warning">
+
+                                {% endblock %}
                             </form>
                         </div>
                     </div>
                 </div>
-
-{% endblock %}
