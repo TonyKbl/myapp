@@ -27,4 +27,10 @@ urlpatterns = [
         views.ClubDeleteGuestlistView.as_view(),
         name="guestlist",
     ),
+    path(
+        "master-events/<int:pk>/<str:club>.html",
+        views.PageEventsList.as_view(),
+        name="page_events",
+    ),
+    path("add_date/<int:pk>", views.AddEventDateView.as_view(), name="add_date"),
 ]

@@ -1,5 +1,5 @@
 from django import forms
-from .models import ClubEvent, Guestlist
+from .models import ClubEvent, Guestlist, Event
 from pages.models import Page, PageHost
 from django.contrib.auth.models import User
 
@@ -50,4 +50,26 @@ class GuestlistCreateForm(forms.ModelForm):
 class GuestlistDeleteForm(forms.ModelForm):
     class Meta:
         model = Guestlist
-        exclude = ("private", "event", "guest")
+        exclude = ("private", "event", "guest", "profile_type")
+
+
+class EventAddDatesForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = (
+            "date",
+            "start_time",
+            "end_time",
+            "admission_fees",
+            "additional_info",
+        )
+
+        widgets = {
+            "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "start_time": forms.TimeInput(
+                attrs={"class": "form-control", "type": "time"}
+            ),
+            "end_time": forms.TimeInput(
+                attrs={"class": "form-control", "type": "time"}
+            ),
+        }

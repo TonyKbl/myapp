@@ -272,12 +272,12 @@
 										<a class="dropdown-item btn btn-primary-soft btn-sm my-2 text-center" href="{% url 'profiles:detail' request.user.username %}">View profile</a>
 									</li>
 									<!-- Links -->
-									<li><a class="dropdown-item" href="{% url "feed:new_post" %}"><i class="bi bi-plus-square fa-fw me-2"></i>Add New Post</a></li>
+									<li><a class="dropdown-item" href="{% url 'feed:new_post' %}"><i class="bi bi-plus-square fa-fw me-2"></i>Add New Post</a></li>
 									
-									<li><a class="dropdown-item" href="{% url "pages:add_page" %}"><i class="bi bi-flag fa-fw me-2"></i>Add New Page</a></li>
+									<li><a class="dropdown-item" href="{% url 'pages:add_page' %}"><i class="bi bi-flag fa-fw me-2"></i>Add New Page</a></li>
 									
 									{% if perms.blog.add_blog %} 
-									<li><a class="dropdown-item" href="{% url "blog:add_article" %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Add New Blog Article</a></li>
+									<li><a class="dropdown-item" href="{% url 'blog:add_article' %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Add New Blog Article</a></li>
 									{% endif %}
 									<li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings & Privacy</a></li>
 									{% comment %} <li> 
@@ -417,7 +417,7 @@
 														<a class="nav-link" href="{% url 'pages:list'%}"><i class="fa fa-flag me-2 h-20px fa-fw"></i><span>Pages </span></a>
 													</li>
 													<li class="nav-item">
-														<a class="nav-link" href="/events/"><i class="fa fa-calendar-day me-2 h-20px fa-fw"></i><span>Events </span></a>
+														<a class="nav-link" href="/events.html"><i class="fa fa-calendar-day me-2 h-20px fa-fw"></i><span>Events </span></a>
 													</li>
 													{% comment %} <li class="nav-item">
 														<a class="nav-link" href="groups.html"> <i class="fa-solid fa-user-group me-2 h-20px fa-fw"></i><span>Groups </span></a>
@@ -434,7 +434,7 @@
 											<!-- Card body END -->
 											<!-- Card footer -->
 											<div class="card-footer text-center py-2">
-												<a class="btn btn-link btn-sm" href="my-profile.html">View Profile </a>
+												<a class="btn btn-link btn-sm" href="{% url 'profiles:detail' request.user.username %}">View Profile </a>
 											</div>
 										</div>
 										<!-- Card END -->

@@ -14,7 +14,12 @@ from profiles.models import Profile
 
 from .models import MasterEvent, Event, ClubEvent, EventHost, Guestlist
 
-from .forms import ClubEventCreateForm, GuestlistCreateForm, GuestlistDeleteForm
+from .forms import (
+    ClubEventCreateForm,
+    GuestlistCreateForm,
+    GuestlistDeleteForm,
+    EventAddDatesForm,
+)
 
 
 # Create your views here.
@@ -106,6 +111,7 @@ class ClubAddGuestlistView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.event_id = self.kwargs.get("pk")
         form.instance.guest = self.request.user
+        form.instance.profile_type = self.request.user.profile.profile_type
         return super(ClubAddGuestlistView, self).form_valid(form)
 
     def get_object(self):
@@ -123,6 +129,42 @@ class ClubDeleteGuestlistView(LoginRequiredMixin, DeleteView):
         form.instance.event_id = self.kwargs.get("pk")
         form.instance.guest = self.request.user
         return super(ClubDeleteGuestlistView, self).form_valid(form)
+
+
+class PageEventsList(ListView):
+    # html_method_names = ["get"]
+    # template_name = "events/list.html"
+    # models = Events
+    # context_object_name = "events"
+    # queryset = Events.objects.all().order_by('-id')[0:30]
+    http_method_names = ["get"]
+    template_name = "event/master-events.html"
+    model = Page
+    context_object_name = "event"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PageEventsList, self).get_context_data(*args, **kwargs)
+        context["event"] = ClubEvent.objects.filter(
+            location__id=self.kwargs["pk"]
+        ).order_by("id")
+        return context
+
+
+class AddEventDateView(LoginRequiredMixin, CreateView):
+    models = Event
+    form_class = EventAddDatesForm
+    template_name = "event/add_date.html"
+    # queryset = Event.objects.all()
+    success_message = "Your event was added successfully"
+    success_url = "/events.html"
+
+    def form_valid(self, form):
+        form.instance.event_id = self.kwargs.get("pk")
+        form.instance.organiser = self.request.user
+        return super(AddEventDateView, self).form_valid(form)
+
+    def get_object(self):
+        return self.request.user
 
 
 # @login_required

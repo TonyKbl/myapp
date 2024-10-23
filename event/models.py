@@ -127,9 +127,7 @@ class Meet(MasterEvent):
 
 
 class Event(models.Model):
-    default_admission_fees = (
-        "Couples - £\nSingle Males - £\nSingle Females - £\nTV/TS - £"
-    )
+    default_admission_fees = "Couples\t£\nSingle Males\t£\nSingle Females\t£\nTV/TS\t£"
     event = models.ForeignKey(
         MasterEvent, on_delete=models.CASCADE, related_name="master_event"
     )
@@ -196,6 +194,7 @@ class EventHost(models.Model):
 class Guestlist(models.Model):
     guest = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    profile_type = models.CharField(max_length=10, null=True)
     private = models.BooleanField(null=False, blank=True)
 
     class Meta:
