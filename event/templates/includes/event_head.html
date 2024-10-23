@@ -1,0 +1,74 @@
+{% load thumbnail %}
+{% load custom_filters %}
+{% load custom_event_filters %}
+
+{% load custom_page_filters %}
+
+    <!-- Card START -->
+    <div class="card">
+        <div class="h-200px rounded-top" style="background-image:url(https://clubs4fun.s3.amazonaws.com/static/{{ event_date.event.clubevent.image }}); background-position: center; background-size: cover; background-repeat: no-repeat;">
+        </div>
+        <!-- Card body START -->
+        <div class="card-body py-0">
+          <div class="d-sm-flex align-items-start text-center text-sm-start">
+            <div class="mt-sm-3">
+              <!-- Info -->
+        <h1 class="h3 mb-1 text-white">{{ event_date.event}}</h1>
+        <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h1>
+        {% comment %} <p>{% avg_rating page.id %} {% autoescape off %}{% avg_stars page.id %}{% endautoescape %} ({% review_count page.id %})</p> {% endcomment %}
+            </div>
+            <!-- Button -->
+            <div class="d-flex mt-3 justify-content-center ms-sm-auto">
+              {% if request.user.is_authenticated %}
+                {% if page.user.username == request.user.username %}
+                  <a href="/edit_page/{{page.id}}/{{page.page_type|slugify}}/{{page.slug}}" >
+                    <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit </button>
+                  </a>
+                {% else %}
+                {% if request.user.id|is_on_guestlist:event_date.id %}
+                <a class="btn btn-warning mb-2 btn-sm" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
+                {% else %}
+                <a class="btn btn-primary mb-2 btn-sm" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
+                {% endif %}
+                {% endif %}
+              <div class="dropdown">
+                <!-- Card share action menu -->
+                <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-three-dots"></i>
+                </button>
+                <!-- Card share action dropdown menu -->
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
+                  <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Page Post</a></li>
+                  
+                    <li><a class="dropdown-item" href="/add_host/{{page.id}}"> <i class="bi bi-person fa-fw pe-2"></i>Add Event Host</a></li>
+                    
+                 
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="/master-events/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>Master Events</a></li>
+                    <li><a class="dropdown-item" href="/add-club-event/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>Add Master Event</a></li>
+                  
+                  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
+                  <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
+                  <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
+                </ul>
+              </div>
+                {% endif %}
+            </div>
+          </div>
+          <!-- List profile -->
+        </div>
+        <!-- Card body END -->
+        <div class="card-footer mt-3 pt-2 pb-0">
+          <!-- Nav profile pages -->
+          {% comment %} <ul class="nav nav-bottom-line align-items-center justify-content-center justify-content-md-start mb-0 border-0">
+            <li class="nav-item"> <a class="nav-link {{ feed_active }}" href="{% url 'pages:page_feed' page.page_type|slugify page.slug %}#page_menu">&nbsp Feed </a> </li>
+            <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.page_type|slugify page.slug %}#page_menu"> About </a> </li>
+            <li class="nav-item"> <a class="nav-link {{ gallery_active }}" href="#page_menu"> Gallery</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#page_menu"> Events</a> </li>
+            <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.page_type|slugify page.slug %}#page_menu"> Reviews</a> </li>
+          </ul> {% endcomment %}
+      </div>
+      </div>
+      <!-- Card END -->

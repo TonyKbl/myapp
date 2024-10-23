@@ -6,9 +6,8 @@
 {% block title %}{{ event.name }} - Event{% endblock title %}
 
 {% block content %}
-{% comment %} 
-{% include 'includes/page_head.html' with about_active="active" %} {% endcomment %}
-    <!-- Card about item START -->
+{% include "includes/event_head.html"%}
+<!-- Card about item START -->
     {% comment %} <div class="card">
       <!-- Card header START -->
       <div class="card-header border-0 pb-0">
@@ -56,70 +55,11 @@
 
 <div class="col stack gap-4">
   <!-- Card START -->
-  <div class="card card-body card-overlay-bottom border-0" style="background-image:url(https://clubs4fun.s3.amazonaws.com/static/{{ event_date.event.clubevent.image }}); background-position: center; background-size: cover; background-repeat: no-repeat;">
-    <a href="https://clubs4fun.s3.amazonaws.com/static/{{ event_date.event.clubevent.image }}" class ="stretched-link"></a>
-    <!-- Card body START -->
-    <div class="row g-3 justify-content-between">
-      <!-- Date START -->
-      <div class="col-lg-2">
-        <div class="bg-mode text-center rounded overflow-hidden p-1 d-inline-block">
-          <h5 class="bg-primary p-2 text-white rounded-top lh-1">{{ event_date.date|date:"l" }}</h5>
-          <h5 class="mb-0 py-2 lh-1">{{ event_date.date|date:"dS M" }}</h5>  
-        </div>
-      </div>
-    </div>
-    <!-- Event name START -->
-    <div class="row g-3 justify-content-between align-items-center mt-5 pt-5 position-relative z-index-9">
-      <div class="col-lg-9">
-        <h1 class="h3 mb-1 text-white">{{ event_date.event}}</h1>
-        <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h1>
-        {% comment %} <a class="text-white" href="https://themes.getbootstrap.com/store/webestica" target="_blank">https://themes.getbootstrap.com/store/webestica</a> {% endcomment %}
-      </div>
-      <!-- Button -->
-      {% comment %} <div class="col-lg-3 text-lg-end text-center text-white">
-         <a class="btn btn-primary mb-2" href="#!"> Join Guestlist </a><br>
-         <a class=" text-white" href="#!"> View Guestlist </a>
-      </div> {% endcomment %}
-    </div>
-    <!-- Event name END -->
-  </div>
+
   <!-- Card END -->
   
   <!-- Card About START -->
   <div class="card card-body">
-    {% comment %} <div class="row g-4 ms-auto me-auto"> {% endcomment %}
-      <div class="d-flex mt-3 justify-content-center ms-sm-auto">
-      {% comment %} <div class=" col"> {% endcomment %}
-        {% if request.user.id|is_on_guestlist:event_date.id %}
-        <a class="btn btn-warning mb-2 btn-sm" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
-        {% else %}
-        <a class="btn btn-primary mb-2 btn-sm" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
-        {% endif %}
-      <div class="dropdown">
-        <!-- Card share action menu -->
-        <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
-          <i class="bi bi-three-dots"></i>
-        </button>
-        <!-- Card share action dropdown menu -->
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
-          <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>View Guestlist</a></li>
-          
-            <li><a class="dropdown-item" href="/add_host/{{page.id}}"> <i class="bi bi-person fa-fw pe-2"></i>Add Event Host</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/master-events/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>Add Dates</a></li>
-            <li><a class="dropdown-item" href="/add-club-event/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>Add Master Event</a></li>
-         
-          {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
-          <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
-          <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
-        </ul>
-      </div>
-      {% comment %} </div> {% endcomment %}
-      
-    </div>
-<hr>
   <!-- Related events START -->
   <div class="row g-4">
     <div class="col">
