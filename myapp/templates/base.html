@@ -472,7 +472,7 @@
 
 						
 					<!-- Main content START -->
-					<div class="col-md-8 col-lg-8 vstack gap-4 pe-0 mt-0">
+					<div class="col-md-6 col-lg-6 vstack gap-4 pe-0 mt-0">
 							{% if messages %}
 								<div>
 									{% for message in messages %}
@@ -487,11 +487,11 @@
 					<!-- Main content END -->
 
 					<!-- Right sidebar START -->
-					{% comment %} <div class="col-lg-3 pe-0 mt-0"> {% endcomment %}
-					<div class="colpe-0 mt-0">
-						{% comment %} <div class="row g-4"> {% endcomment %}
+					<div class="col-lg-3 pe-0 mt-0">
+					{% comment %} <div class="col pe-0 mt-0"> {% endcomment %}
+						<div class="row g-4">
 								{% block rightbar %}{% endblock rightbar %}
-						{% comment %} </div> {% endcomment %}
+						</div>
 					</div>
 					<!-- Right sidebar END -->
 

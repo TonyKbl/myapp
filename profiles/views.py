@@ -87,11 +87,8 @@ class LookingForUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse("profiles:detail", kwargs={"username": self.request.user})
 
-    # def get_success_url(self):
-    #     return reverse("/edit_2nd_person/")
-
-    def get_object(self):
-        return self.request.user
+    # def get_object(self):
+    #     return self.request.user
 
     def get_object(self, queryset=None):
         obj = LookingFor.objects.get(user=self.request.user)

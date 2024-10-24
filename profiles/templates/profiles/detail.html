@@ -130,6 +130,15 @@
       </div>
       <!-- Card feed item END -->
 
+{% else %}
+
+ <h6> User is inactive </h6>
+
+{% endif %}
+
+{% endblock %}
+{% block rightbar %}
+
       <!-- Card feed item START -->
       <div class="card">
         <!-- Card header START -->
@@ -314,10 +323,4 @@
         </div>
         <!-- Card body END -->
       </div>
-{% else %}
-
- <h6> User is inactive </h6>
-
-{% endif %}
-
 {% endblock %}

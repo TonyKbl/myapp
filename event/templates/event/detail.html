@@ -131,47 +131,48 @@
         {% endfor %}
       </div>
       <!-- Host group END -->
-      <div class="col-lg-6">
+      <div class="col=lg-6">
         <div class="row g-2">
-          <div class="col-sm-3">
+          <h5>Attendees</h5>
+          <div class="col-3">
             <!-- Visitors -->
             <div class="d-flex">
               <i class="fa-solid fa-mars"></i>
               <div class="ms-3">
                 <h5 class="mb-0">{% guestlist_man_count event_date.id %}</h5>
-                <p class="mb-0">Men</p>
               </div>
             </div>
+                <p class="mb-0">Men</p>
           </div>
-          <div class="col-sm-3">
+          <div class="col-3">
             <!-- Registred -->
             <div class="d-flex">
               <i class="fa-solid fa-venus"></i>
               <div class="ms-3">
                 <h5 class="mb-0">{% guestlist_woman_count event_date.id %}</h5>
-                <p class="mb-0">Women</p>
               </div>
             </div>
+                <p class="mb-0">Women</p>
           </div>
-          <div class="col-sm-3">
+          <div class="col-3">
             <!-- Registred -->
             <div class="d-flex">
               <i class="fa-solid fa-venus-mars"></i>
               <div class="ms-3">
                 <h5 class="mb-0">{% guestlist_couple_count event_date.id %}</h5>
-                <p class="mb-0">Couples</p>
               </div>
             </div>
+                <p class="mb-0">Couples</p>
           </div>
-          <div class="col-sm-3">
+          <div class="col-3">
             <!-- Attendance -->
             <div class="d-flex">
               <i class="fa-solid fa-transgender"></i>
               <div class="ms-3">
                 <h5 class="mb-0">{% guestlist_trans_count event_date.id %}</h5>
-                <p class="mb-0">Trans</p>
               </div>
             </div>
+                <p class="mb-0">Trans</p>
           </div>
         </div>
       </div>
