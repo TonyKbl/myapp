@@ -202,3 +202,6 @@ class Guestlist(models.Model):
             "guest",
             "event",
         )
+
+    def __str__(self):
+        return self.guest.username

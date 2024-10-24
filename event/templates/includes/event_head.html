@@ -9,13 +9,14 @@
         <div class="h-200px rounded-top" style="background-image:url(https://clubs4fun.s3.amazonaws.com/static/{{ event_date.event.clubevent.image }}); background-position: center; background-size: cover; background-repeat: no-repeat;">
         </div>
         <!-- Card body START -->
-        <div class="card-body py-0">
+        <div class="card-body pt-0">
           <div class="d-sm-flex align-items-start text-center text-sm-start">
             <div class="mt-sm-3">
               <!-- Info -->
-        <h1 class="h3 mb-1 text-white">{{ event_date.event}}</h1>
-        <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h1>
-        {% comment %} <p>{% avg_rating page.id %} {% autoescape off %}{% avg_stars page.id %}{% endautoescape %} ({% review_count page.id %})</p> {% endcomment %}
+              <h1 class="h3 mb-1 text-white">{{ event_date.event}}</h1>
+              <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}.{{ event_date.event.clubevent.location.town_city}}. </h2>
+              <h2 class="h6 mb-1 text-small">{{ event_date.date|date}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h2>
+              {% comment %} <p>{% avg_rating page.id %} {% autoescape off %}{% avg_stars page.id %}{% endautoescape %} ({% review_count page.id %})</p> {% endcomment %}
             </div>
             <!-- Button -->
             <div class="d-flex mt-3 justify-content-center ms-sm-auto">

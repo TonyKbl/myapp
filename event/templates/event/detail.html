@@ -84,17 +84,8 @@
       {% comment %} <div class="col-12">
         <p class="mb-0">{{ event_date.event.description|linebreaks}}</p>
       </div> {% endcomment %}
-      <div class="col-xs-6 col-md-4">
-        <!-- Timings -->
-        <h5>Timings</h5>
-        <p>
-          {{ event_date.start_time|time}} - {{ event_date.end_time|time}}
-        </p>
-        <h5>Entry fees</h5>
-        <p class="small mb-0">{{ event_date.admission_fees|linebreaks }}</p>
-      </div>
       <!-- Entry Fees -->
-      <div class="col-xs-6 col-md-8 border-start">
+      <div class="col">
         <h5>Overview</h5>
         <p class="mb-0">{{ event_date.event.description|linebreaks}}</p>
         {% comment %} <h5>Entry fees</h5>
@@ -180,6 +171,48 @@
   </div>
   <!-- Card About END -->
 </div>
+
+
+
+{% endblock %}
+{% block rightbar %}
+
+<!-- Card feed item START -->
+<div class="card">
+  <!-- Card header START -->
+  <div class="card-header d-flex justify-content-between border-0 pb-0">
+    <h5 class="card-title">Timings</h5>
+ </div>
+  <!-- Card header END -->
+  <!-- Card body START -->
+  <div class="card-body">
+        <!-- Timings item START -->
+       
+          {{ event_date.start_time|time}} - {{ event_date.end_time|time}}
+        
+        <!-- Timings items end -->
+  </div>
+  <!-- Card body END -->
+</div>
+<!-- Card feed item END -->
+
+      <!-- Card feed item START -->
+      <div class="card">
+        <!-- Card header START -->
+        <div class="card-header d-flex justify-content-between border-0 pb-0">
+          <h5 class="card-title">Entry Fees</h5>
+       </div>
+        <!-- Card header END -->
+        <!-- Card body START -->
+        <div class="card-body">
+              <!-- Entry Fees item START -->
+        <p class="small mb-0">{{ event_date.admission_fees|linebreaks }}</p>
+              <!-- Entry Fees items end -->
+        </div>
+        <!-- Card body END -->
+      </div>
+      <!-- Card feed item END -->
+
 
 
 
