@@ -31,8 +31,10 @@ DEVELOPMENT_MODE = env.DEVELOPMENT_MODE
 ALLOWED_HOSTS = (
     "127.0.0.1",
     "localhost",
-    ".clubsforfun.com",
-    ".clubswing.co.uk",
+    "clubsforfun.com",
+    "www.clubsforfun.com",
+    "clubswing.co.uk",
+    "www.clubswing.co.uk",
 )
 
 
@@ -284,7 +286,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.clubsforfun.com",
     "https://clubsforfun.co.uk",
     "http://18.134.250.132",
-    "https://clubswing.com",
 ]
 CSRF_COOKIE_SECURE = True
 
