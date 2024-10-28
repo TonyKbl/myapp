@@ -284,8 +284,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://www.clubswing.co.uk",
     "https://clubsforfun.com",
     "https://www.clubsforfun.com",
-    "https://clubsforfun.co.uk",
-    "http://18.134.250.132",
 ]
 CSRF_COOKIE_SECURE = True
 
