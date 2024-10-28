@@ -28,7 +28,12 @@ AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", env.AWS_ACCESS_KEY_ID)
 
 DEVELOPMENT_MODE = env.DEVELOPMENT_MODE
 
-ALLOWED_HOSTS = ("127.0.0.1", "localhost", "www.clubsforfun.com", "clubsforfun.com")
+ALLOWED_HOSTS = (
+    "127.0.0.1",
+    "localhost",
+    ".clubsforfun.com",
+    ".clubswing.co.uk",
+)
 
 
 # Application definition
@@ -273,6 +278,8 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", env.EMAIL_HOST_PASSWORD)
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", env.DEFAULT_FROM_EMAIL)
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://clubswing.co.uk",
+    "https://www.clubswing.co.uk",
     "https://clubsforfun.com",
     "https://www.clubsforfun.com",
     "https://clubsforfun.co.uk",
