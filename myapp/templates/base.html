@@ -341,7 +341,7 @@
 		<!-- **************** MAIN CONTENT START **************** -->
 			<!-- Container START -->
 						<main>					
-			<div class="container-xxl g-0 g-md-1">
+			<div class="container-xxl g-0 g-md-1 scrollbar-gutter">
 				<div class="row g-4">
 					<!-- Sidenav START -->
 					<div class="col-lg-3 mt-0">
@@ -472,7 +472,7 @@
 
 						
 					<!-- Main content START -->
-					<div class="col-lg-6 vstack gap-4 me-0 mt-0">
+					<div class="col-lg-6 vstack gap-4 pe-0 me-0 mt-0 mb-4">
 							{% if messages %}
 								<div>
 									{% for message in messages %}
@@ -487,7 +487,7 @@
 					<!-- Main content END -->
 
 					<!-- Right sidebar START -->
-					<div class="col-lg-3 mt-0">
+					<div class="col-lg-3 vstack gap-4 pe-0 me-0 mt-0">
 					{% comment %} <div class="col pe-0 mt-0"> {% endcomment %}
 								{% block rightbar %}{% endblock rightbar %}
 					</div>
