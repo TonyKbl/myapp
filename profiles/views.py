@@ -19,6 +19,7 @@ from .forms import (
     ProfileGalleryCreateForm,
     SetProfileTypeForm,
     Profile2ndPersonForm,
+    Profile1stPersonForm,
     LookingForUpdateForm,
     InterestUpdateForm,
 )
@@ -162,6 +163,23 @@ class SetProfileTypeView(LoginRequiredMixin, UpdateView):
 class Profile2ndPersonView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = Profile2ndPersonForm
+    template_name = "profiles/profile_update_form.html"
+    # success_url = reverse('profile:detail', user.username)
+
+    def get_success_url(self):
+        return reverse("profiles:detail", kwargs={"username": self.request.user})
+
+    def get_object(self):
+        return self.request.user
+
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
+
+
+class Profile1stPersonView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = Profile1stPersonForm
     template_name = "profiles/profile_update_form.html"
     # success_url = reverse('profile:detail', user.username)
 

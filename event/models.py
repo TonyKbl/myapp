@@ -15,9 +15,11 @@ class PathAndRename(object):
         self.path = sub_path
 
     def __call__(self, instance, filename):
+        today = datetime.now()
+        today_path = today.strftime("%Y/%m/%d")
         ext = filename.split(".")[-1]
         # set filename as random string
-        filename = "{}.{}".format(uuid4().hex, ext)
+        filename = "{}/{}.{}".format(today_path, uuid4().hex, ext)
         # return the whole path to the file
         return os.path.join(self.path, filename)
 
@@ -46,15 +48,9 @@ class MasterEvent(models.Model):
 
 
 class ClubEvent(MasterEvent):
-    today = datetime.now()
-    today_path = today.strftime(
-        "%Y/%m/%d"
-    )  ## this will create something like "2011/08/30"
-    upload_dir = "event_images/" + today_path
-
     image = ResizedImageField(
         size=[600, 600],
-        upload_to=PathAndRename(upload_dir),
+        upload_to=PathAndRename("event_images/"),
         max_length=200,
         null=True,
         blank=True,
@@ -65,15 +61,9 @@ class ClubEvent(MasterEvent):
 
 
 class Social(MasterEvent):
-    today = datetime.now()
-    today_path = today.strftime(
-        "%Y/%m/%d"
-    )  ## this will create something like "2011/08/30"
-    upload_dir = "event_images/" + today_path
-
     image = ResizedImageField(
         size=[600, 600],
-        upload_to=PathAndRename(upload_dir),
+        upload_to=PathAndRename("event_images/"),
         max_length=200,
         null=True,
         blank=True,
@@ -82,15 +72,9 @@ class Social(MasterEvent):
 
 
 class Festival(MasterEvent):
-    today = datetime.now()
-    today_path = today.strftime(
-        "%Y/%m/%d"
-    )  ## this will create something like "2011/08/30"
-    upload_dir = "event_images/" + today_path
-
     image = ResizedImageField(
         size=[600, 600],
-        upload_to=PathAndRename(upload_dir),
+        upload_to=PathAndRename("event_images/"),
         max_length=200,
         null=True,
         blank=True,
@@ -99,15 +83,9 @@ class Festival(MasterEvent):
 
 
 class PrivateParty(MasterEvent):
-    today = datetime.now()
-    today_path = today.strftime(
-        "%Y/%m/%d"
-    )  ## this will create something like "2011/08/30"
-    upload_dir = "event_images/" + today_path
-
     image = ResizedImageField(
         size=[600, 600],
-        upload_to=PathAndRename(upload_dir),
+        upload_to=PathAndRename("event_images/"),
         max_length=200,
         null=True,
         blank=True,
@@ -127,7 +105,12 @@ class Meet(MasterEvent):
 
 
 class Event(models.Model):
-    default_admission_fees = "Couples\t£\nSingle Males\t£\nSingle Females\t£\nTV/TS\t£"
+    default_admission_fees = """
+Couples £
+Single Males    £
+Single Females  £
+TV/TS   £"""
+
     event = models.ForeignKey(
         MasterEvent, on_delete=models.CASCADE, related_name="master_event"
     )

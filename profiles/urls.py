@@ -22,6 +22,9 @@ urlpatterns = [
     path(
         "edit_2nd_person/", views.Profile2ndPersonView.as_view(), name="edit_2nd_person"
     ),
+    path(
+        "edit_1st_person/", views.Profile1stPersonView.as_view(), name="edit_2nd_person"
+    ),
     path("feed/<str:username>/", views.ProfileFeedView.as_view(), name="feed"),
     path("profile/<str:username>/", views.ProfileDetailView.as_view(), name="detail"),
     path("follow/<str:username>/", views.follow, name="follow"),

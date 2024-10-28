@@ -15,6 +15,9 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import UpdateView
+from django.template import loader
+from django.http import HttpResponse
+from django.core.mail import send_mail
 
 from feed.models import PagePost
 from place_area.models import PostCode
@@ -26,6 +29,7 @@ from .forms import (
     PageCreateForm,
     PageReviewForm,
     PageUpdateForm,
+    PageEmailForm,
 )
 from .models import ClaimPage, Page, PageFollow, PageHost, PageReviews
 
@@ -153,6 +157,56 @@ class PageFeedView(LoginRequiredMixin, DetailView):
         return context
 
 
+# class SendClubEmail(self, *args, **kwargs):
+#     # obj_id = instance._id
+
+#     message = """A message has been send from clubswing.co.uk contact page on your profile
+
+#     Page - {pg_name}
+#     Name - {name}
+#     Email - {email}
+#     Subject - {subject}
+
+#     Message
+#     =======
+#     {message}
+
+#     """.format(
+#         pg_name=self.kwargs["slug"],
+#         name=request.GET.get("name"),
+#         email=request.GET.get("email"),
+#         subject=request.GET.get("subject"),
+#         message=request.GET.get("message"),
+#     )
+#     subject = request.GET.get("subject")
+#     email = request.GET.get("email")
+#     name = request.GET.get("name")
+
+#     send_mail(
+#         subject,
+#         message,
+#         name,
+#         [email],
+#         fail_silently=False,
+#     )
+
+
+# def email_view(slug):
+#     name = request.POST.get("full_name", False)
+#     email = request.POST.get("email", False)
+#     subject = request.POST.get("subject", False)
+#     message = request.POST.get("message", False)
+#     form = PageEmailForm()
+#     if request.method == "POST":
+#         form = PageEmailForm(request.POST)
+#     if form.is_valid():
+#         send_club_email(name, email, subject, message)
+#         template = loader.get_template("./templates/pages/thankyoumsg.html")
+#         return HttpResponse(template.render({}, request))
+#     template = loader.get_template("./templates/pages/contact.html")
+#     return HttpResponse(template.render({"form": form}, request))
+
+
 #### START OF COOD CODE #####
 
 # class PageFeedView(LoginRequiredMixin, DetailView):
@@ -182,7 +236,7 @@ class PageReviewsView(DetailView):
 
 
 class PageAddReviewView(LoginRequiredMixin, CreateView):
-    models = PageReviews
+    model = PageReviews
     form_class = PageReviewForm
     template_name = "pages/add_review.html"
     # queryset = PageReviews.objects.all()
@@ -199,7 +253,7 @@ class PageAddReviewView(LoginRequiredMixin, CreateView):
 
 
 class PageAddHostView(LoginRequiredMixin, CreateView):
-    models = PageHost
+    model = PageHost
     form_class = PageAddHostForm
     template_name = "pages/add_host.html"
     # queryset = PageReviews.objects.all()
@@ -219,7 +273,7 @@ class PageAddHostView(LoginRequiredMixin, CreateView):
 
 
 class PageAddClaimView(LoginRequiredMixin, CreateView):
-    models = ClaimPage
+    model = ClaimPage
     form_class = PageClaimForm
     template_name = "pages/add_claim.html"
     # queryset = PageReviews.objects.all()

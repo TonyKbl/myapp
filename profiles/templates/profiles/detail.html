@@ -29,7 +29,7 @@
                 <th scope="col"></th>
                 <th scope="col">{{user.profile.name}}</th>
                 <th scope="col">
-                  {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                  {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple FF' %}
                   {{user.profile.name2}}
                   {%endif%}&nbsp
                 </th>
@@ -41,7 +41,7 @@
                 <th scope="row">Age</th>
                 <td>{{user.profile.age}}</td>
                 <td>
-                  {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                  {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple FF' %}
                   {{user.profile.age2}}
                   {%endif%}&nbsp
                 </td>
@@ -50,7 +50,7 @@
                 <th scope="row">Sexuality</th>
                 <td>{{user.profile.sexuality}}</td>
                 <td>
-                  {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                  {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple FF' %}
                   {{user.profile.sexuality2}}
                   {%endif%}&nbsp
                 </td>
@@ -59,7 +59,7 @@
                 <th scope="row">Height</th>
                 <td>{{user.profile.height}}</td>
                 <td>
-                  {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                  {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple FF' %}
                   {{user.profile.height2}}
                   {%endif%}&nbsp
                 </td>
@@ -68,7 +68,7 @@
                 <th scope="row">Body Type:</th>
                 <td>{{user.profile.body_type}}</td>
                 <td>
-                  {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                  {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple FF' %}
                   {{user.profile.body_type2}}
                   {%endif%}&nbsp
                 </td>
@@ -77,7 +77,7 @@
                 <th scope="row">Smoke/Vape</th>
                 <td>{{user.profile.smoke}}</td>
                 <td>
-                  {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                  {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple FF' %}
                   {{user.profile.smoke2}}
                   {%endif%}&nbsp
                 </td>
@@ -86,11 +86,21 @@
                 <th scope="row">Drink</td>
                   <td>{{user.profile.drink}}</td>
                   <td>
-                    {%if user.profile.profile_type == 'COUPLE_MF' or user.profile.profile_type == 'COUPLE_MM' or user.profile.profile_type == 'COUPLE_FF' %}
+                    {%if user.profile.profile_type == 'Couple MF' or user.profile.profile_type == 'Couple MM' or user.profile.profile_type == 'Couple FF' %}
                     {{user.profile.drink2}}
                     {%endif%}&nbsp
                   </td>
               </tr>
+              
+              {% if request.user.is_authenticated %}
+              {% if user.username == request.user.username %}
+              <tr>
+                <th scope="row">&nbsp</td>
+                  <td><a href="/edit_1st_person/" class="btn btn-primary-soft btn-sm">Edit</a></td>
+                  <td><a href="/edit_2nd_person/" class="btn btn-primary-soft btn-sm">Edit</a></td>
+              </tr>
+              {% endif %}
+              {% endif %}
             </tbody>
             </table>
             {% comment %} {% for lf in lookingfor %} {% endcomment %}

@@ -341,7 +341,7 @@
 		<!-- **************** MAIN CONTENT START **************** -->
 			<!-- Container START -->
 						<main>					
-			<div class="container-xxl g-0 g-md-1 scrollbar-gutter">
+			<div class="container-xxl g-0 g-md-1">
 				<div class="row g-4">
 					<!-- Sidenav START -->
 					<div class="col-lg-3 mt-0">
@@ -358,8 +358,8 @@
 										<!-- Card START -->
 										<div class="card overflow-hidden">
 											<!-- Cover image -->
-											 {% thumbnail request.user.profile.cover_image "200x200" crop="center" as im %}
-											<div class="h-50px" style="background-image:url({{ im.url }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
+											 {% thumbnail request.user.profile.cover_image "300x80" crop="center" as im %}
+											<div class="h-80px" style="background-image:url({{ im.url }}); background-position: center; background-size: cover; background-repeat: no-repeat;"></div>
 												{% endthumbnail %}<!-- Card body START -->
 												<div class="card-body pt-0">
 													<div class="text-center">
@@ -472,7 +472,7 @@
 
 						
 					<!-- Main content START -->
-					<div class="col-md-6 col-lg-6 vstack gap-4 pe-0 mt-0">
+					<div class="col-lg-6 vstack gap-4 me-0 mt-0">
 							{% if messages %}
 								<div>
 									{% for message in messages %}
@@ -487,11 +487,9 @@
 					<!-- Main content END -->
 
 					<!-- Right sidebar START -->
-					<div class="col-lg-3 pe-0 mt-0">
+					<div class="col-lg-3 mt-0">
 					{% comment %} <div class="col pe-0 mt-0"> {% endcomment %}
-						<div class="row g-4">
 								{% block rightbar %}{% endblock rightbar %}
-						</div>
 					</div>
 					<!-- Right sidebar END -->
 

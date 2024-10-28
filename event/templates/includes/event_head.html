@@ -13,7 +13,7 @@
           <div class="d-sm-flex align-items-start text-center text-sm-start">
             <div class="mt-sm-3">
               <!-- Info -->
-              <h1 class="h3 mb-1 text-white">{{ event_date.event}}</h1>
+              <h1 class="h3 mb-1 color-white">{{ event_date.event}}</h1>
               <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}.{{ event_date.event.clubevent.location.town_city}}. </h2>
               <h2 class="h6 mb-1 text-small">{{ event_date.date|date}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h2>
               {% comment %} <p>{% avg_rating page.id %} {% autoescape off %}{% avg_stars page.id %}{% endautoescape %} ({% review_count page.id %})</p> {% endcomment %}

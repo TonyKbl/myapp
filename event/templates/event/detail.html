@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% load custom_event_filters %}
 
-{% block title %}{{ event.name }} - Event{% endblock title %}
+{% block title %}{{ event.name }} | Swingers Event | Club Swing{% endblock title %}
 
 {% block content %}
 {% include "includes/event_head.html"%}
@@ -116,7 +116,7 @@
               <img class="avatar-img rounded-circle border border-white border-3" src="{{ im.url }}" alt="{{ page.page_name }} | {{ page.page_type }} | Club Swing">
             {% endthumbnail %}
           </div>
-          <span class = "text-white">{{host}}&nbsp</span>
+          <span class = "color-white">{{host}}&nbsp</span>
         
         </a>
         {% endfor %}

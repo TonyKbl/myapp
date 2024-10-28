@@ -4,8 +4,7 @@ from django.contrib.auth.models import User
 
 
 class PageCreateForm(forms.ModelForm):
-        
-    class Meta:        
+    class Meta:
         model = Page
         fields = (
             "page_type",
@@ -21,9 +20,9 @@ class PageCreateForm(forms.ModelForm):
         def __str__(self):
             return self.model.page
 
+
 class PageUpdateForm(forms.ModelForm):
-        
-    class Meta:        
+    class Meta:
         model = Page
         fields = (
             "page_type",
@@ -37,28 +36,23 @@ class PageUpdateForm(forms.ModelForm):
             "description",
         )
 
+
 class PageReviewForm(forms.ModelForm):
-    
     class Meta:
         model = PageReviews
         fields = (
             "rating",
             "text",
-            )
-        
+        )
+
 
 class PageAddHostForm(forms.ModelForm):
-    
     class Meta:
         model = PageHost
-        fields = (
-            "host",
-            )
-
+        fields = ("host",)
 
 
 class PageClaimForm(forms.ModelForm):
-    
     class Meta:
         model = ClaimPage
         fields = (
@@ -66,5 +60,14 @@ class PageClaimForm(forms.ModelForm):
             "email",
             "phone",
             "reason",
-            )
-        
+        )
+
+
+class PageEmailForm(forms.Form):
+    full_name = forms.CharField(max_length=20)
+    email = forms.CharField(max_length=30)
+    subject = forms.CharField(max_length=50)
+    message = forms.CharField(max_length=500)
+
+    class Meta:
+        fields = ["name", "email", "subject", "message"]
