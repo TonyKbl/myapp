@@ -67,28 +67,7 @@ class Page(models.Model):
         blank=True,
     )
 
-    address1 = models.CharField(
-        max_length=50, null=False, blank=False, validators=[validate_is_profane]
-    )
-    address2 = models.CharField(
-        max_length=50, null=True, blank=True, validators=[validate_is_profane]
-    )
-    town_city = models.CharField(
-        max_length=50, null=False, blank=False, validators=[validate_is_profane]
-    )
-    county = models.CharField(
-        max_length=50, null=False, blank=False, validators=[validate_is_profane]
-    )
-    post_code = models.CharField(
-        max_length=10, null=False, blank=False, validators=[validate_is_profane]
-    )
-    lat = models.FloatField(null=True, blank=True)
-    lon = models.FloatField(null=True, blank=True)
-    loc = models.PointField(null=True, blank=True, srid=4326)
-
-    region = models.ForeignKey(
-        Region, null=True, blank=False, on_delete=models.SET_NULL
-    )
+    # location went here
 
     description = models.TextField(
         null=False, blank=False, validators=[validate_is_profane]
@@ -132,12 +111,54 @@ class Page(models.Model):
         return super().save(*args, **kwargs)
 
 
-# class ClubPage(Page):
-#     pass
+class ClubPage(Page):
+    address1 = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    address2 = models.CharField(
+        max_length=50, null=True, blank=True, validators=[validate_is_profane]
+    )
+    town_city = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    county = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    post_code = models.CharField(
+        max_length=10, null=False, blank=False, validators=[validate_is_profane]
+    )
+    lat = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True, blank=True)
+    loc = models.PointField(null=True, blank=True, srid=4326)
+
+    region = models.ForeignKey(
+        Region, null=True, blank=False, on_delete=models.SET_NULL
+    )
 
 
-# class CinemaPage(Page):
-#     pass
+class CinemaPage(Page):
+    address1 = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    address2 = models.CharField(
+        max_length=50, null=True, blank=True, validators=[validate_is_profane]
+    )
+    town_city = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    county = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    post_code = models.CharField(
+        max_length=10, null=False, blank=False, validators=[validate_is_profane]
+    )
+    lat = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True, blank=True)
+    loc = models.PointField(null=True, blank=True, srid=4326)
+
+    region = models.ForeignKey(
+        Region, null=True, blank=False, on_delete=models.SET_NULL
+    )
 
 
 # class FestivalPage(Page):

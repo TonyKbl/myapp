@@ -13,6 +13,12 @@ urlpatterns = [
     ),
     path("pages.html", views.PageListView.as_view(), name="list"),
     path("pages.html?ord=<str:ord>", views.PageListView.as_view(), name="list"),
+    path("swingers-clubs.html", views.ClubPageListView.as_view(), name="clublist"),
+    path(
+        "swingers-clubs.html?ord=<str:ord>",
+        views.ClubPageListView.as_view(),
+        name="clublist",
+    ),
     # path(
     #     "page/<str:page_type>/<slug:slug>/email.html",
     #     views.send_club_email(),
@@ -24,8 +30,8 @@ urlpatterns = [
         name="page_feed",
     ),
     path(
-        "page/<str:page_type>/<slug:slug>/about.html",
-        views.PageDetailView.as_view(),
+        "page/<str:page_type>/<slug:slug>.html",
+        views.ClubPageDetailView.as_view(),
         name="detail",
     ),
     # path("page/<str:page_type>/<slug:slug>/gallery.html", views.PageGalleryView.as_view(), name="gallery"),
@@ -35,10 +41,10 @@ urlpatterns = [
         name="page_reviews",
     ),
     path("claim_page/<int:pk>/", views.PageAddClaimView.as_view(), name="claim_page"),
-    path("add_page/", views.PageCreateView.as_view(), name="add_page"),
+    path("add_page/", views.ClubPageCreateView.as_view(), name="add_page"),
     path(
         "edit_page/<int:pk>/<str:page_type>/<slug:slug>",
-        views.PageUpdateView.as_view(),
+        views.ClubPageUpdateView.as_view(),
         name="edit_page",
     ),
     path(

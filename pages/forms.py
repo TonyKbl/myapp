@@ -1,11 +1,45 @@
 from django import forms
-from .models import Page, PageReviews, ClaimPage, PageHost
+from .models import Page, PageReviews, ClaimPage, PageHost, ClubPage
 from django.contrib.auth.models import User
 
 
-class PageCreateForm(forms.ModelForm):
+# class PageCreateForm(forms.ModelForm):
+#     class Meta:
+#         model = Page
+#         fields = (
+#             "page_type",
+#             "page_name",
+#             "address1",
+#             "address2",
+#             "town_city",
+#             "county",
+#             "post_code",
+#             "description",
+#         )
+
+#         def __str__(self):
+#             return self.model.page
+
+
+# class PageUpdateForm(forms.ModelForm):
+# class Meta:
+#     model = Page
+#     fields = (
+#         "page_type",
+#         "page_name",
+#         "address1",
+#         "address2",
+#         "town_city",
+#         "county",
+#         "post_code",
+#         "region",
+#         "description",
+#     )
+
+
+class ClubPageCreateForm(forms.ModelForm):
     class Meta:
-        model = Page
+        model = ClubPage
         fields = (
             "page_type",
             "page_name",
@@ -14,6 +48,7 @@ class PageCreateForm(forms.ModelForm):
             "town_city",
             "county",
             "post_code",
+            "region",
             "description",
         )
 
@@ -21,9 +56,9 @@ class PageCreateForm(forms.ModelForm):
             return self.model.page
 
 
-class PageUpdateForm(forms.ModelForm):
+class ClubPageUpdateForm(forms.ModelForm):
     class Meta:
-        model = Page
+        model = ClubPage
         fields = (
             "page_type",
             "page_name",

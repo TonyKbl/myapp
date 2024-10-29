@@ -172,9 +172,13 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="pagesMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
 									<ul class="dropdown-menu" aria-labelledby="pagesMenu">
-										<li> <a class="dropdown-item" href="{% url 'pages:list' %}">List Pages</a></li>
-										<li> <a class="dropdown-item" href="#">New Pages</a></li>
-										<li> <a class="dropdown-item" href="#">Most Popular Pages</a></li>
+										<li> <a class="dropdown-item" href="{% url 'pages:list' %}">All Pages</a></li>
+										<li> <a class="dropdown-item" href="{% url 'pages:clublist' %}">Swinger Clubs</a></li>
+										<li> <a class="dropdown-item" href="#">Swinger Hotels</a></li>
+										<li> <a class="dropdown-item" href="#">Swinger Festivals</a></li>
+										<li> <a class="dropdown-item" href="#">Gay Saunas</a></li>
+										<li> <a class="dropdown-item" href="#">Adult Cinemas</a></li>
+										<li> <a class="dropdown-item" href="#">Online Shops</a></li>
 										<hr>
 										<li> <a class="dropdown-item" href="/add_page/">Add New Page</a></li>
 										<!-- Dropdown submenu -->
@@ -472,7 +476,7 @@
 
 						
 					<!-- Main content START -->
-					<div class="col-lg-6 vstack gap-4 pe-0 me-0 mt-0 mb-4">
+					<div class="col-lg-6 vstack gap-2 pe-0 me-0 mt-0 mb-4">
 							{% if messages %}
 								<div>
 									{% for message in messages %}
@@ -487,7 +491,7 @@
 					<!-- Main content END -->
 
 					<!-- Right sidebar START -->
-					<div class="col-lg-3 vstack gap-4 pe-0 me-0 mt-0">
+					<div class="col-lg-3 vstack gap-2 pe-0 me-0 mt-0">
 					{% comment %} <div class="col pe-0 mt-0"> {% endcomment %}
 								{% block rightbar %}{% endblock rightbar %}
 					</div>

@@ -78,9 +78,9 @@
                         {% else %}
                         <div class="d-flex justify-content-end ms-5 mb-1">
                             <div class="d-flex flex-column align-items-end">
-                              <div class="bg-body text-decondary border border-primary p-2 px-3 rounded-2">{{message.message|linebreaks}}</div>
+                              <div class="bg-body text-decondary border border-primary p-2 px-3 rounded-2">{{message.attachment}}{{message.message|linebreaks}}</div>
                               <div class="d-flex my-2">
-                                <div class="small text-secondary">{{message.attachment}}{{message.time_sent|date:"H:i"}}</div>
+                                <div class="small text-secondary">{{message.time_sent|date:"H:i"}}</div>
                                 <div class="small ms-2"><i class="fa-solid fa-check-double "></i></div>
                               </div>
                             </div>

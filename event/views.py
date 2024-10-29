@@ -28,7 +28,7 @@ from .forms import (
 class MasterEventList(ListView):
     paginate_by = 15
     html_method_names = ["get"]
-    template_name = "event/date_list.html"
+    template_name = "event/list.html"
     models = MasterEvent
     context_object_name = "master_event"
 

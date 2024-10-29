@@ -16,19 +16,19 @@
 									  Order By...
 									</button>
 									<!-- Card share action dropdown menu -->
-									{% comment %} <ul class="dropdown-menu" aria-labelledby="profileAction2">
-										<li><a class="dropdown-item" href="/pages.html">Page Type</a></li>
-										<li><a class="dropdown-item" href="/pages.html?ord=county">County</a></li>
-										<li><a class="dropdown-item" href="/pages.html?ord=region">Region</a></li> {% endcomment %}
+									<ul class="dropdown-menu" aria-labelledby="profileAction2">
+										<li><a class="dropdown-item" href="/swingers-clubs.html">Page Type</a></li>
+										<li><a class="dropdown-item" href="/swingers-clubs.html?ord=county">County</a></li>
+										<li><a class="dropdown-item" href="/swingers-clubs.html?ord=region">Region</a></li>
 
 									  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
 									  <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
 									  <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
 									  <li><hr class="dropdown-divider"></li>
 									  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
-									{% comment %} </ul> {% endcomment %}
+									</ul>
 
-{% include "includes/list-menu.html" with all_active="active" %}
+									{% include "includes/list-menu.html" with clubs_active="active" %}
 								  </div>
 								
 							</div>
@@ -63,7 +63,7 @@
 												<div class="col">
 													<h6><a href="{% url 'pages:detail' y.page_type|slugify y.slug %}" class="btn-link stretched-link text-reset fw-bold">{{y.page_name}}</a></h6>
 													<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.page_type}}</a>
-													{% comment %} <p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.town_city}}, {{y.county}}, {{y.post_code}}, {{y.region}}</p> {% endcomment %}
+													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.town_city}}, {{y.county}}, {{y.post_code}}, {{y.region}}</p>
 												</div>
 											</div>
 										</div>

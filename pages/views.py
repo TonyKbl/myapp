@@ -26,12 +26,12 @@ from profiles.models import Profile
 from .forms import (
     PageAddHostForm,
     PageClaimForm,
-    PageCreateForm,
+    ClubPageCreateForm,
     PageReviewForm,
-    PageUpdateForm,
+    ClubPageUpdateForm,
     PageEmailForm,
 )
-from .models import ClaimPage, Page, PageFollow, PageHost, PageReviews
+from .models import ClaimPage, ClubPage, PageFollow, PageHost, PageReviews, Page
 
 
 class PageListView(ListView):
@@ -56,18 +56,42 @@ class PageListView(ListView):
         return queryset
 
 
-class PageDetailView(DetailView):
+class ClubPageListView(ListView):
+    http_method_names = ["get"]
+    template_name = "pages/club-list.html"
+    model = ClubPage
+    context_object_name = "pages"
+
+    def get_queryset(self):
+        # ord = self.kwargs['ord']
+        ord = self.request.GET.get("ord")
+        if ord == "county":
+            queryset = ClubPage.objects.all().order_by("county", "page_name")
+        elif ord == "region":
+            queryset = ClubPage.objects.all().order_by("region", "page_name")
+        elif ord == "rating":
+            queryset = ClubPage.objects.all().order_by(
+                PageReviews.page_name.Avg("rating")
+            )
+        else:
+            queryset = ClubPage.objects.all().order_by("page_name")
+
+        # order = {"ord": ord}
+        return queryset
+
+
+class ClubPageDetailView(DetailView):
     http_method_names = ["get"]
     template_name = "pages/detail.html"
-    model = Page
+    model = ClubPage
     context_object_name = "page"
     # slug_field = "slug"
     # slug_url_kwarg = "slug"
 
 
-class PageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
-    model = Page
-    form_class = PageCreateForm
+class ClubPageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = ClubPage
+    form_class = ClubPageCreateForm
     template_name = "pages/page_add_edit_form.html"
     success_message = "Page successfully added"
     success_url = "/pages/"
@@ -90,9 +114,9 @@ class PageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     #     return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
 
 
-class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    model = Page
-    form_class = PageUpdateForm
+class ClubPageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = ClubPage
+    form_class = ClubPageUpdateForm
     template_name = "pages/page_add_edit_form.html"
     success_message = "Page successfully updated"
 
@@ -100,7 +124,7 @@ class PageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     #    return self.request.user
 
     def get_object(self, queryset=None):
-        obj = Page.objects.get(id=self.kwargs.get("pk"))
+        obj = ClubPage.objects.get(id=self.kwargs.get("pk"))
         return obj
 
     def get_success_url(self):
