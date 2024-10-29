@@ -10,11 +10,11 @@
 							<!-- Card header START -->
 							<div class="card-body border-0">
 								<h5 class="card-title"> Pages</h5>
-								  <div class="dropdown">
+								  {% comment %} <div class="dropdown"> {% endcomment %}
 									<!-- Card share action menu -->
-									<button class="btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+									{% comment %} <button class="btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
 									  Order By...
-									</button>
+									</button> {% endcomment %}
 									<!-- Card share action dropdown menu -->
 									{% comment %} <ul class="dropdown-menu" aria-labelledby="profileAction2">
 										<li><a class="dropdown-item" href="/pages.html">Page Type</a></li>
@@ -29,7 +29,7 @@
 									{% comment %} </ul> {% endcomment %}
 
 {% include "includes/list-menu.html" with all_active="active" %}
-								  </div>
+								  {% comment %} </div> {% endcomment %}
 								
 							</div>
 							
