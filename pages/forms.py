@@ -41,7 +41,6 @@ class ClubPageCreateForm(forms.ModelForm):
     class Meta:
         model = ClubPage
         fields = (
-            "page_type",
             "page_name",
             "address1",
             "address2",
@@ -60,7 +59,6 @@ class ClubPageUpdateForm(forms.ModelForm):
     class Meta:
         model = ClubPage
         fields = (
-            "page_type",
             "page_name",
             "address1",
             "address2",

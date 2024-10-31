@@ -106,6 +106,7 @@ class ClubPageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         form.instance.lon = location.lon
         form.instance.loc = Point(float(location.lon), float(location.lat))
         form.instance.user = self.request.user
+        form.instance.page_type = "Swingers Club"
         return super().form_valid(form)
 
     # def get_success_url(self):
