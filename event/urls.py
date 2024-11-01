@@ -33,4 +33,6 @@ urlpatterns = [
         name="page_events",
     ),
     path("add_date/<int:pk>", views.AddEventDateView.as_view(), name="add_date"),
+    path("list-meets.html", views.PrivateMeetListView.as_view(), name="list-meets"),
+    path("add-meet.html", views.PrivateMeetAddView.as_view(), name="add_meet"),
 ]

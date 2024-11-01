@@ -1,5 +1,5 @@
 from django import forms
-from .models import ClubEvent, Guestlist, Event
+from .models import ClubEvent, Guestlist, Event, Meet
 from pages.models import Page, PageHost
 from django.contrib.auth.models import User
 
@@ -33,6 +33,32 @@ class ClubEventCreateForm(forms.ModelForm):
             page_name_id=self.kwargs["pk"]
         )
         return context
+
+
+class PrivateMeetAddForm(forms.ModelForm):
+    class Meta:
+        model = Meet
+        fields = (
+            "meet_type",
+            "title",
+            "Location",
+            "description",
+            "date",
+            "start_time",
+            "ot_men",
+            "ot_women",
+            "ot_mfcouples",
+            "ot_ffcouples",
+            "ot_mmcouples",
+            "ot_tvts",
+        )
+
+        widgets = {
+            "date": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "start_time": forms.TimeInput(
+                attrs={"class": "form-control", "type": "time"}
+            ),
+        }
 
 
 class GuestlistCreateForm(forms.ModelForm):

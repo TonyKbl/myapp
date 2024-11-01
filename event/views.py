@@ -12,13 +12,14 @@ from django.shortcuts import get_object_or_404, redirect
 from pages.models import Page, PageHost
 from profiles.models import Profile
 
-from .models import MasterEvent, Event, ClubEvent, EventHost, Guestlist
+from .models import MasterEvent, Event, ClubEvent, EventHost, Guestlist, Meet
 
 from .forms import (
     ClubEventCreateForm,
     GuestlistCreateForm,
     GuestlistDeleteForm,
     EventAddDatesForm,
+    PrivateMeetAddForm,
 )
 
 
@@ -41,6 +42,16 @@ class EventList(ListView):
     context_object_name = "event_list"
     today = datetime.now()
     queryset = Event.objects.filter(date__gt=today).order_by("date")[0:30]
+
+
+class PrivateMeetListView(ListView):
+    paginate_by = 15
+    html_method_names = ["get"]
+    template_name = "event/date_list.html"
+    models = Meet
+    context_object_name = "event_list"
+    today = datetime.now()
+    queryset = Meet.objects.filter(date__gt=today).order_by("date")[0:30]
 
 
 class ClubAddEventView(LoginRequiredMixin, CreateView):
@@ -70,6 +81,28 @@ class ClubAddEventView(LoginRequiredMixin, CreateView):
             page_name_id=self.kwargs["pk"]
         )
         return context
+
+
+class PrivateMeetAddView(LoginRequiredMixin, CreateView):
+    model = Meet
+    form_class = PrivateMeetAddForm
+    template_name = "event/add_meet.html"
+    success_message = "Your event was added successfully"
+    # fields = (
+    #         "title",
+    #         "description",
+    #         "image",
+    #     )
+    success_url = reverse_lazy("events:events")
+
+    def form_valid(self, form):
+        form.instance.organiser = self.request.user
+        form.instance.event_type = "private-meet"
+        form.instance.private = "0"
+        return super(PrivateMeetAddView, self).form_valid(form)
+
+    def get_object(self):
+        return self.request.user
 
 
 class EventDetailView(DetailView):

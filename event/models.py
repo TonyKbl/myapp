@@ -102,6 +102,12 @@ class Meet(MasterEvent):
     ]
     meet_type = models.CharField(choices=MEET_TYPE_CHOICES)
     Location = models.CharField(max_length=255, null=True, blank=False)
+    date = models.DateField(blank=False, null=True)
+    start_time = models.TimeField(blank=False, null=True)
+    end_time = models.TimeField(blank=False, null=True)
+
+    def __str__(self):
+        return self.title
 
 
 class Event(models.Model):
