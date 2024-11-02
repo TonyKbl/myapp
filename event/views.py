@@ -47,7 +47,7 @@ class EventList(ListView):
 class PrivateMeetListView(ListView):
     paginate_by = 15
     html_method_names = ["get"]
-    template_name = "event/date_list.html"
+    template_name = "event/meet-list.html"
     models = Meet
     context_object_name = "event_list"
     today = datetime.now()

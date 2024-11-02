@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load custom_page_filters %}
+
+{% block title %}Club Swing | Pages | Swinger Venues{% endblock title %}
+{% block description %}Swinger club list of swingers clubs in the United Kingdom, France and Spain {% endblock %}
+
+{% block content %}
+						<div class="card">
+							<!-- Card header START -->
+							<div class="card-body border-0">
+								<h5 class="card-title"> Private Meets</h5>
+								  {% comment %} <div class="dropdown">
+									<!-- Card share action menu -->
+									<button class="btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+									  Order By...
+									</button>
+									<!-- Card share action dropdown menu -->
+									<ul class="dropdown-menu" aria-labelledby="profileAction2">
+										<li><a class="dropdown-item" href="/search_user.html">User</a></li>
+										<li><a class="dropdown-item" href="/search_user.html?ord=new">Newest User</a></li>
+										<li><a class="dropdown-item" href="/search_user.html?ord=updated">Latest Update</a></li>
+                                    </ul>
+								  </div> {% endcomment %}
+								
+							</div>
+							
+						</div>
+						{% comment %} {% for page in pages %} {% endcomment %}
+
+
+
+							<div class="card mb-0">
+									{% for y in event_list %}
+										<div class="card-body">
+											<div class="row position-relative">
+												<div class="col-auto">
+												<!-- Blog image -->
+												<div class="avatar">
+													{% thumbnail y.organiser.profile.image "100x100" crop="center" as im %}
+														<img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+													{% endthumbnail %}
+												</div>
+												</div>
+												<div class="col">
+                                                   	<h6><a href="{% url 'profiles:detail' y.organiser %}" class="btn-link stretched-link text-reset fw-bold">{{y.organiser.profile.display_name}}</a></h6>
+													<a href="#" class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">{{y.meet_type}}</a>
+													<p class="small text-secondary mb-2 bi bi-geo-alt me-1"> {{y.organiser.profile.profile_type}}, {{y.Location}}</p>
+													<p class="small text-secondary mb-2 me-1"> {{y.title}}</p>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+							</div>
+
+
+{% endblock %}

@@ -29,7 +29,11 @@
 
                     <!-- Event Card Here -->
                     {% for event in event_list %}
-                    {% include 'includes/event_dates.html' %}
+                      {% if event.event_type == "private-meet" %}
+                        {% include 'includes/event_dates.html' %}
+                      {% else %}
+                        {% include 'includes/event_dates.html' %}
+                      {% endif %}
                     {% endfor%}
 
                   </div>

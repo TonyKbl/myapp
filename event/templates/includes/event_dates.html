@@ -14,12 +14,12 @@
           {% endthumbnail %}
         {% endif %}
         
-        {% if event.event.event_type == 'private-meet' %}
+        {% if event.event.event_type == 'Private Meet' %}
           {% thumbnail event.event.meet.image "400x400" crop="center" as im %}
             <img class="img-fluid rounded-top" src="{{ im.url }}" alt="">
           {% endthumbnail %}
           <div class="badge bg-danger text-white mt-2 me-2 position-absolute top-0 end-0">
-            Online
+            Private Meet
           </div>
         {% endif %}
         {% comment %} <div class="badge bg-danger text-white mt-2 me-2 position-absolute top-0 end-0">
@@ -29,11 +29,14 @@
       <!-- Card body START -->
       <div class="card-body position-relative pt-0">
         <!-- Tag -->
-        {% if event.event.event_type == 'swingers-club-event' %}
+        {% if event.event_type == 'swingers-club-event' %}
           {% include 'includes/club_event_card.html' %}
         {% endif %}
-        {% if event.event.event_type == 'swinger-social' %}
+        {% if event.event_type == 'swinger-social' %}
           {% include 'includes/social_card.html' %}
+        {% endif %}
+        {% if event.event_type == 'private-meet' %}
+          {% include 'includes/meet_card.html' %}
         {% endif %}
  <!-- Button -->
         <div class="d-flex mt-3 justify-content-between">
