@@ -13,9 +13,9 @@
           <div class="d-sm-flex align-items-start text-center text-sm-start">
             <div class="mt-sm-3">
               <!-- Info -->
-              <h1 class="h3 mb-1 color-white">{{ event_date.event}}</h1>
+              <h1 class="h4 mb-1 color-white">{{ event_date.event}}</h1>
               <h2 class="h6 mb-1 text-small">{{ event_date.event.clubevent.location}}.{{ event_date.event.clubevent.location.town_city}}. </h2>
-              <h2 class="h6 mb-1 text-small">{{ event_date.date|date}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h2>
+              <h3 class="h6 mb-1 text-small">{{ event_date.date|date}}. {{ event_date.start_time|time}} - {{ event_date.end_time|time}}</h2>
               {% comment %} <p>{% avg_rating page.id %} {% autoescape off %}{% avg_stars page.id %}{% endautoescape %} ({% review_count page.id %})</p> {% endcomment %}
             </div>
             <!-- Button -->
@@ -26,12 +26,15 @@
                     <button class="btn btn-danger-soft me-2" type="button"> <i class="bi bi-pencil-fill pe-1"></i> Edit </button>
                   </a>
                 {% else %}
-                {% if request.user.id|is_on_guestlist:event_date.id %}
-                <a class="btn btn-warning mb-2 btn-sm" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
-                {% else %}
-                <a class="btn btn-primary mb-2 btn-sm" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
+                {% if request.user.profile.profile_type|can_attend:event_date.event.id %}
+                {% comment %} {% if request.user.profile.profile_type == "MAN" and event_date.event.ot_men == '1' or request.user.profile.profile_type == "Woman" and event_date.event.ot_women == '1' or request.user.profile.profile_type == "MF_COUPLE" and event_date.event.ot_mfcouples == '1' or request.user.profile.profile_type == "FF Couple" and event_date.event.ot_ffcouples == '1' or request.user.profile.profile_type == "MM Couple" and event_date.event.ot_mmcouples == '1' or request.user.profile.profile_type == "CD/TV" and event_date.event.ot_tvts == '1' or request.user.profile.profile_type == "TG/TS" and event_date.event.ot_tvts == '1' %} {% endcomment %}
+                  {% if request.user.id|is_on_guestlist:event_date.id %}
+                  <a class="btn btn-warning mb-2 btn-sm" href="/remove-from-guestlist/{{guest.id}}">Remove from Guestlist {{gl_id}} </a>&nbsp
+                  {% else %}
+                  <a class="btn btn-primary mb-2 btn-sm" href="/join-guestlist/{{event_date.id}}">Join Guestlist </a>&nbsp
+                  {% endif %}
                 {% endif %}
-                {% endif %}
+                {%endif%}
               <div class="dropdown">
                 <!-- Card share action menu -->
                 <button class="icon-md btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">

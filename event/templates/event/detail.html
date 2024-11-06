@@ -107,6 +107,7 @@
     <hr>
     <div class="row align-items-center">
       <!-- Host group START-->
+       {% if hosts %}
       <div class="col-lg-6">
         <h5>Your Hosts</h5>
         {% for host in hosts %}
@@ -121,10 +122,51 @@
         </a>
         {% endfor %}
       </div>
+      {%endif%}
       <!-- Host group END -->
       <div class="col=lg-6">
         <div class="row g-2">
-          <h5>Attendees</h5>
+          <h5>This event is open to</h5>
+          {% if event_date.event.ot_men %}
+          <div class="col-3">
+            <!-- Visitors -->
+            <div class="d-flex">
+              <i class="fa-solid fa-mars"></i>
+            </div>
+                <p class="mb-0">Men</p>
+          </div>
+          {%endif%}
+          {% if event_date.event.ot_women %}
+          <div class="col-3">
+            <!-- Registred -->
+            <div class="d-flex">
+              <i class="fa-solid fa-venus"></i>
+            </div>
+                <p class="mb-0">Women</p>
+          </div>
+          {%endif%}
+          {% if event_date.event.ot_mfcouples %}
+          <div class="col-3">
+            <!-- Registred -->
+            <div class="d-flex">
+              <i class="fa-solid fa-venus-mars"></i>
+            </div>
+                <p class="mb-0">Couples</p>
+          </div>
+          {%endif%}
+          {% if event_date.event.ot_tvts %}
+          <div class="col-3">
+            <!-- Attendance -->
+            <div class="d-flex">
+              <i class="fa-solid fa-transgender"></i>
+            </div>
+                <p class="mb-0">Trans</p>
+          </div>
+          {%endif%}
+        </div>
+        <hr>
+        <div class="row g-2">
+          <h5>Guestlist</h5>
           <div class="col-3">
             <!-- Visitors -->
             <div class="d-flex">
@@ -200,7 +242,7 @@
       <div class="card">
         <!-- Card header START -->
         <div class="card-header d-flex justify-content-between border-0 pb-0">
-          <h5 class="card-title">Entry Fees</h5>
+          <h5 class="card-title">Admission Fees</h5>
        </div>
         <!-- Card header END -->
         <!-- Card body START -->

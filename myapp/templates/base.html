@@ -163,15 +163,15 @@
 								<li class="nav-item dropdown">
 									<a class="nav-link dropdown-toggle" href="#" id="homeMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Events</a>
 									<ul class="dropdown-menu" aria-labelledby="homeMenu">
-										<li class = "dropdown-header">Events</li>
+										<li class = "dropdown-header"><strong>Events</strong></li>
 										<li> <a class="dropdown-item" href="{% url 'events:events' %}">Upcoming Events</a></li>
 										<li> <a class="dropdown-item" href="{% url 'events:events' %}">Club Events</a></li>
 										<li> <a class="dropdown-item" href="{% url 'events:events' %}">Social Events</a></li>
 										<li> <a class="dropdown-item" href="{% url 'events:events' %}">Festival Events</a></li>
 										<li class="dropdown-divider"></li>
-										<li class = "dropdown-header">	Private Meets</li>
-										<li> <a class="dropdown-item" href="{% url 'events:list-meets' %}">Private Meets</a></li>
-										<li> <a class="dropdown-item" href="{% url 'events:add_meet' %}">Add Private Meet</a></li>
+										<li class = "dropdown-header"><strong>Meets</strong></li>
+										<li> <a class="dropdown-item" href="{% url 'events:list-meets' %}">Meets</a></li>
+										<li> <a class="dropdown-item" href="{% url 'events:add_meet' %}">Add Meet</a></li>
 										{% comment %} <li> <a class="dropdown-item" href="index-classic.html">Add Event</a></li> {% endcomment %}
 									</ul>
 								</li>

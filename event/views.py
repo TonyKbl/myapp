@@ -130,7 +130,7 @@ class EventDetailView(DetailView):
             context["guest"] = None
 
         context["hosts"] = EventHost.objects.filter(event=master_event)
-        print(context)
+        # print(context)
         return context
 
 

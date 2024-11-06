@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from pages.models import Page, PageHost
+from pages.models import Page, PageHost, ClubPage
 from profiles.models import Profile
 from datetime import datetime
 from django_resized import ResizedImageField
@@ -33,12 +33,20 @@ class MasterEvent(models.Model):
     )
     title = models.CharField(max_length=250, blank=False, null=False)
     description = models.TextField(blank=False, null=False)
-    ot_men = models.BooleanField(null=False, blank=True)
-    ot_women = models.BooleanField(null=False, blank=True)
-    ot_mfcouples = models.BooleanField(null=False, blank=True)
-    ot_ffcouples = models.BooleanField(null=False, blank=True)
-    ot_mmcouples = models.BooleanField(null=False, blank=True)
-    ot_tvts = models.BooleanField(null=False, blank=True)
+    ot_men = models.BooleanField(null=False, blank=True, verbose_name="Open to Men")
+    ot_women = models.BooleanField(null=False, blank=True, verbose_name="Open to Women")
+    ot_mfcouples = models.BooleanField(
+        null=False, blank=True, verbose_name="Open to MF Couples"
+    )
+    ot_ffcouples = models.BooleanField(
+        null=False, blank=True, verbose_name="Open to FF Couples"
+    )
+    ot_mmcouples = models.BooleanField(
+        null=False, blank=True, verbose_name="Open to MM Couples"
+    )
+    ot_tvts = models.BooleanField(
+        null=False, blank=True, verbose_name="Open to CD-TV-TG-TS"
+    )
     private = models.BooleanField(null=False, blank=True)
     # host_list = models.ForeignKey(PageHost, on_delete=models.PROTECT, max_length=100, blank=True, null=True)
     # image = ResizedImageField(upload_to=upload_dir, blank=True, null=True, size=[900, 900], quality=70, max_length=200)
@@ -56,7 +64,7 @@ class ClubEvent(MasterEvent):
         blank=True,
     )
     location = models.ForeignKey(
-        Page, on_delete=models.CASCADE, related_name="location"
+        ClubPage, on_delete=models.CASCADE, related_name="location"
     )
 
 

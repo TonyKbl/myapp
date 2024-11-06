@@ -28,8 +28,7 @@
       </div>
       <!-- Card body START -->
       <div class="card-body position-relative pt-0">
-        <!-- Tag -->
-        {% if event.event_type == 'swingers-club-event' %}
+        {% if event.event.event_type == 'swingers-club-event' %}
           {% include 'includes/club_event_card.html' %}
         {% endif %}
         {% if event.event_type == 'swinger-social' %}
