@@ -3,11 +3,8 @@ from django.contrib.gis.geos import Point
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from sorl.thumbnail import ImageField
 from django_resized import ResizedImageField
-from datetime import date
 from django.utils import timezone
-from django.conf import settings
 from profanity.validators import validate_is_profane
 from place_area.models import OuterPostCode
 import os
@@ -17,37 +14,31 @@ from django.utils.deconstruct import deconstructible
 
 @deconstructible
 class PathAndRename(object):
-
     def __init__(self, sub_path):
         self.path = sub_path
 
     def __call__(self, instance, filename):
-        ext = filename.split('.')[-1]
+        ext = filename.split(".")[-1]
         # set filename as random string
-        filename = '{}-{}.{}'.format(instance.pk, uuid4().hex, ext)
+        filename = "{}-{}.{}".format(instance.pk, uuid4().hex, ext)
         # return the whole path to the file
         return os.path.join(self.path, filename)
- 
 
-@receiver(post_save, sender=User)   
+
+@receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     """Create a new profile when a new user joins"""
     if created:
         Profile.objects.create(user=instance)
         Interest.objects.create(user=instance)
         LookingFor.objects.create(user=instance)
-        
+
 
 # Create your models here.
 class Profile(models.Model):
-    user = models.OneToOneField(
-      User,
-      on_delete=models.CASCADE,
-      related_name = "profile"
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
 
-
-        # Height Option
+    # Height Option
 
     SELECT = ""
     f4 = "4ft 0in"
@@ -111,7 +102,7 @@ class Profile(models.Model):
         (f66, "6ft 6in"),
         (f67, ">6ft 6in"),
     ]
-    
+
     # body_type options
 
     SELECT = ""
@@ -145,7 +136,7 @@ class Profile(models.Model):
         (VAPER, "Vape"),
     ]
 
-        # Drink Options
+    # Drink Options
     SELECT = ""
     NEVER = "Never"
     OCCASIONALLY = "Occasionally"
@@ -159,16 +150,23 @@ class Profile(models.Model):
         (OFTEN, "Often"),
     ]
 
+    cover_image = ResizedImageField(
+        size=[600, 200], upload_to=PathAndRename("profile/cover"), max_length=200
+    )
 
-    cover_image = ResizedImageField(size=[600, 200], upload_to=PathAndRename('profile/cover'), max_length=200)
+    image = ResizedImageField(
+        size=[100, 100], upload_to=PathAndRename("profile/avatar"), max_length=200
+    )
 
-    image = ResizedImageField(size=[100, 100], upload_to=PathAndRename('profile/avatar'), max_length=200)
+    display_name = models.CharField(max_length=50, null=True, blank=False)
 
-    display_name = models.CharField( max_length=50, null = True, blank = False )
-    
-    status = models.CharField( max_length=200, null=True, blank=True, validators=[validate_is_profane])
+    status = models.CharField(
+        max_length=200, null=True, blank=True, validators=[validate_is_profane]
+    )
 
-    intro = models.TextField( max_length=500, null=True, blank=True, validators=[validate_is_profane])
+    intro = models.TextField(
+        max_length=500, null=True, blank=True, validators=[validate_is_profane]
+    )
 
     description = models.TextField(null=True, validators=[validate_is_profane])
 
@@ -199,16 +197,17 @@ class Profile(models.Model):
 
     location = models.CharField(max_length=25)
     # outer_postcode = models.CharField(max_length=10, null=True, blank=False)
-    outer_postcode = models.ForeignKey(OuterPostCode, on_delete=models.CASCADE, blank=False, null=True)
+    outer_postcode = models.ForeignKey(
+        OuterPostCode, on_delete=models.CASCADE, blank=False, null=True
+    )
     lat = models.FloatField(null=True, blank=True)
     lon = models.FloatField(null=True, blank=True)
     loc = models.PointField(null=True, blank=True)
 
-    
     name = models.CharField(max_length=20)
-    
-    DOB = models.DateTimeField(null = True, blank = False)
-    
+
+    DOB = models.DateTimeField(null=True, blank=False)
+
     # Sexuality Option
     SELECT = ""
     STRAIGHT = "Straight"
@@ -258,14 +257,13 @@ class Profile(models.Model):
         default=SELECT,
     )
 
-
     name2 = models.CharField(max_length=20, null=True, blank=True)
     DOB2 = models.DateTimeField(null=True, blank=True)
 
     sexuality2 = models.CharField(
         max_length=10,
-        null = True,
-        blank = True,
+        null=True,
+        blank=True,
         choices=SEXUALITY_CHOICES,
         default=SELECT,
     )
@@ -274,34 +272,33 @@ class Profile(models.Model):
         max_length=16,
         choices=HEIGHT_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
+        null=True,
+        blank=True,
     )
 
     body_type2 = models.CharField(
         max_length=16,
         choices=BODY_TYPE_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
+        null=True,
+        blank=True,
     )
 
     smoke2 = models.CharField(
         max_length=16,
         choices=SMOKER_TYPE_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
+        null=True,
+        blank=True,
     )
 
     drink2 = models.CharField(
         max_length=16,
         choices=DRINK_TYPE_CHOICES,
         default=SELECT,
-        null = True,
-        blank = True,
+        null=True,
+        blank=True,
     )
-
 
     date_joined = models.DateTimeField(auto_now_add=True)
 
@@ -315,11 +312,11 @@ class Profile(models.Model):
     def age(self):
         today = timezone.now().date()
         age = int(
-            today.year 
-            - (self.DOB.year) 
+            today.year
+            - (self.DOB.year)
             - ((today.month, today.day) < (self.DOB.month, self.DOB.day))
         )
-        return age 
+        return age
 
     @property
     def age2(self):
@@ -333,13 +330,9 @@ class Profile(models.Model):
         else:
             age2 = 0
         return age2
-    
-
 
     def __str__(self):
-        return self.user.username    
-    
-
+        return self.user.username
 
 
 # class Level(models.Model):
@@ -348,7 +341,7 @@ class Profile(models.Model):
 
 #     def __str__(self):
 #         return self.level_name
-    
+
 
 # class UserLevel(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='level')
@@ -359,12 +352,16 @@ class Profile(models.Model):
 
 
 class Follow(models.Model):
-    follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name='following')
-    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name='followers')
-    date = models.DateTimeField(auto_now_add='True')
+    follower = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="following"
+    )
+    following = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="followers"
+    )
+    date = models.DateTimeField(auto_now_add="True")
 
     class Meta:
-        unique_together = ('follower', 'following')
+        unique_together = ("follower", "following")
 
 
 class Interest(models.Model):
@@ -407,6 +404,7 @@ class Interest(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class LookingFor(models.Model):
     user = models.OneToOneField(User, models.CASCADE)
     age_min = models.IntegerField(null=False, blank=True, default=18)
@@ -424,16 +422,14 @@ class LookingFor(models.Model):
 
     def __str__(self):
         return self.user.username
-    
+
 
 class BlockedList(models.Model):
-    blocker = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocker')
-    blocked =models.ForeignKey(User, on_delete=models.CASCADE, related_name='blocked')
+    blocker = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blocker")
+    blocked = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blocked")
 
     class Meta:
-        unique_together = ('blocker', 'blocked')
+        unique_together = ("blocker", "blocked")
 
     def __str__(self):
         return self.blocker.username
-
-

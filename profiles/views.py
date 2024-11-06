@@ -133,9 +133,9 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)
-        return obj
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
 
     def form_valid(self, form):
         # kwargs = super().get_form_kwargs()
@@ -155,9 +155,9 @@ class SetProfileTypeView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)
-        return obj
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
 
 
 class Profile2ndPersonView(LoginRequiredMixin, UpdateView):
@@ -172,9 +172,9 @@ class Profile2ndPersonView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)
-        return obj
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
 
 
 class Profile1stPersonView(LoginRequiredMixin, UpdateView):
@@ -189,9 +189,9 @@ class Profile1stPersonView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)
-        return obj
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
 
 
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
@@ -205,9 +205,9 @@ class CoverImageUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)
-        return obj
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
 
 
 class AvatarImageUpdateView(LoginRequiredMixin, UpdateView):
@@ -222,9 +222,9 @@ class AvatarImageUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    def get_object(self, queryset=None):
-        obj = Profile.objects.get(user=self.request.user)
-        return obj
+    # def get_object(self, queryset=None):
+    #     obj = Profile.objects.get(user=self.request.user)
+    #     return obj
 
 
 class ProfileFeedView(LoginRequiredMixin, DetailView):

@@ -192,8 +192,10 @@ class AddEventDateView(LoginRequiredMixin, CreateView):
     success_url = "/events.html"
 
     def form_valid(self, form):
+        loc = Page.objects.get(slug=self.kwargs.get("location"))
         form.instance.event_id = self.kwargs.get("pk")
         form.instance.organiser = self.request.user
+        form.instance.page = loc
         return super(AddEventDateView, self).form_valid(form)
 
     def get_object(self):

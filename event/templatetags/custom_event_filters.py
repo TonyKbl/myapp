@@ -1,8 +1,6 @@
 from django import template
-from django.db.models import Avg, Count
-from ..models import Guestlist, MasterEvent, Event
-from django.http import HttpResponse, request
-from urllib.parse import urlencode
+from django.db.models import Count
+from ..models import Guestlist, MasterEvent
 
 register = template.Library()
 

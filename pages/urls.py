@@ -36,6 +36,11 @@ urlpatterns = [
     ),
     # path("page/<str:page_type>/<slug:slug>/gallery.html", views.PageGalleryView.as_view(), name="gallery"),
     path(
+        "page/<str:page_type>/<slug:slug>/events.html",
+        views.PageEventsView.as_view(),
+        name="page_events",
+    ),
+    path(
         "page/<str:page_type>/<slug:slug>/reviews.html",
         views.PageReviewsView.as_view(),
         name="page_reviews",

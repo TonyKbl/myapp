@@ -20,6 +20,7 @@ from django.http import HttpResponse
 from django.core.mail import send_mail
 
 from feed.models import PagePost
+from event.models import Event
 from place_area.models import PostCode
 from profiles.models import Profile
 
@@ -174,6 +175,42 @@ class PageFeedView(LoginRequiredMixin, DetailView):
         context = super(PageFeedView, self).get_context_data(*args, **kwargs)
         context["page_posts"] = PagePost.objects.filter(
             name__slug=self.kwargs["slug"]
+        ).order_by("-date")[start_index:end_index]
+        context["total_pages"] = str(total_pages)
+        context["page_number"] = str(page_number)
+        context["prev"] = str(page_number - 1)
+        context["next"] = str(page_number + 1)
+        return context
+
+
+class PageEventsView(LoginRequiredMixin, DetailView):
+    http_method_names = ["get"]
+    template_name = "pages/events.html"
+    model = Page
+
+    def get_context_data(self, *args, **kwargs):
+        page_size = 15
+        item_cnt = Event.objects.filter(page__slug=self.kwargs["slug"]).count()
+        total_pages = (item_cnt + page_size - 1) // page_size
+
+        try:
+            page_number = int(self.request.GET.get("pg", 1))
+
+            if 1 <= page_number <= total_pages:
+                start_index = (page_number - 1) * page_size
+                end_index = page_number * page_size
+
+            else:
+                start_index = 1 * page_size
+                end_index = page_number * page_size
+
+        except ValueError:
+            print("Invalid input. Please enter a valid integer.")
+            raise Http404
+
+        context = super(PageEventsView, self).get_context_data(*args, **kwargs)
+        context["page_events"] = Event.objects.filter(
+            page__slug=self.kwargs["slug"]
         ).order_by("-date")[start_index:end_index]
         context["total_pages"] = str(total_pages)
         context["page_number"] = str(page_number)

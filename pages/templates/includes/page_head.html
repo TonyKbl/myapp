@@ -51,12 +51,12 @@
                   <!-- Card share action dropdown menu -->
                   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
                     <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Page Post</a></li>
+                      <li><hr class="dropdown-divider"></li>
                     {% if page.user.username == request.user.username %}
                       <li><a class="dropdown-item" href="{% url 'pages:add_host' page.id %}"> <i class="bi bi-person fa-fw pe-2"></i>Add Event Host</a></li>
                       {% endif %}
                     {% if request.user.id|is_page_host:page.id or  page.user.username == request.user.username %}
-                      <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="/master-events/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>Master Events</a></li>
+                      <li><a class="dropdown-item" href="/master-events/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>List Master Events</a></li>
                       <li><a class="dropdown-item" href="/add-club-event/{{page.id}}/{{page.slug}}.html"> <i class="bi bi-calendar fa-fw pe-2"></i>Add Master Event</a></li>
                     {% endif %}
                     {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
@@ -85,7 +85,7 @@
             <li class="nav-item"> <a class="nav-link {{ feed_active }}" href="{% url 'pages:page_feed' page.page_type|slugify page.slug %}#page_menu">&nbsp Feed </a> </li>
             <li class="nav-item"> <a class="nav-link {{ about_active }}" href="{% url 'pages:detail' page.page_type|slugify page.slug %}#page_menu"> About </a> </li>
             <li class="nav-item"> <a class="nav-link {{ gallery_active }}" href="#page_menu"> Gallery</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="#page_menu"> Events</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="{% url 'pages:page_events' page.page_type|slugify page.slug %}#page_menu"> Events</a> </li>
             <li class="nav-item"> <a class="nav-link {{ reviews_active }}" href="{% url 'pages:page_reviews' page.page_type|slugify page.slug %}#page_menu"> Reviews</a> </li>
           </ul>
       </div>
