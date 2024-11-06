@@ -128,7 +128,9 @@ TV/TS   £"""
     event = models.ForeignKey(
         MasterEvent, on_delete=models.CASCADE, related_name="master_event"
     )
-    page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name="event_page")
+    page = models.ForeignKey(
+        Page, on_delete=models.CASCADE, related_name="event_page", null=True
+    )
     date = models.DateField(blank=False, null=True)
     start_time = models.TimeField(blank=False, null=True)
     end_time = models.TimeField(blank=False, null=True)
