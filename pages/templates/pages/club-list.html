@@ -7,34 +7,50 @@
 
 {% block content %}
 						<div class="card">
-							<!-- Card header START -->
-							<div class="card-body border-0">
-								<h5 class="card-title"> Pages</h5>
-								  <div class="dropdown">
-									<!-- Card share action menu -->
-									<button class="btn btn-light" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
-									  Order By...
-									</button>
-									<!-- Card share action dropdown menu -->
-									<ul class="dropdown-menu" aria-labelledby="profileAction2">
-										<li><a class="dropdown-item" href="/swingers-clubs.html">Page Type</a></li>
-										<li><a class="dropdown-item" href="/swingers-clubs.html?ord=county">County</a></li>
-										<li><a class="dropdown-item" href="/swingers-clubs.html?ord=region">Region</a></li>
+							<!-- Card header START -->                
 
-									  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
-									  <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
-									  <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
-									  <li><hr class="dropdown-divider"></li>
-									  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
-									</ul>
+							{% comment %} ===================================  {% endcomment %}
+							<div class="d-sm-flex align-items-start text-center text-sm-start">
+								<div class="ms-sm-4 mt-sm-3">
+									<!-- Info -->
+									<h1 class="mb-0 h4">Swingers Clubs</h1>
+								  </div>
+								  <!-- Button -->
+								  <div class="d-flex mt-1 justify-content-center ms-sm-auto">
+
+										<div class="dropdown">
+											<!-- Card share action menu -->
+											<button class="btn btn-light me-2 btn-small" type="button" id="profileAction2" data-bs-toggle="dropdown" aria-expanded="false">
+											  Order By...
+											</button>
+											<!-- Card share action dropdown menu -->
+											<ul class="dropdown-menu" aria-labelledby="profileAction2">
+												<li><a class="dropdown-item" href="/swingers-clubs.html">Page Type</a></li>
+												<li><a class="dropdown-item" href="/swingers-clubs.html?ord=county">County</a></li>
+												<li><a class="dropdown-item" href="/swingers-clubs.html?ord=region">Region</a></li>
+		
+											  {% comment %} <li><a class="dropdown-item" href="#"> <i class="bi bi-bookmark fa-fw pe-2"></i>Share page in a message</a></li>
+											  <li><a class="dropdown-item" href="#"> <i class="bi bi-file-earmark-pdf fa-fw pe-2"></i>Save your profile to PDF</a></li>
+											  <li><a class="dropdown-item" href="#"> <i class="bi bi-lock fa-fw pe-2"></i>Lock profile</a></li>
+											  <li><hr class="dropdown-divider"></li>
+											  <li><a class="dropdown-item" href="#"> <i class="bi bi-gear fa-fw pe-2"></i>Profile settings</a></li> {% endcomment %}
+											</ul>
+		
+										</div>
+										<a href="{% url 'pages:add_club' %}" >
+										  <button class="btn btn-primary me-2 btn-small" type="button"> <i class="bi bi-plus-circle pe-1"></i>Add</button>
+										</a>
+								  </div>
+								</div>
+								 {% comment %} ======================================= {% endcomment %}
+							<div class="card-body border-0">
 
 									{% include "includes/list-menu.html" with clubs_active="active" %}
-								  </div>
 								
 							</div>
 							
 						</div>
-						{% comment %} {% for page in pages %} {% endcomment %}
+	
 
 						{% if request.GET.ord == 'county' %}
 						{% regroup pages by county as newlist %}

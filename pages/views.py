@@ -32,7 +32,15 @@ from .forms import (
     ClubPageUpdateForm,
     PageEmailForm,
 )
-from .models import ClaimPage, ClubPage, PageFollow, PageHost, PageReviews, Page
+from .models import (
+    ClaimPage,
+    ClubPage,
+    PageFollow,
+    PageHost,
+    PageReviews,
+    Page,
+    HotelPage,
+)
 
 
 class PageListView(ListView):
@@ -145,6 +153,32 @@ class ClubPageUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         except:
             alert = "Please enter a valid postcode"
         return super().form_valid(form)
+
+
+class HotelPageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = HotelPage
+    form_class = ClubPageCreateForm
+    template_name = "pages/page_add_edit_form.html"
+    success_message = "Page successfully added"
+    success_url = "/pages/"
+
+    def form_valid(self, form):
+        try:
+            location = PostCode.objects.get(postcode=form.instance.post_code)
+        except:
+            raise ValidationError("Please enter a valid Postcode")
+        # print(location)
+        form.instance.lat = location.lat
+        form.instance.lon = location.lon
+        form.instance.loc = Point(float(location.lon), float(location.lat))
+        form.instance.user = self.request.user
+        form.instance.page_type = "Swingers Hotel"
+        return super().form_valid(form)
+
+    # def get_success_url(self):
+    #     slug = self.kwargs["slug"]
+    #     page_type = self.kwargs["page_type"]
+    #     return reverse_lazy("pages:detail", kwargs={"page_type": page_type, "slug": slug})
 
 
 class PageFeedView(LoginRequiredMixin, DetailView):

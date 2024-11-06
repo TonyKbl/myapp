@@ -184,11 +184,7 @@
 										<li> <a class="dropdown-item" href="{% url 'pages:clublist' %}">Swinger Clubs</a></li>
 										<li> <a class="dropdown-item" href="#">Swinger Hotels</a></li>
 										<li> <a class="dropdown-item" href="#">Swinger Festivals</a></li>
-										<li> <a class="dropdown-item" href="#">Gay Saunas</a></li>
-										<li> <a class="dropdown-item" href="#">Adult Cinemas</a></li>
 										<li> <a class="dropdown-item" href="#">Online Shops</a></li>
-										<hr>
-										<li> <a class="dropdown-item" href="/add_page/">Add New Page</a></li>
 										<!-- Dropdown submenu -->
 									</ul>
 								</li>
@@ -284,8 +280,6 @@
 									</li>
 									<!-- Links -->
 									<li><a class="dropdown-item" href="{% url 'feed:new_post' %}"><i class="bi bi-plus-square fa-fw me-2"></i>Add New Post</a></li>
-									
-									<li><a class="dropdown-item" href="{% url 'pages:add_page' %}"><i class="bi bi-flag fa-fw me-2"></i>Add New Page</a></li>
 									
 									{% if perms.blog.add_blog %} 
 									<li><a class="dropdown-item" href="{% url 'blog:add_article' %}"><i class="bi bi-pencil-square fa-fw me-2"></i>Add New Blog Article</a></li>

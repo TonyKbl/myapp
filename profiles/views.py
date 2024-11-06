@@ -130,12 +130,12 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     # def get_success_url(self):
     #     return reverse("/edit_2nd_person/")
 
-    def get_object(self):
-        return self.request.user
+    # def get_object(self):
+    #     return self.request.user
 
-    # def get_object(self, queryset=None):
-    #     obj = Profile.objects.get(user=self.request.user)
-    #     return obj
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
 
     def form_valid(self, form):
         # kwargs = super().get_form_kwargs()
@@ -172,9 +172,9 @@ class Profile2ndPersonView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    # def get_object(self, queryset=None):
-    #     obj = Profile.objects.get(user=self.request.user)
-    #     return obj
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
 
 
 class Profile1stPersonView(LoginRequiredMixin, UpdateView):
@@ -189,9 +189,9 @@ class Profile1stPersonView(LoginRequiredMixin, UpdateView):
     def get_object(self):
         return self.request.user
 
-    # def get_object(self, queryset=None):
-    #     obj = Profile.objects.get(user=self.request.user)
-    #     return obj
+    def get_object(self, queryset=None):
+        obj = Profile.objects.get(user=self.request.user)
+        return obj
 
 
 class CoverImageUpdateView(LoginRequiredMixin, UpdateView):

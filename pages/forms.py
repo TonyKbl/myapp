@@ -1,5 +1,5 @@
 from django import forms
-from .models import Page, PageReviews, ClaimPage, PageHost, ClubPage
+from .models import Page, PageReviews, ClaimPage, PageHost, ClubPage, HotelPage
 from django.contrib.auth.models import User
 
 
@@ -49,6 +49,10 @@ class ClubPageCreateForm(forms.ModelForm):
             "post_code",
             "region",
             "description",
+            "phone_number",
+            "show_phone_button",
+            "email",
+            "show_email_button",
         )
 
         def __str__(self):
@@ -59,6 +63,24 @@ class ClubPageUpdateForm(forms.ModelForm):
     class Meta:
         model = ClubPage
         fields = (
+            "address1",
+            "address2",
+            "town_city",
+            "county",
+            "post_code",
+            "region",
+            "description",
+            "phone_number",
+            "show_phone_button",
+            "email",
+            "show_email_button",
+        )
+
+
+class HotelPageCreateForm(forms.ModelForm):
+    class Meta:
+        model = HotelPage
+        fields = (
             "page_name",
             "address1",
             "address2",
@@ -67,6 +89,33 @@ class ClubPageUpdateForm(forms.ModelForm):
             "post_code",
             "region",
             "description",
+            "phone_number",
+            "show_phone_button",
+            "email",
+            "show_email_button",
+            "num_rooms",
+            "ensuite",
+        )
+
+        def __str__(self):
+            return self.model.page
+
+
+class HotelPageUpdateForm(forms.ModelForm):
+    class Meta:
+        model = HotelPage
+        fields = (
+            "address1",
+            "address2",
+            "town_city",
+            "county",
+            "post_code",
+            "region",
+            "description",
+            "phone_number",
+            "show_phone_button",
+            "email",
+            "show_email_button",
         )
 
 

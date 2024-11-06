@@ -46,7 +46,8 @@ urlpatterns = [
         name="page_reviews",
     ),
     path("claim_page/<int:pk>/", views.PageAddClaimView.as_view(), name="claim_page"),
-    path("add_page/", views.ClubPageCreateView.as_view(), name="add_page"),
+    path("add_club.html", views.ClubPageCreateView.as_view(), name="add_club"),
+    path("add_hotel.html", views.HotelPageCreateView.as_view(), name="add_hotel"),
     path(
         "edit_page/<int:pk>/<str:page_type>/<slug:slug>",
         views.ClubPageUpdateView.as_view(),

@@ -119,8 +119,8 @@ class Profile2ndPersonForm(forms.ModelForm):
             "drink2": forms.Select(attrs={"class": "form-control"}),
         }
 
-        def __str__(self):
-            return self.user
+        # def __str__(self):
+        #     return self.user
 
         # def form_valid(self, form):
         #     form.instance.lat = 'tony'
@@ -163,15 +163,8 @@ class Profile1stPersonForm(forms.ModelForm):
             "drink": forms.Select(attrs={"class": "form-control"}),
         }
 
-        def __str__(self):
-            return self.user
-
-        # def form_valid(self, form):
-        #     form.instance.lat = 'tony'
-        #     form.instance.lon = 'keeble'
-        #     coords = super().form_valid(form)
-        #     print(coords)
-        #     return coords
+        # def __str__(self):
+        #     return self.user
 
 
 class ProfileCoverUpdateForm(forms.ModelForm):

@@ -136,6 +136,35 @@ class ClubPage(Page):
     )
 
 
+class HotelPage(Page):
+    address1 = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    address2 = models.CharField(
+        max_length=50, null=True, blank=True, validators=[validate_is_profane]
+    )
+    town_city = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    county = models.CharField(
+        max_length=50, null=False, blank=False, validators=[validate_is_profane]
+    )
+    post_code = models.CharField(
+        max_length=10, null=False, blank=False, validators=[validate_is_profane]
+    )
+    lat = models.FloatField(null=True, blank=True)
+    lon = models.FloatField(null=True, blank=True)
+    loc = models.PointField(null=True, blank=True, srid=4326)
+
+    region = models.ForeignKey(
+        Region, null=True, blank=False, on_delete=models.SET_NULL
+    )
+    num_rooms = models.IntegerField(
+        null=True, blank=False, verbose_name="Number of rooms"
+    )
+    ensuite = models.BooleanField(null=False, verbose_name="Ensuite rooms")
+
+
 class CinemaPage(Page):
     address1 = models.CharField(
         max_length=50, null=False, blank=False, validators=[validate_is_profane]
