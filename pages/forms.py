@@ -153,3 +153,15 @@ class PageEmailForm(forms.Form):
 
     class Meta:
         fields = ["name", "email", "subject", "message"]
+
+
+class PageCoverUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = ("cover_image",)
+
+
+class PageAvatarUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Page
+        fields = ("image",)

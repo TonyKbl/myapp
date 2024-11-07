@@ -53,8 +53,9 @@
       <!-- Address END -->
     </div>
     <div class="col-lg-6">
-      <!-- Map START -->     
-      <a href="https://www.google.com/maps/dir/?api=1&destination={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="btn btn-primary btn-small">Get Directions</a>
+      <!-- Map START -->
+      <a href="https://maps.google.co.uk/maps?q={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="mx-auto btn btn-primary btn-sm mb-2" target="_blank">View Map </a> 
+      <a href="https://www.google.com/maps/dir/?api=1&destination={{page.page_name|urlencode}}+{{page.address1|urlencode}}+{{page.county|urlencode}}+{{page.post_code|urlencode}}" class="btn btn-primary btn-sm mb-2">Get Directions</a>
       <!-- Map END -->
     </div>
   </div>

@@ -31,6 +31,8 @@ from .forms import (
     PageReviewForm,
     ClubPageUpdateForm,
     PageEmailForm,
+    PageAvatarUpdateForm,
+    PageCoverUpdateForm,
 )
 from .models import (
     ClaimPage,
@@ -184,7 +186,8 @@ class HotelPageCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class PageFeedView(LoginRequiredMixin, DetailView):
     http_method_names = ["get"]
     template_name = "pages/feed.html"
-    model = Page
+    model = ClubPage
+    context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
         page_size = 15
@@ -320,7 +323,7 @@ class PageEventsView(LoginRequiredMixin, DetailView):
 class PageReviewsView(DetailView):
     http_method_names = ["get"]
     template_name = "pages/reviews.html"
-    model = Page
+    model = ClubPage
     context_object_name = "page"
 
     def get_context_data(self, *args, **kwargs):
@@ -383,6 +386,50 @@ class PageAddClaimView(LoginRequiredMixin, CreateView):
 
     def get_object(self):
         return self.request.user
+
+
+class PageAvatarUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Page
+    form_class = PageAvatarUpdateForm
+    template_name = "pages/page_add_edit_form.html"
+    success_message = "Avatar successfully updated"
+
+    # def get_object(self):
+    #    return self.request.user
+
+    def get_object(self, queryset=None):
+        queryset = Page.objects.get(slug=self.kwargs.get("slug"))
+        print(queryset)
+        return queryset
+
+    def get_success_url(self):
+        slug = self.kwargs["slug"]
+        page_type = self.kwargs["page_type"]
+        return reverse_lazy(
+            "pages:detail", kwargs={"page_type": page_type, "slug": slug}
+        )
+
+
+class PageCoverUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Page
+    form_class = PageCoverUpdateForm
+    template_name = "pages/page_add_edit_form.html"
+    success_message = "Avatar successfully updated"
+
+    # def get_object(self):
+    #    return self.request.user
+
+    def get_object(self, queryset=None):
+        queryset = Page.objects.get(slug=self.kwargs.get("slug"))
+        print(queryset)
+        return queryset
+
+    def get_success_url(self):
+        slug = self.kwargs["slug"]
+        page_type = self.kwargs["page_type"]
+        return reverse_lazy(
+            "pages:detail", kwargs={"page_type": page_type, "slug": slug}
+        )
 
 
 # class PageGalleryView(LoginRequiredMixin, DetailView):

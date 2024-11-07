@@ -56,15 +56,15 @@ class Page(models.Model):
         upload_to=PathAndRename("page_covers"),
         max_length=200,
         null=True,
-        blank=True,
+        blank=False,
     )
 
     image = ResizedImageField(
-        size=[600, 600],
+        size=[200, 200],
         upload_to=PathAndRename("page_avatars"),
         max_length=200,
         null=True,
-        blank=True,
+        blank=False,
     )
 
     # location went here

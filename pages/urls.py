@@ -62,4 +62,14 @@ urlpatterns = [
     path("<int:pk>/add_host.html", views.PageAddHostView.as_view(), name="add_host"),
     path("page_follow/<slug:slug>/", views.page_follow, name="page_follow"),
     # path("new_page_post/<int:pk>/<slug:slug>", feedviews.CreateNewPagePost.as_view(), name="add_page_post"),
+    path(
+        "page/update-cover/<str:page_type>/<slug:slug>.html",
+        views.PageCoverUpdateView.as_view(),
+        name="page_update_cover",
+    ),
+    path(
+        "page/update-avatar/<str:page_type>/<slug:slug>.html",
+        views.PageAvatarUpdateView.as_view(),
+        name="page_update_avatar",
+    ),
 ]
