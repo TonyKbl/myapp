@@ -3,6 +3,13 @@
 
 {% block title %}Club Swing - Homepage{% endblock title %}
 
+{% block head %}
+	{% if request.user.is_authenticated and request.user.profile.name %}
+	{% else %}
+		<meta http-equiv="refresh" content="0; url=/edit_profile/" />
+	{% endif %}
+{% endblock %}
+
 {% block content %}
 
 
@@ -77,6 +84,5 @@
 
 <!-- RIGHT NAVBAR START -->
 {% block rightbar %}
-
 {% endblock %}
 <!-- RIGHT NAVBAR END -->

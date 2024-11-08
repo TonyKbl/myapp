@@ -433,3 +433,15 @@ class BlockedList(models.Model):
 
     def __str__(self):
         return self.blocker.username
+
+
+class Verifications(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="verifyer")
+    verifyer = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="verifyee"
+    )
+    text = models.CharField(max_length=2048)
+    date = models.DateField(auto_now_add="True")
+
+    def __int__(self):
+        return self.user.username

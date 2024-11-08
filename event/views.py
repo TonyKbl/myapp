@@ -20,6 +20,7 @@ from .forms import (
     GuestlistDeleteForm,
     EventAddDatesForm,
     PrivateMeetAddForm,
+    ClubAddNonMemberGuestlistForm,
 )
 
 
@@ -124,7 +125,7 @@ class EventDetailView(DetailView):
         master_event = MasterEvent.objects.get(master_event=event)
         try:
             context["guest"] = Guestlist.objects.get(
-                event=event, guest=self.request.user.id
+                event=event, guest=self.request.user.id, non_member=None
             )
         except:
             context["guest"] = None
@@ -146,6 +147,26 @@ class ClubAddGuestlistView(LoginRequiredMixin, CreateView):
         form.instance.guest = self.request.user
         form.instance.profile_type = self.request.user.profile.profile_type
         return super(ClubAddGuestlistView, self).form_valid(form)
+
+    def get_object(self):
+        return self.request.guest
+
+
+ClubAddNonMemberGuestlistForm
+
+
+class ClubAddNonMemberGuestlistView(LoginRequiredMixin, CreateView):
+    model = Guestlist
+    form_class = ClubAddNonMemberGuestlistForm
+    template_name = "event/add_guestlist.html"
+    success_message = "You successfully a non-member"
+    success_url = reverse_lazy("events:events")
+
+    def form_valid(self, form):
+        form.instance.event_id = self.kwargs.get("pk")
+        form.instance.guest = self.request.user
+        # form.instance.non_member = self.kwargs.get("non_member")
+        return super(ClubAddNonMemberGuestlistView, self).form_valid(form)
 
     def get_object(self):
         return self.request.guest

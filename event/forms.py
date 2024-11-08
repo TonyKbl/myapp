@@ -76,7 +76,30 @@ class GuestlistCreateForm(forms.ModelForm):
 class GuestlistDeleteForm(forms.ModelForm):
     class Meta:
         model = Guestlist
-        exclude = ("private", "event", "guest", "profile_type")
+        exclude = (
+            "private",
+            "event",
+            "guest",
+            "profile_type",
+            "non_member",
+        )
+
+
+class ClubAddNonMemberGuestlistForm(forms.ModelForm):
+    class Meta:
+        model = Guestlist
+        fields = (
+            "non_member",
+            "profile_type",
+            "private",
+        )
+
+        class Meta:
+            unique_together = (
+                "guest",
+                "non_member",
+                "event",
+            )
 
 
 class EventAddDatesForm(forms.ModelForm):

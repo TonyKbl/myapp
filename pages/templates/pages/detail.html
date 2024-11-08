@@ -3,7 +3,12 @@
 {% load thumbnail %}
 
 {% block title %}{{ page.page_name }} - Profile{% endblock title %}
-
+{% block head %}
+<meta property="og:title" content="{{ page.page_name}}" />
+<meta property="og:url" content="{{request.build_absolute_uri}}" />
+<meta property="og:image" content="https://clubs4fun.s3.amazonaws.com/static/{{ page.cover_image }}" />
+<meta property="og:description" content="{{ page.description|truncatechars:100 }}" />
+{% endblock %}
 {% block content %}
 
 {% include 'includes/page_head.html' with about_active="active" %}

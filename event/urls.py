@@ -31,6 +31,11 @@ urlpatterns = [
         name="guestlist",
     ),
     path(
+        "add-non-member/<int:pk>",
+        views.ClubAddNonMemberGuestlistView.as_view(),
+        name="non-member-guestlist",
+    ),
+    path(
         "remove-from-guestlist/<int:pk>",
         views.ClubDeleteGuestlistView.as_view(),
         name="guestlist",

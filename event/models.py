@@ -192,14 +192,37 @@ class EventHost(models.Model):
 
 
 class Guestlist(models.Model):
-    guest = models.ForeignKey(User, on_delete=models.CASCADE)
+    # profile type option
+    SELECT = ""
+    MALE = "Man"
+    FEMALE = "Woman"
+    CD_TV = "CD/TV"
+    TV_TS = "TV/TS"
+    COUPLE_MF = "Couple MF"
+    COUPLE_FF = "Couple FF"
+    COUPLE_MM = "Couple MM"
+    PROFILE_TYPE_CHOICES = [
+        (SELECT, "Select Profile Type"),
+        (MALE, "Single Male"),
+        (FEMALE, "Single Female"),
+        (CD_TV, "CD_TV"),
+        (TV_TS, "TV_TS"),
+        (COUPLE_MF, "Couple MF"),
+        (COUPLE_FF, "Couple FF"),
+        (COUPLE_MM, "Couple MM"),
+    ]
+    guest = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    profile_type = models.CharField(max_length=10, null=True)
+    profile_type = models.CharField(
+        max_length=10, null=True, choices=PROFILE_TYPE_CHOICES
+    )
     private = models.BooleanField(null=False, blank=True)
+    non_member = models.CharField(max_length=50, blank=False, null=True)
 
     class Meta:
         unique_together = (
             "guest",
+            "non_member",
             "event",
         )
 
