@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 
-from .models import Profile, Follow, LookingFor, Interest
+from .models import Profile, Follow, LookingFor, Interest, Verification
 from place_area.models import OuterPostCode
 from .forms import (
     ProfileUpdateForm,
@@ -22,6 +22,7 @@ from .forms import (
     Profile1stPersonForm,
     LookingForUpdateForm,
     InterestUpdateForm,
+    VerifyForm,
 )
 from feed.models import Post
 from gallery.models import UserGallery
@@ -169,8 +170,8 @@ class Profile2ndPersonView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse("profiles:detail", kwargs={"username": self.request.user})
 
-    def get_object(self):
-        return self.request.user
+    # def get_object(self):
+    #     return self.request.user
 
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
@@ -186,8 +187,8 @@ class Profile1stPersonView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse("profiles:detail", kwargs={"username": self.request.user})
 
-    def get_object(self):
-        return self.request.user
+    # def get_object(self):
+    #     return self.request.user
 
     def get_object(self, queryset=None):
         obj = Profile.objects.get(user=self.request.user)
@@ -284,6 +285,49 @@ class ProfileAddGalleryView(LoginRequiredMixin, CreateView):
     # def get_object(self, queryset=None):
     #     obj = Profile.objects.get(user=self.request.user)
     #     return obj
+
+
+class ProfileAddVerification(LoginRequiredMixin, CreateView):
+    template_name = "profiles/profile_update_form.html"
+    model = Verification
+    form_class = VerifyForm
+    queryset = Verification.objects.all()
+    success_url = "/"
+
+    def form_valid(self, form):
+        print(self.kwargs.get("username"))
+        form.instance.user_verified = User.objects.get(username=self.kwargs.get("slug"))
+        form.instance.user = self.request.user
+        return super(ProfileAddVerification, self).form_valid(form)
+
+
+class ProfileVerifications(LoginRequiredMixin, DetailView):
+    model = User
+    http_method_names = ["get"]
+    template_name = "profiles/verifications.html"
+    context_object_name = "user"
+    slug_field = "username"
+    slug_url_kwarg = "username"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfileVerifications, self).get_context_data(*args, **kwargs)
+        context["veris"] = Verification.objects.filter(
+            user_verified__username=self.kwargs["username"]
+        ).order_by("-date")
+        return context
+
+
+class AddVerificationView(LoginRequiredMixin, CreateView):
+    template_name = "profiles/profile_update_form.html"
+    model = Verification
+    form_class = VerifyForm
+    queryset = Verification.objects.all()
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.instance.user_verified = self.kwargs.get("username")
+        form.instance.user = self.request.user
+        return super(AddVerificationView, self).form_valid(form)
 
 
 def follow(request, username):

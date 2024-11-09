@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile, LookingFor, Interest
+from .models import Profile, LookingFor, Interest, Verification
 from gallery.models import UserGallery
 from django.contrib.auth.models import User
 
@@ -192,6 +192,15 @@ class ProfileGalleryCreateForm(forms.ModelForm):
             "image",
             "private",
         )
+
+        def __str__(self):
+            return self.user
+
+
+class VerifyForm(forms.ModelForm):
+    class Meta:
+        model = Verification
+        fields = ("text",)
 
         def __str__(self):
             return self.user

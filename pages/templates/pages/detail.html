@@ -4,7 +4,8 @@
 
 {% block title %}{{ page.page_name }} - Profile{% endblock title %}
 {% block head %}
-<meta property="og:title" content="{{ page.page_name}}" />
+<meta property="og:title" content="{{page.page_name}}" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="https://clubswing.co.uk{{request.path}}" />
 <meta property="og:image" content="https://clubs4fun.s3.amazonaws.com/static/{{ page.cover_image }}" />
 <meta property="og:description" content="{{ page.description|truncatechars:100 }}" />

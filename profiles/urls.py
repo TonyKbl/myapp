@@ -36,4 +36,14 @@ urlpatterns = [
     ),
     path("update_cover/", views.CoverImageUpdateView.as_view(), name="update_cover"),
     path("update_avatar/", views.AvatarImageUpdateView.as_view(), name="update_avatar"),
+    path(
+        "profile/<slug:slug>/verify.html",
+        views.ProfileAddVerification.as_view(),
+        name="verify",
+    ),
+    path(
+        "verifications/<str:username>.html",
+        views.ProfileVerifications.as_view(),
+        name="verifications",
+    ),
 ]

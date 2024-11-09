@@ -1,0 +1,31 @@
+{% load thumbnail %}
+{% load static %}
+{% load custom_page_filters %}
+
+
+                    <div class="card mb-0">
+                      <div class="card-body">
+                        <div class="row position-relative">
+                          <div class="col-auto">
+                          <!-- Blog image -->
+                          <div class="avatar">
+                            {% thumbnail veri.user.profile.image "100x100" crop="center" as im %}
+                              <img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+                            {% endthumbnail %}
+                          </div>
+                          </div>
+                          <div class="col">
+                            <h6><a href="{% url 'profiles:detail' veri.user.username %}" class="btn-link stretched-link text-reset fw-bold">{{veri.user.profile.display_name}}</a></h6>
+                            <p class="small text-secondary mb-2 "> {{veri.user.profile.profile_type}} from {{veri.user.profile.location}}. Aged {{veri.user.profile.age}}</p>
+                            <p class="small text-secondary mb-2 me-1"> {{veri.date}}</p>
+                            <p class="small text-secondary mb-2 me-1"> {{veri.text}}</p>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+        
+           
+
+                     
+
+

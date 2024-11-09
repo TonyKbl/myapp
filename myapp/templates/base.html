@@ -520,8 +520,7 @@
 		<!-- **************** MAIN CONTENT END **************** -->
 		<!-- Cookie Banner -->
 		<div id="cb-cookie-banner" class="alert alert-dark text-center mb-0" role="alert">
-		🍪 This website uses cookies to ensure you get the best experience on our website.
-		<a href="https://www.cookiesandyou.com/" target="blank">Learn more</a>
+		This website uses cookies to ensure you get the best experience on our website.
 		<button type="button" class="btn btn-primary btn-sm ms-3" onclick="window.cb_hideCookieBanner()">
 		I Got It
 		</button>
@@ -556,41 +555,40 @@
 		<!-- Theme Functions -->
 		<script src="{% static 'js/functions.js' %}"></script>
 		<script src="{% static 'js/additional.js' %}"></script>
-		<script>
-			/* Javascript to show and hide cookie banner using localstorage */
-/* Shows the Cookie banner */
-function showCookieBanner(){
- let cookieBanner = document.getElementById("cb-cookie-banner");
- cookieBanner.style.display = "block";
-}
-
-/* Hides the Cookie banner and saves the value to localstorage */
-function hideCookieBanner(){
- localStorage.setItem("cb_isCookieAccepted", "yes");
- let cookieBanner = document.getElementById("cb-cookie-banner");
- cookieBanner.style.display = "none";
-}
-
-/* Checks the localstorage and shows Cookie banner based on it. */
-function initializeCookieBanner(){
- let isCookieAccepted = localStorage.getItem("cb_isCookieAccepted");
- if(isCookieAccepted === null)
- {
-  localStorage.setItem("cb_isCookieAccepted", "no");
-  showCookieBanner();
- }
- if(isCookieAccepted === "no"){
-  showCookieBanner();
- }
-}
-</script>
-<style>
-	#cb-cookie-banner { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999; border-radius: 0; display: none; }
-</style>
 		{% block scripts %}
 
 		{% endblock %}
 
+		<script>
+			/* Javascript to show and hide cookie banner using localstorage */
+			/* Shows the Cookie banner */
+			function showCookieBanner(){
+				let cookieBanner = document.getElementById("cb-cookie-banner");
+				cookieBanner.style.display = "block";
+				}
+
+			/* Hides the Cookie banner and saves the value to localstorage */
+			function hideCookieBanner(){
+				localStorage.setItem("cb_isCookieAccepted", "yes");
+				let cookieBanner = document.getElementById("cb-cookie-banner");
+				cookieBanner.style.display = "none";
+				}
+
+			/* Checks the localstorage and shows Cookie banner based on it. */
+			function initializeCookieBanner(){
+				let isCookieAccepted = localStorage.getItem("cb_isCookieAccepted");
+				if(isCookieAccepted === null){
+					localStorage.setItem("cb_isCookieAccepted", "no");
+					showCookieBanner();
+					}
+				if(isCookieAccepted === "no"){
+					showCookieBanner();
+					}
+				}
+		</script>
+<style>
+	#cb-cookie-banner { position: fixed; bottom: 0; left: 0; width: 100%; z-index: 999; border-radius: 0; display: none; }
+</style>
 
 	</body>
 </html>
