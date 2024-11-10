@@ -1,19 +1,13 @@
 <!DOCTYPE html>
-{% load static %}
-{% load thumbnail %}
-{% load allauth account %}
-
+{% load static %}{% load thumbnail %}{% load allauth account %}
+{% load custom_blog_filters %}
 <html lang="en">
 	<head>
-		<title>
-			{% block head_title %}{% endblock %}
-			{% block title %}{% endblock %}
-		</title>
-
+		<title>	{% block head_title %}{% endblock %}{% block title %}{% endblock %}</title>
 		<!-- Meta Tags -->
+		<meta name="description" content="{% block description %}{% endblock %}">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, shrink-to-fit=yes">
-		<meta name="description" content="Social network for swingers who enjoy clubs and parties">
 
 		<!-- Dark mode -->
 		<script>
@@ -76,7 +70,14 @@
 		</script>
 
 		<!-- Favicon -->
-		<link rel="shortcut icon" href="media/images/favicon.png">
+		{% comment %} <link rel="shortcut icon" href="static/images/favicon-32x32.png"> {% endcomment %}
+
+		<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{% static 'images/apple-touch-icon.png' %}">
+		<link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+		<link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+		<link rel="manifest" href="{% static 'images/site.webmanifest' %}">
+		<meta name="msapplication-TileColor" content="#da532c">
+		<meta name="theme-color" content="#ffffff">
 
 		<!-- Google Font -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -94,6 +95,11 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'vendor/flatpickr/dist/flatpickr.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'vendor/plyr/plyr.css' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'vendor/zuck.js/dist/zuck.min.css' %}">
+		
+  {% comment %}<script> src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script> {% endcomment %}
+
 
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
