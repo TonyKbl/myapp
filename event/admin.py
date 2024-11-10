@@ -32,7 +32,7 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class GuestlistAdmin(admin.ModelAdmin):
-    list_display = ("guest", "event", "profile_type", "private")
+    list_display = ("guest", "non_member", "event", "profile_type", "private")
 
 
 admin.site.register(MasterEvent, MasterEventAdmin)

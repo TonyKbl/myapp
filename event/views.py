@@ -8,6 +8,7 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
+from django.db.models import Q
 
 from pages.models import Page, PageHost
 from profiles.models import Profile
@@ -152,9 +153,6 @@ class ClubAddGuestlistView(LoginRequiredMixin, CreateView):
         return self.request.guest
 
 
-ClubAddNonMemberGuestlistForm
-
-
 class ClubAddNonMemberGuestlistView(LoginRequiredMixin, CreateView):
     model = Guestlist
     form_class = ClubAddNonMemberGuestlistForm
@@ -221,6 +219,43 @@ class AddEventDateView(LoginRequiredMixin, CreateView):
 
     def get_object(self):
         return self.request.user
+
+
+class GuestlistView(DetailView):
+    # html_method_names = ["get"]
+    # template_name = "events/list.html"
+    # models = Events
+    # context_object_name = "events"
+    # queryset = Events.objects.all().order_by('-id')[0:30]
+    http_method_names = ["get"]
+    template_name = "event/guestlist.html"
+    model = Event
+    context_object_name = "event_date"
+
+    def get_queryset(self, **kwargs):
+        ev = Event.objects.filter(id=self.kwargs["pk"])
+        return ev
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(GuestlistView, self).get_context_data(*args, **kwargs)
+
+        q1 = Q(event__id=self.kwargs["pk"])
+        q2 = ~Q(private="1")
+
+        context["guestlist"] = Guestlist.objects.filter(q1 & q2)
+
+        event = Event.objects.get(id=self.kwargs["pk"])
+        try:
+            context["guest"] = Guestlist.objects.get(
+                event=event, guest=self.request.user.id, non_member=None
+            )
+        except:
+            context["guest"] = None
+        print(context["guest"])
+        # context["guestlist"] = Guestlist.objects.filter(
+        #     event__id=self.kwargs["pk"] and private != "1"
+        # ).order_by("id")
+        return context
 
 
 # @login_required

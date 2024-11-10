@@ -46,6 +46,11 @@ urlpatterns = [
         name="page_events",
     ),
     path(
+        "guestlist/<int:pk>/<str:event>.html",
+        views.GuestlistView.as_view(),
+        name="guestlist",
+    ),
+    path(
         "add_date/<int:pk>/<slug:location>.html",
         views.AddEventDateView.as_view(),
         name="add_date",

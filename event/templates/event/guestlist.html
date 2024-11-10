@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block title %}Clubs4Fun - Verifications{% endblock title %}
+
+{% block content %}
+
+{% include 'includes/event_head.html' with veris_active="active" target_user=user.id %}
+<div class="card">
+    <!-- Card header START -->
+    <div class="card-header d-sm-flex align-items-center justify-content-between border-0 pb-0">
+      <h5 class="card-title">Guestlist</h5>
+      <!-- Button modal -->
+      {% comment %} <a class="btn btn-sm btn-primary-soft" href="#" data-bs-toggle="modal" data-bs-target="#modalCreateAlbum"> <i class="fa-solid fa-plus pe-1"></i> Create album</a> {% endcomment %}
+    </div>
+    <!-- Card header END -->
+    <!-- Card body START -->
+    <div class="card-body">
+      <!-- Photos of you tab START -->
+
+
+        {% for guest in guestlist %}
+          {% include 'includes/guest.html'%}
+        {% endfor %}
+      </div>
+      <!-- Photos of you tab END -->
+    </div>
+    <!-- Card body END -->
+  </div>
+
+{% endblock %}

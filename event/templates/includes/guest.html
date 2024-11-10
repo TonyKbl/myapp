@@ -1,0 +1,54 @@
+{% load thumbnail %}
+{% load static %}
+{% load custom_page_filters %}
+
+{% if not guest.non_member %}
+                    <div class="card mb-0">
+                      <div class="card-body">
+                        <div class="row position-relative">
+                          <div class="col-auto">
+                          <!-- Blog image -->
+                          <div class="avatar">
+                            {% thumbnail guest.guest.profile.image "100x100" crop="center" as im %}
+                              <img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+                            {% endthumbnail %}
+                          </div>
+                          </div>
+                          <div class="col">
+                            <h6><a href="{% url 'profiles:detail' guest.guest.username %}" class="btn-link stretched-link text-reset fw-bold">{{guest.guest.profile.display_name}}</a></h6>
+                            <div class="badge bg-success bg-opacity-10 text-success mb-2 fw-bold">Site Member</div>
+                            <p class="small text-secondary mb-2 "> {{guest.guest.profile.profile_type}} from {{guest.guest.profile.location}}. Aged {{guest.guest.profile.age}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {% else %}
+                    <div class="card mb-0">
+                      <div class="card-body">
+                        <div class="row position-relative">
+                          <div class="col-auto">
+                          <!-- Blog image -->
+                          <div class="avatar ">
+                            <div class="d-flex avatar-img rounded-circle border border-black border-3 float-end bg-danger">
+                            <h5 class="justify-content-center align-items-center mx-auto my-auto"> NM </h5>
+                            </div>
+                            {% comment %} {% thumbnail guest.guest.profile.image "100x100" crop="center" as im %}
+                              <img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
+                            {% endthumbnail %} {% endcomment %}
+                          </div>
+                          </div>
+                          <div class="col">
+                            <h6>{{guest.non_member}}</h6>
+                            <div class="badge bg-danger bg-opacity-10 text-danger mb-2 fw-bold">Non Member</div>
+                            <p class="small text-secondary mb-2 "> {{guest.profile_type}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+{% endif %}
+           
+
+                     
+
+
