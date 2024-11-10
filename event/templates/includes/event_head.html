@@ -44,7 +44,6 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileAction2">
                   <li><a class="dropdown-item" href="/new_page_post/{{page.id}}"> <i class="bi bi-bookmark fa-fw pe-2"></i>New Event Post</a></li>
                   <li><a class="dropdown-item" href="/add_host/{{event.id}}"> <i class="bi bi-person fa-fw pe-2"></i>Add Event Host</a></li>
-                  {{event_date.event.clubevent.location.user}}#
                   {% if event_date.event.clubevent.location.user.username == request.user.username %}
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="/add-non-member/{{event_date.id}}"> <i class="bi bi-person fa-fw pe-2"></i>Add non-member</a></li>
