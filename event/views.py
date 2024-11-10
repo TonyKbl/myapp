@@ -3,15 +3,17 @@ from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+
+# from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
+
+# from django.contrib.auth.decorators import login_required
+# from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Q
 
 from pages.models import Page, PageHost
-from profiles.models import Profile
+# from profiles.models import Profile
 
 from .models import MasterEvent, Event, ClubEvent, EventHost, Guestlist, Meet
 
