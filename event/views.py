@@ -48,7 +48,7 @@ class EventList(ListView):
     queryset = Event.objects.filter(date__gt=today).order_by("date")[0:30]
 
 
-class PrivateMeetListView(ListView):
+class PrivateMeetListView(LoginRequiredMixin, ListView):
     paginate_by = 15
     html_method_names = ["get"]
     template_name = "event/meet-list.html"
@@ -223,7 +223,7 @@ class AddEventDateView(LoginRequiredMixin, CreateView):
         return self.request.user
 
 
-class GuestlistView(DetailView):
+class GuestlistView(LoginRequiredMixin, DetailView):
     # html_method_names = ["get"]
     # template_name = "events/list.html"
     # models = Events
