@@ -217,7 +217,13 @@
         </div>
       </div>
     </div>
-
+<hr>
+    <div class="col">
+      <h5>Additional Information</h5>
+      <p class="mb-0">{{ event_date.additional_info|linebreaks}}</p>
+      {% comment %} <h5>Entry fees</h5>
+      <p class="small mb-0">{{ event_date.admission_fees|linebreaks }}</p> {% endcomment %}
+    </div>
   </div>
   <!-- Card About END -->
 </div>
