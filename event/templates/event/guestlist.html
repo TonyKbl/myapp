@@ -19,6 +19,7 @@
       <!-- Photos of you tab START -->
 
 
+      {% comment %} {% regroup guestlist by non_member as guestlist %} {% endcomment %}
         {% for guest in guestlist %}
           {% include 'includes/guest.html'%}
         {% endfor %}
@@ -26,6 +27,6 @@
       <!-- Photos of you tab END -->
     </div>
     <!-- Card body END -->
-  </div>
+  {% comment %} </div> {% endcomment %}
 
 {% endblock %}

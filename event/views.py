@@ -160,7 +160,7 @@ class ClubAddNonMemberGuestlistView(LoginRequiredMixin, CreateView):
     form_class = ClubAddNonMemberGuestlistForm
     template_name = "event/add_guestlist.html"
     success_message = "You successfully a non-member"
-    success_url = reverse_lazy("events:events")
+    # success_url = reverse_lazy("events:events")
 
     def form_valid(self, form):
         form.instance.event_id = self.kwargs.get("pk")

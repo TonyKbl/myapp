@@ -16,6 +16,7 @@
                           </div>
                           <div class="col">
                             <h6><a href="{% url 'profiles:detail' guest.guest.username %}" class="btn-link stretched-link text-reset fw-bold">{{guest.guest.profile.display_name}}</a></h6>
+                            {% comment %} <h6><a href="#" class="btn-link stretched-link text-reset fw-bold">{{guest.guest.profile.display_name}}</a></h6> {% endcomment %}
                             <div class="badge bg-success bg-opacity-10 text-success mb-2 fw-bold">Site Member</div>
                             <p class="small text-secondary mb-2 "> {{guest.guest.profile.profile_type}} from {{guest.guest.profile.location}}. Aged {{guest.guest.profile.age}}</p>
                           </div>
