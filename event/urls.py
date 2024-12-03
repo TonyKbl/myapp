@@ -31,7 +31,7 @@ urlpatterns = [
         name="guestlist",
     ),
     path(
-        "add-non-member/<int:pk>",
+        "add-non-member/<int:pk>/<str:event>.html",
         views.ClubAddNonMemberGuestlistView.as_view(),
         name="non-member-guestlist",
     ),

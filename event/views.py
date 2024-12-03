@@ -1,7 +1,7 @@
 from django.db.models.base import Model as Model
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, FormView, DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from django.contrib.auth.models import User
@@ -160,7 +160,6 @@ class ClubAddNonMemberGuestlistView(LoginRequiredMixin, CreateView):
     form_class = ClubAddNonMemberGuestlistForm
     template_name = "event/add_guestlist.html"
     success_message = "You successfully a non-member"
-    # success_url = reverse_lazy("events:events")
 
     def form_valid(self, form):
         form.instance.event_id = self.kwargs.get("pk")
@@ -170,6 +169,15 @@ class ClubAddNonMemberGuestlistView(LoginRequiredMixin, CreateView):
 
     def get_object(self):
         return self.request.guest
+
+    def get_success_url(self):
+        id = self.kwargs.get("pk")
+        e = self.kwargs.get("event")
+        print(id, e)
+        # return reverse("events:view-guestlist", id)
+        # goto =
+        # print(goto)
+        return reverse_lazy("events:view-guestlist", args=[id, e])
 
 
 class ClubDeleteGuestlistView(LoginRequiredMixin, DeleteView):
@@ -244,7 +252,7 @@ class GuestlistView(LoginRequiredMixin, DetailView):
         q1 = Q(event__id=self.kwargs["pk"])
         q2 = ~Q(private="1")
 
-        context["guestlist"] = Guestlist.objects.filter(q1 & q2)
+        context["guestlist"] = Guestlist.objects.filter(q1 & q2).order_by("-date")
 
         event = Event.objects.get(id=self.kwargs["pk"])
         try:

@@ -218,6 +218,7 @@ class Guestlist(models.Model):
     )
     private = models.BooleanField(null=False, blank=True)
     non_member = models.CharField(max_length=50, blank=False, null=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = (
