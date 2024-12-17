@@ -31,7 +31,7 @@
                           <!-- Blog image -->
                           <div class="avatar ">
                             <div class="d-flex avatar-img rounded-circle border border-black border-3 float-end bg-danger">
-                            <h5 class="justify-content-center align-items-center mx-auto my-auto"> NM </h5>
+                            <h5 class="justify-content-center align-items-center mx-auto my-auto"> {{guest.non_member.0}} </h5>
                             </div>
                             {% comment %} {% thumbnail guest.guest.profile.image "100x100" crop="center" as im %}
                               <img class="avatar-img rounded-circle border border-white border-3 float-end" src="{{ im.url }}" alt="">
